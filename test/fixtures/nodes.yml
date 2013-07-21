@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  parent: 1
+  name: MyString
+  title: MyString
+  header: MyString
+  content: MyText
+
+two:
+  parent: 1
+  name: MyString
+  title: MyString
+  header: MyString
+  content: MyText
