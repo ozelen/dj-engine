@@ -6,3 +6,14 @@
     }
   }
 }
+
+.new_user, .edit_user {
+  input[type=text], input[type=password] {
+    width: 300px;
+  }
+
+  textarea {
+    height: 100px;
+    width: 300px;
+  }
+}

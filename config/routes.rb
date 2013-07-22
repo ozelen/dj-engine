@@ -1,8 +1,20 @@
 DjEngine::Application.routes.draw do
+  resources :user_sessions
+
   resources :users
 
   resources :nodes
   get 'home', :to => 'nodes#home'
+
+  resources :user_sessions
+  match 'login'  => "user_sessions#new",      as: :login
+  match 'logout' => "user_sessions#destroy",  as: :logout
+
+  resources :users
+  resource :user, :as => 'account'  # a convenience route
+  match 'register' => 'users#new', :as => :signup
+  #match 'account' => 'users#edit', :as => :account
+
   root :to => 'nodes#home'
   get '/:name', to: 'nodes#page'
 

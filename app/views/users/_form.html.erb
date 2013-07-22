@@ -1,32 +1,35 @@
-<%= form_for @user do |f| %>
+<%= form_for @user, class: :user_form do |f| %>
   <%= f.error_messages %>
-  <p>
-    <%= f.label :username %><br />
+  
+    <%= f.label :username %>
     <%= f.text_field :username %>
-  </p>
-  <p>
-    <%= f.label :password %><br />
-    <%= f.text_field :password %>
-  </p>
-  <p>
-    <%= f.label :email %><br />
+  
+  
+    <%= f.label :password %>
+    <%= f.password_field :password %>
+  
+    <%= f.label :password_confirmation  %>
+    <%= f.password_field :password_confirmation  %>
+
+
+    <%= f.label :email %>
     <%= f.text_field :email %>
-  </p>
-  <p>
-    <%= f.label :first_name %><br />
+  
+  
+    <%= f.label :first_name %>
     <%= f.text_field :first_name %>
-  </p>
-  <p>
-    <%= f.label :last_name %><br />
+  
+  
+    <%= f.label :last_name %>
     <%= f.text_field :last_name %>
-  </p>
-  <p>
-    <%= f.label :address %><br />
+  
+  
+    <%= f.label :address %>
     <%= f.text_area :address %>
-  </p>
-  <p>
-    <%= f.label :phone %><br />
+  
+  
+    <%= f.label :phone %>
     <%= f.text_field :phone %>
-  </p>
-  <p><%= f.submit %></p>
+    <br>
+  <%= f.submit :class => :btn %>
 <% end %>

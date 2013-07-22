@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130716210243) do
+ActiveRecord::Schema.define(:version => 20130721112135) do
 
   create_table "nodes", :force => true do |t|
     t.integer  "parent"
@@ -22,5 +22,30 @@ ActiveRecord::Schema.define(:version => 20130716210243) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
+
+  create_table "users", :force => true do |t|
+    t.string   "username"
+    t.string   "password"
+    t.string   "crypted_password",                 :null => false
+    t.string   "password_salt",                    :null => false
+    t.string   "persistence_token",                :null => false
+    t.integer  "login_count",       :default => 0, :null => false
+    t.datetime "last_request_at"
+    t.datetime "last_login_at"
+    t.datetime "current_login_at"
+    t.string   "last_login_ip"
+    t.string   "current_login_ip"
+    t.string   "email"
+    t.string   "first_name"
+    t.string   "last_name"
+    t.text     "address"
+    t.string   "phone"
+    t.datetime "created_at",                       :null => false
+    t.datetime "updated_at",                       :null => false
+  end
+
+  add_index "users", ["last_request_at"], :name => "index_users_on_last_request_at"
+  add_index "users", ["persistence_token"], :name => "index_users_on_persistence_token"
+  add_index "users", ["username"], :name => "index_users_on_username"
 
 end
