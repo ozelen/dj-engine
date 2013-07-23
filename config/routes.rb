@@ -1,10 +1,8 @@
 DjEngine::Application.routes.draw do
   resources :source_classes
 
-
   resources :source_instances
   get '/source_instances/:id/new' => 'source_instances#new'
-
 
   resources :user_sessions
 

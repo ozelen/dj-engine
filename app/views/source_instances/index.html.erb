@@ -20,7 +20,7 @@
         <td><%= source_instance.name %></td>
         <td><%= source_instance.description %></td>
         <td><%= source_instance.source_class_id %></td>
-        <td><%= source_instance.parent_instance_id %></td>
+        <td><%= source_instance.parent.name if source_instance.parent %></td>
         <td>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
                       edit_source_instance_path(source_instance), :class => 'btn btn-mini' %>
