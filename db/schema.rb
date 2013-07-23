@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130721112135) do
+ActiveRecord::Schema.define(:version => 20130722044014) do
 
   create_table "nodes", :force => true do |t|
     t.integer  "parent"
@@ -21,6 +21,24 @@ ActiveRecord::Schema.define(:version => 20130721112135) do
     t.text     "content"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+  end
+
+  create_table "source_classes", :force => true do |t|
+    t.string   "name"
+    t.text     "description"
+    t.integer  "parent_id"
+    t.integer  "parent_class_id"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+  end
+
+  create_table "source_instances", :force => true do |t|
+    t.string   "name"
+    t.text     "description"
+    t.integer  "source_class_id"
+    t.integer  "parent_instance_id"
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
   end
 
   create_table "users", :force => true do |t|

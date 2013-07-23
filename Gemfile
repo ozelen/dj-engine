@@ -21,7 +21,8 @@ group :assets do
 end
 
 group :development do
-  gem "nifty-generators"
+  gem 'nifty-generators'
+  gem 'faker'
 end
 
 gem "therubyracer"
