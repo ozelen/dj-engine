@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Room:</b>
+  <%= @room_price.room_id %>
+</p>
+
+<p>
+  <b>Period:</b>
+  <%= @room_price.period_id %>
+</p>
+
+<p>
+  <b>Value:</b>
+  <%= @room_price.value %>
+</p>
+
+<p>
+  <b>Measure:</b>
+  <%= @room_price.measure_id %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%= @room_price.description %>
+</p>
+
+
+<%= link_to 'Edit', edit_room_price_path(@room_price) %> |
+<%= link_to 'Back', room_prices_path %>

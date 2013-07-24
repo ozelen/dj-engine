@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Hotel:</b>
+  <%= @hotel_service.hotel_id %>
+</p>
+
+<p>
+  <b>Service type:</b>
+  <%= @hotel_service.service_type_id %>
+</p>
+
+<p>
+  <b>Name:</b>
+  <%= @hotel_service.name %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%= @hotel_service.description %>
+</p>
+
+<p>
+  <b>Price:</b>
+  <%= @hotel_service.price %>
+</p>
+
+
+<%= link_to 'Edit', edit_hotel_service_path(@hotel_service) %> |
+<%= link_to 'Back', hotel_services_path %>

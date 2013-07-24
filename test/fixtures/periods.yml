@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  since: 2013-07-24
+  till: 2013-07-24
+  name: MyString
+  description: MyString
+  order_position: 1
+
+two:
+  since: 2013-07-24
+  till: 2013-07-24
+  name: MyString
+  description: MyString
+  order_position: 1

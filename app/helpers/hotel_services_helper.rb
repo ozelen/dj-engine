@@ -1,0 +1,2 @@
+module HotelServicesHelper
+end

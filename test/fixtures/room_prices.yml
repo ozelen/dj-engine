@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  room_id: 1
+  period_id: 1
+  value: 1
+  measure_id: 1
+  description: MyString
+
+two:
+  room_id: 1
+  period_id: 1
+  value: 1
+  measure_id: 1
+  description: MyString
