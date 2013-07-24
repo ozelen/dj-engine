@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  tag_name_id: MyString
+  value_int: 1
+  value_flt: 1.5
+  value_str: MyString
+
+two:
+  tag_name_id: MyString
+  value_int: 1
+  value_flt: 1.5
+  value_str: MyString

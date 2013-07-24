@@ -4,5 +4,6 @@ class Hotel < ActiveRecord::Base
   has_many :rooms
   has_many :services
   has_many :periods
+  has_many :tags, as: :taggable
   attr_accessible :city_id, :description, :location, :name, :user_id, :ident
 end

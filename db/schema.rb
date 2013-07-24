@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130724124948) do
+ActiveRecord::Schema.define(:version => 20130724192944) do
 
   create_table "cities", :force => true do |t|
     t.string   "name"
@@ -31,6 +31,22 @@ ActiveRecord::Schema.define(:version => 20130724124948) do
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
     t.string   "ident"
+  end
+
+  create_table "measure_categories", :force => true do |t|
+    t.string   "name"
+    t.integer  "data_type"
+    t.string   "filter"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "measures", :force => true do |t|
+    t.integer  "measure_category_id"
+    t.string   "iso"
+    t.string   "name"
+    t.datetime "created_at",          :null => false
+    t.datetime "updated_at",          :null => false
   end
 
   create_table "nodes", :force => true do |t|
@@ -108,6 +124,40 @@ ActiveRecord::Schema.define(:version => 20130724124948) do
     t.integer  "parent_instance_id"
     t.datetime "created_at",         :null => false
     t.datetime "updated_at",         :null => false
+  end
+
+  create_table "tag_categories", :force => true do |t|
+    t.integer  "parent_id"
+    t.string   "filter"
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "tag_names", :force => true do |t|
+    t.integer  "tag_category_id"
+    t.string   "ident"
+    t.string   "name"
+    t.integer  "measure_category_id"
+    t.datetime "created_at",          :null => false
+    t.datetime "updated_at",          :null => false
+  end
+
+  create_table "tag_options", :force => true do |t|
+    t.integer  "tag_name_id"
+    t.string   "name"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  create_table "tags", :force => true do |t|
+    t.integer  "tag_name_id"
+    t.integer  "value_int"
+    t.float    "value_flt"
+    t.string   "value_str"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+    t.integer  "measure_id"
   end
 
   create_table "users", :force => true do |t|

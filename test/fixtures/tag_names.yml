@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  tag_category_id: 1
+  ident: MyString
+  name: MyString
+  measure_category_id: 1
+
+two:
+  tag_category_id: 1
+  ident: MyString
+  name: MyString
+  measure_category_id: 1

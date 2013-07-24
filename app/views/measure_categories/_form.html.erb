@@ -1,0 +1,26 @@
+<%= form_for @measure_category, :html => { :class => 'form-horizontal' } do |f| %>
+  <div class="control-group">
+    <%= f.label :name, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :name, :class => 'text_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :data_type, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.number_field :data_type, :class => 'number_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :filter, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :filter, :class => 'text_field' %>
+    </div>
+  </div>
+
+  <div class="form-actions">
+    <%= f.submit nil, :class => 'btn btn-primary' %>
+    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                measure_categories_path, :class => 'btn' %>
+  </div>
+<% end %>

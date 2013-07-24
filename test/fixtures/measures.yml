@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  measure_category_id: 1
+  iso: MyString
+  name: MyString
+
+two:
+  measure_category_id: 1
+  iso: MyString
+  name: MyString
