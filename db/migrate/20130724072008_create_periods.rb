@@ -6,6 +6,7 @@ class CreatePeriods < ActiveRecord::Migration
       t.string :name
       t.string :description
       t.integer :order_position
+      t.integer :hotel_id
 
       t.timestamps
     end
