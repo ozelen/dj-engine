@@ -1,30 +1,29 @@
-<p id="notice"><%= notice %></p>
+<%- model_class = RoomPrice -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.titleize %></h1>
+</div>
 
-<p>
-  <b>Room:</b>
-  <%= @room_price.room_id %>
-</p>
+<dl class="dl-horizontal">
+  <dt><strong><%= model_class.human_attribute_name(:room_id) %>:</strong></dt>
+  <dd><%= @room_price.room_id %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:period_id) %>:</strong></dt>
+  <dd><%= @room_price.period_id %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:value) %>:</strong></dt>
+  <dd><%= @room_price.value %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:measure_id) %>:</strong></dt>
+  <dd><%= @room_price.measure_id %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:description) %>:</strong></dt>
+  <dd><%= @room_price.description %></dd>
+</dl>
 
-<p>
-  <b>Period:</b>
-  <%= @room_price.period_id %>
-</p>
-
-<p>
-  <b>Value:</b>
-  <%= @room_price.value %>
-</p>
-
-<p>
-  <b>Measure:</b>
-  <%= @room_price.measure_id %>
-</p>
-
-<p>
-  <b>Description:</b>
-  <%= @room_price.description %>
-</p>
-
-
-<%= link_to 'Edit', edit_room_price_path(@room_price) %> |
-<%= link_to 'Back', room_prices_path %>
+<div class="form-actions">
+  <%= link_to t('.back', :default => t("helpers.links.back")),
+              room_prices_path, :class => 'btn'  %>
+  <%= link_to t('.edit', :default => t("helpers.links.edit")),
+              edit_room_price_path(@room_price), :class => 'btn' %>
+  <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+              room_price_path(@room_price),
+              :method => 'delete',
+              :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+              :class => 'btn btn-danger' %>
+</div>

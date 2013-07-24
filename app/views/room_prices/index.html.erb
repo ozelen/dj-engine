@@ -1,31 +1,44 @@
-<h1>Listing room_prices</h1>
-
-<table>
-  <tr>
-    <th>Room</th>
-    <th>Period</th>
-    <th>Value</th>
-    <th>Measure</th>
-    <th>Description</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
-<% @room_prices.each do |room_price| %>
-  <tr>
-    <td><%= room_price.room_id %></td>
-    <td><%= room_price.period_id %></td>
-    <td><%= room_price.value %></td>
-    <td><%= room_price.measure_id %></td>
-    <td><%= room_price.description %></td>
-    <td><%= link_to 'Show', room_price %></td>
-    <td><%= link_to 'Edit', edit_room_price_path(room_price) %></td>
-    <td><%= link_to 'Destroy', room_price, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
-<% end %>
+<%- model_class = RoomPrice -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
+</div>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th><%= model_class.human_attribute_name(:id) %></th>
+      <th><%= model_class.human_attribute_name(:room_id) %></th>
+      <th><%= model_class.human_attribute_name(:period_id) %></th>
+      <th><%= model_class.human_attribute_name(:value) %></th>
+      <th><%= model_class.human_attribute_name(:measure_id) %></th>
+      <th><%= model_class.human_attribute_name(:description) %></th>
+      <th><%= model_class.human_attribute_name(:created_at) %></th>
+      <th><%=t '.actions', :default => t("helpers.actions") %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @room_prices.each do |room_price| %>
+      <tr>
+        <td><%= link_to room_price.id, room_price_path(room_price) %></td>
+        <td><%= room_price.room_id %></td>
+        <td><%= room_price.period_id %></td>
+        <td><%= room_price.value %></td>
+        <td><%= room_price.measure_id %></td>
+        <td><%= room_price.description %></td>
+        <td><%=l room_price.created_at %></td>
+        <td>
+          <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                      edit_room_price_path(room_price), :class => 'btn btn-mini' %>
+          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+                      room_price_path(room_price),
+                      :method => :delete,
+                      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+                      :class => 'btn btn-mini btn-danger' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
 </table>
 
-<br />
-
-<%= link_to 'New Room price', new_room_price_path %>
+<%= link_to t('.new', :default => t("helpers.links.new")),
+            new_room_price_path,
+            :class => 'btn btn-primary' %>

@@ -1,31 +1,44 @@
-<h1>Listing periods</h1>
-
-<table>
-  <tr>
-    <th>Since</th>
-    <th>Till</th>
-    <th>Name</th>
-    <th>Description</th>
-    <th>Order position</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
-<% @periods.each do |period| %>
-  <tr>
-    <td><%= period.since %></td>
-    <td><%= period.till %></td>
-    <td><%= period.name %></td>
-    <td><%= period.description %></td>
-    <td><%= period.order_position %></td>
-    <td><%= link_to 'Show', period %></td>
-    <td><%= link_to 'Edit', edit_period_path(period) %></td>
-    <td><%= link_to 'Destroy', period, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
-<% end %>
+<%- model_class = Period -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
+</div>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th><%= model_class.human_attribute_name(:id) %></th>
+      <th><%= model_class.human_attribute_name(:since) %></th>
+      <th><%= model_class.human_attribute_name(:till) %></th>
+      <th><%= model_class.human_attribute_name(:name) %></th>
+      <th><%= model_class.human_attribute_name(:description) %></th>
+      <th><%= model_class.human_attribute_name(:order_position) %></th>
+      <th><%= model_class.human_attribute_name(:created_at) %></th>
+      <th><%=t '.actions', :default => t("helpers.actions") %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @periods.each do |period| %>
+      <tr>
+        <td><%= link_to period.id, period_path(period) %></td>
+        <td><%= period.since %></td>
+        <td><%= period.till %></td>
+        <td><%= period.name %></td>
+        <td><%= period.description %></td>
+        <td><%= period.order_position %></td>
+        <td><%=l period.created_at %></td>
+        <td>
+          <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                      edit_period_path(period), :class => 'btn btn-mini' %>
+          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+                      period_path(period),
+                      :method => :delete,
+                      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+                      :class => 'btn btn-mini btn-danger' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
 </table>
 
-<br />
-
-<%= link_to 'New Period', new_period_path %>
+<%= link_to t('.new', :default => t("helpers.links.new")),
+            new_period_path,
+            :class => 'btn btn-primary' %>
