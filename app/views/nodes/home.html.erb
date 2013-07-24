@@ -1,1 +1,29 @@
-Home page
+
+<div class="row-fluid">
+
+  <div class="span3">
+    <div class="well sidebar-nav">
+
+      <ul class="nav nav-pills nav-stacked">
+        <li class="nav-header">Admin menu</li>
+        <li><%= link_to 'Cities', cities_path %></li>
+        <li><%= link_to 'Regions', regions_path %></li>
+        <li><%= link_to 'Hotels', hotels_path %></li>
+        <li><%= link_to 'Users', users_path %></li>
+      </ul>
+
+    </div><!--/.well -->
+  </div><!--/span-->
+
+  <div class="span9">
+    <%= bootstrap_flash %>
+
+    Home Page
+
+  </div>
+
+</div><!--/row-->
+
+<footer>
+  <p>&copy; Company 2013</p>
+</footer>
