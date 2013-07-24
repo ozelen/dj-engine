@@ -1,4 +1,25 @@
 DjEngine::Application.routes.draw do
+  resources :room_prices
+
+
+  resources :periods
+
+
+  resources :rooms
+
+
+  resources :hotel_services
+
+
+  resources :regions
+
+
+  resources :cities
+
+
+  resources :hotels
+
+
   resources :user_sessions
 
   resources :users

@@ -11,7 +11,36 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130721112135) do
+ActiveRecord::Schema.define(:version => 20130724072602) do
+
+  create_table "cities", :force => true do |t|
+    t.string   "name"
+    t.text     "description"
+    t.float    "location"
+    t.integer  "region_id"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  create_table "hotel_services", :force => true do |t|
+    t.integer  "hotel_id"
+    t.integer  "service_type_id"
+    t.string   "name"
+    t.text     "description"
+    t.string   "price"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+  end
+
+  create_table "hotels", :force => true do |t|
+    t.string   "name"
+    t.text     "description"
+    t.float    "location"
+    t.integer  "city_id"
+    t.integer  "user_id"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
 
   create_table "nodes", :force => true do |t|
     t.integer  "parent"
@@ -21,6 +50,62 @@ ActiveRecord::Schema.define(:version => 20130721112135) do
     t.text     "content"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+  end
+
+  create_table "periods", :force => true do |t|
+    t.date     "since"
+    t.date     "till"
+    t.string   "name"
+    t.string   "description"
+    t.integer  "order_position"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+  end
+
+  create_table "regions", :force => true do |t|
+    t.integer  "parent_id"
+    t.string   "name"
+    t.text     "description"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  create_table "room_prices", :force => true do |t|
+    t.integer  "room_id"
+    t.integer  "period_id"
+    t.integer  "value"
+    t.integer  "measure_id"
+    t.string   "description"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  create_table "rooms", :force => true do |t|
+    t.integer  "hotel_id"
+    t.integer  "service_type_id"
+    t.string   "name"
+    t.text     "description"
+    t.string   "price"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+  end
+
+  create_table "source_classes", :force => true do |t|
+    t.string   "name"
+    t.text     "description"
+    t.integer  "parent_id"
+    t.integer  "parent_class_id"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+  end
+
+  create_table "source_instances", :force => true do |t|
+    t.string   "name"
+    t.text     "description"
+    t.integer  "source_class_id"
+    t.integer  "parent_instance_id"
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
   end
 
   create_table "users", :force => true do |t|
