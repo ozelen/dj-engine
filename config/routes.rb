@@ -1,55 +1,40 @@
 DjEngine::Application.routes.draw do
+  scope "(:locale)", locale: /#{I18n.available_locales.join('|')}/ do
 
-  resources :tag_options
+    resources :tag_options
+    resources :measures
+    resources :measure_categories
+    resources :tags
+    resources :tag_names
+    resources :tag_categories
 
-
-  resources :measures
-
-
-  resources :measure_categories
-
-
-  resources :tags
-
-
-  resources :tag_names
-
-
-  resources :tag_categories
-
-
-  resources :hotels do
-    resources :rooms do
-      resources :prices
+    resources :hotels do
+      resources :rooms do
+        resources :prices
+      end
+      resources :services
+      resources :periods
     end
-    resources :services
-    resources :periods
+
+    resources :prices
+    resources :regions
+    resources :cities
+    resources :nodes
+    get 'home', :to => 'nodes#home'
+
+    resources :user_sessions
+    match 'login'  => "user_sessions#new",      as: :login
+    match 'logout' => "user_sessions#destroy",  as: :logout
+
+    resources :users
+    resource :user, :as => 'account'  # a convenience route
+    match 'register' => 'users#new', :as => :signup
+    #match 'account' => 'users#edit', :as => :account
+
+    root :to => 'nodes#home'
+    get '/:name', to: 'nodes#page'
+
   end
-
-
-  resources :prices
-
-
-  resources :regions
-
-
-  resources :cities
-
-
-  resources :nodes
-  get 'home', :to => 'nodes#home'
-
-  resources :user_sessions
-  match 'login'  => "user_sessions#new",      as: :login
-  match 'logout' => "user_sessions#destroy",  as: :logout
-
-  resources :users
-  resource :user, :as => 'account'  # a convenience route
-  match 'register' => 'users#new', :as => :signup
-  #match 'account' => 'users#edit', :as => :account
-
-  root :to => 'nodes#home'
-  get '/:name', to: 'nodes#page'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

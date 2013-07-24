@@ -3,9 +3,24 @@ class ApplicationController < ActionController::Base
 
   #filter_parameter_logging :password
 
+  before_filter :set_locale
+
   helper_method :current_user
 
   private
+
+  def set_locale
+    I18n.default_locale = 'ru'
+    I18n.locale = params[:locale].present? ? params[:locale] : I18n.default_locale
+    # current_user.locale
+    # request.subdomain
+    # request.env['HTTP_ACCEPT_LANGUAGE']
+    # request.remote_ip
+  end
+
+  def default_url_options(options = {})
+    {locale: I18n.locale}
+  end
 
   def current_user_session
     return @current_user_session if defined?(@current_user_session)
