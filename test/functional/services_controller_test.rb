@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class HotelServicesControllerTest < ActionController::TestCase
+class ServicesControllerTest < ActionController::TestCase
   setup do
     @hotel_service = hotel_services(:one)
   end
@@ -8,7 +8,7 @@ class HotelServicesControllerTest < ActionController::TestCase
   test "should get index" do
     get :index
     assert_response :success
-    assert_not_nil assigns(:hotel_services)
+    assert_not_nil assigns(:services)
   end
 
   test "should get new" do
@@ -17,7 +17,7 @@ class HotelServicesControllerTest < ActionController::TestCase
   end
 
   test "should create hotel_service" do
-    assert_difference('HotelService.count') do
+    assert_difference('Service.count') do
       post :create, hotel_service: { description: @hotel_service.description, hotel_id: @hotel_service.hotel_id, name: @hotel_service.name, price: @hotel_service.price, service_type_id: @hotel_service.service_type_id }
     end
 
@@ -40,7 +40,7 @@ class HotelServicesControllerTest < ActionController::TestCase
   end
 
   test "should destroy hotel_service" do
-    assert_difference('HotelService.count', -1) do
+    assert_difference('Service.count', -1) do
       delete :destroy, id: @hotel_service
     end
 

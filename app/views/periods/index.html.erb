@@ -18,7 +18,7 @@
   <tbody>
     <% @periods.each do |period| %>
       <tr>
-        <td><%= link_to period.id, period_path(period) %></td>
+        <td><%= link_to period.id, hotel_period_path(@hotel, period) %></td>
         <td><%= period.since %></td>
         <td><%= period.till %></td>
         <td><%= period.name %></td>
@@ -27,9 +27,9 @@
         <td><%=l period.created_at %></td>
         <td>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
-                      edit_period_path(period), :class => 'btn btn-mini' %>
+                      edit_hotel_period_path(@hotel, period), :class => 'btn btn-mini' %>
           <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
-                      period_path(period),
+                      hotel_period_path(@hotel, period),
                       :method => :delete,
                       :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
                       :class => 'btn btn-mini btn-danger' %>
@@ -40,5 +40,5 @@
 </table>
 
 <%= link_to t('.new', :default => t("helpers.links.new")),
-            new_period_path,
+            new_hotel_period_path(@hotel),
             :class => 'btn btn-primary' %>

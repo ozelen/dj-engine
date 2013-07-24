@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130724074815) do
+ActiveRecord::Schema.define(:version => 20130724124948) do
 
   create_table "cities", :force => true do |t|
     t.string   "name"
@@ -22,16 +22,6 @@ ActiveRecord::Schema.define(:version => 20130724074815) do
     t.datetime "updated_at",  :null => false
   end
 
-  create_table "hotel_services", :force => true do |t|
-    t.integer  "hotel_id"
-    t.integer  "service_type_id"
-    t.string   "name"
-    t.text     "description"
-    t.string   "price"
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
-  end
-
   create_table "hotels", :force => true do |t|
     t.string   "name"
     t.text     "description"
@@ -40,6 +30,7 @@ ActiveRecord::Schema.define(:version => 20130724074815) do
     t.integer  "user_id"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
+    t.string   "ident"
   end
 
   create_table "nodes", :force => true do |t|
@@ -63,15 +54,7 @@ ActiveRecord::Schema.define(:version => 20130724074815) do
     t.integer  "hotel_id"
   end
 
-  create_table "regions", :force => true do |t|
-    t.integer  "parent_id"
-    t.string   "name"
-    t.text     "description"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
-  end
-
-  create_table "room_prices", :force => true do |t|
+  create_table "prices", :force => true do |t|
     t.integer  "room_id"
     t.integer  "period_id"
     t.integer  "value"
@@ -81,7 +64,25 @@ ActiveRecord::Schema.define(:version => 20130724074815) do
     t.datetime "updated_at",  :null => false
   end
 
+  create_table "regions", :force => true do |t|
+    t.integer  "parent_id"
+    t.string   "name"
+    t.text     "description"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
   create_table "rooms", :force => true do |t|
+    t.integer  "hotel_id"
+    t.integer  "service_type_id"
+    t.string   "name"
+    t.text     "description"
+    t.string   "price"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+  end
+
+  create_table "services", :force => true do |t|
     t.integer  "hotel_id"
     t.integer  "service_type_id"
     t.string   "name"

@@ -1,14 +1,15 @@
 DjEngine::Application.routes.draw do
-  resources :room_prices
+
+  resources :hotels do
+    resources :rooms do
+      resources :prices
+    end
+    resources :services
+    resources :periods
+  end
 
 
-  resources :periods
-
-
-  resources :rooms
-
-
-  resources :hotel_services
+  resources :prices
 
 
   resources :regions
@@ -16,13 +17,6 @@ DjEngine::Application.routes.draw do
 
   resources :cities
 
-
-  resources :hotels
-
-
-  resources :user_sessions
-
-  resources :users
 
   resources :nodes
   get 'home', :to => 'nodes#home'

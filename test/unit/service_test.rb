@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class HotelServiceTest < ActiveSupport::TestCase
+class ServiceTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end

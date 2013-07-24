@@ -1,5 +1,10 @@
 class Period < ActiveRecord::Base
   belongs_to :hotel
-  has_many :rooms, through: :room_prices
-  attr_accessible :description, :name, :order_position, :since, :till
+  has_many :rooms, through: :prices
+  attr_accessible :description, :name, :order_position, :since, :till, :hotel_id
+
+  def title
+    "#{self.name} (#{self.since.to_formatted_s :short} - #{self.till.to_formatted_s :short})"
+  end
+
 end

@@ -25,6 +25,7 @@ class HotelsController < ApplicationController
   # GET /hotels/new.json
   def new
     @hotel = Hotel.new
+    @hotel.user_id = current_user.id
 
     respond_to do |format|
       format.html # new.html.erb

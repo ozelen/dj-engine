@@ -1,4 +1,4 @@
-<%= form_for @room_price, :html => { :class => 'form-horizontal' } do |f| %>
+<%= form_for [@hotel, @room, @price], :html => { :class => 'form-horizontal' } do |f| %>
   <div class="control-group">
     <%= f.label :room_id, :class => 'control-label' %>
     <div class="controls">
@@ -8,7 +8,7 @@
   <div class="control-group">
     <%= f.label :period_id, :class => 'control-label' %>
     <div class="controls">
-      <%= f.number_field :period_id, :class => 'number_field' %>
+      <%= f.select :period_id, @periods.map { |p| [p.title, p.id] }, :class => 'select_field' %>
     </div>
   </div>
   <div class="control-group">
@@ -33,6 +33,6 @@
   <div class="form-actions">
     <%= f.submit nil, :class => 'btn btn-primary' %>
     <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
-                room_prices_path, :class => 'btn' %>
+                hotel_room_prices_path(@hotel, @room), :class => 'btn' %>
   </div>
 <% end %>

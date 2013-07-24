@@ -2,7 +2,8 @@ class RoomsController < ApplicationController
   # GET /rooms
   # GET /rooms.json
   def index
-    @rooms = Room.all
+    @hotel = Hotel.find params[:hotel_id]
+    @rooms = @hotel.rooms
 
     respond_to do |format|
       format.html # index.html.erb
@@ -14,6 +15,7 @@ class RoomsController < ApplicationController
   # GET /rooms/1.json
   def show
     @room = Room.find(params[:id])
+    @hotel = Hotel.find(params[:hotel_id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -25,6 +27,8 @@ class RoomsController < ApplicationController
   # GET /rooms/new.json
   def new
     @room = Room.new
+    @hotel = Hotel.find(params[:hotel_id])
+    @room.hotel_id = @hotel.id
 
     respond_to do |format|
       format.html # new.html.erb
@@ -35,6 +39,7 @@ class RoomsController < ApplicationController
   # GET /rooms/1/edit
   def edit
     @room = Room.find(params[:id])
+    @hotel = Hotel.find(params[:hotel_id])
   end
 
   # POST /rooms
@@ -44,7 +49,7 @@ class RoomsController < ApplicationController
 
     respond_to do |format|
       if @room.save
-        format.html { redirect_to @room, notice: 'Room was successfully created.' }
+        format.html { redirect_to [@room.hotel, @room], notice: 'Room was successfully created.' }
         format.json { render json: @room, status: :created, location: @room }
       else
         format.html { render action: "new" }
@@ -60,7 +65,7 @@ class RoomsController < ApplicationController
 
     respond_to do |format|
       if @room.update_attributes(params[:room])
-        format.html { redirect_to @room, notice: 'Room was successfully updated.' }
+        format.html { redirect_to [@room.hotel, @room], notice: 'Room was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }

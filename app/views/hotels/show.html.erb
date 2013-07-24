@@ -4,6 +4,8 @@
 </div>
 
 <dl class="dl-horizontal">
+  <dt><strong><%= model_class.human_attribute_name(:ident) %>:</strong></dt>
+  <dd><%= @hotel.ident %></dd>
   <dt><strong><%= model_class.human_attribute_name(:name) %>:</strong></dt>
   <dd><%= @hotel.name %></dd>
   <dt><strong><%= model_class.human_attribute_name(:description) %>:</strong></dt>
@@ -13,7 +15,14 @@
   <dt><strong><%= model_class.human_attribute_name(:city_id) %>:</strong></dt>
   <dd><%= @hotel.city_id %></dd>
   <dt><strong><%= model_class.human_attribute_name(:user_id) %>:</strong></dt>
-  <dd><%= @hotel.user_id %></dd>
+  <dd><%= @hotel.user.name %></dd>
+  <dt><strong>Rooms:</strong></dt>
+  <dd><%= link_to @hotel.rooms.count, hotel_rooms_path(@hotel) %></dd>
+  <dt><strong>Services:</strong></dt>
+  <dd><%= link_to @hotel.services.count, hotel_services_path(@hotel) %></dd>
+  <dt><strong>Periods:</strong></dt>
+  <dd><%= link_to @hotel.periods.count, hotel_periods_path(@hotel) %></dd>
+
 </dl>
 
 <div class="form-actions">
