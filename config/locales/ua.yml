@@ -6,3 +6,9 @@ ua:
   hotels:
     index:
       title: "Список готелів"
+
+  time:
+    formats:
+      default: "%d.%m.%Y"
+      short: "%b %d"
+      long: "%B %d, %Y"

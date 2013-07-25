@@ -6,3 +6,10 @@ ru:
   hotels:
     index:
       title: "Список гостиниц"
+
+
+  time:
+    formats:
+      default: "%d.%m.%Y"
+      short: "%b %d"
+      long: "%B %d, %Y"
