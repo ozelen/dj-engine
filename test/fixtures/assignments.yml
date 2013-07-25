@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  assigned_id: 1
+  assigned_type: MyString
+  role: MyString
+
+two:
+  assigned_id: 1
+  assigned_type: MyString
+  role: MyString
