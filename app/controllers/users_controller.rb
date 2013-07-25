@@ -2,6 +2,7 @@ class UsersController < ApplicationController
   load_and_authorize_resource
 
   def index
+    redirect_to root_url, :alert => "Access denied." if !current_user || !current_user.role?(:admin)
     @users = User.all
   end
 

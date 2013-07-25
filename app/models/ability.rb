@@ -20,7 +20,6 @@ class Ability
       can :manage, Price do |period|
         price.room.hotel.try(:user) == user
       end
-
     end
 
     user ||= User.new # guest user (not logged in)
@@ -29,7 +28,15 @@ class Ability
       can :manage, :all
     else
       can :read, :all
+
+      can :page, Node
+      can :home, Node
+
+      cannot :index, User
       cannot :read, User
+      cannot :update, User
+      can :create, User
+
       can :manage, User do |u|
         user == u
       end
