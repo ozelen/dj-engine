@@ -1,4 +1,5 @@
 class TagNamesController < ApplicationController
+  load_and_authorize_resource
   # GET /tag_names
   # GET /tag_names.json
   def index

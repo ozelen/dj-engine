@@ -1,4 +1,5 @@
 class PricesController < ApplicationController
+  load_and_authorize_resource
   # GET /Prices
   # GET /Prices.json
   def index

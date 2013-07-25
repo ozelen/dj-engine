@@ -1,4 +1,5 @@
 class TagCategoriesController < ApplicationController
+  load_and_authorize_resource
   # GET /tag_categories
   # GET /tag_categories.json
   def index

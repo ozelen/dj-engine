@@ -1,4 +1,5 @@
 class MeasureCategoriesController < ApplicationController
+  load_and_authorize_resource
   # GET /measure_categories
   # GET /measure_categories.json
   def index

@@ -1,4 +1,5 @@
 class NodesController < ApplicationController
+  load_and_authorize_resource
   # GET /nodes
   # GET /nodes.json
   def home

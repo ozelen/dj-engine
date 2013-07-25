@@ -1,4 +1,5 @@
 class TagOptionsController < ApplicationController
+  load_and_authorize_resource
   # GET /tag_options
   # GET /tag_options.json
   def index

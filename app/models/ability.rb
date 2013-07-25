@@ -14,6 +14,12 @@ class Ability
       can :manage, Service do |room|
         room.hotel.try(:user) == user
       end
+      can :manage, Period do |period|
+        period.hotel.try(:user) == user
+      end
+      can :manage, Price do |period|
+        price.room.hotel.try(:user) == user
+      end
 
     end
 
