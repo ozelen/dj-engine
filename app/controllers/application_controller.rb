@@ -1,13 +1,24 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
 
-  #filter_parameter_logging :password
+  include Mercury::Authentication
+
+  layout :layout_with_mercury
+  helper_method :is_editing?
 
   before_filter :set_locale
 
   helper_method :current_user
 
   private
+
+  def layout_with_mercury
+    !params[:mercury_frame] && is_editing? ? 'mercury' : 'application'
+  end
+
+  def is_editing?
+    cookies[:editing] == 'true' && can_edit?
+  end
 
   def set_locale
     I18n.default_locale = 'ru'

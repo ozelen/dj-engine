@@ -1,7 +1,13 @@
 <%- model_class = Hotel -%>
 <div class="page-header">
-  <h1><%=t '.title', :default => model_class.model_name.human.titleize %></h1>
+  <h1 data-mercury="simple"><%= @hotel.name %></h1>
 </div>
+
+
+<div data-mercury="markdown">
+  <%= @hotel.description %>
+</div>
+
 
 <dl class="dl-horizontal">
   <dt><strong><%= model_class.human_attribute_name(:ident) %>:</strong></dt>
