@@ -34,6 +34,10 @@ gem "authlogic", :git => "git://github.com/binarylogic/authlogic.git"
 gem 'cancan'
 gem 'globalize3'
 
+gem 'mercury-rails', require: 'mercury/rails'
+
+
+
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 
@@ -50,3 +54,4 @@ gem 'globalize3'
 # gem 'debugger'
 
 gem "mocha", :group => :test
+gem 'paperclip'

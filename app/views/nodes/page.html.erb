@@ -5,12 +5,12 @@
 
 
       <div id="page-div" class="page">
-        <h1 id="page-header" class="header">
-          <%= @node.header %>
+        <h1 id="node_header" class="mercury-region" data-mercury="full">
+          <%= raw @node.header %>
         </h1>
 
-        <div id="page-conent" class="content">
-          <%= @node.content %>
+        <div id="node_content" class="mercury-region" data-mercury="full">
+          <%= raw @node.content %>
         </div>
       </div>
 

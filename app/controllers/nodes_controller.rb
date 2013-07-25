@@ -10,6 +10,14 @@ class NodesController < ApplicationController
     @page_title = @node.title
   end
 
+  def mercury_update
+    @node = Node.find_by_name params[:name]
+    @node.header = params[:content][:node_header][:value]
+    @node.content = params[:content][:node_content][:value]
+    @node.save!
+    render text: ""
+  end
+
   def index
     @nodes = Node.all
 
@@ -89,4 +97,7 @@ class NodesController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+
+
 end

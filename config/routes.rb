@@ -1,4 +1,10 @@
 DjEngine::Application.routes.draw do
+    namespace :mercury do
+      resources :images
+    end
+
+  mount Mercury::Engine => '/'
+
   scope "(:locale)", locale: /#{I18n.available_locales.join('|')}/ do
     resources :assignments
     resources :tag_options
@@ -9,6 +15,7 @@ DjEngine::Application.routes.draw do
     resources :tag_categories
 
     resources :hotels do
+      member { post :mercury_update }
       resources :rooms do
         resources :prices
       end
@@ -37,6 +44,9 @@ DjEngine::Application.routes.draw do
 
     root :to => 'nodes#home'
     get '/:name', to: 'nodes#page'
+    put '/:name', to: 'nodes#mercury_update' do
+      member { post :mercury_update }
+    end
 
   end
 
