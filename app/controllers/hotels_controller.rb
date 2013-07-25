@@ -3,12 +3,16 @@ class HotelsController < ApplicationController
   # GET /hotels
   # GET /hotels.json
   def index
-    @hotels = Hotel.all
+    @hotels = params[:whose] == 'my' ? current_user.hotels : Hotel.all
 
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @hotels }
     end
+  end
+
+  def my
+    @hotels = current_user.hotels
   end
 
   # GET /hotels/1

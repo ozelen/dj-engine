@@ -8,4 +8,5 @@ class Hotel < ActiveRecord::Base
   has_many :assignments, as: :assigned
   attr_accessible :city_id, :description, :location, :name, :user_id, :ident
   translates :name, :description
+
 end

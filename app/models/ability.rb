@@ -3,11 +3,30 @@ class Ability
 
   def initialize(user)
 
+    if user
+      can :create, Hotel
+      can :manage, Hotel do |hotel|
+        hotel.try(:user) == user
+      end
+      can :manage, Room do |room|
+        room.hotel.try(:user) == user
+      end
+      can :manage, Service do |room|
+        room.hotel.try(:user) == user
+      end
+
+    end
+
     user ||= User.new # guest user (not logged in)
+
     if user.role? :admin
-     can :manage, :all
+      can :manage, :all
     else
-     can :read, :all
+      can :read, :all
+      cannot :read, User
+      can :manage, User do |u|
+        user == u
+      end
     end
 
     # Define abilities for the passed in user here. For example:

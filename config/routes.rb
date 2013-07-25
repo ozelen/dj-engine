@@ -16,6 +16,10 @@ DjEngine::Application.routes.draw do
       resources :periods
     end
 
+    scope "(:whose)", scope: /(my|our)/ do
+      resources :hotels
+    end
+
     resources :prices
     resources :regions
     resources :cities
