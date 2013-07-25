@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130725035458) do
+ActiveRecord::Schema.define(:version => 20130725041814) do
 
   create_table "cities", :force => true do |t|
     t.string   "name"
@@ -21,6 +21,18 @@ ActiveRecord::Schema.define(:version => 20130725035458) do
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
   end
+
+  create_table "city_translations", :force => true do |t|
+    t.integer  "city_id"
+    t.string   "locale"
+    t.string   "name"
+    t.text     "description"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  add_index "city_translations", ["city_id"], :name => "index_city_translations_on_city_id"
+  add_index "city_translations", ["locale"], :name => "index_city_translations_on_locale"
 
   create_table "hotel_translations", :force => true do |t|
     t.integer  "hotel_id"
@@ -53,6 +65,28 @@ ActiveRecord::Schema.define(:version => 20130725035458) do
     t.datetime "updated_at", :null => false
   end
 
+  create_table "measure_category_translations", :force => true do |t|
+    t.integer  "measure_category_id"
+    t.string   "locale"
+    t.string   "name"
+    t.datetime "created_at",          :null => false
+    t.datetime "updated_at",          :null => false
+  end
+
+  add_index "measure_category_translations", ["locale"], :name => "index_measure_category_translations_on_locale"
+  add_index "measure_category_translations", ["measure_category_id"], :name => "index_measure_category_translations_on_measure_category_id"
+
+  create_table "measure_translations", :force => true do |t|
+    t.integer  "measure_id"
+    t.string   "locale"
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "measure_translations", ["locale"], :name => "index_measure_translations_on_locale"
+  add_index "measure_translations", ["measure_id"], :name => "index_measure_translations_on_measure_id"
+
   create_table "measures", :force => true do |t|
     t.integer  "measure_category_id"
     t.string   "iso"
@@ -60,6 +94,19 @@ ActiveRecord::Schema.define(:version => 20130725035458) do
     t.datetime "created_at",          :null => false
     t.datetime "updated_at",          :null => false
   end
+
+  create_table "node_translations", :force => true do |t|
+    t.integer  "node_id"
+    t.string   "locale"
+    t.string   "header"
+    t.string   "title"
+    t.text     "content"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "node_translations", ["locale"], :name => "index_node_translations_on_locale"
+  add_index "node_translations", ["node_id"], :name => "index_node_translations_on_node_id"
 
   create_table "nodes", :force => true do |t|
     t.integer  "parent"
@@ -70,6 +117,17 @@ ActiveRecord::Schema.define(:version => 20130725035458) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
+
+  create_table "period_translations", :force => true do |t|
+    t.integer  "period_id"
+    t.string   "locale"
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "period_translations", ["locale"], :name => "index_period_translations_on_locale"
+  add_index "period_translations", ["period_id"], :name => "index_period_translations_on_period_id"
 
   create_table "periods", :force => true do |t|
     t.date     "since"
@@ -96,6 +154,17 @@ ActiveRecord::Schema.define(:version => 20130725035458) do
 
   add_index "pois", ["objective_id", "objective_type"], :name => "index_pois_on_objective_id_and_objective_type"
 
+  create_table "price_translations", :force => true do |t|
+    t.integer  "price_id"
+    t.string   "locale"
+    t.text     "description"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  add_index "price_translations", ["locale"], :name => "index_price_translations_on_locale"
+  add_index "price_translations", ["price_id"], :name => "index_price_translations_on_price_id"
+
   create_table "prices", :force => true do |t|
     t.integer  "room_id"
     t.integer  "period_id"
@@ -106,6 +175,18 @@ ActiveRecord::Schema.define(:version => 20130725035458) do
     t.datetime "updated_at",  :null => false
   end
 
+  create_table "region_translations", :force => true do |t|
+    t.integer  "region_id"
+    t.string   "locale"
+    t.string   "name"
+    t.text     "description"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  add_index "region_translations", ["locale"], :name => "index_region_translations_on_locale"
+  add_index "region_translations", ["region_id"], :name => "index_region_translations_on_region_id"
+
   create_table "regions", :force => true do |t|
     t.integer  "parent_id"
     t.string   "name"
@@ -113,6 +194,18 @@ ActiveRecord::Schema.define(:version => 20130725035458) do
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
   end
+
+  create_table "room_translations", :force => true do |t|
+    t.integer  "room_id"
+    t.string   "locale"
+    t.string   "name"
+    t.text     "description"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  add_index "room_translations", ["locale"], :name => "index_room_translations_on_locale"
+  add_index "room_translations", ["room_id"], :name => "index_room_translations_on_room_id"
 
   create_table "rooms", :force => true do |t|
     t.integer  "hotel_id"
@@ -123,6 +216,19 @@ ActiveRecord::Schema.define(:version => 20130725035458) do
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
   end
+
+  create_table "service_translations", :force => true do |t|
+    t.integer  "service_id"
+    t.string   "locale"
+    t.string   "name"
+    t.text     "description"
+    t.string   "price"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  add_index "service_translations", ["locale"], :name => "index_service_translations_on_locale"
+  add_index "service_translations", ["service_id"], :name => "index_service_translations_on_service_id"
 
   create_table "services", :force => true do |t|
     t.integer  "hotel_id"
