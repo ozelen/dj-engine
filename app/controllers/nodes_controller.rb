@@ -6,12 +6,16 @@ class NodesController < ApplicationController
   end
 
   def page
-    @node = Node.find_by_name params[:page_name]
+    @node = Node.find_by_name params[:name]
     @page_title = @node.title
+    @object = @node.accessible
+    layout = @node.accessible_type.parameterize
+    instance_variable_set "@#{layout}", @node.accessible
+    render layout: layout
   end
 
   def mercury_update
-    @node = Node.find_by_name params[:name]
+    @node = Node.find_by_name params[:page_name]
     @node.header = params[:content][:node_header][:value]
     @node.content = params[:content][:node_content][:value]
     @node.save!

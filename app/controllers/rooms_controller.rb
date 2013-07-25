@@ -12,6 +12,13 @@ class RoomsController < ApplicationController
     end
   end
 
+  def layout
+    @node = Node.find_by_name params[:ident]
+    @object = @node.accessible
+    @rooms = @object.rooms
+    render layout: 'hotel', template: 'nodes/page'
+  end
+
   # GET /rooms/1
   # GET /rooms/1.json
   def show

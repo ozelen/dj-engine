@@ -52,7 +52,6 @@
               <li><%= link_to "Activities", "/activities"  %></li>
               <li><%= link_to "About", "/about"  %></li>
               <li><%= link_to "Edit Page", "/editor" + request.path, id: "edit_link" %></li>
-              <li><%= link_to_function "Toggle Mercury Editor", "document.cookie='editing=#{is_editing? ? 'false' : 'true'}';top.location.href=top.location.href" %></li>
             </ul>
 
             <ul class="nav pull-right">
@@ -89,7 +88,7 @@
     </div>
 
     <div class="container-fluid">
-        <%= yield %>
+      <%= content_for?(:content) ? yield(:content) : yield %>
     </div> <!-- /container -->
 
     <!-- Javascripts

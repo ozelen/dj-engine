@@ -14,6 +14,11 @@ DjEngine::Application.routes.draw do
     resources :tag_names
     resources :tag_categories
 
+    scope 'hotels/:ident', constraints: { id: /[A-Z]\d{5}/ } do
+      get 'rooms' => 'rooms#layout'
+      get 'services' => 'services#index'
+    end
+
     resources :hotels do
       member { post :mercury_update }
       resources :rooms do
@@ -43,7 +48,7 @@ DjEngine::Application.routes.draw do
     #match 'account' => 'users#edit', :as => :account
 
     root :to => 'nodes#home'
-    get '/:page_name', to: 'nodes#page'
+    get '/:name', to: 'nodes#page'
     put '/:page_name', to: 'nodes#mercury_update' do
       member { post :mercury_update }
     end
