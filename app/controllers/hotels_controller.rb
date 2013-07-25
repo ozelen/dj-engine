@@ -1,4 +1,5 @@
 class HotelsController < ApplicationController
+  load_and_authorize_resource
   # GET /hotels
   # GET /hotels.json
   def index

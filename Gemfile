@@ -31,7 +31,7 @@ gem 'thin'
 
 gem 'jquery-rails'
 gem "authlogic", :git => "git://github.com/binarylogic/authlogic.git"
-
+gem 'cancan'
 gem 'globalize3'
 
 # To use ActiveModel has_secure_password
