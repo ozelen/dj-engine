@@ -3,14 +3,13 @@
     <div class="span9">
       <%= bootstrap_flash %>
 
-
       <div id="page-div" class="page">
-        <h1 id="node_header" class="mercury-region" data-mercury="full">
-          <%= raw @node.header %>
+        <h1 id="node_header" data-mercury="full">
+          <%= @node.header %>
         </h1>
 
-        <div id="node_content" class="mercury-region" data-mercury="full">
-          <%= raw @node.content %>
+        <div id="node_content" data-mercury="full">
+          <%= @node.content %>
         </div>
       </div>
 

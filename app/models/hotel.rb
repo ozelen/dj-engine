@@ -1,4 +1,5 @@
 class Hotel < ActiveRecord::Base
+  has_one :node, as: :accessible
   belongs_to :city
   belongs_to :user
   has_many :rooms

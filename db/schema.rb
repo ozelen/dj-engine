@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130725125800) do
+ActiveRecord::Schema.define(:version => 20130725173030) do
 
   create_table "assignments", :force => true do |t|
     t.integer  "user_id"
@@ -134,9 +134,13 @@ ActiveRecord::Schema.define(:version => 20130725125800) do
     t.string   "title"
     t.string   "header"
     t.text     "content"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+    t.integer  "accessible_id"
+    t.string   "accessible_type"
   end
+
+  add_index "nodes", ["accessible_id", "accessible_type"], :name => "index_nodes_on_accessible_id_and_accessible_type"
 
   create_table "period_translations", :force => true do |t|
     t.integer  "period_id"

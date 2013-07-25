@@ -6,7 +6,7 @@ class NodesController < ApplicationController
   end
 
   def page
-    @node = Node.find_by_name params[:name]
+    @node = Node.find_by_name params[:page_name]
     @page_title = @node.title
   end
 

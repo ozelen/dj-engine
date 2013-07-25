@@ -43,8 +43,8 @@ DjEngine::Application.routes.draw do
     #match 'account' => 'users#edit', :as => :account
 
     root :to => 'nodes#home'
-    get '/:name', to: 'nodes#page'
-    put '/:name', to: 'nodes#mercury_update' do
+    get '/:page_name', to: 'nodes#page'
+    put '/:page_name', to: 'nodes#mercury_update' do
       member { post :mercury_update }
     end
 

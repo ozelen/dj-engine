@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
 
   include Mercury::Authentication
 
-  layout :layout_with_mercury
+  #layout :layout_with_mercury
   helper_method :is_editing?
 
   before_filter :set_locale
