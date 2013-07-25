@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130724192944) do
+ActiveRecord::Schema.define(:version => 20130725035458) do
 
   create_table "cities", :force => true do |t|
     t.string   "name"
@@ -21,6 +21,18 @@ ActiveRecord::Schema.define(:version => 20130724192944) do
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
   end
+
+  create_table "hotel_translations", :force => true do |t|
+    t.integer  "hotel_id"
+    t.string   "locale"
+    t.string   "name"
+    t.text     "description"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  add_index "hotel_translations", ["hotel_id"], :name => "index_hotel_translations_on_hotel_id"
+  add_index "hotel_translations", ["locale"], :name => "index_hotel_translations_on_locale"
 
   create_table "hotels", :force => true do |t|
     t.string   "name"
@@ -69,6 +81,20 @@ ActiveRecord::Schema.define(:version => 20130724192944) do
     t.datetime "updated_at",     :null => false
     t.integer  "hotel_id"
   end
+
+  create_table "pois", :force => true do |t|
+    t.string   "ident"
+    t.string   "title"
+    t.string   "name"
+    t.text     "content"
+    t.text     "teaser"
+    t.integer  "objective_id"
+    t.string   "objective_type"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+  end
+
+  add_index "pois", ["objective_id", "objective_type"], :name => "index_pois_on_objective_id_and_objective_type"
 
   create_table "prices", :force => true do |t|
     t.integer  "room_id"
