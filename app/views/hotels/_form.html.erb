@@ -1,24 +1,30 @@
 <%= form_for @hotel, :html => { :class => 'form-horizontal' } do |f| %>
 
-    <div class="control-group">
-      <%= f.label :ident, :class => 'control-label' %>
-      <div class="controls">
-        <%= f.text_field :ident, :class => 'text_field' %>
-      </div>
-    </div>
+    <%= fields_for @hotel.node do |f| %>
+        <div class="control-group">
+          <%= f.label 'Unique ID', for: :name, :class => 'control-label' %>
+          <div class="controls">
+            <%= f.text_field :name, :class => 'text_field' %>
+          </div>
+        </div>
 
-  <div class="control-group">
-    <%= f.label :name, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :name, :class => 'text_field' %>
-    </div>
-  </div>
-  <div class="control-group">
-    <%= f.label :description, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_area :description, :class => 'text_area' %>
-    </div>
-  </div>
+        <div class="control-group">
+            <%= f.label :header, :class => 'control-label' %>
+            <div class="controls">
+              <%= f.text_field :header, :class => 'text_field' %>
+            </div>
+            </div>
+
+            <div class="control-group">
+            <%= f.label :content, :class => 'control-label' %>
+            <div class="controls">
+              <%= f.text_area :content, :class => 'text_area' %>
+            </div>
+        </div>
+
+    <% end %>
+
+
   <div class="control-group">
     <%= f.label :location, :class => 'control-label' %>
     <div class="controls">

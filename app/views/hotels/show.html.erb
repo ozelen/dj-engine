@@ -4,12 +4,9 @@
   <%= @hotel['active_item'] %>
   <%= render partial: 'hotels/hotel_header', locals: {active_item: 'Info'} %>
 
-  <div id="node_content" data-mercury="full">
-    <%= @hotel.node.content.html_safe if @hotel.node.content %>
-  </div>
 
-<div data-mercury="markdown">
-  <%= @hotel.description %>
+<div id="node_content" data-mercury="markdown">
+  <%= @hotel.node.content.html_safe if @hotel.node.content %>
 </div>
 
 <div style="clear: both"></div>

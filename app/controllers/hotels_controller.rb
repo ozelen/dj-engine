@@ -2,7 +2,7 @@ class HotelsController < ApplicationController
   #load_resource :node
   #load_and_authorize_resource find_by: :name, through: :node
   #load_and_authorize_resource :hotel, find_by: :ident
-  #before_filter :find_hotel, only: [:show, :edit, :update, :destroy]
+  before_filter :find_hotel#, only: [:show, :edit, :update, :destroy]
   # GET /hotels
   # GET /hotels.json
   def index
@@ -22,8 +22,6 @@ class HotelsController < ApplicationController
   # GET /hotels/1
   # GET /hotels/1.json
   def show
-    @hotel = Hotel.find_by_ident(params[:id])
-
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @hotel }
@@ -44,7 +42,6 @@ class HotelsController < ApplicationController
 
   # GET /hotels/1/edit
   def edit
-    @hotel = Hotel.find(params[:id])
   end
 
   # POST /hotels
@@ -54,6 +51,8 @@ class HotelsController < ApplicationController
 
     respond_to do |format|
       if @hotel.save
+        node = Hotel.create(name: params[:node][:slug], header: params[:node][:header], content: params[:node][:content])
+        @hotel.node = node
         format.html { redirect_to @hotel, notice: 'Hotel was successfully created.' }
         format.json { render json: @hotel, status: :created, location: @hotel }
       else
@@ -66,10 +65,12 @@ class HotelsController < ApplicationController
   # PUT /hotels/1
   # PUT /hotels/1.json
   def update
-    @hotel = Hotel.find(params[:id])
-
     respond_to do |format|
       if @hotel.update_attributes(params[:hotel])
+        @hotel.node.name = params[:node][:name]
+        @hotel.node.header = params[:node][:header]
+        @hotel.node.content = params[:node][:content]
+        @hotel.node.save!
         format.html { redirect_to @hotel, notice: 'Hotel was successfully updated.' }
         format.json { head :no_content }
       else
@@ -82,7 +83,6 @@ class HotelsController < ApplicationController
   # DELETE /hotels/1
   # DELETE /hotels/1.json
   def destroy
-    @hotel = Hotel.find(params[:id])
     @hotel.destroy
 
     respond_to do |format|
@@ -90,4 +90,9 @@ class HotelsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  def find_hotel
+    @hotel = Node.find_by_name(params[:id]).accessible
+  end
+
 end

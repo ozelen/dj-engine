@@ -11,7 +11,7 @@ class Hotel < ActiveRecord::Base
   translates :name, :description
 
   def to_param
-    ident
+    self.node.name
   end
 
   def node_name
