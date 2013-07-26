@@ -1,7 +1,8 @@
 class CitiesController < ApplicationController
-  load_and_authorize_resource
+  #load_and_authorize_resource
   # GET /cities
   # GET /cities.json
+  before_filter :find_city, only: [:show, :edit, :update, :destroy]
   def index
     @cities = City.all
 
@@ -14,7 +15,6 @@ class CitiesController < ApplicationController
   # GET /cities/1
   # GET /cities/1.json
   def show
-    @city = City.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -35,7 +35,6 @@ class CitiesController < ApplicationController
 
   # GET /cities/1/edit
   def edit
-    @city = City.find(params[:id])
   end
 
   # POST /cities
@@ -57,7 +56,6 @@ class CitiesController < ApplicationController
   # PUT /cities/1
   # PUT /cities/1.json
   def update
-    @city = City.find(params[:id])
 
     respond_to do |format|
       if @city.update_attributes(params[:city])
@@ -73,7 +71,6 @@ class CitiesController < ApplicationController
   # DELETE /cities/1
   # DELETE /cities/1.json
   def destroy
-    @city = City.find(params[:id])
     @city.destroy
 
     respond_to do |format|
@@ -81,4 +78,9 @@ class CitiesController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  def find_city
+    @city = Node.find_by_name(params[:id]).accessible
+  end
+
 end

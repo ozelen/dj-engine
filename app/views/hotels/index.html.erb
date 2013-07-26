@@ -5,7 +5,6 @@
 <table class="table table-striped">
   <thead>
     <tr>
-      <th><%= model_class.human_attribute_name(:id) %></th>
       <th><%= model_class.human_attribute_name(:name) %></th>
       <th><%= model_class.human_attribute_name(:description) %></th>
       <th><%= model_class.human_attribute_name(:location) %></th>
@@ -20,8 +19,8 @@
         <td><%= hotel.node.header %></td>
         <td><%= link_to hotel.node.header, node_path(hotel.node.name) %></td>
         <td><%= hotel.location %></td>
-        <td><%= hotel.city_id %></td>
-        <td><%= hotel.user_id %></td>
+        <td><%= hotel.city.node.header %></td>
+        <td><%= hotel.user.name %></td>
         <td>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
                       edit_hotel_path(hotel), :class => 'btn btn-mini' %>

@@ -1,5 +1,6 @@
 class RegionsController < ApplicationController
-  load_and_authorize_resource
+  #load_and_authorize_resource
+  before_filter :find_region, only: [:show, :edit, :update, :destroy]
   # GET /regions
   # GET /regions.json
   def index
@@ -14,8 +15,6 @@ class RegionsController < ApplicationController
   # GET /regions/1
   # GET /regions/1.json
   def show
-    @region = Region.find(params[:id])
-
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @region }
@@ -35,7 +34,6 @@ class RegionsController < ApplicationController
 
   # GET /regions/1/edit
   def edit
-    @region = Region.find(params[:id])
   end
 
   # POST /regions
@@ -57,7 +55,6 @@ class RegionsController < ApplicationController
   # PUT /regions/1
   # PUT /regions/1.json
   def update
-    @region = Region.find(params[:id])
 
     respond_to do |format|
       if @region.update_attributes(params[:region])
@@ -73,7 +70,6 @@ class RegionsController < ApplicationController
   # DELETE /regions/1
   # DELETE /regions/1.json
   def destroy
-    @region = Region.find(params[:id])
     @region.destroy
 
     respond_to do |format|
@@ -81,4 +77,9 @@ class RegionsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  def find_region
+    @region = Node.find_by_name(params[:id]).accessible
+  end
+
 end

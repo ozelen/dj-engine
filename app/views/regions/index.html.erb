@@ -5,22 +5,17 @@
 <table class="table table-striped">
   <thead>
     <tr>
-      <th><%= model_class.human_attribute_name(:id) %></th>
-      <th><%= model_class.human_attribute_name(:parent_id) %></th>
       <th><%= model_class.human_attribute_name(:name) %></th>
       <th><%= model_class.human_attribute_name(:description) %></th>
-      <th><%= model_class.human_attribute_name(:created_at) %></th>
       <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
   </thead>
   <tbody>
     <% @regions.each do |region| %>
       <tr>
-        <td><%= link_to region.id, region_path(region) %></td>
-        <td><%= region.parent_id %></td>
+        <td><%= link_to region.node.header, node_path(region.node) %></td>
         <td><%= region.name %></td>
         <td><%= region.description %></td>
-        <td><%=l region.created_at %></td>
         <td>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
                       edit_region_path(region), :class => 'btn btn-mini' %>
