@@ -17,9 +17,8 @@
   <tbody>
     <% @hotels.each do |hotel| %>
       <tr>
-        <td><%= link_to hotel.id, hotel_path(hotel) %></td>
-        <td><%= hotel.name %></td>
-        <td><%= hotel.description %></td>
+        <td><%= hotel.node.header %></td>
+        <td><%= link_to hotel.node.header, node_path(hotel.node.name) %></td>
         <td><%= hotel.location %></td>
         <td><%= hotel.city_id %></td>
         <td><%= hotel.user_id %></td>

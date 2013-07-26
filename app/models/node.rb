@@ -18,4 +18,15 @@ class Node < ActiveRecord::Base
     self.name ||= header.parameterize
   end
 
+  def save_from_accessible! params
+    self.name = params[:node][:name]
+    self.header = params[:node][:header]
+    self.content = params[:node][:content]
+    self.save!
+  end
+
+  def create_from_accessible! params
+    Hotel.create(name: params[:node][:name], header: params[:node][:header], content: params[:node][:content])
+  end
+
 end

@@ -1,13 +1,10 @@
 class HotelsController < ApplicationController
-  #load_resource :node
-  #load_and_authorize_resource find_by: :name, through: :node
-  #load_and_authorize_resource :hotel, find_by: :ident
-  before_filter :find_hotel#, only: [:show, :edit, :update, :destroy]
+
+  before_filter :find_hotel, only: [:show, :edit, :update, :destroy]
   # GET /hotels
   # GET /hotels.json
   def index
     @hotels = Hotel.all
-    #@hotels = params[:whose] == 'my' ? current_user.hotels : Hotel.all
 
     respond_to do |format|
       format.html # index.html.erb
@@ -51,8 +48,7 @@ class HotelsController < ApplicationController
 
     respond_to do |format|
       if @hotel.save
-        node = Hotel.create(name: params[:node][:slug], header: params[:node][:header], content: params[:node][:content])
-        @hotel.node = node
+        @hotel.node = Node.create_from_accessible!
         format.html { redirect_to @hotel, notice: 'Hotel was successfully created.' }
         format.json { render json: @hotel, status: :created, location: @hotel }
       else
@@ -67,10 +63,7 @@ class HotelsController < ApplicationController
   def update
     respond_to do |format|
       if @hotel.update_attributes(params[:hotel])
-        @hotel.node.name = params[:node][:name]
-        @hotel.node.header = params[:node][:header]
-        @hotel.node.content = params[:node][:content]
-        @hotel.node.save!
+        @hotel.node.save_from_accessible! params
         format.html { redirect_to @hotel, notice: 'Hotel was successfully updated.' }
         format.json { head :no_content }
       else
@@ -92,7 +85,7 @@ class HotelsController < ApplicationController
   end
 
   def find_hotel
-    @hotel = Node.find_by_name(params[:id]).accessible
+    @hotel = Node.find_by_name(params[:id]).accessible if params[:id]
   end
 
 end
