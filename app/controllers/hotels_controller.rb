@@ -1,6 +1,7 @@
 class HotelsController < ApplicationController
-
   before_filter :find_hotel, only: [:show, :edit, :update, :destroy]
+  load_and_authorize_resource :node
+  load_and_authorize_resource :hotel, :through => :node, :singleton => true
   # GET /hotels
   # GET /hotels.json
   def index
@@ -85,7 +86,8 @@ class HotelsController < ApplicationController
   end
 
   def find_hotel
-    @hotel = Node.find_by_name(params[:id]).accessible if params[:id]
+    @node = Node.find_by_name(params[:id])
+    @hotel = @node.accessible if params[:id]
   end
 
 end
