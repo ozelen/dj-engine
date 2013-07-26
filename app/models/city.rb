@@ -3,7 +3,7 @@ class City < ActiveRecord::Base
   has_many :hotels
   attr_accessible :description, :location, :name, :region_id
   translates :name, :description
-  has_one :node, as: :accessible
+  has_one :node, as: :accessible, :dependent => :destroy
 
   def to_param
     self.node.name

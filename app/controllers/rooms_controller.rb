@@ -33,7 +33,9 @@ class RoomsController < ApplicationController
   # GET /rooms/new
   # GET /rooms/new.json
   def new
+    authorize! :manage, @hotel
     @room = Room.new
+    @room.node = Node.new
     @room.hotel_id = @hotel.id
 
     respond_to do |format|

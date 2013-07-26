@@ -30,6 +30,7 @@ class HotelsController < ApplicationController
   def new
     authorize! :create, @hotel
     @hotel = Hotel.new
+    @hotel.node = Node.new
     @hotel.user_id = current_user.id
 
     respond_to do |format|
@@ -51,7 +52,7 @@ class HotelsController < ApplicationController
 
     respond_to do |format|
       if @hotel.save
-        @hotel.node = Node.create_from_accessible!
+        @hotel.node = Node.new.create_from_accessible! params
         format.html { redirect_to @hotel, notice: 'Hotel was successfully created.' }
         format.json { render json: @hotel, status: :created, location: @hotel }
       else

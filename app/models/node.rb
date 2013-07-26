@@ -1,10 +1,12 @@
 class Node < ActiveRecord::Base
-  belongs_to :accessible, polymorphic: true
+  belongs_to :accessible, polymorphic: true, dependent: :destroy
   attr_accessible :content, :header, :name, :parent, :title, :accessible_id, :accessible_type
   translates :header, :content, :title
 
   validates :name, uniqueness: true, presence: true
   before_validation :generate_name
+
+  #delegate :name, :header, :content, to: :accessible
 
   def self.from_param(param)
     find_by_name!(param)
@@ -15,7 +17,7 @@ class Node < ActiveRecord::Base
   end
 
   def generate_name
-    self.name ||= header.parameterize
+    self.name ||= header ? header.parameterize : id
   end
 
   def save_from_accessible! params
@@ -26,7 +28,7 @@ class Node < ActiveRecord::Base
   end
 
   def create_from_accessible! params
-    Hotel.create(name: params[:node][:name], header: params[:node][:header], content: params[:node][:content])
+    Node.create(name: params[:node][:name], header: params[:node][:header], content: params[:node][:content])
   end
 
 end

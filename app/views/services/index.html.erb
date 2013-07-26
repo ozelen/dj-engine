@@ -8,26 +8,18 @@
 <table class="table table-striped">
   <thead>
     <tr>
-      <th><%= model_class.human_attribute_name(:id) %></th>
-      <th><%= model_class.human_attribute_name(:hotel_id) %></th>
-      <th><%= model_class.human_attribute_name(:service_type_id) %></th>
       <th><%= model_class.human_attribute_name(:name) %></th>
       <th><%= model_class.human_attribute_name(:description) %></th>
       <th><%= model_class.human_attribute_name(:price) %></th>
-      <th><%= model_class.human_attribute_name(:created_at) %></th>
       <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
   </thead>
   <tbody>
     <% @services.each do |service| %>
       <tr>
-        <td><%= link_to service.id, hotel_service_path(@hotel, service) %></td>
-        <td><%= service.hotel_id %></td>
-        <td><%= service.service_type_id %></td>
-        <td><%= service.name %></td>
+        <td><%= link_to service.name, hotel_service_path(@hotel, service) %></td>
         <td><%= service.description %></td>
         <td><%= service.price %></td>
-        <td><%=l service.created_at %></td>
         <td>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
                       edit_hotel_service_path(@hotel, service), :class => 'btn btn-mini' %>

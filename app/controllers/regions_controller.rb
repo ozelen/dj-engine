@@ -24,6 +24,7 @@ class RegionsController < ApplicationController
   # GET /regions/new
   # GET /regions/new.json
   def new
+    authorize! :create, @region
     @region = Region.new
 
     respond_to do |format|
@@ -34,15 +35,18 @@ class RegionsController < ApplicationController
 
   # GET /regions/1/edit
   def edit
+    authorize! :manage, @city
   end
 
   # POST /regions
   # POST /regions.json
   def create
+    authorize! :create, @region
     @region = Region.new(params[:region])
 
     respond_to do |format|
       if @region.save
+        @region.node = Node.create_from_accessible! params
         format.html { redirect_to @region, notice: 'Region was successfully created.' }
         format.json { render json: @region, status: :created, location: @region }
       else
@@ -55,9 +59,10 @@ class RegionsController < ApplicationController
   # PUT /regions/1
   # PUT /regions/1.json
   def update
-
+    authorize! :manage, @region
     respond_to do |format|
       if @region.update_attributes(params[:region])
+        @region.node.save_from_accessible! params
         format.html { redirect_to @region, notice: 'Region was successfully updated.' }
         format.json { head :no_content }
       else
@@ -70,6 +75,7 @@ class RegionsController < ApplicationController
   # DELETE /regions/1
   # DELETE /regions/1.json
   def destroy
+    authorize! :destroy, @region
     @region.destroy
 
     respond_to do |format|

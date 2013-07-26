@@ -47,6 +47,7 @@ class CitiesController < ApplicationController
 
     respond_to do |format|
       if @city.save
+        @city.node = Node.new.create_from_accessible! params
         format.html { redirect_to @city, notice: 'City was successfully created.' }
         format.json { render json: @city, status: :created, location: @city }
       else
@@ -62,6 +63,7 @@ class CitiesController < ApplicationController
     authorize! :manage, @city
     respond_to do |format|
       if @city.update_attributes(params[:city])
+        @city.node.save_from_accessible! params
         format.html { redirect_to @city, notice: 'City was successfully updated.' }
         format.json { head :no_content }
       else

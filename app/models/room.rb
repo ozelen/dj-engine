@@ -3,7 +3,7 @@ class Room < ActiveRecord::Base
   has_many :prices
   has_many :periods, through: :prices
   has_many :tags, as: :taggable
-  has_one :node, as: :accessible
+  has_one :node, as: :accessible, :dependent => :destroy
   attr_accessible :description, :hotel_id, :name, :price, :service_type_id
   translates :name, :description
 
