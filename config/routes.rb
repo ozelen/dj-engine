@@ -14,9 +14,12 @@ DjEngine::Application.routes.draw do
     resources :tag_names
     resources :tag_categories
 
-    scope 'hotels/:ident', constraints: { id: /[A-Z]\d{5}/ } do
-      get 'rooms' => 'rooms#layout'
-      get 'services' => 'services#index'
+    scope 'hotels', path: '' do
+      get ':name' => 'nodes#page', name: /[A-Z]\d{5}/
+      scope ':ident', constraints: { id: /[A-Z]\d{5}/ } do
+        get 'rooms' => 'rooms#layout'
+        get 'services' => 'services#index'
+      end
     end
 
     resources :hotels do
