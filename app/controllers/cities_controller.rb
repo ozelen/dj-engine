@@ -25,6 +25,7 @@ class CitiesController < ApplicationController
   # GET /cities/new
   # GET /cities/new.json
   def new
+    authorize! :create, @city
     @city = City.new
 
     respond_to do |format|
@@ -35,11 +36,13 @@ class CitiesController < ApplicationController
 
   # GET /cities/1/edit
   def edit
+    authorize! :manage, @hotel
   end
 
   # POST /cities
   # POST /cities.json
   def create
+    authorize! :manage, @city
     @city = City.new(params[:city])
 
     respond_to do |format|
@@ -56,7 +59,7 @@ class CitiesController < ApplicationController
   # PUT /cities/1
   # PUT /cities/1.json
   def update
-
+    authorize! :manage, @city
     respond_to do |format|
       if @city.update_attributes(params[:city])
         format.html { redirect_to @city, notice: 'City was successfully updated.' }
@@ -71,6 +74,7 @@ class CitiesController < ApplicationController
   # DELETE /cities/1
   # DELETE /cities/1.json
   def destroy
+    authorize! :destroy, @city
     @city.destroy
 
     respond_to do |format|

@@ -1,7 +1,6 @@
 class HotelsController < ApplicationController
   before_filter :find_hotel, only: [:show, :edit, :update, :destroy]
-  load_and_authorize_resource :node
-  load_and_authorize_resource :hotel, :through => :node, :singleton => true
+
   # GET /hotels
   # GET /hotels.json
   def index
@@ -29,6 +28,7 @@ class HotelsController < ApplicationController
   # GET /hotels/new
   # GET /hotels/new.json
   def new
+    authorize! :create, @hotel
     @hotel = Hotel.new
     @hotel.user_id = current_user.id
 
@@ -40,11 +40,13 @@ class HotelsController < ApplicationController
 
   # GET /hotels/1/edit
   def edit
+    authorize! :manage, @hotel
   end
 
   # POST /hotels
   # POST /hotels.json
   def create
+    authorize! :create, @hotel
     @hotel = Hotel.new(params[:hotel])
 
     respond_to do |format|
@@ -62,6 +64,7 @@ class HotelsController < ApplicationController
   # PUT /hotels/1
   # PUT /hotels/1.json
   def update
+    authorize! :manage, @hotel
     respond_to do |format|
       if @hotel.update_attributes(params[:hotel])
         @hotel.node.save_from_accessible! params
@@ -77,6 +80,7 @@ class HotelsController < ApplicationController
   # DELETE /hotels/1
   # DELETE /hotels/1.json
   def destroy
+    authorize! :destroy, @hotel
     @hotel.destroy
 
     respond_to do |format|
@@ -89,5 +93,6 @@ class HotelsController < ApplicationController
     @node = Node.find_by_name(params[:id])
     @hotel = @node.accessible if params[:id]
   end
+
 
 end
