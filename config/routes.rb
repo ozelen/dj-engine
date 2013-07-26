@@ -14,14 +14,6 @@ DjEngine::Application.routes.draw do
     resources :tag_names
     resources :tag_categories
 
-    scope 'hotels', path: '' do
-      get ':name' => 'nodes#page', name: /[A-Z]\d{5}/
-      scope ':ident', constraints: { id: /[A-Z]\d{5}/ } do
-        get 'rooms' => 'rooms#layout'
-        get 'services' => 'services#index'
-      end
-    end
-
     resources :hotels do
       member { post :mercury_update }
       resources :rooms do
@@ -38,7 +30,7 @@ DjEngine::Application.routes.draw do
     resources :prices
     resources :regions
     resources :cities
-    resources :nodes
+
     get 'home', :to => 'nodes#home'
 
     resources :user_sessions
@@ -51,10 +43,15 @@ DjEngine::Application.routes.draw do
     #match 'account' => 'users#edit', :as => :account
 
     root :to => 'nodes#home'
-    get '/:name', to: 'nodes#page'
-    put '/:page_name', to: 'nodes#mercury_update' do
-      member { post :mercury_update }
-    end
+
+
+    #get '/:name', to: 'nodes#page'
+    #put '/:page_name', to: 'nodes#mercury_update' do
+    #  member { post :mercury_update }
+    #end
+
+    resources :nodes, only: [:index, :new, :create]
+    resources :nodes, path: '', except: [:index, :new, :create]
 
   end
 

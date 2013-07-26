@@ -1,21 +1,12 @@
 class NodesController < ApplicationController
-  load_and_authorize_resource
+  load_and_authorize_resource find_by: :name
+  before_filter :find_node, only: [:show, :edit, :update, :destroy]
   # GET /nodes
   # GET /nodes.json
   def home
   end
 
-  def page
-    @node = Node.find_by_name params[:name]
-    @page_title = @node.title
-    @object = @node.accessible
-    layout = @node.accessible_type.parameterize
-    instance_variable_set "@#{layout}", @node.accessible
-    render layout: layout
-  end
-
   def mercury_update
-    @node = Node.find_by_name params[:page_name]
     @node.header = params[:content][:node_header][:value]
     @node.content = params[:content][:node_content][:value]
     @node.save!
@@ -24,7 +15,7 @@ class NodesController < ApplicationController
 
   def index
     @nodes = Node.all
-
+    @node = Node.find_by_name!('skiworld')
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @nodes }
@@ -34,12 +25,27 @@ class NodesController < ApplicationController
   # GET /nodes/1
   # GET /nodes/1.json
   def show
-    @node = Node.find(params[:id])
     @page_title = @node.title
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @node }
+    if @node.accessible
+      layout = @node.accessible_type.parameterize
+      instance_variable_set "@#{layout}", @node.accessible
+      render template: layout.pluralize + '/show'
+    else
+      respond_to do |format|
+        format.html # show.html.erb
+        format.json { render json: @node }
+      end
     end
+
+  end
+
+  def page
+    @node = Node.find_by_name params[:name]
+    @page_title = @node.title
+    @object = @node.accessible
+    layout = @node.accessible_type.parameterize
+    instance_variable_set "@#{layout}", @node.accessible
+    render layout: layout
   end
 
   # GET /nodes/new
@@ -55,7 +61,6 @@ class NodesController < ApplicationController
 
   # GET /nodes/1/edit
   def edit
-    @node = Node.find(params[:id])
   end
 
   # POST /nodes
@@ -77,8 +82,6 @@ class NodesController < ApplicationController
   # PUT /nodes/1
   # PUT /nodes/1.json
   def update
-    @node = Node.find(params[:id])
-
     respond_to do |format|
       if @node.update_attributes(params[:node])
         format.html { redirect_to @node, notice: 'Node was successfully updated.' }
@@ -93,7 +96,6 @@ class NodesController < ApplicationController
   # DELETE /nodes/1
   # DELETE /nodes/1.json
   def destroy
-    @node = Node.find(params[:id])
     @node.destroy
 
     respond_to do |format|
@@ -102,6 +104,10 @@ class NodesController < ApplicationController
     end
   end
 
+private
 
+  def find_node
+    @node = Node.find_by_name!(params[:id])
+  end
 
 end

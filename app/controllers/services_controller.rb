@@ -1,9 +1,9 @@
 class ServicesController < ApplicationController
   load_and_authorize_resource
+  before_filter :find_hotel
   # GET /services
   # GET /services.json
   def index
-    @hotel = Hotel.find params[:hotel_id]
     @services = @hotel.services
 
     respond_to do |format|
@@ -16,7 +16,7 @@ class ServicesController < ApplicationController
   # GET /services/1.json
   def show
     @service = Service.find(params[:id])
-    @hotel = @service.hotel || Hotel.find(params[:hotel_id])
+    @hotel = @service.hotel
 
     respond_to do |format|
       format.html # show.html.erb
@@ -28,7 +28,6 @@ class ServicesController < ApplicationController
   # GET /services/new.json
   def new
     @service = Service.new
-    @hotel = Hotel.find params[:hotel_id]
     @service.hotel_id = @hotel.id
 
     respond_to do |format|
@@ -40,14 +39,12 @@ class ServicesController < ApplicationController
   # GET /services/1/edit
   def edit
     @service = Service.find(params[:id])
-    @hotel = Hotel.find params[:hotel_id]
   end
 
   # POST /services
   # POST /services.json
   def create
     @service = Service.new(params[:service])
-    @hotel = Hotel.find(params[:hotel_id])
 
     respond_to do |format|
       if @service.save

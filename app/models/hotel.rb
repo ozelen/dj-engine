@@ -10,4 +10,12 @@ class Hotel < ActiveRecord::Base
   attr_accessible :city_id, :description, :location, :name, :user_id, :ident
   translates :name, :description
 
+  def to_param
+    ident
+  end
+
+  def node_name
+    self.node.name
+  end
+
 end

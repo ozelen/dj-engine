@@ -1,9 +1,10 @@
 class RoomsController < ApplicationController
   load_and_authorize_resource
+  before_filter :find_hotel#, only: [:show, :edit, :update, :destroy]
+
   # GET /rooms
   # GET /rooms.json
   def index
-    @hotel = Hotel.find params[:hotel_id]
     @rooms = @hotel.rooms
 
     respond_to do |format|
@@ -23,7 +24,6 @@ class RoomsController < ApplicationController
   # GET /rooms/1.json
   def show
     @room = Room.find(params[:id])
-    @hotel = Hotel.find(params[:hotel_id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -35,7 +35,6 @@ class RoomsController < ApplicationController
   # GET /rooms/new.json
   def new
     @room = Room.new
-    @hotel = Hotel.find(params[:hotel_id])
     @room.hotel_id = @hotel.id
 
     respond_to do |format|
@@ -47,7 +46,6 @@ class RoomsController < ApplicationController
   # GET /rooms/1/edit
   def edit
     @room = Room.find(params[:id])
-    @hotel = Hotel.find(params[:hotel_id])
   end
 
   # POST /rooms
@@ -93,4 +91,7 @@ class RoomsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+
+
 end

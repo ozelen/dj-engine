@@ -1,0 +1,18 @@
+
+<ul>
+
+</ul>
+
+
+<div class="span3">
+  <div class="well sidebar-nav">
+
+    <ul class="nav nav-pills nav-stacked">
+      <li class="nav-header">Rooms</li>
+      <% @hotel.rooms.each do |room| %>
+          <li><%= link_to room.name, hotel_room_path(@hotel, room)  %></li>
+      <% end %>
+    </ul>
+
+  </div><!--/.well -->
+</div><!--/span-->

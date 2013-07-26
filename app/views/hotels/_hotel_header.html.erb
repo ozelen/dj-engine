@@ -1,0 +1,28 @@
+<% hotel_menu = [
+        ['Info',      node_path(@hotel.node),           -1 ],
+        ['Rooms',       hotel_rooms_path(@hotel),       @hotel.rooms.count     ],
+        ['Services',    hotel_services_path(@hotel),    @hotel.services.count  ],
+        ['Photos',      '#',                            35 ],
+        ['Prices',      '#',                            -1 ],
+        ['Comments',    '#',                            52 ],
+        ['Contacts',    '#',                            -1 ]
+] %>
+
+<div class="page-header">
+  <h1 data-mercury="simple" id="node_header"><%= @hotel.node.header %></h1>
+
+    <ul class="nav nav-pills">
+
+      <% hotel_menu.each do |item| %>
+          <li <%= 'class="active"'.html_safe if active_item == item[0] %> ><a href="<%= item[1] %>">
+            <% if item[2]>0 %>
+                <span class="badge pull-right"><%= item[2] %></span>
+            <% end %>
+            <%= item[0] %> </a>
+          </li>
+      <% end %>
+
+    </ul>
+
+</div>
+

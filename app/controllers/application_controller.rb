@@ -78,4 +78,8 @@ class ApplicationController < ActionController::Base
     redirect_to root_url
   end
 
+  def find_hotel
+    @hotel = Node.find_by_name(params[:hotel_id]).accessible
+  end
+
 end
