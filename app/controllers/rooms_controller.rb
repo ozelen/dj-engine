@@ -1,7 +1,6 @@
 class RoomsController < ApplicationController
   #load_and_authorize_resource
-  before_filter :find_hotel#
-  before_filter :find_room, only: [:show, :edit, :update, :destroy]
+  before_filter :find_hotel
 
   # GET /rooms
   # GET /rooms.json
@@ -14,16 +13,10 @@ class RoomsController < ApplicationController
     end
   end
 
-  def layout
-    @node = Node.find_by_name params[:ident]
-    @object = @node.accessible
-    @rooms = @object.rooms
-    render layout: 'hotel', template: 'nodes/page'
-  end
-
   # GET /rooms/1
   # GET /rooms/1.json
   def show
+    @room = Room.find params[:id]
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @room }
@@ -35,7 +28,6 @@ class RoomsController < ApplicationController
   def new
     authorize! :manage, @hotel
     @room = Room.new
-    @room.node = Node.new
     @room.hotel_id = @hotel.id
 
     respond_to do |format|
@@ -46,6 +38,7 @@ class RoomsController < ApplicationController
 
   # GET /rooms/1/edit
   def edit
+    @room = Room.find params[:id]
   end
 
   # POST /rooms
@@ -55,7 +48,6 @@ class RoomsController < ApplicationController
 
     respond_to do |format|
       if @room.save
-        @room.node = Node.create_from_accessible! params
         format.html { redirect_to [@room.hotel, @room], notice: 'Room was successfully created.' }
         format.json { render json: @room, status: :created, location: @room }
       else
@@ -68,9 +60,9 @@ class RoomsController < ApplicationController
   # PUT /rooms/1
   # PUT /rooms/1.json
   def update
+    @room = Room.find params[:id]
     respond_to do |format|
       if @room.update_attributes(params[:room])
-        @room.node.save_from_accessible! params
         format.html { redirect_to [@room.hotel, @room], notice: 'Room was successfully updated.' }
         format.json { head :no_content }
       else
@@ -83,16 +75,14 @@ class RoomsController < ApplicationController
   # DELETE /rooms/1
   # DELETE /rooms/1.json
   def destroy
+    @room = Room.find params[:id]
     @room.destroy
 
     respond_to do |format|
-      format.html { redirect_to rooms_url }
+      format.html { redirect_to hotel_rooms_url }
       format.json { head :no_content }
     end
   end
 
-  def find_room
-    @room = Node.find_by_name(params[:id]).accessible
-  end
 
 end

@@ -23,12 +23,13 @@ class Node < ActiveRecord::Base
   def save_from_accessible! params
     self.name = params[:node][:name]
     self.header = params[:node][:header]
+    self.title = params[:node][:title]
     self.content = params[:node][:content]
     self.save!
   end
 
   def create_from_accessible! params
-    Node.create(name: params[:node][:name], header: params[:node][:header], content: params[:node][:content])
+    Node.create(name: params[:node][:name], header: params[:node][:header], content: params[:node][:content], title: params[:node][:title])
   end
 
 end

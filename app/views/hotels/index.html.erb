@@ -6,19 +6,21 @@
 <div class="row">
     <% @hotels.each do |hotel| %>
 
+        <div class="hotel-item col-lg-6">
 
-            <div class="thumbnail">
-              <img data-src="holder.js/300x200" alt="">
-              <div class="caption">
-                <h3><%= link_to hotel.node.header, node_path(hotel.node.name) %></h3>
-                <div>
-                  <%= hotel.node.content %>
-                </div>
+          <div class="pull-left">
+            <a href="#" class="thumbnail">
+              <img data-src="holder.js/100%x180" alt="100%x180" style="height: 180px; width: 100%; display: block;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALEAAAC0CAYAAADb5M12AAAFkUlEQVR4Xu2YvUsrQRxFJ6CC2iraiq02gij++1YqiJ1Yi53EThC/nrM4Yd+aTd5Hde89qZ5vEjfnd07GyU6m0+ln4cEEhCcwIWJhe7z1bgJETAjyEyBieYUAEDENyE+AiOUVAkDENCA/ASKWVwgAEdOA/ASIWF4hAERMA/ITIGJ5hQAQMQ3IT4CI5RUCQMQ0ID8BIpZXCAAR04D8BIhYXiEAREwD8hMgYnmFABAxDchPgIjlFQJAxDQgPwEillcIABHTgPwEiFheIQBETAPyEyBieYUAEDENyE+AiOUVAkDENCA/ASKWVwgAEdOA/ASIWF4hAERMA/ITIGJ5hQAQMQ3IT4CI5RUCQMQ0ID8BIpZXCAAR04D8BIhYXiEAREwD8hMgYnmFABAxDchPgIjlFQJAxDQgPwEillcIABHTgPwEiFheIQBETAPyEyBieYUAEDENyE+AiOUVAkDENCA/ASKWVwgAEdOA/ASIWF4hAERMA/ITIGJ5hQAQMQ3IT4CI5RUCQMQ0ID8BIpZXCAAR04D8BIhYXiEAREwD8hMgYnmFABAxDchPgIjlFQJAxDQgPwEillcIABHTgPwEiFheIQBETAPyEyBieYUAEDENyE+AiOUVAkDENCA/ASKWVwgAEdOA/ASIWF4hAERMA/ITIGJ5hQAQMQ3IT4CIvxV+fHyUi4uL8vz8XM7Ozsr6+nq5vb0tDw8PPyTv7OyUlZWV0bXDw8OlYcy7Xn3R/f19ubu7m73+4OCg7O7udj9Pp9Nyc3NT6mvro7+29ILGTyDiL7lvb2/l/Py8vL+/l8lkMou4730suvqcRWvz2hm7Xvv/jY2NcnJyUq6vr8vT01P3flZXV7v32F+rH7j6vLqW/IiPuB9UDWEs4rYr7+3tlf39/d+aGa61HXNzc7OLrK3XnXNra2v2gRler71ue3u71N28/7rX19duh27Xbzs2u/GXs6/BfSZ/imvEV1dX5ejoqNv5+seJNpcWet3xhjvf2FrbRU9PT8vl5eVsB110vUU78ePj49yI532o0nzGR9yELzoS/M0uPAx/7Igydr2xo8bwPbSdmIjZiWeb1lhU/3MWrrtxPSLUL4LDL3vzfu+/HCeImIiXRjz8E9//U71orQVZjyAvLy8/7iQsuhsyPPfWn9fW1jgTj5yTOE58D2Zsxx3ujv05jq2131WPEsfHx91Zu/67f57+2524fSHk7sTPkol4ScSLzp5ja2Pn1/6x4k/vE/ePC9wnnr8VE3HaV3lDXiI2lJqGRMRpxg15idhQahoSEacZN+QlYkOpaUhEnGbckJeIDaWmIRFxmnFDXiI2lJqGRMRpxg15idhQahoSEacZN+QlYkOpaUhEnGbckJeIDaWmIRFxmnFDXiI2lJqGRMRpxg15idhQahoSEacZN+QlYkOpaUhEnGbckJeIDaWmIRFxmnFDXiI2lJqGRMRpxg15idhQahoSEacZN+QlYkOpaUhEnGbckJeIDaWmIRFxmnFDXiI2lJqGRMRpxg15idhQahoSEacZN+QlYkOpaUhEnGbckJeIDaWmIRFxmnFDXiI2lJqGRMRpxg15idhQahoSEacZN+QlYkOpaUhEnGbckJeIDaWmIRFxmnFDXiI2lJqGRMRpxg15idhQahoSEacZN+QlYkOpaUhEnGbckJeIDaWmIRFxmnFDXiI2lJqGRMRpxg15idhQahoSEacZN+QlYkOpaUhEnGbckJeIDaWmIRFxmnFDXiI2lJqGRMRpxg15idhQahoSEacZN+QlYkOpaUhEnGbckJeIDaWmIRFxmnFDXiI2lJqGRMRpxg15idhQahoSEacZN+QlYkOpaUhEnGbckJeIDaWmIRFxmnFDXiI2lJqGRMRpxg15idhQahoSEacZN+QlYkOpaUi/AOQwxkVC+LdFAAAAAElFTkSuQmCC">
+            </a>
+          </div>
 
-
-
-              </div>
+          <div class="caption">
+            <h3><%= link_to hotel.node.header, node_path(hotel.node.name) %></h3>
+            <div>
+              <%= hotel.node.title %>
             </div>
+          </div>
+        </div>
 
     <% end %>
 </div>

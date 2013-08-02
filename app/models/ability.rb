@@ -36,6 +36,7 @@ class Ability
       cannot :read, User
       cannot :update, User
       can :create, User
+      can :create, Hotel
 
       can :manage, User do |u|
         user == u

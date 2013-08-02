@@ -1,47 +1,27 @@
 <%- model_class = Room -%>
+<% title 'Rooms, ' + @hotel.node.header %>
 
 <%= render partial: 'hotels/hotel_header', locals: {active_item: 'Rooms'} %>
 
-<div class="page-header">
-  <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
-</div>
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th><%= model_class.human_attribute_name(:id) %></th>
-      <th><%= model_class.human_attribute_name(:hotel_id) %></th>
-      <th><%= model_class.human_attribute_name(:service_type_id) %></th>
-      <th><%= model_class.human_attribute_name(:name) %></th>
-      <th><%= model_class.human_attribute_name(:description) %></th>
-      <th><%= model_class.human_attribute_name(:price) %></th>
-      <th><%= model_class.human_attribute_name(:created_at) %></th>
-      <th><%=t '.actions', :default => t("helpers.actions") %></th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @rooms.each do |room| %>
-      <tr>
-        <td><%= link_to room.id, hotel_room_path(room.hotel, room) %></td>
-        <td><%= room.hotel_id %></td>
-        <td><%= room.service_type_id %></td>
-        <td><%= room.name %></td>
-        <td><%= room.description %></td>
-        <td><%= room.price %></td>
-        <td><%=l room.created_at %></td>
-        <td>
-          <%= link_to t('.edit', :default => t("helpers.links.edit")),
-                      edit_hotel_room_path(room.hotel, room), :class => 'btn btn-mini' %>
-          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
-                      hotel_room_path(room.hotel, room),
-                      :method => :delete,
-                      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
-                      :class => 'btn btn-mini btn-danger' %>
-        </td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<% if can? :manage, @hotel %>
+  <% if @rooms.blank? %><h3>No rooms in your hotel</h3><% end %>
+  <div class="panel clearfix">
+    <%= link_to 'Create new  Room', new_hotel_room_path, :class => 'btn btn-primary btn-large btn-block pull-right' %>
+  </div>
+<% end %>
 
-<%= link_to t('.new', :default => t("helpers.links.new")),
-            new_hotel_room_path,
-            :class => 'btn btn-primary' %>
+<% @rooms.each do |room| %>
+    <%= render( partial: 'hotels/item_thumbnail', locals: {
+            header:     link_to(room.name, hotel_room_path(@hotel, room)),
+            teaser:     'Standard',
+            price:      room.price,
+            edit:       edit_hotel_room_path(room.hotel, room),
+            destroy:    hotel_room_path(room.hotel, room)
+    }) %>
+<% end %>
+
+
+
+
+
+

@@ -1,12 +1,30 @@
-<% title "New User Session" %>
+<% title "Sign In" %>
 
-<%= form_for @user_session do |f| %>
+<h1>Sign In</h1>
+
+<%= form_for @user_session, html: {class: "login-form form-horizontal"} do |f| %>
   <%= f.error_messages %>
-    <%= f.label :username %>
-    <%= f.text_field :username %>
-    <%= f.label :password %>
-    <%= f.password_field :password %>
-  <p><%= f.submit 'Sign in', class: :btn %></p>
+
+      <div class="form-group">
+        <label for="inputEmail" class="col-lg-2 control-label">Email</label>
+        <div class="col-lg-10">
+          <%= f.text_field :username, class: 'form-control',  placeholder: "Username" %>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="inputPassword" class="col-lg-2 control-label">Password</label>
+        <div class="col-lg-10">
+          <%= f.password_field :password, class: 'form-control',  placeholder: "Password" %>
+          <div class="checkbox">
+            <label>
+              <input type="checkbox"> Remember me
+            </label>
+          </div>
+          <p><%= f.submit 'Sign in', class: "btn btn-default" %></p>
+        </div>
+      </div>
+
+
 <% end %>
 
 

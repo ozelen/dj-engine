@@ -28,8 +28,9 @@ class HotelsController < ApplicationController
   # GET /hotels/new
   # GET /hotels/new.json
   def new
-    authorize! :create, @hotel
     @hotel = Hotel.new
+    authorize! :create, @hotel
+
     @hotel.node = Node.new
     @hotel.user_id = current_user.id
 
@@ -47,8 +48,8 @@ class HotelsController < ApplicationController
   # POST /hotels
   # POST /hotels.json
   def create
-    authorize! :create, @hotel
     @hotel = Hotel.new(params[:hotel])
+    authorize! :create, @hotel
 
     respond_to do |format|
       if @hotel.save
