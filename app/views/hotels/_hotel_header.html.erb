@@ -11,7 +11,7 @@
 
 
 <div class="jumbotron">
-  <h1><%= @hotel.node.header %> <small><%= active_item == 'Info' ? 'Hotel' : ' / '+active_item %></small></h1>
+  <h1><%= @hotel.node.header %> <small><%= active_item == 'Info' ? @hotel.type.name : ' / '+active_item %></small></h1>
   <p>
     <%= @hotel.node.title %>
   </p>

@@ -2,6 +2,8 @@ class Hotel < ActiveRecord::Base
   has_one :node, as: :accessible, :dependent => :destroy
   belongs_to :city
   belongs_to :user
+  belongs_to :type
+  has_many :values, as: :evaluated
   has_many :rooms
   has_many :services
   has_many :periods
@@ -11,7 +13,7 @@ class Hotel < ActiveRecord::Base
   has_many :fields
 
   accepts_nested_attributes_for :node
-  attr_accessible :city_id, :description, :location, :name, :user_id, :ident, :node_attributes
+  attr_accessible :city_id, :description, :location, :name, :user_id, :ident, :node_attributes, :type_id
 
   translates :name, :description
 

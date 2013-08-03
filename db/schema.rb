@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130803024835) do
+ActiveRecord::Schema.define(:version => 20130803034457) do
 
   create_table "assignments", :force => true do |t|
     t.integer  "user_id"
@@ -254,7 +254,10 @@ ActiveRecord::Schema.define(:version => 20130803024835) do
     t.string   "price"
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
+    t.integer  "type_id"
   end
+
+  add_index "rooms", ["type_id"], :name => "index_rooms_on_type_id"
 
   create_table "service_translations", :force => true do |t|
     t.integer  "service_id"
@@ -277,7 +280,10 @@ ActiveRecord::Schema.define(:version => 20130803024835) do
     t.string   "price"
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
+    t.integer  "type_id"
   end
+
+  add_index "services", ["type_id"], :name => "index_services_on_type_id"
 
   create_table "source_classes", :force => true do |t|
     t.string   "name"
@@ -363,5 +369,21 @@ ActiveRecord::Schema.define(:version => 20130803024835) do
   add_index "users", ["last_request_at"], :name => "index_users_on_last_request_at"
   add_index "users", ["persistence_token"], :name => "index_users_on_persistence_token"
   add_index "users", ["username"], :name => "index_users_on_username"
+
+  create_table "values", :force => true do |t|
+    t.string   "field_id"
+    t.string   "measure_id"
+    t.string   "value_string"
+    t.integer  "value_integer"
+    t.float    "value_float"
+    t.datetime "value_datetime"
+    t.time     "value_time"
+    t.integer  "evaluated_id"
+    t.string   "evaluated_type"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+  end
+
+  add_index "values", ["evaluated_id", "evaluated_type"], :name => "index_values_on_evaluated_id_and_evaluated_type"
 
 end

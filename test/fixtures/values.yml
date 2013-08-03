@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  field_id: MyString
+  valued_id: MyString
+  measure_id: MyString
+  evaluated_id: MyString
+  evaluated_type: MyString
+
+two:
+  field_id: MyString
+  valued_id: MyString
+  measure_id: MyString
+  evaluated_id: MyString
+  evaluated_type: MyString
