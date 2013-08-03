@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130725173030) do
+ActiveRecord::Schema.define(:version => 20130803024835) do
 
   create_table "assignments", :force => true do |t|
     t.integer  "user_id"
@@ -45,6 +45,18 @@ ActiveRecord::Schema.define(:version => 20130725173030) do
   add_index "city_translations", ["city_id"], :name => "index_city_translations_on_city_id"
   add_index "city_translations", ["locale"], :name => "index_city_translations_on_locale"
 
+  create_table "fields", :force => true do |t|
+    t.string   "name"
+    t.integer  "measure_category_id"
+    t.boolean  "required"
+    t.integer  "type_id"
+    t.datetime "created_at",          :null => false
+    t.datetime "updated_at",          :null => false
+  end
+
+  add_index "fields", ["measure_category_id"], :name => "index_fields_on_measure_category_id"
+  add_index "fields", ["type_id"], :name => "index_fields_on_type_id"
+
   create_table "hotel_translations", :force => true do |t|
     t.integer  "hotel_id"
     t.string   "locale"
@@ -66,7 +78,10 @@ ActiveRecord::Schema.define(:version => 20130725173030) do
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
     t.string   "ident"
+    t.integer  "type_id"
   end
+
+  add_index "hotels", ["type_id"], :name => "index_hotels_on_type_id"
 
   create_table "measure_categories", :force => true do |t|
     t.string   "name"
@@ -314,6 +329,13 @@ ActiveRecord::Schema.define(:version => 20130725173030) do
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
     t.integer  "measure_id"
+  end
+
+  create_table "types", :force => true do |t|
+    t.string   "name"
+    t.string   "filter"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "users", :force => true do |t|

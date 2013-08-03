@@ -1,4 +1,5 @@
 DjEngine::Application.routes.draw do
+
     namespace :mercury do
       resources :images
     end
@@ -13,6 +14,8 @@ DjEngine::Application.routes.draw do
     resources :tags
     resources :tag_names
     resources :tag_categories
+
+    resources :types
 
     resources :hotels do
       member { post :mercury_update }

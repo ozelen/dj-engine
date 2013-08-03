@@ -8,6 +8,8 @@ class Hotel < ActiveRecord::Base
   has_many :tags, as: :taggable
   has_many :assignments, as: :assigned
 
+  has_many :fields
+
   accepts_nested_attributes_for :node
   attr_accessible :city_id, :description, :location, :name, :user_id, :ident, :node_attributes
 

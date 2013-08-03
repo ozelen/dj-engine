@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  name: MyString
+  model: MyString
+  measure_category: 
+
+two:
+  name: MyString
+  model: MyString
+  measure_category: 

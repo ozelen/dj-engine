@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  name: MyString
+  measure_category: 
+  required: false
+  type: 
+
+two:
+  name: MyString
+  measure_category: 
+  required: false
+  type: 

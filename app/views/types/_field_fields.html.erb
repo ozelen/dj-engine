@@ -1,0 +1,9 @@
+<fieldset>
+  <%=
+    f.select :measure_category_id, options_from_collection_for_select(MeasureCategory.all, :id, :name, f.object.measure_category_id)
+  %>
+  <%= f.text_field :name, placeholder: "field_name" %>
+  <%= f.check_box :required %> <%= f.label :required %>
+  <%= f.hidden_field :_destroy %>
+  <%= link_to "[remove]", '#', class: "remove_fields" %>
+</fieldset>
