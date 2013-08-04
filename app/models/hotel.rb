@@ -13,10 +13,14 @@ class Hotel < ActiveRecord::Base
   has_many :values, as: :evaluated
   has_many :fields, through: :values
 
-  accepts_nested_attributes_for :node
-  accepts_nested_attributes_for :values
+  accepts_nested_attributes_for :node, allow_destroy: true
+  accepts_nested_attributes_for :values, allow_destroy: true
+  accepts_nested_attributes_for :rooms, allow_destroy: true
+  accepts_nested_attributes_for :services, allow_destroy: true
 
-  attr_accessible :city_id, :description, :location, :name, :user_id, :ident, :node_attributes, :type_id, :values_attributes, :fields
+  attr_accessible :city_id, :description, :location, :name, :user_id, :ident, :type_id, :fields,
+                  :values_attributes, :node_attributes,
+                  :rooms_attributes, :services_attributes
 
   translates :name, :description
 

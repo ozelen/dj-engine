@@ -1,0 +1,12 @@
+<fieldset>
+  <div class="form-group">
+    <div class="col-lg-3"></div>
+    <div class="col-lg-7">
+      <%= f.text_field :name, placeholder: "Room name", class: 'form-control' %>
+    </div>
+    <div class="col-lg-1">
+      <%= f.hidden_field :_destroy %>
+      <%= link_to "Remove", '#', class: "remove_fields btn btn-danger" %>
+    </div>
+  </div>
+</fieldset>
