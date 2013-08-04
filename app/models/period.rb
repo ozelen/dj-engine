@@ -1,5 +1,6 @@
 class Period < ActiveRecord::Base
   belongs_to :hotel
+  has_many :prices
   has_many :rooms, through: :prices
   attr_accessible :description, :name, :order_position, :since, :till, :hotel_id
   translates :name

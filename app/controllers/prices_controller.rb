@@ -1,10 +1,15 @@
 class PricesController < ApplicationController
   load_and_authorize_resource
+  before_filter :find_hotel
   # GET /Prices
   # GET /Prices.json
+
+  def hotel_pricelist
+    find_hotel
+  end
+
   def index
-    @hotel = Hotel.find params[:hotel_id]
-    @room = Room.find params[:room_id]
+    @room = Room.find params[:room_id] if params[:room_id]
     @prices = @room.prices
 
     respond_to do |format|
@@ -16,7 +21,6 @@ class PricesController < ApplicationController
   # GET /Prices/1
   # GET /Prices/1.json
   def show
-    @hotel = Hotel.find params[:hotel_id]
     @room = Room.find(params[:room_id])
     @price = Price.find(params[:id])
 

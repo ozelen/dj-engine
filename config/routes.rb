@@ -23,13 +23,16 @@ DjEngine::Application.routes.draw do
       end
       resources :services
       resources :periods
+      resources :prices
+    end
+    scope 'hotels/:hotel_id' do
+      get 'pricelist' => 'prices#hotel_pricelist'
     end
 
     scope "(:whose)", scope: /(my|our)/ do
       resources :hotels
     end
 
-    resources :prices
     resources :regions
     resources :cities
 

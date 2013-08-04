@@ -1,9 +1,9 @@
 class PeriodsController < ApplicationController
   load_and_authorize_resource
+  before_filter :find_hotel
   # GET /periods
   # GET /periods.json
   def index
-    @hotel = Hotel.find params[:hotel_id]
     @periods = @hotel.periods
 
     respond_to do |format|
@@ -15,7 +15,6 @@ class PeriodsController < ApplicationController
   # GET /periods/1
   # GET /periods/1.json
   def show
-    @hotel = Hotel.find params[:hotel_id]
     @period = Period.find(params[:id])
 
     respond_to do |format|
@@ -27,7 +26,6 @@ class PeriodsController < ApplicationController
   # GET /periods/new
   # GET /periods/new.json
   def new
-    @hotel = Hotel.find params[:hotel_id]
     @period = Period.new
     @period.hotel_id = @hotel.id
 
@@ -39,14 +37,12 @@ class PeriodsController < ApplicationController
 
   # GET /periods/1/edit
   def edit
-    @hotel = Hotel.find params[:hotel_id]
     @period = Period.find(params[:id])
   end
 
   # POST /periods
   # POST /periods.json
   def create
-    @hotel = Hotel.find params[:hotel_id]
     @period = Period.new(params[:period])
 
     respond_to do |format|
@@ -63,7 +59,6 @@ class PeriodsController < ApplicationController
   # PUT /periods/1
   # PUT /periods/1.json
   def update
-    @hotel = Hotel.find params[:hotel_id]
     @period = Period.find(params[:id])
 
     respond_to do |format|
@@ -80,7 +75,6 @@ class PeriodsController < ApplicationController
   # DELETE /periods/1
   # DELETE /periods/1.json
   def destroy
-    @hotel = Hotel.find params[:hotel_id]
     @period = Period.find(params[:id])
     @period.destroy
 

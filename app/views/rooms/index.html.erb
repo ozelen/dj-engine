@@ -19,7 +19,7 @@
                 price:      room.price,
                 edit:       edit_hotel_room_path(room.hotel, room),
                 destroy:    hotel_room_path(room.hotel, room)
-        }) %>
+        }) if room %>
     <% end %>
     </div>
 <% end %>
