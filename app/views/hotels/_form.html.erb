@@ -1,5 +1,21 @@
 <%= form_for @hotel, :html => { :class => 'form-horizontal' } do |f| %>
 
+    <%= f.fields_for :node do |node| %>
+        <div class="form-group">
+          <%= node.label :header, 'Hotel Name', :class => 'col-lg-3 control-label label-large' %>
+          <div class="col-lg-9">
+            <%= node.text_field :header, class: 'form-control input-large' %>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <%= node.label 'Hotel Unique ID', for: :name, :class => 'control-label col-lg-3' %>
+          <div class="col-lg-9">
+            <%= node.text_field :name, :class => 'form-control', placeholder: 'Name' %>
+          </div>
+        </div>
+    <% end %>
+
     <div class="form-group">
       <%= f.label :type, :class => 'col-lg-3 control-label' %>
       <div class="col-lg-9">
@@ -14,14 +30,27 @@
       </div>
     </div>
 
-    <%= render partial: 'nodes/fields_for_accessible', locals: {node:@hotel.node} %>
+    <%= f.fields_for :node do |node| %>
+        <div class="form-group">
+          <%= node.label :title, 'Short description title', :class => 'control-label col-lg-3' %>
+          <div class="col-lg-9">
+            <%= node.text_field :title, :class => 'form-control', placeholder: 'i.e. Comfortable hotel just near the ski lift, the best choice for a skier! ' %>
+          </div>
+        </div>
+        <div class="form-group">
+          <%= node.label :header, 'Long Description', :class => 'control-label col-lg-3' %>
+          <div class="col-lg-9">
+            <%= node.text_area :header, :class => 'form-control', placeholder: 'Content', rows: 8 %>
+          </div>
+        </div>
+    <% end %>
 
     <%= render 'types/properties', evaluated: @hotel, f: f %>
 
   <div class="form-group">
     <%= f.label :location, :class => 'control-label col-lg-3' %>
     <div class="col-lg-9">
-      <%= f.text_field :location, class: 'form-control' %>
+      <%= f.number_field :location, class: 'form-control' %>
     </div>
   </div>
 

@@ -15,15 +15,18 @@
                 <div class="form-group">
                   <% req = field.required? ? '* ' : ''  %>
                   <%= val.label :value_string, req + field.name, class: 'col-lg-3 control-label' %>
-                  <div class="col-lg-9">
+                  <div class="col-lg-<%= field.measure_category.measures.blank? ? 9 : 6 %>">
                     <%= val.text_field :value_string, class: 'form-control', placeholder: field.name %> <%= val.hidden_field :field_id %>
                   </div>
+
+                  <% if !field.measure_category.measures.blank? %>
+                      <div class="col-lg-3">
+                        <%= val.select :measure_id, options_from_collection_for_select(field.measure_category.measures, :id, :name), {}, {class: "form-control"}  %>
+                      </div>
+                  <% end %>
+
                 </div>
 
-                <tr>
-                  <td></td>
-                  <td></td>
-                </tr>
                 <% end %>
             <% end %>
     <% end %>

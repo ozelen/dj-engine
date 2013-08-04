@@ -1,10 +1,15 @@
 <%= form_for @value, remote: true do |f| %>
+    <form>
     <div class="row">
-      <div class="col-lg-10 dynamic-field-col-field">
-        <%= f.text_field :value_string, class: "form-control" %>
+      <div class="col-lg-6 dynamic-field-col-field">
+        <%= f.text_field :value_string, class: "form-control", id: "value_#{@value.id}" %>
+      </div>
+      <div class="col-lg-4">
+        <%= f.select :measure_id, options_from_collection_for_select(@value.field.measure_category.measures, :id, :name, @value.measure_id), {}, {class: "form-control"}  %>
       </div>
       <div class="col-lg-1 dynamic-field-col-button">
-        <%= link_to 'Save', '#', onclick: "$.post('#{value_path(@value)}',  {value:{value_string: $(this).prev().val() }} ); return false", :class => 'btn btn-primary' %>
+        <%= link_to 'Save', '#', onclick: "$.post('#{value_path(@value)}',  $(this).closest('.row').find('input, select').serialize() ); return false; ", :class => 'btn btn-primary' %>
       </div>
     </div>
+    </form>
 <% end %>

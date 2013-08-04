@@ -1,27 +1,39 @@
 <%= form_for @measure_category, :html => { :class => 'form-horizontal' } do |f| %>
-  <div class="control-group">
-    <%= f.label :name, :class => 'control-label' %>
-    <div class="controls">
+  <div class="form-group">
+    <%= f.label :name, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
       <%= f.text_field :name, :class => 'form-control' %>
     </div>
   </div>
-  <div class="control-group">
-    <%= f.label :data_type, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.select :data_type, map_for_select(@measure_category.data_types), class: 'form-control' %>
+  <div class="form-group">
+    <%= f.label :data_type, :class => 'control-label col-lg-2' %>
+    <div class="controls col-lg-10">
+      <%= f.select :data_type, map_for_select(@measure_category.data_types), {}, {class: 'form-control'} %>
     </div>
   </div>
-  <div class="control-group">
-    <%= f.label 'Measures' %>
-    <%= f.fields_for :measures do |builder| %>
-        <%= render 'measure_fields', f: builder %>
-    <% end %>
-    <%= link_to_add_fields "Add measure", f, :measures %>
-  </div>
 
-  <div class="form-actions">
-    <%= f.submit nil, :class => 'btn btn-primary' %>
-    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
-                measure_categories_path, :class => 'btn' %>
-  </div>
+    <fieldset>
+      <legend>Measures</legend>
+
+        <%= f.fields_for :measures do |builder| %>
+            <%= render 'measure_fields', f: builder %>
+        <% end %>
+
+        <div class="row">
+            <div class="col-lg-10"></div>
+            <div class="col-lg-2">
+              <%= link_to_add_fields "Add measure", f, :measures %>
+            </div>
+        </div>
+
+    </fieldset>
+
+    <fieldset class="form-actions">
+      <legend>Actions</legend>
+
+      <%= link_to t('.cancel', :default => t("helpers.links.cancel")), measure_categories_path, :class => 'btn btn-default' %>
+      <%= f.submit nil, :class => 'btn btn-success' %>
+    </fieldset>
+
+
 <% end %>
