@@ -33,6 +33,7 @@ gem 'jquery-rails'
 gem "authlogic", :git => "git://github.com/binarylogic/authlogic.git"
 gem 'cancan'
 gem 'globalize3'
+gem 'ancestry'
 
 gem 'mercury-rails', require: 'mercury/rails'
 

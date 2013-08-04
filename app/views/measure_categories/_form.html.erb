@@ -2,20 +2,21 @@
   <div class="control-group">
     <%= f.label :name, :class => 'control-label' %>
     <div class="controls">
-      <%= f.text_field :name, :class => 'text_field' %>
+      <%= f.text_field :name, :class => 'form-control' %>
     </div>
   </div>
   <div class="control-group">
     <%= f.label :data_type, :class => 'control-label' %>
     <div class="controls">
-      <%= f.number_field :data_type, :class => 'number_field' %>
+      <%= f.select :data_type, map_for_select(@measure_category.data_types), class: 'form-control' %>
     </div>
   </div>
   <div class="control-group">
-    <%= f.label :filter, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :filter, :class => 'text_field' %>
-    </div>
+    <%= f.label 'Measures' %>
+    <%= f.fields_for :measures do |builder| %>
+        <%= render 'measure_fields', f: builder %>
+    <% end %>
+    <%= link_to_add_fields "Add measure", f, :measures %>
   </div>
 
   <div class="form-actions">

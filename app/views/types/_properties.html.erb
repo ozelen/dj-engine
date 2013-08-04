@@ -1,0 +1,20 @@
+<fieldset>
+  <legend>Properties</legend>
+
+  <% if evaluated.type %>
+
+      <% evaluated.values.each do |value| %>
+          <% if value.id %>
+              <label><%= value.field.name %></label>
+              <div id="dynamic_value_<%= value.id %>"><%= render 'values/show_value_item', value: value %></div>
+          <% end %>
+      <% end %>
+
+      <% existed = f.object.values.map{|v| v.field_id.to_i if v.id } %>
+      <%= render partial: 'types/fields_of_type_and_ancestors', locals:{type: evaluated.type, f: f, existed: existed} %>
+      </table>
+  <% end %>
+
+  <%= render partial: 'nodes/fields_for_accessible', locals: {node:evaluated.node} %>
+
+</fieldset>

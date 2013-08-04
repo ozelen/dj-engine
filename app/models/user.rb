@@ -32,5 +32,12 @@ class User < ActiveRecord::Base
     self.roles_mask = User.find(self.id).roles_mask if !this_user.role? :admin # Work around to omit self setting roles for non admins
   end
 
+  def users_available
+    if self.role? :admin
+      User.all
+    else
+      [self]
+    end
+  end
 
 end

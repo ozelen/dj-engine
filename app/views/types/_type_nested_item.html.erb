@@ -1,0 +1,14 @@
+<tr>
+  <td><%= type.name.indent(type.ancestors.count, '-&nbsp;').html_safe %></td>
+  <td><%= type.fields.count %></td>
+  <td class="btn-group">
+
+    <%= link_to 'Show', type, class: "btn btn-default btn-small" %>
+    <%= link_to 'Edit', edit_type_path(type), class: "btn btn-default btn-small" %>
+    <%= link_to 'Destroy', type, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-default btn-small" %>
+  </td>
+</tr>
+
+<% type.children.each do |d| %>
+    <%= render 'types/type_nested_item', type: d %>
+<% end %>

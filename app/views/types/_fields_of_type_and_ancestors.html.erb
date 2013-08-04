@@ -1,0 +1,35 @@
+
+<%= render('types/fields_of_type_and_ancestors', type: type.parent, f: f, existed: existed) if type.parent %>
+<% type.fields.each do |field| %>
+    <%= f.fields_for field do |fd| %>
+
+            <%
+               new_object = fd.object.send(:values).klass.new
+               new_object.field = fd.object
+               #new_object.field_id = field.object.id
+               id = new_object.object_id
+            %>
+            <%= f.fields_for(:values, new_object, child_index: id) do |val| %>
+                <% if !existed.include? val.object.field_id  %>
+
+                <div class="control-group">
+                  <label for="exampleInputEmail"></label>
+                  <%= val.label :value_string, field.name %> <%= '*' if field.required? %>
+                  <%= val.text_field :value_string, class: 'form-control', placeholder: field.name %> <%= val.hidden_field :field_id %>
+                </div>
+
+                <tr>
+                  <td></td>
+                  <td></td>
+                </tr>
+                <% end %>
+            <% end %>
+    <% end %>
+<% end %>
+
+
+
+
+<%
+   #= fd.fields_for(:values, Field.reflect_on_association(:values).klass.new) do |val|
+%>

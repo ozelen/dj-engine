@@ -73,7 +73,10 @@ class HotelsController < ApplicationController
         format.html { redirect_to @hotel, notice: 'Hotel was successfully updated.' }
         format.json { head :no_content }
       else
-        format.html { render action: "edit" }
+        format.html {
+          #redirect_to action: :edit
+          render :edit
+        }
         format.json { render json: @hotel.errors, status: :unprocessable_entity }
       end
     end

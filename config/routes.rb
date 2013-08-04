@@ -11,9 +11,8 @@ DjEngine::Application.routes.draw do
     resources :tag_options
     resources :measures
     resources :measure_categories
-    resources :tags
-    resources :tag_names
-    resources :tag_categories
+    resources :values
+    post 'values/:id' => 'values#update'
 
     resources :types
 

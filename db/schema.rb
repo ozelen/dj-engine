@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130803034457) do
+ActiveRecord::Schema.define(:version => 20130803045324) do
 
   create_table "assignments", :force => true do |t|
     t.integer  "user_id"
@@ -85,10 +85,10 @@ ActiveRecord::Schema.define(:version => 20130803034457) do
 
   create_table "measure_categories", :force => true do |t|
     t.string   "name"
-    t.integer  "data_type"
+    t.integer  "data_type",  :limit => 255
     t.string   "filter"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
   end
 
   create_table "measure_category_translations", :force => true do |t|
@@ -342,7 +342,10 @@ ActiveRecord::Schema.define(:version => 20130803034457) do
     t.string   "filter"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.string   "ancestry"
   end
+
+  add_index "types", ["ancestry"], :name => "index_types_on_ancestry"
 
   create_table "users", :force => true do |t|
     t.string   "username"

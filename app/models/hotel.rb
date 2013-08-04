@@ -10,12 +10,17 @@ class Hotel < ActiveRecord::Base
   has_many :tags, as: :taggable
   has_many :assignments, as: :assigned
 
-  has_many :fields
+  has_many :values, as: :evaluated
+  has_many :fields, through: :values
 
   accepts_nested_attributes_for :node
-  attr_accessible :city_id, :description, :location, :name, :user_id, :ident, :node_attributes, :type_id
+  accepts_nested_attributes_for :values
+
+  attr_accessible :city_id, :description, :location, :name, :user_id, :ident, :node_attributes, :type_id, :values_attributes, :fields
 
   translates :name, :description
+
+  validate :validate_properties
 
   def to_param
     self.node.name
@@ -23,6 +28,14 @@ class Hotel < ActiveRecord::Base
 
   def node_name
     self.node.name
+  end
+
+  def validate_properties
+    values.each do |value|
+      if value.field.required? && value.value_string == ''
+        errors.add value.field.name, "must not be blank"
+      end
+    end
   end
 
 end

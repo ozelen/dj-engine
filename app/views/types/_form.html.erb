@@ -19,6 +19,12 @@
     <%= f.label :filter %><br />
     <%= f.text_field :filter %>
   </div>
+
+    <div class="field">
+      <%= f.label :parent_id %><br />
+      <%= f.select :parent_id, Type.all.map{|i| [ i.name.indent(i.ancestors.count, '- '), i.id] }, include_blank: true %>
+    </div>
+
     <%= f.fields_for :fields do |builder| %>
         <%= render partial: 'field_fields', locals:{f:builder} %>
     <% end %>

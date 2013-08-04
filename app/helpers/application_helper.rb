@@ -16,4 +16,8 @@ module ApplicationHelper
     link_to(name, '#', class: "add_fields", data: {id: id, fields: fields.gsub("\n", "")})
   end
 
+  def map_for_select array
+    array.map{|t| [t, array.index(t)+1] }
+  end
+
 end

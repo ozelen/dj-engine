@@ -9,4 +9,8 @@ class City < ActiveRecord::Base
     self.node.name
   end
 
+  def city_name
+    node.header
+  end
+
 end
