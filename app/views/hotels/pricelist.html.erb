@@ -1,0 +1,17 @@
+<%= render 'hotels/hotel_header', active_item: 'Prices' %>
+
+<h1>Pricelist</h1>
+
+<h3>Rooms</h3>
+
+<%= render 'table_pricelist' %>
+
+<h3>Services</h3>
+
+<table class="table">
+  <% @hotel.services.each do |service| %>
+      <tr>
+        <td><%= service.name %></td>
+      </tr>
+  <% end %>
+</table>

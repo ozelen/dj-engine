@@ -1,5 +1,5 @@
 class HotelsController < ApplicationController
-  before_filter :find_hotel, only: [:show, :edit, :update, :destroy]
+  before_filter :find_hotel, only: [:show, :edit, :update, :destroy, :pricelist]
 
   # GET /hotels
   # GET /hotels.json
@@ -10,6 +10,13 @@ class HotelsController < ApplicationController
       format.html # index.html.erb
       format.json { render json: @hotels }
     end
+  end
+
+  def pricelist
+  end
+
+  def edit_pricelist
+    find_hotel
   end
 
   def my
@@ -94,8 +101,9 @@ class HotelsController < ApplicationController
   end
 
   def find_hotel
-    @node = Node.find_by_name(params[:id])
-    @hotel = @node.accessible if params[:id]
+    id = params[:id] || params[:hotel_id]
+    @node = Node.find_by_name(id)
+    @hotel = @node.accessible if id
   end
 
 

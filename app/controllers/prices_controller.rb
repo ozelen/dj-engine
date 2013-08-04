@@ -4,10 +4,6 @@ class PricesController < ApplicationController
   # GET /Prices
   # GET /Prices.json
 
-  def hotel_pricelist
-    find_hotel
-  end
-
   def index
     @room = Room.find params[:room_id] if params[:room_id]
     @prices = @room.prices

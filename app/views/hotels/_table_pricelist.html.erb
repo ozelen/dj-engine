@@ -1,15 +1,9 @@
-<%= render 'hotels/hotel_header', active_item: 'Prices' %>
-
-<h1>Pricelist</h1>
-
-<h3>Rooms</h3>
-
 <table class="table pricelist">
   <tr>
     <th class="name">Room</th>
-      <% @hotel.periods.each do |period| %>
-          <th><%= period.title %> </th>
-      <% end %>
+    <% @hotel.periods.each do |period| %>
+        <th><%= period.title %> </th>
+    <% end %>
   </tr>
 
   <% @hotel.rooms.each do |room| %>
@@ -20,16 +14,6 @@
             <td><%= price[0].value if !price.blank? %></td>
             <% #period.prices. %>
         <% end %>
-      </tr>
-  <% end %>
-</table>
-
-<h3>Services</h3>
-
-<table class="table">
-  <% @hotel.services.each do |service| %>
-      <tr>
-        <td><%= service.name %></td>
       </tr>
   <% end %>
 </table>

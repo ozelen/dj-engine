@@ -26,7 +26,8 @@ DjEngine::Application.routes.draw do
       resources :prices
     end
     scope 'hotels/:hotel_id' do
-      get 'pricelist' => 'prices#hotel_pricelist'
+      get 'pricelist' => 'hotels#pricelist'
+      get 'pricelist/edit' => 'hotels#edit_pricelist'
     end
 
     scope "(:whose)", scope: /(my|our)/ do

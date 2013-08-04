@@ -1,0 +1,44 @@
+<fieldset>
+
+    <div class="form-group">
+      <div class="col-lg-2">
+        <%= f.text_field :since, class: 'form-control', placeholder: 'Since' %>
+      </div>
+      <div class="col-lg-2">
+        <%= f.text_field :till, class: 'form-control', placeholder: 'Till' %>
+      </div>
+      <div class="col-lg-3">
+        <%= f.text_field :name, class: 'form-control', placeholder: 'Period name' %>
+      </div>
+      <div class="col-lg-5">
+        <%= f.text_field :description, class: 'form-control', placeholder: 'Description' %>
+      </div>
+    </div>
+
+  <hr>
+
+  <% @hotel.rooms.each do |room| %>
+      <div class="form-group">
+        <label class="control-label col-lg-7">
+          <%= room.name %>
+        </label>
+        <div class="col-lg-5">
+          <% price = f.object.prices.select {|k| k['room_id'] == room.id } %>
+          <%
+             #obj = price.blank? ? f.object.prices.build : price[0]
+
+             obj =  price.blank? ?
+                    Price.new(room_id: room.id, period_id: f.object.id)
+                    : price[0]
+
+          %>
+          <%= f.fields_for :prices, obj do |fp| %>
+            <%= fp.text_field :value, class: 'form-control', placeholder: 'Price' %>
+            <%= fp.hidden_field :room_id, placeholder: 'Price' %>
+          <% end %>
+
+        </div>
+      </div>
+  <% end %>
+  <hr>
+</fieldset>
