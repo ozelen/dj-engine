@@ -1,4 +1,10 @@
 <%= form_for @value, remote: true do |f| %>
-    <%= f.text_field :value_string %>
-    <%= link_to 'Save', '#', onclick: "$.post('#{value_path(@value)}',  {value:{value_string: $(this).prev().val() }} ); ", :class => 'btn btn-primary btn-small' %>
+    <div class="row">
+      <div class="col-lg-10 dynamic-field-col-field">
+        <%= f.text_field :value_string, class: "form-control" %>
+      </div>
+      <div class="col-lg-1 dynamic-field-col-button">
+        <%= link_to 'Save', '#', onclick: "$.post('#{value_path(@value)}',  {value:{value_string: $(this).prev().val() }} ); return false", :class => 'btn btn-primary' %>
+      </div>
+    </div>
 <% end %>

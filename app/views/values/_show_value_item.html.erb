@@ -1,2 +1,12 @@
-<%= value.value_string %>
-<%= link_to 'Edit', edit_value_path(value), remote: true, class: 'btn btn-default btn-small' %>
+<div class="row">
+  <div class="col-lg-10 dynamic-field-col-field">
+    <div class="form-control">
+      <%= value.value_string %>
+    </div>
+  </div>
+  <div class="col-lg-1 dynamic-field-col-button">
+    <%= link_to 'Edit', edit_value_path(value), remote: true, class: 'btn btn-default' %>
+  </div>
+</div>
+
+
