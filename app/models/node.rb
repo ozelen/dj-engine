@@ -21,11 +21,12 @@ class Node < ActiveRecord::Base
   end
 
   def save_from_accessible! params
+    params['node']
     #self.name = params[:node][:name] if params[:node][:name]
     #self.header = params[:node][:header] if params[:node][:header]
     #self.title = params[:node][:title] if params[:node][:title]
     #self.content = params[:node][:content] if params[:node][:content]
-    #self.save!
+    self.save!
   end
 
   def create_from_accessible! params

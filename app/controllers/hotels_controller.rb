@@ -69,7 +69,6 @@ class HotelsController < ApplicationController
     authorize! :manage, @hotel
     respond_to do |format|
       if @hotel.update_attributes(params[:hotel])
-        @hotel.node.save_from_accessible! params
         format.html { redirect_to @hotel, notice: 'Hotel was successfully updated.' }
         format.json { head :no_content }
       else
