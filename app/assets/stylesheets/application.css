@@ -10,5 +10,7 @@
  *
  *= require_self
  *= require initial
+ *= require jquery.ui.datepicker
  *= require_tree .
+
  */

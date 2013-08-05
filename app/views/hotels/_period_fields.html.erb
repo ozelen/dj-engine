@@ -1,17 +1,21 @@
-<fieldset>
+<% period = f.object %>
+<fieldset class="panel period-panel">
+  <div class="panel-heading">
+    <h3 class="panel-title"><%= "#{period.since} - #{period.till} #{period.name}" %></h3>
+  </div>
 
-    <div class="form-group">
+    <div class="form-group period-values">
       <div class="col-lg-2">
-        <%= f.text_field :since, class: 'form-control', placeholder: 'Since' %>
+        <%= f.text_field :since, class: 'form-control period-since datepicker', placeholder: 'Since' %>
       </div>
       <div class="col-lg-2">
-        <%= f.text_field :till, class: 'form-control', placeholder: 'Till' %>
+        <%= f.text_field :till, class: 'form-control period-till datepicker', placeholder: 'Till' %>
       </div>
       <div class="col-lg-3">
-        <%= f.text_field :name, class: 'form-control', placeholder: 'Period name' %>
+        <%= f.text_field :name, class: 'form-control period-name', placeholder: 'Period name' %>
       </div>
       <div class="col-lg-5">
-        <%= f.text_field :description, class: 'form-control', placeholder: 'Description' %>
+        <%= f.text_field :description, class: 'form-control period-description', placeholder: 'Description' %>
       </div>
     </div>
 
@@ -40,5 +44,4 @@
         </div>
       </div>
   <% end %>
-  <hr>
 </fieldset>

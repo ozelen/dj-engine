@@ -30,7 +30,9 @@ gem 'twitter-bootstrap-rails'
 gem 'thin'
 
 gem 'jquery-rails'
-gem "authlogic", :git => "git://github.com/binarylogic/authlogic.git"
+gem 'jquery-ui-rails'
+#gem "authlogic", :git => "git://github.com/binarylogic/authlogic.git"
+gem "authlogic"
 gem 'cancan'
 gem 'globalize3'
 gem 'ancestry'
