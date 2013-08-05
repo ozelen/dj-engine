@@ -1,19 +1,31 @@
-<table class="table pricelist">
+<table class="table table-striped pricelist">
+  <thead>
   <tr>
-    <th class="name">Room</th>
+    <th class="name text-center">Room</th>
     <% @hotel.periods.each do |period| %>
-        <th><%= period.title %> </th>
+        <%
+           since = l(period.since, format: :short) if period.since
+           till =  l(period.till, format: :short) if period.since
+        %>
+        <th class="period-title text-center text-primary">
+          <%= l period.since, format: :short %> - <%= l period.till, format: :short %>
+          <div>
+            <%= period.name %>
+          </div>
+        </th>
     <% end %>
   </tr>
-
+  </thead>
+  <tbody>
   <% @hotel.rooms.each do |room| %>
       <tr>
-        <td><%= room.name %> </td>
+        <td class=""><%= room.name %> </td>
         <% @hotel.periods.each do |period| %>
             <% price = period.prices.select{|k| k['room_id'] == room.id } %>
-            <td><%= price[0].value if !price.blank? %></td>
+            <td class="text-center price-value text-info"><%= price[0].value if !price.blank? %></td>
             <% #period.prices. %>
         <% end %>
       </tr>
   <% end %>
+  </tbody>
 </table>

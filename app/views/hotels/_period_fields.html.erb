@@ -1,15 +1,28 @@
 <% period = f.object %>
+<%
+    existing = period.created_at ? true : false # checking whether it new object or existing
+    since = period.since || Date.today
+    till  = period.till  || Date.tomorrow
+    name  = period.name  || 'Noname period'
+%>
 <fieldset class="panel period-panel">
   <div class="panel-heading">
-    <h3 class="panel-title"><%= "#{period.since} - #{period.till} #{period.name}" %></h3>
+    <button type="button"
+            class="btn btn-small btn-info pull-right open-period"
+            data-toggle="collapse"
+            data-target="#period-<%= period.id %>-prices">
+      <span class="<%= existing ? '' : 'closed' %>">Open</span><span class="<%= existing ? 'closed' : '' %>">Close</span>
+    </button>
+    <h3 class="panel-title"><%= l(since, format: :long) %> - <%= l(till, format: :long) %> / <%= name %></h3>
   </div>
+  <div id="period-<%= period.id %>-prices" class="<%= existing ? 'collapse' : 'in' %>">
 
     <div class="form-group period-values">
       <div class="col-lg-2">
-        <%= f.text_field :since, class: 'form-control period-since datepicker', placeholder: 'Since' %>
+        <%= f.text_field :since, value: l(since, format: :default), class: 'form-control period-since datepicker', placeholder: 'Since' %>
       </div>
       <div class="col-lg-2">
-        <%= f.text_field :till, class: 'form-control period-till datepicker', placeholder: 'Till' %>
+        <%= f.text_field :till, value: l(till, format: :default), class: 'form-control period-till datepicker', placeholder: 'Till' %>
       </div>
       <div class="col-lg-3">
         <%= f.text_field :name, class: 'form-control period-name', placeholder: 'Period name' %>
@@ -19,22 +32,18 @@
       </div>
     </div>
 
+
   <hr>
 
   <% @hotel.rooms.each do |room| %>
       <div class="form-group">
-        <label class="control-label col-lg-7">
+        <label class="col-lg-7">
           <%= room.name %>
         </label>
         <div class="col-lg-5">
-          <% price = f.object.prices.select {|k| k['room_id'] == room.id } %>
           <%
-             #obj = price.blank? ? f.object.prices.build : price[0]
-
-             obj =  price.blank? ?
-                    Price.new(room_id: room.id, period_id: f.object.id)
-                    : price[0]
-
+             price = f.object.prices.select {|k| k['room_id'] == room.id }
+             obj =  price.blank? ? Price.new(room_id: room.id, period_id: f.object.id) : price[0]
           %>
           <%= f.fields_for :prices, obj do |fp| %>
             <%= fp.text_field :value, class: 'form-control', placeholder: 'Price' %>
@@ -44,4 +53,5 @@
         </div>
       </div>
   <% end %>
+  </div>
 </fieldset>

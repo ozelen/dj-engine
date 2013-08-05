@@ -11,4 +11,5 @@ $ ->
     refresh_header(this)
 
 
-
+  $('.period-panel').on 'click', 'button.open-period', ->
+    $(this).find('span').toggle()

@@ -1,5 +1,5 @@
 class HotelsController < ApplicationController
-  before_filter :find_hotel, only: [:show, :edit, :update, :destroy, :pricelist]
+  before_filter :find_hotel, only: [:show, :edit, :update, :destroy, :pricelist, :edit_pricelist]
 
   # GET /hotels
   # GET /hotels.json
@@ -16,7 +16,7 @@ class HotelsController < ApplicationController
   end
 
   def edit_pricelist
-    find_hotel
+    authorize! :manage, @hotel
   end
 
   def my

@@ -1,0 +1,20 @@
+
+table.pricelist {
+  th {
+    font-weight: normal;
+  }
+  .name {
+    width: 30%;
+  }
+
+  .price-value {
+    vertical-align: middle;
+    font-size: 1.3em;
+  }
+}
+
+.period-panel {
+  .open-period {
+    margin: -5px -10px
+  }
+}

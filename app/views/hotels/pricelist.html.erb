@@ -1,3 +1,4 @@
+<% title('Prices - ' + @hotel.node.header) %>
 <%= render 'hotels/hotel_header', active_item: 'Prices' %>
 
 <h1>Pricelist</h1>
@@ -10,10 +11,19 @@
 
 <h3>Services</h3>
 
-<table class="table">
+<table class="table table-striped">
+  <thead>
+  <tr>
+    <td>Service</td>
+    <td>Price</td>
+  </tr>
+  </thead>
+  <tbody>
   <% @hotel.services.each do |service| %>
       <tr>
         <td><%= service.name %></td>
+        <td></td>
       </tr>
   <% end %>
+  </tbody>
 </table>

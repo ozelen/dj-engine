@@ -39,6 +39,7 @@ gem 'ancestry'
 
 gem 'mercury-rails', require: 'mercury/rails'
 
+gem 'rails-i18n', '~> 3.0.0.pre'
 
 
 # To use ActiveModel has_secure_password

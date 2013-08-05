@@ -12,4 +12,5 @@ class Period < ActiveRecord::Base
     "#{self.name} (#{self.since.to_formatted_s :short} - #{self.till.to_formatted_s :short})"
   end
 
+
 end
