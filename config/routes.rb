@@ -7,6 +7,9 @@ DjEngine::Application.routes.draw do
   mount Mercury::Engine => '/'
 
   scope "(:locale)", locale: /#{I18n.available_locales.join('|')}/ do
+
+    devise_for :users
+
     resources :assignments
     resources :tag_options
     resources :measures

@@ -32,7 +32,7 @@ gem 'thin'
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
 #gem "authlogic", :git => "git://github.com/binarylogic/authlogic.git"
-gem "authlogic"
+#gem "authlogic"
 gem 'cancan'
 gem 'globalize3'
 gem 'ancestry'
@@ -59,3 +59,5 @@ gem 'rails-i18n', '~> 3.0.0.pre'
 
 gem "mocha", :group => :test
 gem 'paperclip'
+
+gem 'devise'
