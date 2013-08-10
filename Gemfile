@@ -61,3 +61,7 @@ gem "mocha", :group => :test
 gem 'paperclip'
 
 gem 'devise'
+gem 'omniauth'
+gem 'omniauth-facebook'
+gem 'omniauth-twitter'
+gem 'omniauth-vkontakte'

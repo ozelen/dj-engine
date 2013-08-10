@@ -56,11 +56,15 @@ GEM
     eventmachine (1.0.3)
     execjs (1.4.0)
       multi_json (~> 1.0)
+    faraday (0.8.8)
+      multipart-post (~> 1.2.0)
     globalize3 (0.3.0)
       activemodel (>= 3.0.0)
       activerecord (>= 3.0.0)
       paper_trail (~> 2)
+    hashie (2.0.5)
     hike (1.2.3)
+    httpauth (0.2.0)
     i18n (0.6.1)
     journey (1.0.4)
     jquery-rails (3.0.4)
@@ -70,6 +74,8 @@ GEM
       jquery-rails
       railties (>= 3.1.0)
     json (1.8.0)
+    jwt (0.1.8)
+      multi_json (>= 1.5)
     less (2.3.2)
       commonjs (~> 0.2.6)
     less-rails (2.3.3)
@@ -87,7 +93,33 @@ GEM
     mocha (0.14.0)
       metaclass (~> 0.0.1)
     multi_json (1.7.8)
+    multipart-post (1.2.0)
     nifty-generators (0.4.6)
+    oauth (0.4.7)
+    oauth2 (0.8.1)
+      faraday (~> 0.8)
+      httpauth (~> 0.1)
+      jwt (~> 0.1.4)
+      multi_json (~> 1.0)
+      rack (~> 1.2)
+    omniauth (1.1.4)
+      hashie (>= 1.2, < 3)
+      rack
+    omniauth-facebook (1.4.1)
+      omniauth-oauth2 (~> 1.1.0)
+    omniauth-oauth (1.0.1)
+      oauth
+      omniauth (~> 1.0)
+    omniauth-oauth2 (1.1.1)
+      oauth2 (~> 0.8.0)
+      omniauth (~> 1.0)
+    omniauth-twitter (1.0.0)
+      multi_json (~> 1.3)
+      omniauth-oauth (~> 1.0)
+    omniauth-vkontakte (1.2.0)
+      multi_json
+      omniauth (~> 1.1.0)
+      omniauth-oauth2 (~> 1.0)
     orm_adapter (0.4.0)
     paper_trail (2.7.2)
       activerecord (~> 3.0)
@@ -177,6 +209,10 @@ DEPENDENCIES
   mercury-rails
   mocha
   nifty-generators
+  omniauth
+  omniauth-facebook
+  omniauth-twitter
+  omniauth-vkontakte
   paperclip
   rails (= 3.2.13)
   rails-i18n (~> 3.0.0.pre)
