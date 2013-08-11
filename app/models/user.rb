@@ -4,7 +4,7 @@ class User < ActiveRecord::Base
   # :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable,
-         :omniauthable, :omniauth_providers => [:facebook]
+         :omniauthable, :omniauth_providers => [:facebook, :twitter, :vkontakte]
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me
@@ -49,6 +49,35 @@ class User < ActiveRecord::Base
     else
       [self]
     end
+  end
+
+
+  def apply_omniauth(omniauth)
+    self.email = omniauth['user_info']['email'] if email.blank?
+    authentications.build(:provider => omniauth['provider'], :uid => omniauth['uid'])
+  end
+
+  def password_required?
+    (authentications.empty? || !password.blank?) && super
+  end
+
+  def self.find_for_facebook_oauth(auth, signed_in_resource=nil)
+    authentication = Authentication.where(:provider => auth.provider, :uid => auth.uid).first
+    if authentication
+      user = authentication.user
+    else
+      user = self.instance_of?(Class) ?
+          User.create!(first_name: auth.extra.raw_info.first_name,
+                       last_name: auth.extra.raw_info.last_name,
+                       email: auth.info.email,
+                       password: Devise.friendly_token[0,20] ) :
+          self
+
+      user.authentications.create!( provider:auth.provider, uid:auth.uid )
+
+    end
+
+    user
   end
 
 end

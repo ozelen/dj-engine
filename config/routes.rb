@@ -1,7 +1,9 @@
 DjEngine::Application.routes.draw do
 
   match '/auth/:provider/callback' => 'authentications#create'
-  devise_for :users #, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
+  devise_for :users, :controllers => {
+      :omniauth_callbacks => "users/omniauth_callbacks"#, registrations: 'registrations'
+  }
 
   resources :authentications
 
