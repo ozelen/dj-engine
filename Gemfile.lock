@@ -84,6 +84,7 @@ GEM
     mocha (0.14.0)
       metaclass (~> 0.0.1)
     multi_json (1.7.8)
+    mysql (2.9.1)
     nifty-generators (0.4.6)
     paper_trail (2.7.2)
       activerecord (~> 3.0)
@@ -170,6 +171,7 @@ DEPENDENCIES
   less-rails
   mercury-rails
   mocha
+  mysql
   nifty-generators
   paperclip
   rails (= 3.2.13)
