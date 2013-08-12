@@ -9,7 +9,7 @@ def create
     flash[:notice] = "Signed in successfully."
     sign_in_and_redirect(:user, authentication.user)
   elsif current_user
-    current_user.authentications.create!(:provider => omniauth['provider'], :uid => omniauth['uid'])
+    current_user.authentications.find_or_create_by_provider_and_uid(:provider => omniauth['provider'], :uid => omniauth['uid'])
     flash[:notice] = "Authentication successful."
     redirect_to authentications_url
   else

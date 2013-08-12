@@ -15,10 +15,13 @@ Devise.setup do |config|
   # available as additional gems.
   require 'devise/orm/active_record'
 
-  require "omniauth-facebook"
-  require "omniauth-twitter"
-  require "omniauth-vkontakte"
-  #config.omniauth :facebook, "APP_ID", "APP_SECRET"
+  #require "omniauth-facebook"
+  #require "omniauth-twitter"
+  #require "omniauth-vkontakte"
+
+  config.omniauth :facebook, '560733490656801', '23010397b9a1515ba9fc1274f8d9462f'
+  config.omniauth :twitter, 'l4uzzYUWtWwXt7eu0jHGCQ', 'S52qsi577WhsMoovJ5eIKqF7qwEmA7XHHEFVeTIJuE'
+  config.omniauth :vkontakte, '3814050', 'Ih9Ka7UXNv34zFwRITIw'
 
   # ==> Configuration for any authentication mechanism
   # Configure which keys are used when authenticating a user. The default is
@@ -87,7 +90,7 @@ Devise.setup do |config|
   config.stretches = Rails.env.test? ? 1 : 10
 
   # Setup a pepper to generate the encrypted password.
-  # config.pepper = "f4385fb331df857dd966f59326f36bba3ec21ffa19f7eb8ae00fee8a9c64a47aecb74cea10a4dc5c57eebe5642ca43a3ea141ad0f469c416d05795a69ddad432"
+  # config.pepper = "f3d65f0175b4b5552676ae1c58307b6f21f484b125ce3f1de1377857f25a335f3ebdf73000e003fecbbefed796067c6db69cf0e8e199c6b24a2d6764874ddd3c"
 
   # ==> Configuration for :confirmable
   # A period that the user is allowed to access the website even without
