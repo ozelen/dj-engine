@@ -11,7 +11,7 @@ development:
 
 skiworld:
   adapter: mysql
-  #database: skiworld
+  database: skiworld
   username: djerelo
   password: djerelo
   encoding: utf8

@@ -42,7 +42,9 @@ namespace :import do
 
     ### Classification
 
-
+    class ClassLink < SkiWorld
+      set_table_name 'ClassLinks'
+    end
 
     ###
 
@@ -51,6 +53,16 @@ namespace :import do
       self.abstract_class = true
       def page
         HbPage.find(self.PageId) rescue nil
+      end
+      def classes
+        ClassLink.where("OwnerId = #{self.Id} and OwnerTable = 'Objects'")
+      end
+      def print_classes
+        classes.each do |c|
+          key = SwPage.find(c.ClassKey).content.try(:Title)
+          val = SwPage.find(c.ClassValue).content.try(:Title)
+          puts "------{#{key}:#{val}}"
+        end
       end
     end
 
@@ -71,9 +83,10 @@ namespace :import do
 
 
     ### ACTION ###
-    HbObject.all.each do |o|
+    HbObject.limit(10).each do |o|
       obj_name = o.page.content.Title
       puts obj_name
+      o.print_classes
       o.hb_categories.each do |c|
         cat_name = c.try(:page).try(:content).try(:Title) || 'noname'
         puts  '--' + cat_name
