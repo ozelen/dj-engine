@@ -101,4 +101,9 @@ class User < ActiveRecord::Base
     find_for_oauth(auth, user_params, signed_in_resource)
   end
 
+  def facebook
+    token = self.authentications.find_by_provider(:facebook).token
+    @facebook ||= Koala::Facebook::API.new(token)
+  end
+
 end

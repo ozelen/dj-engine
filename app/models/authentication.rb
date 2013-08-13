@@ -1,6 +1,6 @@
 class Authentication < ActiveRecord::Base
   belongs_to :user
-  attr_accessible :user_id, :provider, :uid, :provider, :uid
+  attr_accessible :user_id, :provider, :uid, :provider, :uid, :token
 
   def provider_name
     if provider == 'open_id'
