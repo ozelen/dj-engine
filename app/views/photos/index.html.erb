@@ -12,7 +12,7 @@
 
 <% @photos.each do |photo| %>
   <tr>
-    <td><%= photo.image %></td>
+    <td><%= image_tag photo.image_url(:thumb).to_s %></td>
     <td><%= photo.description %></td>
     <td><%= photo.gallery %></td>
     <td><%= link_to 'Show', photo %></td>

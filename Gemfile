@@ -68,3 +68,4 @@ gem 'omniauth-vkontakte'
 gem 'koala'
 
 gem 'carrierwave'
+gem 'rmagick'
