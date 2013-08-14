@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130813194604) do
+ActiveRecord::Schema.define(:version => 20130814105427) do
 
   create_table "assignments", :force => true do |t|
     t.integer  "user_id"
@@ -65,6 +65,18 @@ ActiveRecord::Schema.define(:version => 20130813194604) do
 
   add_index "fields", ["measure_category_id"], :name => "index_fields_on_measure_category_id"
   add_index "fields", ["type_id"], :name => "index_fields_on_type_id"
+
+  create_table "galleries", :force => true do |t|
+    t.string   "name"
+    t.text     "description"
+    t.integer  "cover_photo_id"
+    t.integer  "imageable_id"
+    t.string   "imageable_type"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+  end
+
+  add_index "galleries", ["imageable_id", "imageable_type"], :name => "index_galleries_on_imageable_id_and_imageable_type"
 
   create_table "hotel_translations", :force => true do |t|
     t.integer  "hotel_id"
@@ -206,6 +218,16 @@ ActiveRecord::Schema.define(:version => 20130813194604) do
     t.datetime "updated_at",     :null => false
     t.integer  "hotel_id"
   end
+
+  create_table "photos", :force => true do |t|
+    t.string   "image"
+    t.string   "description"
+    t.integer  "gallery_id"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  add_index "photos", ["gallery_id"], :name => "index_photos_on_gallery_id"
 
   create_table "pois", :force => true do |t|
     t.string   "ident"

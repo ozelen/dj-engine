@@ -66,3 +66,5 @@ gem 'omniauth-facebook'
 gem 'omniauth-twitter'
 gem 'omniauth-vkontakte'
 gem 'koala'
+
+gem 'carrierwave'

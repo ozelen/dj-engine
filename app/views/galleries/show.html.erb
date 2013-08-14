@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @gallery.name %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%= @gallery.description %>
+</p>
+
+<p>
+  <b>Cover photo:</b>
+  <%= @gallery.cover_photo_id %>
+</p>
+
+<p>
+  <b>Imageable:</b>
+  <%= @gallery.imageable_id %>
+</p>
+
+<p>
+  <b>Imageable type:</b>
+  <%= @gallery.imageable_type %>
+</p>
+
+
+<%= link_to 'Edit', edit_gallery_path(@gallery) %> |
+<%= link_to 'Back', galleries_path %>
