@@ -63,6 +63,10 @@ namespace :import do
       def content
         self.page_data_class.where("PageId = #{self.id} and Lang = 'ua' ").first
       end
+
+      def name
+        self.Name
+      end
     end
 
     class HbPage < ContentPage
@@ -97,13 +101,13 @@ namespace :import do
     class ClassLink < SkiWorld
       set_table_name 'ClassLinks'
       def key
-        SwPage.find(self.ClassKey).data.title('ru') rescue nil
+        SwPage.find(self.ClassKey) rescue nil
       end
       def value
-        SwPage.find(self.ClassValue).data.title('ru') rescue nil
+        SwPage.find(self.ClassValue) rescue nil
       end
       def name
-        self.value || 'noname'
+        self.value.data.title('ru') || 'noname'
       end
     end
 
@@ -124,7 +128,8 @@ namespace :import do
       end
       def show_classes
         classes.each do |c|
-          puts " * #{c.key}:#{c.value} "
+          #puts " * #{c.key.data.title('ru')}:#{c.value.data.title('ru')} "
+          puts " * #{c.key.name}:#{c.value.name} "
         end
       end
 
@@ -201,10 +206,16 @@ namespace :import do
 
     hr 100, '#'
     HbObject.limit(20).each do |o|
-      puts "#{o.content.title('ru')} [#{o.slug}]"
+      puts "Object##{o.Id}    #{o.content.title('ru')} [#{o.slug}]"
+      puts "Profile:      hotels"
+      puts "Type:         recreation-centre"
+      puts "Properties:"
       o.show_classes
       o.hb_categories.each do |c|
-        puts  c.content.title 'ru'
+        pref = (c.profile.value.name rescue '') == 'rooms' ? 'room   ' : 'service'
+        puts "#{pref}       #{c.content.title 'ru'} /#{c.caption.value.name rescue ''}/ "
+        c.show_classes
+        hr 40, '`'
       end
       hr 50, '.'
     end
