@@ -15,25 +15,77 @@ namespace :import do
     ###
 
     ### Pages ###
+
+    class PageData
+      def initialize(data)
+        @data = data
+      end
+
+      def locale loc
+        @data.select {|d| d.Lang == loc}[0]
+      end
+
+      def ru
+        self.locale :ru
+      end
+      def ua
+        self.locale :ua
+      end
+
+      def get_field loc, name
+        self.locale(loc)[name] rescue "no #{loc} translate"
+      end
+
+      def title loc
+        self.get_field loc, 'Title'
+      end
+
+      def content loc
+        self.get_field loc, 'Source'
+      end
+
+    end
+
     class ContentPage < ActiveRecord::Base
       self.abstract_class = true
       set_table_name 'Pages'
       set_primary_key 'Id'
 
+      def page_data_class
+      end
+
+      def data
+        raw_data = self.page_data_class.where("PageId = #{self.id} ")
+        res = PageData.new(raw_data)
+        res
+      end
+
       def content
-        HbPageData.where("PageId = #{self.id} and Lang = 'ua' ").first
+        self.page_data_class.where("PageId = #{self.id} and Lang = 'ua' ").first
       end
     end
 
     class HbPage < ContentPage
       establish_connection :hotelbase
+      def page_data_class
+        HbPageData
+      end
     end
 
     class SwPage < ContentPage
       establish_connection :skiworld
+      def page_data_class
+        SwPageData
+      end
     end
 
     class HbPageData < HotelBase
+      set_table_name 'PageData'
+      set_primary_key 'PageId, Lang'
+      belongs_to :hb_page, foreign_key: 'PageId'
+    end
+
+    class SwPageData < SkiWorld
       set_table_name 'PageData'
       set_primary_key 'PageId, Lang'
       belongs_to :hb_page, foreign_key: 'PageId'
@@ -44,6 +96,15 @@ namespace :import do
 
     class ClassLink < SkiWorld
       set_table_name 'ClassLinks'
+      def key
+        SwPage.find(self.ClassKey).data.title('ru') rescue nil
+      end
+      def value
+        SwPage.find(self.ClassValue).data.title('ru') rescue nil
+      end
+      def name
+        self.value || 'noname'
+      end
     end
 
     ###
@@ -51,22 +112,63 @@ namespace :import do
     ### Objects ###
     class HbObjective < HotelBase
       self.abstract_class = true
+
+      def table
+      end
+
       def page
         HbPage.find(self.PageId) rescue nil
       end
       def classes
-        ClassLink.where("OwnerId = #{self.Id} and OwnerTable = 'Objects'")
+        ClassLink.where("OwnerId = #{self.Id} and OwnerTable = '#{self.table}'")
       end
-      def print_classes
+      def show_classes
         classes.each do |c|
-          key = SwPage.find(c.ClassKey).content.try(:Title)
-          val = SwPage.find(c.ClassValue).content.try(:Title)
-          puts "------{#{key}:#{val}}"
+          puts " * #{c.key}:#{c.value} "
         end
       end
+
+      def type
+        self.classes.select{|c| c.TypeOf==self.table }[0]
+      end
+
+      def caption
+        self.classes.select{|c| c.NameOf==self.table }[0]
+      end
+
+      def profile
+        self.classes.select{|c| c.ProfileOf==self.table }[0]
+      end
+
+      def typical_name
+        self.caption.value rescue nil
+      end
+
+      def profile_name
+        self.profile.value rescue nil
+      end
+
+      def name
+        self.page.data.title 'ru'
+      end
+
+      def content
+        self.page.data
+      end
+
+      def console_title
+        "[#{self.id}] #{self.name} [#{self.profile_name}]"
+      end
+
     end
 
     class HbObject < HbObjective
+      def table
+        'Objects'
+      end
+      def slug
+        self.AccountCode
+      end
       set_table_name 'Objects'
       set_primary_key 'Id'
 
@@ -74,23 +176,37 @@ namespace :import do
     end
 
     class HbCategory < HbObjective
+      def table
+        'Categories'
+      end
       set_table_name 'Categories'
       set_primary_key 'Id'
 
       belongs_to :hb_object, foreign_key: 'ObjId'
+
+      def console_title
+        "[#{self.id}] #{self.name} /#{self.typical_name}/ [#{self.profile_name}]"
+      end
     end
     ###
 
 
     ### ACTION ###
-    HbObject.limit(10).each do |o|
-      obj_name = o.page.content.Title
-      puts obj_name
-      o.print_classes
+
+    def hr length=100, sym='-'
+      line = ""
+      1.upto(length){|i| line+=sym}
+      puts line
+    end
+
+    hr 100, '#'
+    HbObject.limit(20).each do |o|
+      puts "#{o.content.title('ru')} [#{o.slug}]"
+      o.show_classes
       o.hb_categories.each do |c|
-        cat_name = c.try(:page).try(:content).try(:Title) || 'noname'
-        puts  '--' + cat_name
+        puts  c.content.title 'ru'
       end
+      hr 50, '.'
     end
     ###
 
