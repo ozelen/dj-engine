@@ -1,4 +1,4 @@
-class CreateRoomPrices < ActiveRecord::Migration
+class CreatePrices < ActiveRecord::Migration
   def change
     create_table :prices do |t|
       t.integer :room_id
