@@ -1,0 +1,26 @@
+<fieldset class="panel clearfix">
+  <div class="panel-heading form-group clearfix">
+    <div class="col-lg-5">
+      <%= f.text_field :name, placeholder: "Field Category name", class: 'form-control' %>
+    </div>
+    <div class="col-lg-3">
+      <%= f.text_field :slug, placeholder: "Identifier", class: 'form-control' %>
+    </div>
+    <div class="col-lg-1">
+      <%= f.hidden_field :_destroy %>
+      <%= link_to "Remove field category", '#', class: "remove_fields btn btn-danger" %>
+    </div>
+  </div>
+
+  <%= f.fields_for :fields do |builder| %>
+      <%= render 'field_fields', f:builder %>
+  <% end %>
+
+  <div class="row">
+    <div class="col-lg-10"></div>
+    <div class="col-lg-2">
+      <%= link_to_add_fields "Add field", f, :fields %>
+    </div>
+  </div>
+
+</fieldset>

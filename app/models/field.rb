@@ -1,6 +1,7 @@
 class Field < ActiveRecord::Base
   belongs_to :measure_category
   belongs_to :type
+  belongs_to :field_category
   has_many :values
 
   has_many :evaluated, through: :values

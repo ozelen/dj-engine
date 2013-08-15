@@ -21,21 +21,25 @@
     <div class="form-group">
       <%= f.label :parent_id, class: 'control-label col-lg-2' %>
       <div class="col-lg-10">
-        <%= f.select :parent_id, @type.collection_for_parent_select, {include_blank: true}, {class: 'form-control'} %>
+        <%= f.select :parent_id, @type.collection_for_parent_select, {include_blank: true}, {class: 'form-control'} rescue f.hidden_field(:parent_id, value: params[:parent_id]) + (params[:parent_id] ? Type.find(params[:parent_id]).name : 'root') %>
       </div>
     </div>
 
     <fieldset>
         <legend>Properties</legend>
 
-        <%= f.fields_for :fields do |builder| %>
-            <%= render partial: 'field_fields', locals:{f:builder} %>
+        <%= f.fields_for :field_categories do |builder| %>
+            <%= render partial: 'field_category_fields', locals:{f:builder} %>
         <% end %>
+
+        <%# f.fields_for :fields do |builder| %>
+            <%# render partial: 'field_fields', locals:{f:builder} %>
+        <%# end %>
 
         <div class="row">
           <div class="col-lg-10"></div>
           <div class="col-lg-2">
-            <%= link_to_add_fields "Add field", f, :fields %>
+            <%= link_to_add_fields "Add Category", f, :field_categories %>
           </div>
         </div>
 

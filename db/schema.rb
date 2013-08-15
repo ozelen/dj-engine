@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130813194604) do
+ActiveRecord::Schema.define(:version => 20130815140145) do
 
   create_table "assignments", :force => true do |t|
     t.integer  "user_id"
@@ -54,6 +54,16 @@ ActiveRecord::Schema.define(:version => 20130813194604) do
   add_index "city_translations", ["city_id"], :name => "index_city_translations_on_city_id"
   add_index "city_translations", ["locale"], :name => "index_city_translations_on_locale"
 
+  create_table "field_categories", :force => true do |t|
+    t.string   "name"
+    t.string   "slug"
+    t.integer  "type_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "field_categories", ["type_id"], :name => "index_field_categories_on_type_id"
+
   create_table "fields", :force => true do |t|
     t.string   "name"
     t.integer  "measure_category_id"
@@ -61,8 +71,11 @@ ActiveRecord::Schema.define(:version => 20130813194604) do
     t.integer  "type_id"
     t.datetime "created_at",          :null => false
     t.datetime "updated_at",          :null => false
+    t.string   "slug"
+    t.integer  "field_category_id"
   end
 
+  add_index "fields", ["field_category_id"], :name => "index_fields_on_field_category_id"
   add_index "fields", ["measure_category_id"], :name => "index_fields_on_measure_category_id"
   add_index "fields", ["type_id"], :name => "index_fields_on_type_id"
 
