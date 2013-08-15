@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130803045324) do
+ActiveRecord::Schema.define(:version => 20130813194604) do
 
   create_table "assignments", :force => true do |t|
     t.integer  "user_id"
@@ -23,6 +23,15 @@ ActiveRecord::Schema.define(:version => 20130803045324) do
   end
 
   add_index "assignments", ["assigned_id", "assigned_type"], :name => "index_assignments_on_assigned_id_and_assigned_type"
+
+  create_table "authentications", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "provider"
+    t.string   "uid"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+    t.string   "token"
+  end
 
   create_table "cities", :force => true do |t|
     t.string   "name"
@@ -75,20 +84,22 @@ ActiveRecord::Schema.define(:version => 20130803045324) do
     t.float    "location"
     t.integer  "city_id"
     t.integer  "user_id"
+    t.string   "ident"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
-    t.string   "ident"
     t.integer  "type_id"
   end
 
+  add_index "hotels", ["city_id"], :name => "index_hotels_on_city_id"
   add_index "hotels", ["type_id"], :name => "index_hotels_on_type_id"
+  add_index "hotels", ["user_id"], :name => "index_hotels_on_user_id"
 
   create_table "measure_categories", :force => true do |t|
     t.string   "name"
-    t.integer  "data_type",  :limit => 255
+    t.integer  "data_type"
     t.string   "filter"
-    t.datetime "created_at",                :null => false
-    t.datetime "updated_at",                :null => false
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "measure_category_translations", :force => true do |t|
@@ -157,6 +168,25 @@ ActiveRecord::Schema.define(:version => 20130803045324) do
 
   add_index "nodes", ["accessible_id", "accessible_type"], :name => "index_nodes_on_accessible_id_and_accessible_type"
 
+  create_table "people", :force => true do |t|
+    t.string   "email",                  :default => "", :null => false
+    t.string   "encrypted_password",     :default => "", :null => false
+    t.string   "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer  "sign_in_count",          :default => 0
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.string   "current_sign_in_ip"
+    t.string   "last_sign_in_ip"
+    t.datetime "created_at",                             :null => false
+    t.datetime "updated_at",                             :null => false
+    t.integer  "roles_mask"
+  end
+
+  add_index "people", ["email"], :name => "index_people_on_email", :unique => true
+  add_index "people", ["reset_password_token"], :name => "index_people_on_reset_password_token", :unique => true
+
   create_table "period_translations", :force => true do |t|
     t.integer  "period_id"
     t.string   "locale"
@@ -174,24 +204,10 @@ ActiveRecord::Schema.define(:version => 20130803045324) do
     t.string   "name"
     t.string   "description"
     t.integer  "order_position"
-    t.datetime "created_at",     :null => false
-    t.datetime "updated_at",     :null => false
     t.integer  "hotel_id"
-  end
-
-  create_table "pois", :force => true do |t|
-    t.string   "ident"
-    t.string   "title"
-    t.string   "name"
-    t.text     "content"
-    t.text     "teaser"
-    t.integer  "objective_id"
-    t.string   "objective_type"
     t.datetime "created_at",     :null => false
     t.datetime "updated_at",     :null => false
   end
-
-  add_index "pois", ["objective_id", "objective_type"], :name => "index_pois_on_objective_id_and_objective_type"
 
   create_table "price_translations", :force => true do |t|
     t.integer  "price_id"
@@ -285,24 +301,6 @@ ActiveRecord::Schema.define(:version => 20130803045324) do
 
   add_index "services", ["type_id"], :name => "index_services_on_type_id"
 
-  create_table "source_classes", :force => true do |t|
-    t.string   "name"
-    t.text     "description"
-    t.integer  "parent_id"
-    t.integer  "parent_class_id"
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
-  end
-
-  create_table "source_instances", :force => true do |t|
-    t.string   "name"
-    t.text     "description"
-    t.integer  "source_class_id"
-    t.integer  "parent_instance_id"
-    t.datetime "created_at",         :null => false
-    t.datetime "updated_at",         :null => false
-  end
-
   create_table "tag_categories", :force => true do |t|
     t.integer  "parent_id"
     t.string   "filter"
@@ -330,11 +328,12 @@ ActiveRecord::Schema.define(:version => 20130803045324) do
   create_table "tags", :force => true do |t|
     t.integer  "tag_name_id"
     t.integer  "value_int"
+    t.integer  "measure_id"
     t.float    "value_flt"
     t.string   "value_str"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
-    t.integer  "measure_id"
+    t.integer  "tag_option_id"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
   end
 
   create_table "types", :force => true do |t|
@@ -350,27 +349,27 @@ ActiveRecord::Schema.define(:version => 20130803045324) do
   create_table "users", :force => true do |t|
     t.string   "username"
     t.string   "password"
-    t.string   "crypted_password",                 :null => false
-    t.string   "password_salt",                    :null => false
-    t.string   "persistence_token",                :null => false
-    t.integer  "login_count",       :default => 0, :null => false
-    t.datetime "last_request_at"
-    t.datetime "last_login_at"
-    t.datetime "current_login_at"
-    t.string   "last_login_ip"
-    t.string   "current_login_ip"
     t.string   "email"
     t.string   "first_name"
     t.string   "last_name"
     t.text     "address"
     t.string   "phone"
-    t.datetime "created_at",                       :null => false
-    t.datetime "updated_at",                       :null => false
+    t.datetime "created_at",                             :null => false
+    t.datetime "updated_at",                             :null => false
     t.integer  "roles_mask"
+    t.string   "encrypted_password",     :default => "", :null => false
+    t.string   "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer  "sign_in_count",          :default => 0
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.string   "current_sign_in_ip"
+    t.string   "last_sign_in_ip"
   end
 
-  add_index "users", ["last_request_at"], :name => "index_users_on_last_request_at"
-  add_index "users", ["persistence_token"], :name => "index_users_on_persistence_token"
+  add_index "users", ["email"], :name => "index_users_on_email", :unique => true
+  add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
   add_index "users", ["username"], :name => "index_users_on_username"
 
   create_table "values", :force => true do |t|
