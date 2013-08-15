@@ -15,4 +15,8 @@
 /tmp
 
 /.idea
+/.idea/*
 Gemfile.lock
+
+/public/uploads
+/public/uploads/*
