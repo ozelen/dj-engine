@@ -1,11 +1,13 @@
 class Type < ActiveRecord::Base
   belongs_to :measure_category
-  has_many :fields
+  has_many :field_categories, dependent: :destroy
+  has_many :fields, through: :field_categories, dependent: :destroy
   has_many :hotels
   has_many :rooms
   has_many :services
-  attr_accessible :filter, :name, :fields_attributes, :parent_id
-  accepts_nested_attributes_for :fields, allow_destroy: true
+  #accepts_nested_attributes_for :fields, allow_destroy: true
+  accepts_nested_attributes_for :field_categories, allow_destroy: true
+  attr_accessible :filter, :name, :field_categories_attributes, :parent_id
 
   has_ancestry
 

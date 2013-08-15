@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130814105427) do
+ActiveRecord::Schema.define(:version => 20130815160157) do
 
   create_table "assignments", :force => true do |t|
     t.integer  "user_id"
@@ -54,6 +54,16 @@ ActiveRecord::Schema.define(:version => 20130814105427) do
   add_index "city_translations", ["city_id"], :name => "index_city_translations_on_city_id"
   add_index "city_translations", ["locale"], :name => "index_city_translations_on_locale"
 
+  create_table "field_categories", :force => true do |t|
+    t.string   "name"
+    t.string   "slug"
+    t.integer  "type_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "field_categories", ["type_id"], :name => "index_field_categories_on_type_id"
+
   create_table "fields", :force => true do |t|
     t.string   "name"
     t.integer  "measure_category_id"
@@ -61,8 +71,11 @@ ActiveRecord::Schema.define(:version => 20130814105427) do
     t.integer  "type_id"
     t.datetime "created_at",          :null => false
     t.datetime "updated_at",          :null => false
+    t.string   "slug"
+    t.integer  "field_category_id"
   end
 
+  add_index "fields", ["field_category_id"], :name => "index_fields_on_field_category_id"
   add_index "fields", ["measure_category_id"], :name => "index_fields_on_measure_category_id"
   add_index "fields", ["type_id"], :name => "index_fields_on_type_id"
 
@@ -96,20 +109,22 @@ ActiveRecord::Schema.define(:version => 20130814105427) do
     t.float    "location"
     t.integer  "city_id"
     t.integer  "user_id"
+    t.string   "ident"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
-    t.string   "ident"
     t.integer  "type_id"
   end
 
+  add_index "hotels", ["city_id"], :name => "index_hotels_on_city_id"
   add_index "hotels", ["type_id"], :name => "index_hotels_on_type_id"
+  add_index "hotels", ["user_id"], :name => "index_hotels_on_user_id"
 
   create_table "measure_categories", :force => true do |t|
     t.string   "name"
-    t.integer  "data_type",  :limit => 255
+    t.integer  "data_type"
     t.string   "filter"
-    t.datetime "created_at",                :null => false
-    t.datetime "updated_at",                :null => false
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "measure_category_translations", :force => true do |t|
@@ -178,25 +193,6 @@ ActiveRecord::Schema.define(:version => 20130814105427) do
 
   add_index "nodes", ["accessible_id", "accessible_type"], :name => "index_nodes_on_accessible_id_and_accessible_type"
 
-  create_table "people", :force => true do |t|
-    t.string   "email",                  :default => "", :null => false
-    t.string   "encrypted_password",     :default => "", :null => false
-    t.string   "reset_password_token"
-    t.datetime "reset_password_sent_at"
-    t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          :default => 0
-    t.datetime "current_sign_in_at"
-    t.datetime "last_sign_in_at"
-    t.string   "current_sign_in_ip"
-    t.string   "last_sign_in_ip"
-    t.datetime "created_at",                             :null => false
-    t.datetime "updated_at",                             :null => false
-    t.integer  "roles_mask"
-  end
-
-  add_index "people", ["email"], :name => "index_people_on_email", :unique => true
-  add_index "people", ["reset_password_token"], :name => "index_people_on_reset_password_token", :unique => true
-
   create_table "period_translations", :force => true do |t|
     t.integer  "period_id"
     t.string   "locale"
@@ -214,8 +210,6 @@ ActiveRecord::Schema.define(:version => 20130814105427) do
     t.string   "name"
     t.string   "description"
     t.integer  "order_position"
-    t.datetime "created_at",     :null => false
-    t.datetime "updated_at",     :null => false
     t.integer  "hotel_id"
   end
 
@@ -240,8 +234,6 @@ ActiveRecord::Schema.define(:version => 20130814105427) do
     t.datetime "created_at",     :null => false
     t.datetime "updated_at",     :null => false
   end
-
-  add_index "pois", ["objective_id", "objective_type"], :name => "index_pois_on_objective_id_and_objective_type"
 
   create_table "price_translations", :force => true do |t|
     t.integer  "price_id"
@@ -335,24 +327,6 @@ ActiveRecord::Schema.define(:version => 20130814105427) do
 
   add_index "services", ["type_id"], :name => "index_services_on_type_id"
 
-  create_table "source_classes", :force => true do |t|
-    t.string   "name"
-    t.text     "description"
-    t.integer  "parent_id"
-    t.integer  "parent_class_id"
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
-  end
-
-  create_table "source_instances", :force => true do |t|
-    t.string   "name"
-    t.text     "description"
-    t.integer  "source_class_id"
-    t.integer  "parent_instance_id"
-    t.datetime "created_at",         :null => false
-    t.datetime "updated_at",         :null => false
-  end
-
   create_table "tag_categories", :force => true do |t|
     t.integer  "parent_id"
     t.string   "filter"
@@ -380,11 +354,12 @@ ActiveRecord::Schema.define(:version => 20130814105427) do
   create_table "tags", :force => true do |t|
     t.integer  "tag_name_id"
     t.integer  "value_int"
+    t.integer  "measure_id"
     t.float    "value_flt"
     t.string   "value_str"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
-    t.integer  "measure_id"
+    t.integer  "tag_option_id"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
   end
 
   create_table "types", :force => true do |t|
@@ -393,9 +368,11 @@ ActiveRecord::Schema.define(:version => 20130814105427) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
     t.string   "ancestry"
+    t.string   "slug"
   end
 
   add_index "types", ["ancestry"], :name => "index_types_on_ancestry"
+  add_index "types", ["slug"], :name => "index_types_on_slug"
 
   create_table "users", :force => true do |t|
     t.string   "username"
