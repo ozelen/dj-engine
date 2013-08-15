@@ -1,6 +1,12 @@
 # encoding: utf-8
 
 class ImageUploader < CarrierWave::Uploader::Base
+  after :store, :delete_original_file
+
+  def delete_original_file(new_file)
+    File.delete path if version_name.blank?
+  end
+
 
   # Include RMagick or MiniMagick support:
   include CarrierWave::RMagick
@@ -36,13 +42,35 @@ class ImageUploader < CarrierWave::Uploader::Base
   # end
 
   # Create different versions of your uploaded files:
-  version :thumb do
-     process thumbing: 100
+  version :mini do
+     process thumbing: 50
   end
 
-  def thumbing value
+  version :small do
+    process thumbing: 100
+  end
+
+  version :thumb do
+    process thumbing: [300, 200]
+  end
+
+  version :big do
+    process :watermarking
+  end
+
+  def thumbing val1, val2=nil
+    val2 ||= val1
     manipulate! format: "jpg" do |source|
-      source = source.resize_to_fill value
+      source = source.resize_to_fill val1, val2
+    end
+  end
+
+  def watermarking
+    manipulate! format: "png" do |source|
+      mark_path = Rails.root.join("app/assets/images/watermark.png")
+      mark = Magick::Image.read(mark_path).first
+      #source = source.watermark mark
+      source = source.composite!(mark, Magick::SouthEastGravity, Magick::OverCompositeOp)
     end
   end
 
@@ -57,5 +85,4 @@ class ImageUploader < CarrierWave::Uploader::Base
   # def filename
   #   "something.jpg" if original_filename
   # end
-
 end
