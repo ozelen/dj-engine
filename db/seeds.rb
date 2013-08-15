@@ -18,35 +18,77 @@
 Type.delete_all
 Field.delete_all
 
-hotel = Type.create({name: 'hotel', filter: 'Hotel'})
-hotel.children.
+Type.create(
+    {
+        name: 'Hotel', slug: 'hotels', filter: 'Hotel',
+        field_categories_attributes: [
+            {
+                name: 'Dining', slug: 'catering',
+                fields_attributes: [
+                    {slug: 'bed-only'},
+                    {slug: 'a-la-carte'},
+                    {slug: 'bed-and-breakfast'},
+                    {slug: 'half-board'},
+                    {slug: 'full-board'},
+                    {slug: 'ai'},
+                    {slug: 'mini-ai'},
+                    {slug: 'high-ai'},
+                    {slug: 'ultra-ai'},
+                    {slug: 'half-complex'},
+                    {slug: 'full-complex'},
+                    {slug: 'kitchen'}
+                ]
+            }
+        ]
+    }
+).children.
     create([
-               {name: 'mini-hotel'},
-               {name: 'private-sector'},
-               {name: 'sanatory'},
-               {name: 'apartment'},
-               {name: 'motel'},
-               {name: 'recreation-centre'},
-           ])
-hotel.fields.
-    create([
-               {name: 'bed-only'},
-               {name: 'a-la-carte'},
-               {name: 'bed-and-breakfast'},
-               {name: 'half-board'},
-               {name: 'full-board'},
-               {name: 'ai'},
-               {name: 'mini-ai'},
-               {name: 'high-ai'},
-               {name: 'ultra-ai'},
-               {name: 'half-complex'},
-               {name: 'full-complex'},
-               {name: 'kitchen'}
+               {slug: 'mini-hotel'},
+               {slug: 'private-sector'},
+               {slug: 'sanatory'},
+               {slug: 'apartment'},
+               {slug: 'motel'},
+               {slug: 'recreation-centre'},
            ])
 
-
-room = Type.create({name: 'room', filter: 'Room'}).
-room.children.
+Type.create(
+    {
+        name: 'Room', slug: 'rooms', filter: 'Room',
+        field_categories_attributes: [
+            {
+                name: 'Location', slug: 'room-placement',
+                fields_attributes: [
+                    {slug: 'in-main-building'},
+                    {slug: 'in-bungalow'},
+                    {slug: 'in-chalet'},
+                    {slug: 'in-cottage'}
+                ]
+            },
+            {
+                name: 'Properties', slug: 'options',
+                fields_attributes: [
+                    {slug: 'cable-tv'},
+                    {slug: 'satelite-tv'},
+                    {slug: 'conditioner'},
+                    {slug: 'minibar'},
+                    {slug: 'safe'},
+                    {slug: 'phone'},
+                    {slug: 'dvd'},
+                    {slug: 'tv'},
+                    {slug: 'towels'},
+                    {slug: 'fireplace'},
+                    {slug: 'cabinet'}
+                ]
+            },
+            {
+                name: '', slug: '',
+                fields_attributes: [
+                    {slug: ''},
+                ]
+            }
+        ]
+    }
+).children.
     create([
                {name: 'standard'},
                {name: 'family-room'},
@@ -66,21 +108,3 @@ room.children.
                {name: 'house-part'},
                {name: 'block'}
            ])
-
-
-#in-main-building
-#in-bungalow
-#in-chalet
-#in-cottage
-#
-#cable-tv
-#satelite-tv
-#conditioner
-#minibar
-#safe
-#phone
-#dvd
-#tv
-#towels
-#fireplace
-#cabinet

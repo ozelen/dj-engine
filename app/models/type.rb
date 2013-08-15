@@ -1,7 +1,7 @@
 class Type < ActiveRecord::Base
   belongs_to :measure_category
   has_many :field_categories, dependent: :destroy
-  has_many :fields, dependent: :destroy
+  has_many :fields, through: :field_categories, dependent: :destroy
   has_many :hotels
   has_many :rooms
   has_many :services
