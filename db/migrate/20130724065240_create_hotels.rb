@@ -12,6 +12,5 @@ class CreateHotels < ActiveRecord::Migration
     end
     add_index :hotels, :city_id
     add_index :hotels, :user_id
-    add_index :hotels, :ident_id, unique: true
   end
 end

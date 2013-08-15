@@ -22,6 +22,7 @@ end
 
 group :development do
   gem "nifty-generators"
+  gem 'mysql'
 end
 
 gem "therubyracer"
