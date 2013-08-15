@@ -1,11 +1,5 @@
 DjEngine::Application.routes.draw do
 
-  resources :photos
-
-
-  resources :galleries
-
-
   match '/auth/:provider/callback' => 'authentications#create'
   devise_for :users, :controllers => {
       :omniauth_callbacks => "users/omniauth_callbacks", registrations: 'registrations'
@@ -13,15 +7,10 @@ DjEngine::Application.routes.draw do
 
   resources :authentications
 
-    namespace :mercury do
-      resources :images
-    end
-
-  mount Mercury::Engine => '/'
-
   scope "(:locale)", locale: /(en|ua|ru)/ do # /#{I18n.available_locales.join('|')}/ do
 
-
+    resources :photos
+    resources :galleries
 
     resources :assignments
     resources :tag_options
