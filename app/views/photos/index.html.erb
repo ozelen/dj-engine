@@ -1,27 +1,19 @@
 <h1>Listing photos</h1>
 
-<table>
-  <tr>
-    <th>Image</th>
-    <th>Description</th>
-    <th>Gallery</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
+<div class="panel">
 
-<% @photos.each do |photo| %>
-  <tr>
-    <td><%= image_tag photo.image_url(:thumb).to_s %></td>
-    <td><%= photo.description %></td>
-    <td><%= photo.gallery %></td>
-    <td><%= link_to 'Show', photo %></td>
-    <td><%= link_to 'Edit', edit_photo_path(photo) %></td>
-    <td><%= link_to 'Destroy', photo, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
-<% end %>
-</table>
+  <%= form_for Photo.new do |f| %>
+    <%= f.label :image, "Upload photos:" %>
+    <%= f.file_field :image, multiple: true, name: "photo[image]" %>
+  <% end %>
 
-<br />
+  <div id="progress">
+    <div class="progress-bar bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;"><span class="sr-only"></span></div>
+  </div>
+</div>
 
-<%= link_to 'New Photo', new_photo_path %>
+<div id="photos">
+  <%= render @photos %>
+</div>
+
+<%# link_to 'New Photo', new_photo_path %>

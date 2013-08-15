@@ -18,6 +18,7 @@ group :assets do
   # gem 'therubyracer', :platforms => :ruby
 
   gem 'uglifier', '>= 1.0.3'
+  gem "jquery-fileupload-rails"
 end
 
 group :development do
@@ -37,8 +38,6 @@ gem 'jquery-ui-rails'
 gem 'cancan'
 gem 'globalize3'
 gem 'ancestry'
-
-gem 'mercury-rails', require: 'mercury/rails'
 
 gem 'rails-i18n', '~> 3.0.0.pre'
 

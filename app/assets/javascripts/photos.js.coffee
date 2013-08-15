@@ -1,3 +1,11 @@
-# Place all the behaviors and hooks related to the matching controller here.
-# All this logic will automatically be available in application.js.
-# You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
+
+jQuery ->
+  $('#new_photo').fileupload
+      dataType: "script"
+      paramName: 'photo[image]'
+      progressall: (e, data) ->
+        progress = parseInt(data.loaded / data.total * 100, 10)
+        $('#progress .bar').css(
+            'width',
+            progress + '%'
+        ).find('.sr-only').html(progress + '%')
