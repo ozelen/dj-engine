@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130815160157) do
+ActiveRecord::Schema.define(:version => 20130816161757) do
 
   create_table "assignments", :force => true do |t|
     t.integer  "user_id"
@@ -63,6 +63,28 @@ ActiveRecord::Schema.define(:version => 20130815160157) do
   end
 
   add_index "field_categories", ["type_id"], :name => "index_field_categories_on_type_id"
+
+  create_table "field_category_translations", :force => true do |t|
+    t.integer  "field_category_id"
+    t.string   "locale"
+    t.string   "name"
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
+  end
+
+  add_index "field_category_translations", ["field_category_id"], :name => "index_field_category_translations_on_field_category_id"
+  add_index "field_category_translations", ["locale"], :name => "index_field_category_translations_on_locale"
+
+  create_table "field_translations", :force => true do |t|
+    t.integer  "field_id"
+    t.string   "locale"
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "field_translations", ["field_id"], :name => "index_field_translations_on_field_id"
+  add_index "field_translations", ["locale"], :name => "index_field_translations_on_locale"
 
   create_table "fields", :force => true do |t|
     t.string   "name"
@@ -329,6 +351,17 @@ ActiveRecord::Schema.define(:version => 20130815160157) do
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
   end
+
+  create_table "type_translations", :force => true do |t|
+    t.integer  "type_id"
+    t.string   "locale"
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "type_translations", ["locale"], :name => "index_type_translations_on_locale"
+  add_index "type_translations", ["type_id"], :name => "index_type_translations_on_type_id"
 
   create_table "types", :force => true do |t|
     t.string   "name"

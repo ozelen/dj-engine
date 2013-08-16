@@ -1,17 +1,20 @@
 <fieldset>
   <div class="form-group">
-    <div class="col-lg-5">
-      <%= f.text_field :name, placeholder: "field_name", class: 'form-control' %>
+    <div class="col-lg-4">
+      <%= f.text_field :name, placeholder: 'Field Name', class: 'form-control' %>
     </div>
     <div class="col-lg-3">
-      <%= f.select :measure_category_id, options_from_collection_for_select(MeasureCategory.all, :id, :name, f.object.measure_category_id), {}, {class: 'form-control'}%>
+      <%= f.text_field :slug, placeholder: 'Field Name', class: 'form-control' %>
+    </div>
+    <div class="col-lg-2">
+      <%= f.select :measure_category_id, options_from_collection_for_select(MeasureCategory.all, :id, :name, f.object.measure_category_id), {include_blank:true}, {class: 'form-control'}%>
     </div>
     <div class="col-lg-2">
       <%= f.check_box :required %> <%= f.label :required %>
     </div>
     <div class="col-lg-1">
       <%= f.hidden_field :_destroy %>
-      <%= link_to "Remove", '#', class: "remove_fields btn btn-danger" %>
+      <%= link_to "&times;".html_safe, '#', class: "remove_fields close" %>
     </div>
   </div>
 </fieldset>

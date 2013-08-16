@@ -13,7 +13,7 @@ DjEngine::Application.routes.draw do
 
   mount Mercury::Engine => '/'
 
-  scope "(:locale)", locale: /(en|ua|ru)/ do # /#{I18n.available_locales.join('|')}/ do
+  scope "(:locale)", locale: /(en|uk|ru)/ do # /#{I18n.available_locales.join('|')}/ do
 
 
 

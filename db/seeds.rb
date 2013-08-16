@@ -195,25 +195,64 @@ Type.create(
     }
 ).children.
     create([
-               {name: 'standard'},
-               {name: 'family-room'},
-               {name: 'superior'},
-               {name: 'studio'},
-               {name: 'suite'},
-               {name: 'junior-suite'},
-               {name: 'de-luxe'},
-               {name: 'senior-suite'},
-               {name: 'business'},
-               {name: 'honeymoon-room'},
-               {name: 'duplex'},
-               {name: 'apartment'},
-               {name: 'president'},
-               {name: 'cheap'},
-               {name: 'cottage'},
-               {name: 'house-part'},
-               {name: 'block'}
+               {slug: 'standard'},
+               {slug: 'family-room'},
+               {slug: 'superior'},
+               {slug: 'studio'},
+               {slug: 'suite'},
+               {slug: 'junior-suite'},
+               {slug: 'de-luxe'},
+               {slug: 'senior-suite'},
+               {slug: 'business'},
+               {slug: 'honeymoon-room'},
+               {slug: 'duplex'},
+               {slug: 'apartment'},
+               {slug: 'president'},
+               {slug: 'cheap'},
+               {slug: 'cottage'},
+               {slug: 'house-part'},
+               {slug: 'block'}
            ])
 
+
+Type.create( { name: 'Following Service', slug: 'services', filter: 'Service' },
+             field_categories_attributes: [
+                 {
+                     name: 'Price', slug: 'service-price',
+                     fields_attributes: [
+                         {slug: 'price'},
+                         {slug: 'is-free'}
+                     ]
+                 }]
+).children.
+    create([
+               {slug: 'pool'},
+               {slug: 'sauna'},
+               {slug: 'jacuzzi'},
+               {slug: 'russian-bath'},
+               {slug: 'barbecue'},
+               {slug: 'pavilion'},
+               {slug: 'fireplace-pavilion'},
+               {slug: 'restaurant'},
+               {slug: 'bar'},
+               {slug: 'ski-hire'},
+               {slug: 'gym'},
+               {slug: 'laundry'},
+               {slug: 'wifi'},
+               {slug: 'conference'},
+               {slug: 'parking'},
+               {slug: 'cafe'},
+               {slug: 'hairdressing'},
+               {slug: 'stomatologist'},
+               {slug: 'fastfood'},
+               {slug: 'currency-exchange'},
+               {slug: 'beer-pub'},
+               {slug: 'ski-instructor'},
+               {slug: 'transfer'},
+               {slug: 'massage'},
+               {slug: 'solarium'},
+               {slug: 'spa'}
+           ])
 
 
 

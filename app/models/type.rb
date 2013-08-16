@@ -10,6 +10,7 @@ class Type < ActiveRecord::Base
   attr_accessible :filter, :name, :field_categories_attributes, :parent_id, :slug
 
   has_ancestry
+  translates :name
 
 
   def collection_for_parent_select
