@@ -7,7 +7,7 @@ class Type < ActiveRecord::Base
   has_many :services
   #accepts_nested_attributes_for :fields, allow_destroy: true
   accepts_nested_attributes_for :field_categories, allow_destroy: true
-  attr_accessible :filter, :name, :field_categories_attributes, :parent_id
+  attr_accessible :filter, :name, :field_categories_attributes, :parent_id, :slug
 
   has_ancestry
 

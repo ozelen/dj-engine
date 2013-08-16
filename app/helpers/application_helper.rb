@@ -20,4 +20,8 @@ module ApplicationHelper
     array.map{|t| [t, array.index(t)+1] }
   end
 
+  def indent str, level, symbol
+    str + symbol * level
+  end
+
 end

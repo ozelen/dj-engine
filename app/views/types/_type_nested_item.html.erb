@@ -1,5 +1,6 @@
 <tr>
-  <td><%= type.name.indent(type.ancestors.count, '-&nbsp;').html_safe %></td>
+  <% name = type.name || type.slug %>
+  <td><%= name.indent(type.ancestors.count, '-&nbsp;').html_safe %></td>
   <td><%= type.fields.count %></td>
   <td class="btn-group">
 

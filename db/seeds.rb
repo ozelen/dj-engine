@@ -81,9 +81,114 @@ Type.create(
                 ]
             },
             {
-                name: '', slug: '',
+                name: 'View', slug: 'view',
                 fields_attributes: [
-                    {slug: ''},
+                    {slug: 'city-view'},
+                    {slug: 'beach-view'},
+                    {slug: 'sea-view'},
+                    {slug: 'side-sea-view'},
+                    {slug: 'inside-view'},
+                    {slug: 'pool-view'},
+                    {slug: 'garden-view'},
+                    {slug: 'ocean-view'},
+                    {slug: 'land-view'},
+                    {slug: 'dune-view'},
+                    {slug: 'mountain-view'},
+                    {slug: 'park-view'},
+                    {slug: 'river-view'}
+                ]
+            },
+            {
+                name: 'Design', slug: '',
+                fields_attributes: [
+                    {slug: 'ethno'},
+                    {slug: 'euro'},
+                ]
+            },
+            {
+                name: 'Accomodation', slug: 'accomodation',
+                fields_attributes: [
+                    {slug: 'sgl'},
+                    {slug: 'dbl'},
+                    {slug: 'dblt'},
+                    {slug: 'trpl'},
+                    {slug: 'qdpl'},
+                    {slug: 'exb'},
+                    {slug: 'inf'},
+                    {slug: 'chl'},
+                    {slug: 'ch'},
+                    {slug: 'all'}
+                ]
+            },
+            {
+                name: 'Heating', slug: 'heating',
+                fields_attributes: [
+                    {slug: 'warm-floor'},
+                    {slug: 'water-heating'},
+                    {slug: 'steam-heating'},
+                    {slug: 'electric-heating'}
+                ]
+            },
+            {
+                name: 'Layout', slug: 'layout',
+                fields_attributes: [
+                    {slug: 'mansard'},
+                    {slug: 'balcony'},
+                    {slug: 'bathroom'},
+                    {slug: '1k'},
+                    {slug: '2k'},
+                    {slug: '3k'},
+                    {slug: '4k'},
+                    {slug: '2story'},
+                    {slug: '3story'},
+                    {slug: 'livingroom'},
+                    {slug: 'kitchenroom'},
+                    {slug: 'terrace'}
+                ]
+            },
+            {
+                name: 'Bathroom', slug: 'bathroom',
+                fields_attributes: [
+                    {slug: 'bath'},
+                    {slug: 'dryer'},
+                    {slug: 'shower'},
+                    {slug: 'bidet'},
+                    {slug: 'massage-bathtub'},
+                    {slug: 'jacuzzi'},
+                    {slug: 'mirror'},
+                    {slug: 'warm-floor'},
+                    {slug: 'washstand'}
+                ]
+            },
+            {
+                name: 'Kitchenware', slug: 'kitchenware',
+                fields_attributes: [
+                    {slug: 'microwave'},
+                    {slug: 'kitchen'},
+                    {slug: 'fridge'},
+                    {slug: 'electric-kettle'},
+                    {slug: 'dishes'},
+                    {slug: 'glasses'}
+                ]
+            },
+            {
+                name: 'Furniture', slug: 'furniture',
+                fields_attributes: [
+                    {slug: 'commode'},
+                    {slug: 'nightstand'},
+                    {slug: 'chair'},
+                    {slug: 'hanger'},
+                    {slug: 'sofa'},
+                    {slug: 'sofabed'},
+                    {slug: 'double-bed'},
+                    {slug: 'single-beds'},
+                    {slug: 'single-bed'},
+                    {slug: 'desktop'},
+                    {slug: 'coffee-table'},
+                    {slug: 'armchair'},
+                    {slug: 'dressing-table'},
+                    {slug: 'chair-ottoman'},
+                    {slug: 'rocking-chair'}
                 ]
             }
         ]
@@ -108,3 +213,17 @@ Type.create(
                {name: 'house-part'},
                {name: 'block'}
            ])
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -5,5 +5,5 @@ class Field < ActiveRecord::Base
 
   has_many :evaluated, through: :values
 
-  attr_accessible :name, :required, :measure_category_id
+  attr_accessible :name, :required, :measure_category_id, :slug
 end
