@@ -6,13 +6,6 @@ class NodesController < ApplicationController
   def home
   end
 
-  def mercury_update
-    @node.header = params[:content][:node_header][:value]
-    @node.content = params[:content][:node_content][:value]
-    @node.save!
-    render text: ""
-  end
-
   def index
     @nodes = Node.all
     @node = Node.find_by_name!('skiworld')

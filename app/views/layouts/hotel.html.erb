@@ -2,11 +2,11 @@
 
 
 <div class="span9">
-    <h1 data-mercury="simple" id="node_header"><%= @node.header %></h1>
+    <h1><%= @node.header %></h1>
 
     <%= render 'layouts/hotel_header' %>
 
-    <div id="node_content" data-mercury="full">
+    <div id="node_content">
     <%= @node.content.html_safe %>
     </div>
 

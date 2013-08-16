@@ -1,0 +1,19 @@
+
+<h1>Edit Hotel Albums</h1>
+<hr>
+
+<%= form_for @hotel, :html => { :class => 'form-horizontal' } do |f| %>
+
+  <%= f.fields_for :galleries do |builder| %>
+    <%= render 'gallery_fields', f: builder, existing: 'true' %>
+  <% end %>
+
+  <div class="row period-list pull-right">
+    <%= link_to_add_fields "Add new Album", f, :galleries %>
+    <%= f.submit nil, :class => 'btn btn-success' %>
+    <%= link_to 'Cancel', albums_path, class: 'btn btn-default' %>
+  </div>
+
+
+
+<% end %>

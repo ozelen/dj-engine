@@ -155,15 +155,6 @@ ActiveRecord::Schema.define(:version => 20130815160157) do
     t.datetime "updated_at",          :null => false
   end
 
-  create_table "mercury_images", :force => true do |t|
-    t.string   "image_file_name"
-    t.string   "image_content_type"
-    t.integer  "image_file_size"
-    t.datetime "image_updated_at"
-    t.datetime "created_at",         :null => false
-    t.datetime "updated_at",         :null => false
-  end
-
   create_table "node_translations", :force => true do |t|
     t.integer  "node_id"
     t.string   "locale"
