@@ -33,11 +33,11 @@ namespace :import do
       end
 
       def get_field loc, name
-        self.locale(loc)[name] rescue "no #{loc} translate"
+        self.locale(loc.to_s)[name].force_encoding("UTF-8") rescue nil #"no #{loc} translate"
       end
 
       def title loc
-        self.get_field loc, 'Title'
+        self.get_field(loc, 'Title')
       end
 
       def content loc
@@ -204,22 +204,47 @@ namespace :import do
       puts line
     end
 
-    hr 100, '#'
-    HbObject.limit(20).each do |o|
-      puts "Object##{o.Id}    #{o.content.title('ru')} [#{o.slug}]"
-      puts "Profile:      hotels"
-      puts "Type:         recreation-centre"
-      puts "Properties:"
-      o.show_classes
-      o.hb_categories.each do |c|
-        pref = (c.profile.value.name rescue '') == 'rooms' ? 'room   ' : 'service'
-        puts "#{pref}       #{c.content.title 'ru'} /#{c.caption.value.name rescue ''}/ "
-        c.show_classes
-        hr 40, '`'
+
+    Type.delete_all
+    Field.delete_all
+
+    hotel_type = Type.create(name: 'Hotel', slug: 'hotels', filter: 'Hotel');
+    SwPage.where("Rozdil = 357").each do |p|
+      subtype = hotel_type.children.create(slug: p.name)
+
+      [:ru, :ua, :en].each do |loc|
+        I18n.locale = loc == :ua ? :uk : loc
+        name = p.data.title(loc)
+        unless name.blank?
+          subtype.name = name
+          subtype.save!
+        end
       end
-      hr 50, '.'
+
+
+      I18n.locale = :uk
+      subtype.name = p.data.title(:ua)
+      subtype.save!
+
     end
+
+    #hr 100, '#'
+    #HbObject.limit(20).each do |o|
+    #  puts "Object##{o.Id}    #{o.content.title('ru')} [#{o.slug}]"
+    #  puts "Profile:      hotels"
+    #  puts "Type:         recreation-centre"
+    #  puts "Properties:"
+    #  o.show_classes
+    #  o.hb_categories.each do |c|
+    #    pref = (c.profile.value.name rescue '') == 'rooms' ? 'room   ' : 'service'
+    #    puts "#{pref}       #{c.content.title 'ru'} /#{c.caption.value.name rescue ''}/ "
+    #    c.show_classes
+    #    hr 40, '`'
+    #  end
+    #  hr 50, '.'
+    #end
     ###
+
 
   end
 end

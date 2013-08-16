@@ -81,30 +81,188 @@ Type.create(
                 ]
             },
             {
-                name: '', slug: '',
+                name: 'View', slug: 'view',
                 fields_attributes: [
-                    {slug: ''},
+                    {slug: 'city-view'},
+                    {slug: 'beach-view'},
+                    {slug: 'sea-view'},
+                    {slug: 'side-sea-view'},
+                    {slug: 'inside-view'},
+                    {slug: 'pool-view'},
+                    {slug: 'garden-view'},
+                    {slug: 'ocean-view'},
+                    {slug: 'land-view'},
+                    {slug: 'dune-view'},
+                    {slug: 'mountain-view'},
+                    {slug: 'park-view'},
+                    {slug: 'river-view'}
+                ]
+            },
+            {
+                name: 'Design', slug: '',
+                fields_attributes: [
+                    {slug: 'ethno'},
+                    {slug: 'euro'},
+                ]
+            },
+            {
+                name: 'Accomodation', slug: 'accomodation',
+                fields_attributes: [
+                    {slug: 'sgl'},
+                    {slug: 'dbl'},
+                    {slug: 'dblt'},
+                    {slug: 'trpl'},
+                    {slug: 'qdpl'},
+                    {slug: 'exb'},
+                    {slug: 'inf'},
+                    {slug: 'chl'},
+                    {slug: 'ch'},
+                    {slug: 'all'}
+                ]
+            },
+            {
+                name: 'Heating', slug: 'heating',
+                fields_attributes: [
+                    {slug: 'warm-floor'},
+                    {slug: 'water-heating'},
+                    {slug: 'steam-heating'},
+                    {slug: 'electric-heating'}
+                ]
+            },
+            {
+                name: 'Layout', slug: 'layout',
+                fields_attributes: [
+                    {slug: 'mansard'},
+                    {slug: 'balcony'},
+                    {slug: 'bathroom'},
+                    {slug: '1k'},
+                    {slug: '2k'},
+                    {slug: '3k'},
+                    {slug: '4k'},
+                    {slug: '2story'},
+                    {slug: '3story'},
+                    {slug: 'livingroom'},
+                    {slug: 'kitchenroom'},
+                    {slug: 'terrace'}
+                ]
+            },
+            {
+                name: 'Bathroom', slug: 'bathroom',
+                fields_attributes: [
+                    {slug: 'bath'},
+                    {slug: 'dryer'},
+                    {slug: 'shower'},
+                    {slug: 'bidet'},
+                    {slug: 'massage-bathtub'},
+                    {slug: 'jacuzzi'},
+                    {slug: 'mirror'},
+                    {slug: 'warm-floor'},
+                    {slug: 'washstand'}
+                ]
+            },
+            {
+                name: 'Kitchenware', slug: 'kitchenware',
+                fields_attributes: [
+                    {slug: 'microwave'},
+                    {slug: 'kitchen'},
+                    {slug: 'fridge'},
+                    {slug: 'electric-kettle'},
+                    {slug: 'dishes'},
+                    {slug: 'glasses'}
+                ]
+            },
+            {
+                name: 'Furniture', slug: 'furniture',
+                fields_attributes: [
+                    {slug: 'commode'},
+                    {slug: 'nightstand'},
+                    {slug: 'chair'},
+                    {slug: 'hanger'},
+                    {slug: 'sofa'},
+                    {slug: 'sofabed'},
+                    {slug: 'double-bed'},
+                    {slug: 'single-beds'},
+                    {slug: 'single-bed'},
+                    {slug: 'desktop'},
+                    {slug: 'coffee-table'},
+                    {slug: 'armchair'},
+                    {slug: 'dressing-table'},
+                    {slug: 'chair-ottoman'},
+                    {slug: 'rocking-chair'}
                 ]
             }
         ]
     }
 ).children.
     create([
-               {name: 'standard'},
-               {name: 'family-room'},
-               {name: 'superior'},
-               {name: 'studio'},
-               {name: 'suite'},
-               {name: 'junior-suite'},
-               {name: 'de-luxe'},
-               {name: 'senior-suite'},
-               {name: 'business'},
-               {name: 'honeymoon-room'},
-               {name: 'duplex'},
-               {name: 'apartment'},
-               {name: 'president'},
-               {name: 'cheap'},
-               {name: 'cottage'},
-               {name: 'house-part'},
-               {name: 'block'}
+               {slug: 'standard'},
+               {slug: 'family-room'},
+               {slug: 'superior'},
+               {slug: 'studio'},
+               {slug: 'suite'},
+               {slug: 'junior-suite'},
+               {slug: 'de-luxe'},
+               {slug: 'senior-suite'},
+               {slug: 'business'},
+               {slug: 'honeymoon-room'},
+               {slug: 'duplex'},
+               {slug: 'apartment'},
+               {slug: 'president'},
+               {slug: 'cheap'},
+               {slug: 'cottage'},
+               {slug: 'house-part'},
+               {slug: 'block'}
            ])
+
+
+Type.create( { name: 'Following Service', slug: 'services', filter: 'Service' },
+             field_categories_attributes: [
+                 {
+                     name: 'Price', slug: 'service-price',
+                     fields_attributes: [
+                         {slug: 'price'},
+                         {slug: 'is-free'}
+                     ]
+                 }]
+).children.
+    create([
+               {slug: 'pool'},
+               {slug: 'sauna'},
+               {slug: 'jacuzzi'},
+               {slug: 'russian-bath'},
+               {slug: 'barbecue'},
+               {slug: 'pavilion'},
+               {slug: 'fireplace-pavilion'},
+               {slug: 'restaurant'},
+               {slug: 'bar'},
+               {slug: 'ski-hire'},
+               {slug: 'gym'},
+               {slug: 'laundry'},
+               {slug: 'wifi'},
+               {slug: 'conference'},
+               {slug: 'parking'},
+               {slug: 'cafe'},
+               {slug: 'hairdressing'},
+               {slug: 'stomatologist'},
+               {slug: 'fastfood'},
+               {slug: 'currency-exchange'},
+               {slug: 'beer-pub'},
+               {slug: 'ski-instructor'},
+               {slug: 'transfer'},
+               {slug: 'massage'},
+               {slug: 'solarium'},
+               {slug: 'spa'}
+           ])
+
+
+
+
+
+
+
+
+
+
+
+
+

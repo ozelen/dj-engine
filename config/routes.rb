@@ -4,10 +4,9 @@ DjEngine::Application.routes.draw do
   devise_for :users, :controllers => {
       :omniauth_callbacks => "users/omniauth_callbacks", registrations: 'registrations'
   }
-
   resources :authentications
 
-  scope "(:locale)", locale: /(en|ua|ru)/ do # /#{I18n.available_locales.join('|')}/ do
+  scope "(:locale)", locale: /(en|uk|ru)/ do # /#{I18n.available_locales.join('|')}/ do
 
     resources :assignments
     resources :tag_options

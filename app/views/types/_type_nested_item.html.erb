@@ -1,10 +1,10 @@
 <tr>
-  <td><%= type.name.indent(type.ancestors.count, '-&nbsp;').html_safe %></td>
+  <% name = type.name || type.slug %>
+  <td><%= name.indent(type.ancestors.count, '-&nbsp;').html_safe %></td>
   <td><%= type.fields.count %></td>
   <td class="btn-group">
 
     <%= link_to 'New child', new_type_path(parent_id: type.id), class: "btn btn-default btn-small" %>
-    <%= link_to 'Show', type, class: "btn btn-default btn-small" %>
     <%= link_to 'Edit', edit_type_path(type), class: "btn btn-default btn-small" %>
     <%= link_to 'Destroy', type, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-default btn-small" %>
   </td>
