@@ -6,6 +6,8 @@
   <h1><%= @room.name %></h1>
 </div>
 
+<%= render 'photos/dynamic_form', gallery: @room.gallery %>
+
 <div class="row">
   <div class="col-lg-9">
 
@@ -22,10 +24,6 @@
     </div>
     <% end %>
 
-    <h3>Photo</h3>
-
-    <%= render "layouts/dummy_photoalbum" %>
-
     <h3>Comments</h3>
 
     <%= render "layouts/dummy_comments" %>
@@ -33,6 +31,7 @@
 
   </div>
 
+  <h3>All rooms:</h3>
   <div class="col-lg-3">
     <ul class="nav nav-pills nav-stacked">
     <% @hotel.rooms.each do |room| %>
