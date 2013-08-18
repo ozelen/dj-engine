@@ -15,10 +15,16 @@ class PostsController < ApplicationController
   def show
     @post = Post.find(params[:id])
 
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @post }
-      format.js
+    if @post.channel
+      layout = @post.channel_type.parameterize
+      instance_variable_set "@#{layout}", @post.channel
+      render template: layout.pluralize + '/show_post'
+    else
+      respond_to do |format|
+        format.html
+        format.json { render json: @post }
+        format.js
+      end
     end
   end
 

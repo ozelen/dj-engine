@@ -28,6 +28,10 @@ class HotelsController < ApplicationController
     @posts = @hotel.posts
   end
 
+  def show_post
+    @post = @hotel.posts.find_by_slug params[:slug]
+  end
+
   def edit_pricelist
     authorize! :manage, @hotel
   end

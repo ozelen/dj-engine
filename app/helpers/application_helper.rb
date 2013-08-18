@@ -24,4 +24,9 @@ module ApplicationHelper
     str + symbol * level
   end
 
+  #def channel_url
+  #  channel = controller.controller_name.singularize
+  #  comments_path(channel_type: channel, channel_id: controller.instance_variable_get("@#{channel}").node.name)
+  #end
+
 end

@@ -1,40 +1,9 @@
-<p id="notice"><%= notice %></p>
+<h1><%= @post.title %></h1>
+<hr>
+<div><%= @post.created_at %></div>
 
-<p>
-  <b>Slug:</b>
-  <%= @post.slug %>
-</p>
+<div><%= @post.teaser %></div>
 
-<p>
-  <b>Title:</b>
-  <%= @post.title %>
-</p>
-
-<p>
-  <b>Teaser:</b>
-  <%= @post.teaser %>
-</p>
-
-<p>
-  <b>Content:</b>
+<div class="content">
   <%= @post.content %>
-</p>
-
-<p>
-  <b>Channel type:</b>
-  <%= @post.channel_type %>
-</p>
-
-<p>
-  <b>Channel:</b>
-  <%= @post.channel_id %>
-</p>
-
-<p>
-  <b>User:</b>
-  <%= @post.user %>
-</p>
-
-
-<%= link_to 'Edit', edit_post_path(@post) %> |
-<%= link_to 'Back', posts_path %>
+</div>
