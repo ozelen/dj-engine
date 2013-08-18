@@ -1,5 +1,8 @@
 DjEngine::Application.routes.draw do
 
+  resources :posts
+
+
   match '/auth/:provider/callback' => 'authentications#create'
   devise_for :users, :controllers => {
       :omniauth_callbacks => "users/omniauth_callbacks", registrations: 'registrations'
@@ -38,6 +41,7 @@ DjEngine::Application.routes.draw do
       get 'album' => 'hotels#album'
       get 'albums/edit' => 'hotels#edit_albums'
       get 'reviews' => 'hotels#comments'
+      get 'blog' => 'hotels#blog'
     end
 
     scope "(:whose)", scope: /(my|our)/ do

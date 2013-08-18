@@ -24,6 +24,10 @@ class HotelsController < ApplicationController
   def edit_albums
   end
 
+  def blog
+    @posts = @hotel.posts
+  end
+
   def edit_pricelist
     authorize! :manage, @hotel
   end

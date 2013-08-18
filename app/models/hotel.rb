@@ -17,6 +17,7 @@ class Hotel < ActiveRecord::Base
 
   has_one :gallery, as: :imageable
   has_many :photos, through: :gallery
+  has_many :posts, as: :channel
 
   accepts_nested_attributes_for :node, allow_destroy: true
   accepts_nested_attributes_for :values, allow_destroy: true

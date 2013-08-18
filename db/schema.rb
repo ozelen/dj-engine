@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130818090338) do
+ActiveRecord::Schema.define(:version => 20130818165236) do
 
   create_table "assignments", :force => true do |t|
     t.integer  "user_id"
@@ -294,6 +294,34 @@ ActiveRecord::Schema.define(:version => 20130818090338) do
   end
 
   add_index "pois", ["objective_id", "objective_type"], :name => "index_pois_on_objective_id_and_objective_type"
+
+  create_table "post_translations", :force => true do |t|
+    t.integer  "post_id"
+    t.string   "locale"
+    t.string   "title"
+    t.text     "teaser"
+    t.text     "content"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "post_translations", ["locale"], :name => "index_post_translations_on_locale"
+  add_index "post_translations", ["post_id"], :name => "index_post_translations_on_post_id"
+
+  create_table "posts", :force => true do |t|
+    t.string   "slug"
+    t.string   "title"
+    t.text     "teaser"
+    t.text     "content"
+    t.integer  "channel_id"
+    t.string   "channel_type"
+    t.integer  "user_id"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
+
+  add_index "posts", ["channel_id", "channel_type"], :name => "index_posts_on_channel_id_and_channel_type"
+  add_index "posts", ["user_id"], :name => "index_posts_on_user_id"
 
   create_table "price_translations", :force => true do |t|
     t.integer  "price_id"

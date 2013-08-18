@@ -2,7 +2,7 @@
         ['Info',      node_path(@hotel.node),           -1 ],
         ['Rooms',       hotel_rooms_path(@hotel),       @hotel.rooms.count     ],
         ['Services',    hotel_services_path(@hotel),    @hotel.services.count  ],
-        ['Blog',        '#',                            -1 ],
+        ['Blog',        blog_path(@hotel),              -1 ],
         ['Photos',      album_path(@hotel),             -1 ],
         ['Prices',      pricelist_path(@hotel),         -1 ],
         ['Comments',    reviews_path(@hotel),           @hotel.comment_threads.count ],

@@ -15,8 +15,8 @@ class User < ActiveRecord::Base
 
   has_many :hotels
   has_many :assignments
-
   has_many :authentications, dependent: :destroy
+  has_many :posts, as: :channel
 
   attr_accessible :username, :password, :email, :first_name, :last_name, :address, :phone, :password_confirmation, :roles
 
