@@ -37,6 +37,9 @@ class Hotel < ActiveRecord::Base
 
   validate :validate_properties
 
+  acts_as_commentable
+
+
   def to_param
     self.node.name
   end

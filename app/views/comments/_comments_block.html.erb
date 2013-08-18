@@ -1,0 +1,14 @@
+<div id="comments">
+  <% commentable.comment_threads.each do |comment| %>
+    <%= render comment %>
+  <% end %>
+</div>
+
+<h3>Add a comment</h3>
+<%= form_for Comment.new, remote: true do |f| %>
+  <%= f.text_field :title %><br>
+  <%= f.text_area :body %><br>
+  <%= hidden_field_tag 'commentable_type',  commentable.class.to_s %>
+  <%= hidden_field_tag 'commentable_id',    commentable.id %>
+  <%= f.submit %>
+<% end %>

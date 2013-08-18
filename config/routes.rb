@@ -19,6 +19,7 @@ DjEngine::Application.routes.draw do
 
     resources :galleries
     resources :photos
+    resources :comments
 
     resources :hotels do
       resources :rooms do
@@ -36,6 +37,7 @@ DjEngine::Application.routes.draw do
       get 'pricelist/edit' => 'hotels#edit_pricelist'
       get 'album' => 'hotels#album'
       get 'albums/edit' => 'hotels#edit_albums'
+      get 'reviews' => 'hotels#comments'
     end
 
     scope "(:whose)", scope: /(my|our)/ do
