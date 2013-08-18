@@ -18,6 +18,7 @@ class PostsController < ApplicationController
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @post }
+      format.js
     end
   end
 
@@ -35,20 +36,26 @@ class PostsController < ApplicationController
   # GET /posts/1/edit
   def edit
     @post = Post.find(params[:id])
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   # POST /posts
   # POST /posts.json
   def create
-    @post = Post.new(params[:post])
+    @post = find_channel.posts.new(params[:post])
 
     respond_to do |format|
       if @post.save
         format.html { redirect_to @post, notice: 'Post was successfully created.' }
         format.json { render json: @post, status: :created, location: @post }
+        format.js
       else
         format.html { render action: "new" }
         format.json { render json: @post.errors, status: :unprocessable_entity }
+        format.js   { render text: 'Sucks! :(' }
       end
     end
   end
@@ -62,6 +69,7 @@ class PostsController < ApplicationController
       if @post.update_attributes(params[:post])
         format.html { redirect_to @post, notice: 'Post was successfully updated.' }
         format.json { head :no_content }
+        format.js
       else
         format.html { render action: "edit" }
         format.json { render json: @post.errors, status: :unprocessable_entity }
@@ -78,6 +86,15 @@ class PostsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to posts_url }
       format.json { head :no_content }
+      format.js
     end
   end
+
+  private
+
+  def find_channel
+    klass = params[:channel_type].constantize
+    klass.find params[:channel_id]
+  end
+
 end

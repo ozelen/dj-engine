@@ -3,9 +3,4 @@
 
 <h1>Blog</h1>
 
-<%= '<p>No entries</p>'.html_safe if @hotel.posts.blank? %>
-
-<% @hotel.posts.each do |post| %>
-  <h3><%= post.title %></h3>
-  <p><%= post.teaser %></p>
-<% end %>
+<%= render 'posts/block', channel: @hotel %>

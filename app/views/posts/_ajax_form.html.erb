@@ -1,0 +1,47 @@
+<% channel ||= @post.channel %>
+<%= content_tag_for :div, @post, 'form' do %>
+  <h3><%= @post.new_record? ? 'New Post' : 'Edit Post' %></h3>
+  <%= form_for(@post, remote: true) do |f| %>
+
+    <%= hidden_field_tag :channel_id, channel.id %>
+    <%= hidden_field_tag :channel_type, channel.class.name %>
+
+    <% if @post.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@post.errors.count, "error") %> prohibited this post from being saved:</h2>
+
+        <ul>
+          <% @post.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="field">
+      <%= f.label :slug %><br />
+      <%= f.text_field :slug %>
+    </div>
+    <div class="field">
+      <%= f.label :title %><br />
+      <%= f.text_field :title %>
+    </div>
+    <div class="field">
+      <%= f.label :teaser %><br />
+      <%= f.text_area :teaser, rows: 2 %>
+    </div>
+    <div class="field">
+      <%= f.label :content %><br />
+      <%= f.text_area :content, rows: 4 %>
+    </div>
+    <div class="actions">
+      <%= f.submit class: 'btn btn-success' %>
+      <% if @post.new_record? %>
+        <a href="#" onclick="$('#form_post').hide(); $('#new_post_link').show(); return false" class="btn btn-default">Cancel</a>
+      <% else %>
+        <%= link_to 'Cancel', @post, remote: true, class: 'btn btn-default' %>
+      <% end %>
+
+    </div>
+  <% end %>
+<% end %>

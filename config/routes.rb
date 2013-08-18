@@ -1,8 +1,5 @@
 DjEngine::Application.routes.draw do
 
-  resources :posts
-
-
   match '/auth/:provider/callback' => 'authentications#create'
   devise_for :users, :controllers => {
       :omniauth_callbacks => "users/omniauth_callbacks", registrations: 'registrations'
@@ -16,6 +13,8 @@ DjEngine::Application.routes.draw do
     resources :measures
     resources :measure_categories
     resources :values
+    resources :posts
+
     post 'values/:id' => 'values#update'
 
     resources :types
