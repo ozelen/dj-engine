@@ -7,3 +7,5 @@
 <div class="content">
   <%= @post.content %>
 </div>
+
+<%= render 'comments/comments_block', commentable: @post %>

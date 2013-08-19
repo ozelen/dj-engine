@@ -4,6 +4,8 @@ class Post < ActiveRecord::Base
   attr_accessible :channel_id, :channel_type, :content, :slug, :teaser, :title
   translates :content, :teaser, :title
 
+  acts_as_commentable
+
   def to_param
     "#{id} #{slug}".parameterize
   end

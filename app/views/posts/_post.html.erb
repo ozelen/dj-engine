@@ -3,6 +3,11 @@
     <h3><%= link_to post.title, [@hotel, post] %></h3>
     <p><%= post.teaser %></p>
 
+    <% unless post.comment_threads.blank? %>
+      <%= post.comment_threads.count %> comments
+    <% end %>
+
+    <br>
 
       <%= link_to 'Edit post', edit_post_path(post), remote: true, class: 'btn btn-default' %>
       <%= link_to 'Delete', post, method: :delete, remote: true, class: 'btn btn-danger', :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) } %>
