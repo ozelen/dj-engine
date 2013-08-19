@@ -1,3 +1,5 @@
+require 'tasks/import/types'
+require 'tasks/import/objects'
 namespace :import do
   desc 'import the legacy db data'
   task hotelbase: :environment do
@@ -205,45 +207,9 @@ namespace :import do
     end
 
 
-    Type.delete_all
-    Field.delete_all
+    import_types
+    #import_objects
 
-    hotel_type = Type.create(name: 'Hotel', slug: 'hotels', filter: 'Hotel');
-    SwPage.where("Rozdil = 357").each do |p|
-      subtype = hotel_type.children.create(slug: p.name)
-
-      [:ru, :ua, :en].each do |loc|
-        I18n.locale = loc == :ua ? :uk : loc
-        name = p.data.title(loc)
-        unless name.blank?
-          subtype.name = name
-          subtype.save!
-        end
-      end
-
-
-      I18n.locale = :uk
-      subtype.name = p.data.title(:ua)
-      subtype.save!
-
-    end
-
-    #hr 100, '#'
-    #HbObject.limit(20).each do |o|
-    #  puts "Object##{o.Id}    #{o.content.title('ru')} [#{o.slug}]"
-    #  puts "Profile:      hotels"
-    #  puts "Type:         recreation-centre"
-    #  puts "Properties:"
-    #  o.show_classes
-    #  o.hb_categories.each do |c|
-    #    pref = (c.profile.value.name rescue '') == 'rooms' ? 'room   ' : 'service'
-    #    puts "#{pref}       #{c.content.title 'ru'} /#{c.caption.value.name rescue ''}/ "
-    #    c.show_classes
-    #    hr 40, '`'
-    #  end
-    #  hr 50, '.'
-    #end
-    ###
 
 
   end
