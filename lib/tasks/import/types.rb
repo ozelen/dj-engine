@@ -11,12 +11,15 @@ namespace :import do
     end
   end
 
-  def import_type type_fields, type_id_legacy, field_category_ids_legacy
+  def import_type type_fields, type_ids_legacy, field_category_ids_legacy
     type = Type.create(type_fields);
-    SwPage.where("Rozdil = #{type_id_legacy}").each do |p|
-      subtype = type.children.create(slug: p.name)
-      localize subtype, p
+    type_ids_legacy.each do |type_id_legacy|
+      SwPage.where("Rozdil = #{type_id_legacy}").each do |p|
+        subtype = type.children.create(slug: p.name)
+        localize subtype, p
+      end
     end
+
 
     import_type_fields type, field_category_ids_legacy
   end
@@ -40,13 +43,13 @@ namespace :import do
     Field.delete_all
 
     # hotel type with fields
-    import_type({name: 'Hotel', slug: 'hotels', filter: 'Hotel'}, 357, [358, 360, 1017])
+    import_type({name: 'Hotel', slug: 'hotels', filter: 'Hotel'}, [357], [358, 360, 1017])
 
     # room type with fields
-    import_type({name: 'Room', slug: 'rooms', filter: 'Room'}, 378, [379, 381, 382, 383, 545, 1024, 1031, 1039, 1041, 1042])
+    import_type({name: 'Room', slug: 'rooms', filter: 'Room'}, [378], [379, 381, 382, 383, 545, 1024, 1031, 1039, 1041, 1042])
 
     # hotel type with fields
-    import_type({name: 'Service', slug: 'services', filter: 'Service'}, 357, [])
+    import_type({name: 'Service', slug: 'services', filter: 'Service'}, [432, 361], [])
   end
 
 end
