@@ -12,11 +12,4 @@ class Room < ActiveRecord::Base
 
   after_create :create_gallery
 
-  def create_gallery
-    unless self.gallery
-      self.gallery = Gallery.create
-      self.save!
-    end
-  end
-
 end

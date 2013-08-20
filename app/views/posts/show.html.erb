@@ -4,6 +4,8 @@
 
 <div><%= @post.teaser %></div>
 
+<%= render 'photos/dynamic_form', gallery: @post.gallery if @post.gallery %>
+
 <div class="content">
   <%= @post.content %>
 </div>

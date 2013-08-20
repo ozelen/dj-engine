@@ -40,6 +40,8 @@ class Hotel < ActiveRecord::Base
 
   acts_as_commentable
 
+  after_create :create_gallery
+  after_create :create_node
 
   def to_param
     self.node.name
