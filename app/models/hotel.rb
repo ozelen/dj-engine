@@ -1,5 +1,5 @@
 class Hotel < ActiveRecord::Base
-  has_one :node, as: :accessible, :dependent => :destroy
+  has_one :node, as: :accessible, dependent: :destroy#, after_add: :create_node #, before_destroy: :destroy_node
   belongs_to :city
   belongs_to :user
   belongs_to :type
@@ -28,7 +28,7 @@ class Hotel < ActiveRecord::Base
   accepts_nested_attributes_for :gallery, :photos, allow_destroy: true
 
 
-  attr_accessible :city_id, :description, :location, :name, :user_id, :ident, :type_id, :fields,
+  attr_accessible :city_id, :location, :user_id, :ident, :type_id, :fields,
                   :values_attributes, :node_attributes,
                   :rooms_attributes, :services_attributes,
                   :periods_attributes, :prices_attributes,
@@ -41,7 +41,6 @@ class Hotel < ActiveRecord::Base
   acts_as_commentable
 
   after_create :create_gallery
-  after_create :create_node
 
   def to_param
     self.node.name
@@ -57,6 +56,34 @@ class Hotel < ActiveRecord::Base
         errors.add value.field.name, "must not be blank"
       end
     end
+  end
+
+  def delete_node
+    node.destroy if node
+  end
+
+  def name
+    node.header
+  end
+
+  def name=(name)
+    node.header=name
+  end
+
+  def description
+    node.content
+  end
+
+  def description=(text)
+    node.content=text
+  end
+
+  def slug
+    node.name
+  end
+
+  def slug=(slug)
+    node.name=slug
   end
 
 end

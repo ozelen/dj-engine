@@ -58,6 +58,18 @@ namespace :import do
       self.page.data.title 'ru'
     end
 
+    def title loc
+      self.page.data.title loc
+    end
+
+    def info loc
+      self.page.data.content loc
+    end
+
+    def content_page name
+      page.children.select {|c| c.Name == name }[0]
+    end
+
     def content
       self.page.data
     end
@@ -72,9 +84,16 @@ namespace :import do
     def table
       'Objects'
     end
+
     def slug
       self.AccountCode
     end
+
+    # redefine method because object's info is in nested page
+    def info loc
+      content_page('info').data.content loc rescue ''
+    end
+
     set_table_name 'Objects'
     set_primary_key 'Id'
 
@@ -85,6 +104,7 @@ namespace :import do
     def table
       'Categories'
     end
+
     set_table_name 'Categories'
     set_primary_key 'Id'
 

@@ -12,9 +12,11 @@ namespace :import do
 
     def ru
       self.locale :ru
+      self
     end
     def ua
       self.locale :ua
+      self
     end
 
     def get_field loc, name
@@ -39,6 +41,10 @@ namespace :import do
     def page_data_class
     end
 
+    def page_class
+      self
+    end
+
     def data
       raw_data = self.page_data_class.where("PageId = #{self.id} ")
       res = PageData.new(raw_data)
@@ -52,6 +58,11 @@ namespace :import do
     def name
       self.Name
     end
+
+    def children
+      self.class.where("Rozdil = #{self.Id}")
+    end
+
   end
 
   class HbPage < ContentPage
