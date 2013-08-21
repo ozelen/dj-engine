@@ -5,9 +5,12 @@ class Room < ActiveRecord::Base
   has_many :periods, through: :prices
   has_many :tags, as: :taggable
   has_one :gallery, as: :imageable
+  has_many :values, as: :evaluated
 
   accepts_nested_attributes_for :gallery
-  attr_accessible :description, :hotel_id, :name, :price, :type_id, :gallery_attributes
+  accepts_nested_attributes_for :values, allow_destroy: true
+
+  attr_accessible :description, :hotel_id, :name, :price, :type_id, :gallery_attributes, :values_attributes
   translates :name, :description
 
   after_create :create_gallery

@@ -20,15 +20,41 @@
         Rooms:
         <ul>
           <% hotel.rooms.each do |room| %>
-              <li><%= room.name %> / <%= room.type.name %> / </li>
+              <li>
+                <%= room.name %> / <%= room.type.name %> /
+
+                Fields: <br>
+                <ul>
+                  <% hotel.fields.each do |field| %>
+                      <li><%= field.name %></li>
+                  <% end %>
+                </ul>
+
+              </li>
           <% end %>
         </ul>
         Services:
         <ul>
           <% hotel.services.each do |service| %>
-              <li><%= service.name %> / <%= service.type.name %> / </li>
+              <li>
+                <%= service.name %> / <%= service.type.name %> / <br>
+                Fields:
+                <ul>
+                  <% hotel.fields.each do |field| %>
+                      <li><%= field.name %></li>
+                  <% end %>
+                </ul>
+              </li>
           <% end %>
         </ul>
+
+        Fields: <br>
+        <ul>
+          <% hotel.fields.each do |field| %>
+              <li><%= field.name %></li>
+          <% end %>
+        </ul>
+
       </div>
 
   <% end %>

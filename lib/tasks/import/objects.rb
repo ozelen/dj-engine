@@ -9,9 +9,10 @@ namespace :import do
       puts "Object##{o.Id}     #{o.content.title('ru')} [#{o.slug}]"
       puts "Type:         #{o.new_class.name}" rescue nil
       puts "Profile:      #{o.new_prof.root.name}"
-      #puts "Properties:"
+      puts "Properties:   #{o.new_fields.inspect}"
 
       hotel = obj_create o
+      classify hotel, o.new_fields
 
       o.hb_categories.each do |c|
         pref = (c.profile.value.name rescue '') == 'rooms' ? 'room   ' : 'service'
@@ -20,6 +21,7 @@ namespace :import do
         new_category = obj_create c
         new_category.hotel_id = hotel.id
         new_category.save
+        classify new_category, c.new_fields
 
         c.show_classes
         hr 40, '`'
@@ -29,6 +31,11 @@ namespace :import do
     end
   end
 
+  def classify object, fields
+    fields.each do |field|
+      object.values.create(field_id: field.id)
+    end
+  end
 
   def obj_create legacy_object
     profile = ''

@@ -12,6 +12,16 @@ namespace :import do
     def classes
       ClassLink.where("OwnerId = #{self.Id} and OwnerTable = '#{self.table}'")
     end
+
+    def new_fields
+      fields = []
+      classes.each do |c|
+        field = Field.find_by_slug c.value.name
+        fields.push field if field
+      end
+      fields
+    end
+
     def show_classes
       I18n.locale = :uk
       classes.each do |c|
