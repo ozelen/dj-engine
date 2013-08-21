@@ -22,13 +22,8 @@
           <% hotel.rooms.each do |room| %>
               <li>
                 <%= room.name %> / <%= room.type.name %> /
-
-                Fields: <br>
-                <ul>
-                  <% hotel.fields.each do |field| %>
-                      <li><%= field.name %></li>
-                  <% end %>
-                </ul>
+                <br>
+                <%= render 'values/structured_list', valuable: room %>
 
               </li>
           <% end %>
@@ -38,22 +33,15 @@
           <% hotel.services.each do |service| %>
               <li>
                 <%= service.name %> / <%= service.type.name %> / <br>
-                Fields:
-                <ul>
-                  <% hotel.fields.each do |field| %>
-                      <li><%= field.name %></li>
-                  <% end %>
-                </ul>
+                <%= render 'values/structured_list', valuable: service %>
               </li>
           <% end %>
         </ul>
 
-        Fields: <br>
-        <ul>
-          <% hotel.fields.each do |field| %>
-              <li><%= field.name %></li>
-          <% end %>
-        </ul>
+        <br>
+
+        <%= render 'values/structured_list', valuable: hotel %>
+
 
       </div>
 

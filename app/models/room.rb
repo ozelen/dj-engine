@@ -5,7 +5,10 @@ class Room < ActiveRecord::Base
   has_many :periods, through: :prices
   has_many :tags, as: :taggable
   has_one :gallery, as: :imageable
+
   has_many :values, as: :evaluated
+  has_many :fields, through: :values
+  has_many :field_categories, through: :fields
 
   accepts_nested_attributes_for :gallery
   accepts_nested_attributes_for :values, allow_destroy: true

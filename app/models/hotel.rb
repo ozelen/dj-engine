@@ -11,6 +11,7 @@ class Hotel < ActiveRecord::Base
 
   has_many :values, as: :evaluated
   has_many :fields, through: :values
+  has_many :field_categories, through: :fields
 
   has_many :periods
   has_many :prices, through: :periods
