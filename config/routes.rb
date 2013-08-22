@@ -11,7 +11,6 @@ DjEngine::Application.routes.draw do
   scope "(:locale)", locale: /(en|uk|ru)/ do # /#{I18n.available_locales.join('|')}/ do
 
     resources :assignments
-    resources :tag_options
     resources :measures
     resources :measure_categories
     resources :values
@@ -44,6 +43,9 @@ DjEngine::Application.routes.draw do
       get 'albums/edit' => 'hotels#edit_albums'
       get 'reviews' => 'hotels#comments'
       get 'blog' => 'hotels#blog'
+      scope 'blog' do
+        get 'tags/:tag' => 'hotels#blog', as: :tag
+      end
       #get 'blog/:post_id' => 'hotels#show_post'
     end
 

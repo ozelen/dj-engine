@@ -7,6 +7,10 @@
       <%= post.comment_threads.count %> comments
     <% end %>
 
+    <p>
+      Tags: <%= raw post.tag_list.map { |t| link_to t, tag_path(post.channel, t) }.join(', ') %>
+    </p>
+
     <br>
 
       <%= link_to 'Edit post', edit_post_path(post), remote: true, class: 'btn btn-default' %>

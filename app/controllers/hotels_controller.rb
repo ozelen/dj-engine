@@ -25,7 +25,6 @@ class HotelsController < ApplicationController
   end
 
   def blog
-    @posts = @hotel.posts
   end
 
   def show_post
