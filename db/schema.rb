@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130818165236) do
+ActiveRecord::Schema.define(:version => 20130822133718) do
 
   create_table "assignments", :force => true do |t|
     t.integer  "user_id"
@@ -383,41 +383,6 @@ ActiveRecord::Schema.define(:version => 20130818165236) do
   end
 
   add_index "services", ["type_id"], :name => "index_services_on_type_id"
-
-  create_table "tag_categories", :force => true do |t|
-    t.integer  "parent_id"
-    t.string   "filter"
-    t.string   "name"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
-  create_table "tag_names", :force => true do |t|
-    t.integer  "tag_category_id"
-    t.string   "ident"
-    t.string   "name"
-    t.integer  "measure_category_id"
-    t.datetime "created_at",          :null => false
-    t.datetime "updated_at",          :null => false
-  end
-
-  create_table "tag_options", :force => true do |t|
-    t.integer  "tag_name_id"
-    t.string   "name"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
-  end
-
-  create_table "tags", :force => true do |t|
-    t.integer  "tag_name_id"
-    t.integer  "value_int"
-    t.integer  "measure_id"
-    t.float    "value_flt"
-    t.string   "value_str"
-    t.integer  "tag_option_id"
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
-  end
 
   create_table "type_translations", :force => true do |t|
     t.integer  "type_id"
