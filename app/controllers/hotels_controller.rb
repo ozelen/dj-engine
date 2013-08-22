@@ -59,6 +59,12 @@ class HotelsController < ApplicationController
     @hotel.user_id = current_user.id
     @hotel.type = Type.find_by_slug('hotels')
 
+    ip = Rails.env.development? ? '77.123.178.205' : request.remote_ip
+    @ip_location = Geocoder.search(ip)[0]
+    @hotel.location = Location.new
+    @hotel.location.latitude  = @ip_location.latitude
+    @hotel.location.longitude = @ip_location.longitude
+
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @hotel }
@@ -68,6 +74,14 @@ class HotelsController < ApplicationController
   # GET /hotels/1/edit
   def edit
     authorize! :manage, @hotel
+
+    unless @hotel.location
+      ip = Rails.env.development? ? '77.123.178.205' : request.remote_ip
+      @ip_location = Geocoder.search(ip)[0]
+      @hotel.location = Location.new
+      @hotel.location.latitude  = @ip_location.latitude
+      @hotel.location.longitude = @ip_location.longitude
+    end
   end
 
   # POST /hotels

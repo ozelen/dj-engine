@@ -20,6 +20,8 @@ class Hotel < ActiveRecord::Base
   has_many :photos, through: :gallery
   has_many :posts, as: :channel
 
+  has_one :location, as: :located
+
   accepts_nested_attributes_for :node, allow_destroy: true
   accepts_nested_attributes_for :values, allow_destroy: true
   accepts_nested_attributes_for :rooms, allow_destroy: true
@@ -27,13 +29,14 @@ class Hotel < ActiveRecord::Base
   accepts_nested_attributes_for :periods, allow_destroy: true
   accepts_nested_attributes_for :periods, :prices, allow_destroy: true
   accepts_nested_attributes_for :gallery, :photos, allow_destroy: true
-
+  accepts_nested_attributes_for :location, allow_destroy: true
 
   attr_accessible :city_id, :location, :user_id, :ident, :type_id, :fields,
                   :values_attributes, :node_attributes,
                   :rooms_attributes, :services_attributes,
                   :periods_attributes, :prices_attributes,
-                  :gallery_attributes, :photos_attributes
+                  :gallery_attributes, :photos_attributes,
+                  :location_attributes
 
   translates :name, :description
 

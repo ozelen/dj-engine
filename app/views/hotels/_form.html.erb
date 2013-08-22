@@ -1,5 +1,4 @@
 <%= form_for @hotel, :html => { :class => 'form-horizontal' } do |f| %>
-
     <%= f.fields_for :node do |node| %>
         <div class="form-group">
           <%= node.label :header, 'Hotel Name', :class => 'col-lg-3 control-label label-large' %>
@@ -22,6 +21,32 @@
         <%= f.select(:type_id, @hotel.type.collection_for_parent_select, {}, {class: 'form-control'}) %>
       </div>
     </div>
+
+    <%= f.fields_for :location do |l| %>
+      <div class="form-group">
+        <%= l.label :address, :class => 'control-label col-lg-3' %>
+        <div class="col-lg-9">
+          <%= l.text_field :address, id: 'address', class: 'form-control', 'data' => locations_search_path %>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-lg-3 control-label">Coordinates</label>
+        <div class="col-lg-4">
+          <%= l.label :latitude, :class => 'control-label' %>
+          <%= l.text_field :latitude, id: 'latitude', class: 'form-control', 'data' => locations_search_path %>
+        </div>
+        <div class="col-lg-5">
+          <%= l.label :longitude, :class => 'control-label' %>
+          <%= l.text_field :longitude, id: 'longitude', class: 'form-control', 'data' => locations_search_path %>
+        </div>
+      </div>
+    <div class="form-group">
+      <label class="col-lg-3 control-label">Map</label>
+      <div class="col-lg-9">
+        <div id="map-canvas" style="height: 300px"></div>
+      </div>
+    </div>
+    <% end %>
 
     <div class="form-group">
       <%= f.label :city_id, :class => 'control-label col-lg-3' %>

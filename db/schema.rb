@@ -148,22 +148,32 @@ ActiveRecord::Schema.define(:version => 20130822133718) do
     t.float    "location"
     t.integer  "city_id"
     t.integer  "user_id"
-    t.string   "ident"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
+    t.string   "ident"
     t.integer  "type_id"
   end
 
-  add_index "hotels", ["city_id"], :name => "index_hotels_on_city_id"
   add_index "hotels", ["type_id"], :name => "index_hotels_on_type_id"
-  add_index "hotels", ["user_id"], :name => "index_hotels_on_user_id"
+
+  create_table "locations", :force => true do |t|
+    t.string   "address"
+    t.float    "latitude"
+    t.float    "longitude"
+    t.integer  "located_id"
+    t.string   "located_type"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+  end
+
+  add_index "locations", ["located_id", "located_type"], :name => "index_locations_on_located_id_and_located_type"
 
   create_table "measure_categories", :force => true do |t|
     t.string   "name"
-    t.integer  "data_type"
+    t.integer  "data_type",  :limit => 255
     t.string   "filter"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
   end
 
   create_table "measure_category_translations", :force => true do |t|
@@ -232,6 +242,25 @@ ActiveRecord::Schema.define(:version => 20130822133718) do
 
   add_index "nodes", ["accessible_id", "accessible_type"], :name => "index_nodes_on_accessible_id_and_accessible_type"
 
+  create_table "people", :force => true do |t|
+    t.string   "email",                  :default => "", :null => false
+    t.string   "encrypted_password",     :default => "", :null => false
+    t.string   "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer  "sign_in_count",          :default => 0
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.string   "current_sign_in_ip"
+    t.string   "last_sign_in_ip"
+    t.datetime "created_at",                             :null => false
+    t.datetime "updated_at",                             :null => false
+    t.integer  "roles_mask"
+  end
+
+  add_index "people", ["email"], :name => "index_people_on_email", :unique => true
+  add_index "people", ["reset_password_token"], :name => "index_people_on_reset_password_token", :unique => true
+
   create_table "period_translations", :force => true do |t|
     t.integer  "period_id"
     t.string   "locale"
@@ -249,9 +278,9 @@ ActiveRecord::Schema.define(:version => 20130822133718) do
     t.string   "name"
     t.string   "description"
     t.integer  "order_position"
-    t.integer  "hotel_id"
     t.datetime "created_at",     :null => false
     t.datetime "updated_at",     :null => false
+    t.integer  "hotel_id"
   end
 
   create_table "photos", :force => true do |t|
@@ -263,6 +292,20 @@ ActiveRecord::Schema.define(:version => 20130822133718) do
   end
 
   add_index "photos", ["gallery_id"], :name => "index_photos_on_gallery_id"
+
+  create_table "pois", :force => true do |t|
+    t.string   "ident"
+    t.string   "title"
+    t.string   "name"
+    t.text     "content"
+    t.text     "teaser"
+    t.integer  "objective_id"
+    t.string   "objective_type"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+  end
+
+  add_index "pois", ["objective_id", "objective_type"], :name => "index_pois_on_objective_id_and_objective_type"
 
   create_table "post_translations", :force => true do |t|
     t.integer  "post_id"

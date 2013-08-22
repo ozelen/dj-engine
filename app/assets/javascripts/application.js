@@ -14,4 +14,5 @@
 //= require jquery_ujs
 //= require jquery-fileupload/basic
 //= require jquery.ui.datepicker
+//= require jquery.ui.autocomplete
 //= require_tree .
