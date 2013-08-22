@@ -427,6 +427,24 @@ ActiveRecord::Schema.define(:version => 20130822133718) do
 
   add_index "services", ["type_id"], :name => "index_services_on_type_id"
 
+  create_table "source_classes", :force => true do |t|
+    t.string   "name"
+    t.text     "description"
+    t.integer  "parent_id"
+    t.integer  "parent_class_id"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+  end
+
+  create_table "source_instances", :force => true do |t|
+    t.string   "name"
+    t.text     "description"
+    t.integer  "source_class_id"
+    t.integer  "parent_instance_id"
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
+  end
+
   create_table "type_translations", :force => true do |t|
     t.integer  "type_id"
     t.string   "locale"
