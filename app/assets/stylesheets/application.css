@@ -11,6 +11,7 @@
  *= require_self
  *= require initial
  *= require jquery.ui.datepicker
+ *= require jquery.ui.autocomplete
  *= require jquery.fileupload-ui
  *= require_tree .
 
