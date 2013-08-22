@@ -10,7 +10,7 @@ $("#address").autocomplete
           dataType: "json"
           data:
             maxRows: 12
-            name_startsWith: request.term
+            query: request.term
 
           success: (data) ->
             console.log data
@@ -60,14 +60,26 @@ initialize = ->
   )
   map
 
-
-
-google.maps.event.addDomListener window, "load", initialize if $('#map-canvas')[0]
-
-
-console.log map
+google.maps.event.addDomListener window, "load", initialize
 
 move_marker = ->
   pos = getLocationByForm()
   marker.setPosition pos
   map.panTo pos
+
+
+$ ->
+  if $('form#new_hotel')
+    $.ajax(
+        url: $("#address").attr "data"
+        dataType: "json"
+        data:
+          query: $("#address").attr "ip"
+        success: (data) ->
+          if item = data[0]
+            console.log data
+            $('#address').val(item.data.formatted_address)
+            $('#latitude').val(item.data.geometry.location.lat)
+            $('#longitude').val(item.data.geometry.location.lng)
+            move_marker()
+    )

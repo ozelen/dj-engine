@@ -6,12 +6,12 @@
 <div class="row">
   <% @hotels.each do |hotel| %>
 
-      <div class="hotel-item col-lg-6 clearfix">
+      <div class="hotel-item clearfix">
 
         <div class="caption">
           <h3><%= link_to hotel.node.header, node_path(hotel.node.name) %></h3>
           <div>
-            <%= hotel.type.name %>
+            <%= hotel.type.name rescue '' %>
           </div>
         </div>
       </div>
@@ -21,7 +21,7 @@
         <ul>
           <% hotel.rooms.each do |room| %>
               <li>
-                <%= room.name %> / <%= room.type.name %> /
+                <%= room.name %> / <%= room.type.name rescue '' %> /
                 <br>
                 <%= render 'values/structured_list', valuable: room %>
 
@@ -32,7 +32,7 @@
         <ul>
           <% hotel.services.each do |service| %>
               <li>
-                <%= service.name %> / <%= service.type.name %> / <br>
+                <%= service.name %> / <%= service.type.name rescue '' %> / <br>
                 <%= render 'values/structured_list', valuable: service %>
               </li>
           <% end %>
