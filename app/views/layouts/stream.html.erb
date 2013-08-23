@@ -1,0 +1,10 @@
+<% @stream ||= Stream.find_by_slug(params[:stream]) %>
+<% content_for :content do %>
+
+    <%= render 'streams/stream_header', active_item: controller_name.capitalize %>
+
+  <%= yield %>
+
+<% end %>
+
+<%= render template: "layouts/application" %>

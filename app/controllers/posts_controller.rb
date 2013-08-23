@@ -5,7 +5,7 @@ class PostsController < ApplicationController
     @posts = Post.all
 
     respond_to do |format|
-      format.html # index.html.erb
+      format.html { render layout: 'stream' if params[:stream] }
       format.json { render json: @posts }
     end
   end

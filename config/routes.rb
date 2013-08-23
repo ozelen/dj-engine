@@ -10,11 +10,12 @@ DjEngine::Application.routes.draw do
 
   scope "(:locale)", locale: /(en|uk|ru)/ do # /#{I18n.available_locales.join('|')}/ do
 
-    resources :assignments
     resources :measures
     resources :measure_categories
     resources :values
     resources :posts
+    resources :resorts
+    resources :streams
 
     post 'values/:id' => 'values#update'
 
@@ -25,6 +26,25 @@ DjEngine::Application.routes.draw do
     resources :comments
 
     resources :hotels do
+      resources :rooms do
+        resources :prices
+      end
+      resources :services
+      resources :periods
+      resources :prices
+      resources :galleries
+      resources :photos
+      resources :posts, only: :show
+    end
+
+    scope '(:stream)', stream: /#{Stream.all.map { |s| s.node.name }.join('|')}/ do
+      resources :hotels, only: :index
+      resources :resorts, only: :index
+      resources :posts
+      get 'blog' => 'streams#blog'
+    end
+
+    scope ':hotel_id', stream: /#{Hotel.all.map { |s| s.node.name }.join('|')}/ do
       resources :rooms do
         resources :prices
       end

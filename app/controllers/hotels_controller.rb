@@ -7,7 +7,7 @@ class HotelsController < ApplicationController
     @hotels = Hotel.all
 
     respond_to do |format|
-      format.html # index.html.erb
+      format.html { render layout: 'stream' if params[:stream] }
       format.json { render json: @hotels }
     end
   end
@@ -78,7 +78,6 @@ class HotelsController < ApplicationController
 
     respond_to do |format|
       if @hotel.save
-        @hotel.node = Node.new.create_from_accessible! params
         format.html { redirect_to @hotel, notice: 'Hotel was successfully created.' }
         format.json { render json: @hotel, status: :created, location: @hotel }
       else

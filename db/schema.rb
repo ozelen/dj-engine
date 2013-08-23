@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130822200144) do
+ActiveRecord::Schema.define(:version => 20130823141514) do
 
   create_table "assignments", :force => true do |t|
     t.integer  "user_id"
@@ -376,6 +376,12 @@ ActiveRecord::Schema.define(:version => 20130822200144) do
     t.datetime "updated_at",  :null => false
   end
 
+  create_table "resorts", :force => true do |t|
+    t.integer  "type_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "room_translations", :force => true do |t|
     t.integer  "room_id"
     t.string   "locale"
@@ -443,6 +449,11 @@ ActiveRecord::Schema.define(:version => 20130822200144) do
     t.integer  "parent_instance_id"
     t.datetime "created_at",         :null => false
     t.datetime "updated_at",         :null => false
+  end
+
+  create_table "streams", :force => true do |t|
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "taggings", :force => true do |t|
