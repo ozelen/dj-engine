@@ -2,7 +2,7 @@ class PostsController < ApplicationController
   # GET /posts
   # GET /posts.json
   def index
-    @posts = Post.all
+    @posts = params[:stream] ? Stream.find_by_slug(params[:stream]).posts : Post.all
 
     respond_to do |format|
       format.html { render layout: 'stream' if params[:stream] }
@@ -13,15 +13,17 @@ class PostsController < ApplicationController
   # GET /posts/1
   # GET /posts/1.json
   def show
-    @post = Post.find(params[:id])
+    id = params[:id] || params[:post_id]
+    @post = Post.find(id)
 
     if @post.channel
       layout = @post.channel_type.parameterize
       instance_variable_set "@#{layout}", @post.channel
-      render template: layout.pluralize + '/show_post'
+      render layout: layout
+      #render template: layout.pluralize + '/show_post'
     else
       respond_to do |format|
-        format.html
+        format.html { render layout: 'stream' if params[:stream] }
         format.json { render json: @post }
         format.js
       end

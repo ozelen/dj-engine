@@ -1,16 +1,9 @@
 <% content_for :content do %>
 
+  <%= render 'hotels/hotel_header', active_item: controller_name.capitalize %>
 
-<div class="span9">
-    <h1><%= @node.header %></h1>
-
-    <%= render 'layouts/hotel_header' %>
-
-    <div id="node_content">
-    <%= @node.content.html_safe %>
-    </div>
-
-</div>
+  <%= yield %>
 
 <% end %>
+
 <%= render template: "layouts/application" %>

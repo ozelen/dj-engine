@@ -3,6 +3,7 @@ class ResortsController < ApplicationController
   # GET /resorts.json
   def index
     @resorts = Resort.all
+    #@resorts = params[:stream] ? Resort.all : Stream.find_by_slug(params[:stream]).resorts
 
     respond_to do |format|
       format.html { render layout: 'stream' if params[:stream] }

@@ -1,6 +1,7 @@
-<% unless post.new_record? %>
+<% unless post.new_record? && post.id.blank? %>
   <%= content_tag_for :div, post do %>
-    <h3><%= link_to post.title, [@hotel, post] %></h3>
+    <% path = params[:stream] ? post_path(@stream, post) : [post.channel, post] %>
+    <h3><%= link_to post.title, path %></h3>
     <p><%= post.teaser %></p>
 
     <% unless post.comment_threads.blank? %>

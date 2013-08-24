@@ -15,7 +15,6 @@ DjEngine::Application.routes.draw do
     resources :values
     resources :posts
     resources :resorts
-    resources :streams
 
     post 'values/:id' => 'values#update'
 
@@ -37,23 +36,17 @@ DjEngine::Application.routes.draw do
       resources :posts, only: :show
     end
 
+    resources :streams do
+      resources :post, only: :show
+    end
     scope '(:stream)', stream: /#{Stream.all.map { |s| s.node.name }.join('|')}/ do
       resources :hotels, only: :index
       resources :resorts, only: :index
-      resources :posts
-      get 'blog' => 'streams#blog'
-    end
-
-    scope ':hotel_id', stream: /#{Hotel.all.map { |s| s.node.name }.join('|')}/ do
-      resources :rooms do
-        resources :prices
+      get 'blog' => 'streams#blog', as: :stream_blog
+      get 'posts/:post_id' => 'posts#show'
+      scope 'blog' do
+        get 'tags/:tag' => 'hotels#blog', as: :tag
       end
-      resources :services
-      resources :periods
-      resources :prices
-      resources :galleries
-      resources :photos
-      resources :posts, only: :show
     end
 
     scope 'hotels/:hotel_id' do
@@ -62,10 +55,11 @@ DjEngine::Application.routes.draw do
       get 'album' => 'hotels#album'
       get 'albums/edit' => 'hotels#edit_albums'
       get 'reviews' => 'hotels#comments'
-      get 'blog' => 'hotels#blog'
+      get 'blog' => 'hotels#blog', as: :blog
       scope 'blog' do
         get 'tags/:tag' => 'hotels#blog', as: :tag
       end
+      get 'posts/:post_id' => 'posts#show'
       #get 'blog/:post_id' => 'hotels#show_post'
     end
 
