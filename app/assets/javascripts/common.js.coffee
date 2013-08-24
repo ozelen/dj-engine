@@ -1,7 +1,4 @@
-#$.ajaxSetup
-#    beforeSend: (xhr) ->
-#      xhr.setRequestHeader "Accept", "application/json"
-#    cache: false
+$.ajaxSetup cache: false # work around Chrome not to show naked json on back/forward button
 
 $ ->
   initComponents = ->
