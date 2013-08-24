@@ -40,18 +40,18 @@ class PhotosController < ApplicationController
   # POST /photos
   # POST /photos.json
   def create
-    @photo = Photo.create(params[:photo])
-    #respond_to do |format|
-    #  format.js {
-    #    @photo = Photo.create(params[:photo])
-    #  }
-    #  format.html {
-    #    @photo = Photo.create(params[:photo])
-    #    @photo.save ?
-    #        redirect_to(@photo, notice: 'Photo was successfully created.') :
-    #        render(action: "new")
-    #  }
-    #end
+    #@photo = Photo.create(params[:photo])
+    respond_to do |format|
+      format.js {
+        @photo = Photo.create(params[:photo])
+      }
+      format.html {
+        @photo = Photo.create(params[:photo])
+        @photo.save ?
+            redirect_to(@photo, notice: 'Photo was successfully created.') :
+            render(action: "new")
+      }
+    end
   end
 
   # PUT /photos/1

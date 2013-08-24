@@ -18,4 +18,6 @@ class Room < ActiveRecord::Base
 
   after_create :create_gallery
 
+  acts_as_commentable
+
 end

@@ -90,4 +90,8 @@ class Hotel < ActiveRecord::Base
     node.name=slug
   end
 
+  def self.find_by_slug slug
+    Node.find_by_name(slug).accessible
+  end
+
 end

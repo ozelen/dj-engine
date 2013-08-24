@@ -87,5 +87,18 @@ DjEngine::Application.routes.draw do
     resources :nodes, only: [:index, :new, :create]
     resources :nodes, path: '', except: [:index, :new, :create]
 
+    match ':hotel_id/rooms' => 'rooms#index', as: :hotel_rooms
+    match ':hotel_id/rooms/:id' => 'rooms#show', as: :hotel_room
+    match ':hotel_id/services' => 'services#index', as: :hotel_services
+    match ':hotel_id/services/:id' => 'services#show', as: :hotel_service
+    match ':hotel_id/pricelist' => 'hotels#pricelist', as: :hotel_pricelist
+    match ':hotel_id/pricelist/edit' => 'hotels#edit_pricelist', as: :edit_hotel_pricelist
+    match ':hotel_id/album' => 'hotels#album', as: :hotel_album
+    match ':hotel_id/albums/edit' => 'hotels#edit_albums', as: :edit_hotel_albums
+    match ':hotel_id/comments' => 'hotels#comments', as: :hotel_comments
+    match ':hotel_id/blog' => 'hotels#blog', as: :hotel_blog
+    match ':hotel_id/contacts' => 'hotels#contacts', as: :hotel_contacts
+
+
   end
 end
