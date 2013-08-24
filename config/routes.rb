@@ -45,7 +45,7 @@ DjEngine::Application.routes.draw do
       get 'blog' => 'streams#blog', as: :stream_blog
       get 'posts/:post_id' => 'posts#show'
       scope 'blog' do
-        get 'tags/:tag' => 'hotels#blog', as: :tag
+        get 'tags/:tag' => 'streams#blog', as: :tag
       end
     end
 
@@ -56,9 +56,7 @@ DjEngine::Application.routes.draw do
       get 'albums/edit' => 'hotels#edit_albums'
       get 'reviews' => 'hotels#comments'
       get 'blog' => 'hotels#blog', as: :blog
-      scope 'blog' do
-        get 'tags/:tag' => 'hotels#blog', as: :tag
-      end
+
       get 'posts/:post_id' => 'posts#show'
       #get 'blog/:post_id' => 'hotels#show_post'
     end
@@ -79,7 +77,7 @@ DjEngine::Application.routes.draw do
     resources :users
     resource :user, :as => 'account'  # a convenience route
     match 'register' => 'users#new', :as => :signup
-    #match 'account' => 'users#edit', :as => :account
+    match 'account' => 'users#edit', :as => :account
 
     root :to => 'nodes#home'
 
@@ -97,6 +95,7 @@ DjEngine::Application.routes.draw do
     match ':hotel_id/albums/edit' => 'hotels#edit_albums', as: :edit_hotel_albums
     match ':hotel_id/comments' => 'hotels#comments', as: :hotel_comments
     match ':hotel_id/blog' => 'hotels#blog', as: :hotel_blog
+    match ':hotel_id/blog/tags/:tag' => 'hotels#blog', as: :tag
     match ':hotel_id/contacts' => 'hotels#contacts', as: :hotel_contacts
 
 
