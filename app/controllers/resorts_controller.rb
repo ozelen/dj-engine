@@ -1,6 +1,5 @@
 class ResortsController < ApplicationController
-  # GET /resorts
-  # GET /resorts.json
+  before_filter :find_resort, except: [:new, :create]
   def index
     @resorts = Resort.all
     #@resorts = params[:stream] ? Resort.all : Stream.find_by_slug(params[:stream]).resorts
@@ -14,8 +13,6 @@ class ResortsController < ApplicationController
   # GET /resorts/1
   # GET /resorts/1.json
   def show
-    @resort = Resort.find(params[:id])
-
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @resort }
@@ -26,7 +23,7 @@ class ResortsController < ApplicationController
   # GET /resorts/new.json
   def new
     @resort = Resort.new
-
+    @resort.node = Node.new
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @resort }
@@ -57,8 +54,6 @@ class ResortsController < ApplicationController
   # PUT /resorts/1
   # PUT /resorts/1.json
   def update
-    @resort = Resort.find(params[:id])
-
     respond_to do |format|
       if @resort.update_attributes(params[:resort])
         format.html { redirect_to @resort, notice: 'Resort was successfully updated.' }
@@ -73,7 +68,6 @@ class ResortsController < ApplicationController
   # DELETE /resorts/1
   # DELETE /resorts/1.json
   def destroy
-    @resort = Resort.find(params[:id])
     @resort.destroy
 
     respond_to do |format|
@@ -81,4 +75,13 @@ class ResortsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  def find_resort
+    id = params[:id] || params[:resort_id]
+    if id
+      @node = Node.find_by_name(id)
+      @resort = @node.accessible if id
+    end
+  end
+
 end

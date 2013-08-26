@@ -1,5 +1,7 @@
-<p id="notice"><%= notice %></p>
-
+<h1><%= @resort.node.header %></h1>
+<div class="content">
+  <%= @resort.node.content %>
+</div>
 
 <%= link_to 'Edit', edit_resort_path(@resort) %> |
 <%= link_to 'Back', resorts_path %>

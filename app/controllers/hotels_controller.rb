@@ -5,7 +5,6 @@ class HotelsController < ApplicationController
   # GET /hotels.json
   def index
     @hotels = Hotel.all
-
     respond_to do |format|
       format.html { render layout: 'stream' if params[:stream] }
       format.json { render json: @hotels }

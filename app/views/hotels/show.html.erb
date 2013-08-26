@@ -1,8 +1,6 @@
 <%- model_class = Hotel -%>
 <% title (@hotel.node.header + (@hotel.node.title ? ' &mdash; ' + @hotel.node.title : '')).html_safe + ' | Djerelo.Info' %>
 
-  <%= render partial: 'hotels/hotel_header', locals: {active_item: 'Info'} %>
-
 <div class="page-header">
   <h1>Info</h1>
 </div>

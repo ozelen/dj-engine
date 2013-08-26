@@ -1,5 +1,5 @@
 class StreamsController < ApplicationController
-  before_filter :find_srteam, except: [:new, :create]
+  before_filter :find_stream, except: [:new, :create]
   layout 'stream', only: [:blog, :show]
   # GET /streams
   # GET /streams.json
@@ -80,7 +80,7 @@ class StreamsController < ApplicationController
     end
   end
 
-  def find_srteam
+  def find_stream
     id = params[:stream] || params[:id] || params[:stream_id]
     if id
       @node = Node.find_by_name(id)

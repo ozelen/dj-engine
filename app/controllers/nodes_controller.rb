@@ -22,7 +22,7 @@ class NodesController < ApplicationController
     if @node.accessible
       layout = @node.accessible_type.parameterize
       instance_variable_set "@#{layout}", @node.accessible
-      render template: layout.pluralize + '/show'
+      render template: layout.pluralize + '/show', layout: layout
     else
       respond_to do |format|
         format.html # show.html.erb

@@ -1,7 +1,16 @@
+class SlugConstraint
+  def initialize type
+    @type = type
+  end
+
+  def matches? request
+    node = Node.find_by_name request[@type.parameterize]
+    node && node.accessible_type == @type ? true : false
+  end
+end
+
 DjEngine::Application.routes.draw do
-
-  get "locations/search" => "locations#search"
-
+  # users and authentications
   match '/auth/:provider/callback' => 'authentications#create'
   devise_for :users, :controllers => {
       :omniauth_callbacks => "users/omniauth_callbacks", registrations: 'registrations'
@@ -9,21 +18,40 @@ DjEngine::Application.routes.draw do
   resources :authentications
 
   scope "(:locale)", locale: /(en|uk|ru)/ do # /#{I18n.available_locales.join('|')}/ do
+    # homepage
+    root :to => 'nodes#home'
+    get 'home', :to => 'nodes#home'
 
+    # admin settings: types and measures
     resources :measures
     resources :measure_categories
     resources :values
-    resources :posts
-    resources :resorts
-
+    resources :types
     post 'values/:id' => 'values#update'
 
-    resources :types
-
+    # editor's interaction
+    resources :posts
     resources :galleries
     resources :photos
     resources :comments
 
+    # location and addresses
+    get "locations/search" => "locations#search"
+    resources :regions
+    resources :cities
+
+    # user sessions
+    resources :user_sessions
+    match 'login'  => "user_sessions#new",      as: :login
+    match 'logout' => "user_sessions#destroy",  as: :logout
+
+    # user's preferences
+    resources :users
+    resource :user, :as => 'account'  # a convenience route
+    match 'register' => 'users#new', :as => :signup
+    match 'account' => 'users#edit', :as => :account
+
+    # hotels
     resources :hotels do
       resources :rooms do
         resources :prices
@@ -36,18 +64,18 @@ DjEngine::Application.routes.draw do
       resources :posts, only: :show
     end
 
-    resources :streams do
-      resources :post, only: :show
-    end
-    scope '(:stream)', stream: /#{Stream.all.map { |s| s.node.name }.join('|')}/ do
-      resources :hotels, only: :index
-      resources :resorts, only: :index
-      get 'blog' => 'streams#blog', as: :stream_blog
-      get 'posts/:post_id' => 'posts#show'
-      scope 'blog' do
-        get 'tags/:tag' => 'streams#blog', as: :tag
-      end
-    end
+    match ':hotel_id/rooms' => 'rooms#index', as: :hotel_rooms
+    match ':hotel_id/rooms/:id' => 'rooms#show', as: :hotel_room
+    match ':hotel_id/services' => 'services#index', as: :hotel_services
+    match ':hotel_id/services/:id' => 'services#show', as: :hotel_service
+    match ':hotel_id/pricelist' => 'hotels#pricelist', as: :hotel_pricelist
+    match ':hotel_id/pricelist/edit' => 'hotels#edit_pricelist', as: :edit_hotel_pricelist
+    match ':hotel_id/album' => 'hotels#album', as: :hotel_album
+    match ':hotel_id/albums/edit' => 'hotels#edit_albums', as: :edit_hotel_albums
+    match ':hotel_id/comments' => 'hotels#comments', as: :hotel_comments
+    match ':hotel_id/blog' => 'hotels#blog', as: :hotel_blog, constraints: SlugConstraint.new('Hotel')
+    match ':hotel_id/blog/tags/:tag' => 'hotels#blog', as: :tag, constraints: SlugConstraint.new('Hotel')
+    match ':hotel_id/contacts' => 'hotels#contacts', as: :hotel_contacts
 
     scope 'hotels/:hotel_id' do
       get 'pricelist' => 'hotels#pricelist'
@@ -61,43 +89,30 @@ DjEngine::Application.routes.draw do
       #get 'blog/:post_id' => 'hotels#show_post'
     end
 
-    scope "(:whose)", scope: /(my|our)/ do
-      resources :hotels
+    # streams
+    get ':stream' => 'streams#show', constraints: SlugConstraint.new('Stream')
+    resources :streams do
+      resources :post, only: :show
     end
 
-    resources :regions
-    resources :cities
+    scope ':stream', constraints: SlugConstraint.new('Stream') do
+      resources :hotels, only: :index
+      get ':resorts' => 'resorts#index', as: :stream_resorts
+      get 'blog' => 'streams#blog', as: :stream_blog
+      get 'posts/:post_id' => 'posts#show'
+      scope 'blog' do
+        get 'tags/:tag' => 'streams#blog', as: :tag
+      end
+    end
 
-    get 'home', :to => 'nodes#home'
-
-    resources :user_sessions
-    match 'login'  => "user_sessions#new",      as: :login
-    match 'logout' => "user_sessions#destroy",  as: :logout
-
-    resources :users
-    resource :user, :as => 'account'  # a convenience route
-    match 'register' => 'users#new', :as => :signup
-    match 'account' => 'users#edit', :as => :account
-
-    root :to => 'nodes#home'
-
+    # resorts
+    resources :resorts
+    get 'resorts' => 'resorts#index', as: :resorts
+    match ':resort_id/hotels' => 'hotels#index', as: :resort_hotels, constraints: SlugConstraint.new('Resort')
 
     resources :nodes, only: [:index, :new, :create]
     resources :nodes, path: '', except: [:index, :new, :create]
 
-    match ':hotel_id/rooms' => 'rooms#index', as: :hotel_rooms
-    match ':hotel_id/rooms/:id' => 'rooms#show', as: :hotel_room
-    match ':hotel_id/services' => 'services#index', as: :hotel_services
-    match ':hotel_id/services/:id' => 'services#show', as: :hotel_service
-    match ':hotel_id/pricelist' => 'hotels#pricelist', as: :hotel_pricelist
-    match ':hotel_id/pricelist/edit' => 'hotels#edit_pricelist', as: :edit_hotel_pricelist
-    match ':hotel_id/album' => 'hotels#album', as: :hotel_album
-    match ':hotel_id/albums/edit' => 'hotels#edit_albums', as: :edit_hotel_albums
-    match ':hotel_id/comments' => 'hotels#comments', as: :hotel_comments
-    match ':hotel_id/blog' => 'hotels#blog', as: :hotel_blog
-    match ':hotel_id/blog/tags/:tag' => 'hotels#blog', as: :tag
-    match ':hotel_id/contacts' => 'hotels#contacts', as: :hotel_contacts
-
-
   end
 end
+

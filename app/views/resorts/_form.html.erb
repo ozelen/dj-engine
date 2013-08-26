@@ -1,15 +1,18 @@
-<%= form_for(@resort) do |f| %>
+<%= form_for @resort, html: { :class => 'form-horizontal' } do |f| %>
+
   <% if @resort.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@resort.errors.count, "error") %> prohibited this resort from being saved:</h2>
 
       <ul>
-      <% @resort.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
+        <% @resort.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
       </ul>
     </div>
   <% end %>
+
+  <%= render 'nodes/fields_for_accessible', f: f %>
 
   <div class="actions">
     <%= f.submit %>
