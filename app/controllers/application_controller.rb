@@ -41,7 +41,8 @@ class ApplicationController < ActionController::Base
   end
 
   def find_hotel
-    @hotel = Node.find_by_name(params[:hotel_id]).accessible
+    slug = params[:hotel_id] || params[:hotel]
+    @hotel = Node.find_by_name(slug).accessible
   end
 
 end

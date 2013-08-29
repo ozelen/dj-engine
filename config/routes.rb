@@ -18,40 +18,41 @@ DjEngine::Application.routes.draw do
   resources :authentications
 
   scope "(:locale)", locale: /(en|uk|ru)/ do # /#{I18n.available_locales.join('|')}/ do
-    # homepage
+    # Homepage
     root :to => 'nodes#home'
     get 'home', :to => 'nodes#home'
 
-    # admin settings: types and measures
+    # Admin settings: types and measures
     resources :measures
     resources :measure_categories
     resources :values
     resources :types
     post 'values/:id' => 'values#update'
 
-    # editor's interaction
+    # Editor's interaction
     resources :posts
     resources :galleries
     resources :photos
     resources :comments
 
-    # location and addresses
+    # Location and addresses
     get "locations/search" => "locations#search"
     resources :regions
     resources :cities
 
-    # user sessions
+    # User sessions
     resources :user_sessions
     match 'login'  => "user_sessions#new",      as: :login
     match 'logout' => "user_sessions#destroy",  as: :logout
 
-    # user's preferences
+    # User's preferences
     resources :users
     resource :user, :as => 'account'  # a convenience route
     match 'register' => 'users#new', :as => :signup
     match 'account' => 'users#edit', :as => :account
 
-    # hotels
+    # Hotels
+    # hotel controls
     resources :hotels do
       resources :rooms do
         resources :prices
@@ -64,51 +65,58 @@ DjEngine::Application.routes.draw do
       resources :posts, only: :show
     end
 
-    match ':hotel_id/rooms' => 'rooms#index', as: :hotel_rooms
-    match ':hotel_id/rooms/:id' => 'rooms#show', as: :hotel_room
-    match ':hotel_id/services' => 'services#index', as: :hotel_services
-    match ':hotel_id/services/:id' => 'services#show', as: :hotel_service
-    match ':hotel_id/pricelist' => 'hotels#pricelist', as: :hotel_pricelist
-    match ':hotel_id/pricelist/edit' => 'hotels#edit_pricelist', as: :edit_hotel_pricelist
-    match ':hotel_id/album' => 'hotels#album', as: :hotel_album
-    match ':hotel_id/albums/edit' => 'hotels#edit_albums', as: :edit_hotel_albums
-    match ':hotel_id/comments' => 'hotels#comments', as: :hotel_comments
-    match ':hotel_id/blog' => 'hotels#blog', as: :hotel_blog, constraints: SlugConstraint.new('Hotel')
-    match ':hotel_id/blog/tags/:tag' => 'hotels#blog', as: :tag, constraints: SlugConstraint.new('Hotel')
-    match ':hotel_id/contacts' => 'hotels#contacts', as: :hotel_contacts
-
-    scope 'hotels/:hotel_id' do
-      get 'pricelist' => 'hotels#pricelist'
-      get 'pricelist/edit' => 'hotels#edit_pricelist'
-      get 'album' => 'hotels#album'
-      get 'albums/edit' => 'hotels#edit_albums'
-      get 'reviews' => 'hotels#comments'
-      get 'blog' => 'hotels#blog', as: :blog
-
-      get 'posts/:post_id' => 'posts#show'
-      #get 'blog/:post_id' => 'hotels#show_post'
+    # shortcut to hotel by slug
+    get ':hotel_id'                    => 'hotels#show', constraints: SlugConstraint.new('Hotel'), as: :hotel
+    scope ':hotel', constraints: SlugConstraint.new('Hotel') do
+      match 'rooms'            => 'rooms#index',               as: :slug_hotel_rooms
+      match 'rooms/:id'        => 'rooms#show',                as: :slug_hotel_room
+      match 'services'         => 'services#index',            as: :slug_hotel_services
+      match 'services/:id'     => 'services#show',             as: :slug_hotel_service
+      match 'pricelist'        => 'hotels#pricelist',          as: :slug_hotel_pricelist
+      match 'pricelist/edit'   => 'hotels#edit_pricelist',     as: :slug_edit_hotel_pricelist
+      match 'album'            => 'hotels#album',              as: :slug_hotel_album
+      match 'albums/edit'      => 'hotels#edit_albums',        as: :slug_edit_hotel_albums
+      match 'comments'         => 'hotels#comments',           as: :slug_hotel_comments
+      match 'blog'             => 'hotels#blog',               as: :slug_hotel_blog
+      match 'posts/:post_id'   => 'posts#show',                as: :hotel_post
+      match 'blog/tags/:tag'   => 'hotels#blog',               as: :tag
+      match 'contacts'         => 'hotels#contacts',           as: :slug_hotel_contacts
     end
 
-    # streams
-    get ':stream' => 'streams#show', constraints: SlugConstraint.new('Stream')
+    scope 'hotels/:hotel_id' do
+      get 'pricelist/edit' => 'hotels#edit_pricelist'
+      get 'albums/edit' => 'hotels#edit_albums'
+      get 'posts/:post_id' => 'posts#show'
+      get 'blog/:post_id' => 'hotels#show_post'
+    end
+
+    # Streams
     resources :streams do
       resources :post, only: :show
     end
 
+    get ':stream' => 'streams#show', constraints: SlugConstraint.new('Stream')
+
     scope ':stream', constraints: SlugConstraint.new('Stream') do
       resources :hotels, only: :index
-      get ':resorts' => 'resorts#index', as: :stream_resorts
-      get 'blog' => 'streams#blog', as: :stream_blog
-      get 'posts/:post_id' => 'posts#show'
-      scope 'blog' do
-        get 'tags/:tag' => 'streams#blog', as: :tag
-      end
+      get 'resorts'         => 'resorts#index', as: :stream_resorts
+      get 'posts/:post_id'  => 'posts#show'
+      get 'blog'            => 'streams#blog', as: :stream_blog
+      get 'blog/tags/:tag'  => 'streams#blog', as: :tag
     end
 
-    # resorts
+    # Resorts
     resources :resorts
     get 'resorts' => 'resorts#index', as: :resorts
-    match ':resort_id/hotels' => 'hotels#index', as: :resort_hotels, constraints: SlugConstraint.new('Resort')
+    match ':resort'               => 'resorts#show',      as: :resort,          constraints: SlugConstraint.new('Resort')
+
+    scope ':resort', constraints: SlugConstraint.new('Resort') do
+      match 'hotels'        => 'resorts#hotels',    as: :resort_hotels
+      match 'blog'          => 'resorts#blog',      as: :resort_blog
+      match 'posts/:post_id'=> 'posts#show',        as: :resort_post
+      match 'album'         => 'resorts#album',     as: :resort_album
+      match 'comments'      => 'resorts#comments',  as: :resort_comments
+    end
 
     resources :nodes, only: [:index, :new, :create]
     resources :nodes, path: '', except: [:index, :new, :create]

@@ -1,6 +1,19 @@
+<% menu = [
+    ['Info',        hotel_path(@hotel),                                 -1 ],
+    ['Rooms',       slug_hotel_rooms_path(@hotel),              @hotel.rooms.count     ],
+    ['Services',    slug_hotel_services_path(@hotel),           @hotel.services.count  ],
+    ['Blog',        slug_hotel_blog_path(@hotel),               -1 ],
+    ['Photos',      slug_hotel_album_path(@hotel),              -1 ],
+    ['Prices',      slug_hotel_pricelist_path(@hotel),          -1 ],
+    ['Comments',    slug_hotel_comments_path(@hotel),           @hotel.comment_threads.count ],
+    ['Contacts',    '#',                                        -1 ]
+]
+   section = 'section'
+%>
+
 <% content_for :content do %>
 
-  <%= render 'hotels/hotel_header', active_item: controller_name.capitalize %>
+  <%= render 'layouts/visual_header', menu: menu, header: @hotel.node.header, section: section, title: @hotel.node.title %>
 
   <%= yield %>
 

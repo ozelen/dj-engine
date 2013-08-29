@@ -1,9 +1,8 @@
 <% title('Prices - ' + @hotel.node.header) %>
-<%= render 'hotels/hotel_header', active_item: 'Prices' %>
 
 <h1>Pricelist</h1>
 
-<%= link_to 'Edit room prices', pricelist_edit_path, class: 'btn btn-default pull-right' %>
+<%= link_to 'Edit room prices', pricelist_edit_path(@hotel), class: 'btn btn-default pull-right' %>
 <h3>Rooms</h3>
 
 <%= render 'table_pricelist' %>

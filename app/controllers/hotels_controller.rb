@@ -1,6 +1,6 @@
 class HotelsController < ApplicationController
   before_filter :find_hotel, except: [:new, :my, :index, :create, :new] # [:show, :edit, :update, :destroy, :pricelist, :edit_pricelist]
-
+  layout 'hotel', except: [:index, :new]
   # GET /hotels
   # GET /hotels.json
   def index
@@ -117,7 +117,7 @@ class HotelsController < ApplicationController
   end
 
   def find_hotel
-    id = params[:id] || params[:hotel_id]
+    id = params[:id] || params[:hotel_id] || params[:hotel]
     @node = Node.find_by_name(id)
     @hotel = @node.accessible if id
   end

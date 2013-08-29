@@ -1,17 +1,16 @@
 
-
 <div class="jumbotron">
-  <h1><%= @hotel.node.header %> <small><%= active_item == 'Info' ? (@hotel.type.name if @hotel.type) : ' / '+active_item %></small></h1>
+  <h1><%= header %> <small><%= section %></small></h1>
   <p>
-    <%= @hotel.node.title %>
+    <%= title %>
   </p>
 </div>
 
 
 <ul class="nav nav-pills hotel-menu">
 
-  <% hotel_menu.each do |item| %>
-    <li <%= 'class="active"'.html_safe if 'path' == item[1] %> ><a href="<%= item[1] %>">
+  <% menu.each do |item| %>
+    <li <%= 'class="active"'.html_safe if request.fullpath == item[1] %> ><a href="<%= item[1] %>">
       <% if item[2]>0 %>
         <span class="badge pull-right"><%= item[2] %></span>
       <% end %>

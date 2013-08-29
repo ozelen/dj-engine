@@ -1,12 +1,10 @@
 <%- model_class = Room -%>
 <% title 'Rooms, ' + @hotel.node.header %>
 
-<%= render partial: 'hotels/hotel_header', locals: {active_item: 'Rooms'} %>
-
 <% if can? :manage, @hotel %>
   <% if @rooms.blank? %><h3>No rooms in your hotel</h3><% end %>
   <div class="panel clearfix">
-    <%= link_to 'Create new  Room', new_hotel_room_path, :class => 'btn btn-primary btn-large btn-block pull-right' %>
+    <%= link_to 'Create new  Room', new_hotel_room_path(@hotel), :class => 'btn btn-primary btn-large btn-block pull-right' %>
   </div>
 <% end %>
 
@@ -14,7 +12,7 @@
     <div class="row">
     <% rooms.each do |room| %>
         <%= render( partial: 'hotels/item_thumbnail', locals: {
-                header:     link_to(room.name, hotel_room_path(@hotel, room)),
+                header:     link_to(room.name, slug_hotel_room_path(@hotel, room)),
                 teaser:     'Standard',
                 price:      room.price,
                 edit:       edit_hotel_room_path(room.hotel, room),

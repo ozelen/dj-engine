@@ -1,6 +1,7 @@
 class ServicesController < ApplicationController
   load_and_authorize_resource
   before_filter :find_hotel
+  layout 'hotel'
   # GET /services
   # GET /services.json
   def index

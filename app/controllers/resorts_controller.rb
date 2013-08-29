@@ -1,5 +1,6 @@
 class ResortsController < ApplicationController
   before_filter :find_resort, except: [:new, :create]
+  layout 'resort', only: [:show, :hotels, :blog, :album]
   def index
     @resorts = Resort.all
     #@resorts = params[:stream] ? Resort.all : Stream.find_by_slug(params[:stream]).resorts
@@ -8,6 +9,18 @@ class ResortsController < ApplicationController
       format.html { render layout: 'stream' if params[:stream] }
       format.json { render json: @resorts }
     end
+  end
+
+  def album
+  end
+
+  def hotels
+    @hotels = Hotel.all # TODO: resort hotels scope
+    render template: 'hotels/index'
+  end
+
+  def blog
+    @posts = @resort.posts
   end
 
   # GET /resorts/1
@@ -76,8 +89,10 @@ class ResortsController < ApplicationController
     end
   end
 
+private
+
   def find_resort
-    id = params[:id] || params[:resort_id]
+    id = params[:id] || params[:resort_id] || params[:resort]
     if id
       @node = Node.find_by_name(id)
       @resort = @node.accessible if id

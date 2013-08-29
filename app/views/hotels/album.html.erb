@@ -1,8 +1,5 @@
 <% title('Photos - ' + @hotel.node.header) %>
-<%= render 'hotels/hotel_header', active_item: 'Photos' %>
-
 
 <h1>Hotel Album</h1>
-
 
 <%= render 'photos/dynamic_form', gallery: @hotel.gallery %>

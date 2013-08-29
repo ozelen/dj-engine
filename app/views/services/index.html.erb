@@ -1,12 +1,10 @@
 <%- model_class = Service -%>
 
-<%= render partial: 'hotels/hotel_header', locals: {active_item: 'Services'} %>
-
 
     <% @services.each do |service| %>
 
     <%= render( partial: 'hotels/item_thumbnail', locals: {
-            header:     link_to(service.name, hotel_service_path(@hotel, service)),
+            header:     link_to(service.name, slug_hotel_service_path(@hotel, service)),
             teaser:     service.description,
             price:      service.price,
             edit:       edit_hotel_service_path(service.hotel, service),

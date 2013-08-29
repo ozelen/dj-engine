@@ -1,8 +1,23 @@
   <div id="file_<%= photo.id %>" class="col-lg-2 photo-item">
+    <span class="glyphicon glyphicon-ok">aa</span>
+    <div class="thumbnail" title="<%= photo.description %>">
+      <div class="btn-group" style="position: absolute;">
 
-    <a href="#" class="thumbnail" title="<%= photo.description %>">
+        <button class="btn btn-default btn-xs dropdown-toggle" style="opacity:0.4;" data-toggle="dropdown"><span class="caret"></span></button>
+          <ul class="dropdown-menu" role="menu">
+            <li><a href="#">Set as a title picture</a><span class="glyphicon glyphicon-ok"></span></li>
+            <li><a href="#">Set as a cover photo</a></li>
+            <li class="divider"></li>
+            <li><a href="#">Set photo description</a></li>
+            <li><a href="#">Delete</a></li>
+          </ul>
+
+
+      </div>
       <%= image_tag photo.image_url(:small).to_s %>
-    </a>
+    </div>
     <%# link_to "×", photo, class: 'close', method: :delete, remote: true, data: { confirm: 'Are you sure?' } %>
-
+    <button type="button" class="btn btn-default btn-xs">
+      <span class="glyphicon glyphicon-star"></span> Star
+    </button>
   </div>

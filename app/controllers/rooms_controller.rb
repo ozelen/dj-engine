@@ -1,6 +1,7 @@
 class RoomsController < ApplicationController
   #load_and_authorize_resource
   before_filter :find_hotel
+  layout 'hotel'#, except: [:edit, :update, :new, :create, :destroy]
 
   # GET /rooms
   # GET /rooms.json

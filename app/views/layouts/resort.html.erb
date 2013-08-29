@@ -1,14 +1,15 @@
 <% menu = [
-    ['Info',        node_path(@resort.node),          -1 ],
-    ['Hotels',      resort_hotels_path(@resort),       @resort.rooms.count     ],
-    ['Blog',        resort_blog_path(@resort),        -1 ],
-    ['Photos',      resort_album_path(@resort),       -1 ],
-    ['Comments',    resort_comments_path(@resort),     @resort.comment_threads.count ],
-] %>
+    ['Info',        resort_path,             -1 ],
+    ['Hotels',      resort_hotels_path,      -1 ],
+    ['Blog',        resort_blog_path,        -1 ],
+    ['Photos',      resort_album_path,       -1 ],
+    ['Comments',    resort_comments_path,     @resort.comment_threads.count ],
+]
+section = 'section'
+%>
 
 <% content_for :content do %>
-
-    <%= render 'visual_header', menu: menu %>
+  <%= render 'layouts/visual_header', menu: menu, header: @resort.node.header, section: section, title: @resort.node.title %>
 
   <%= yield %>
 
