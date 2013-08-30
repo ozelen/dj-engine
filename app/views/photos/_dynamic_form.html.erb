@@ -1,29 +1,50 @@
+<%
+  img = params[:photo_id] ? gallery.photos.select {|p| p.id == params[:photo_id].to_i}[0] : gallery.photos.first
+%>
+
+<div id="album"></div>
 <% if can? :manage, gallery.imageable %>
-<div class="well clearfix">
-
-
-
-  <%= form_for Photo.new do |f| %>
-    <div class="form-group">
-      <div class="col-lg-5">
-        <%= f.hidden_field :gallery_id, value: gallery.id %>
-        <%= f.file_field :image, multiple: true, class: 'form-control' %>
-      </div>
-      <div class="col-lg-7 progress-bar-div">
-        <div id="progress" class="progress">
-          <div class="progress-bar bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;"><span class="sr-only"></span></div>
+  <div class="well clearfix">
+    <%= form_for Photo.new do |f| %>
+      <div class="form-group">
+        <div class="col-lg-5">
+          <%= f.hidden_field :gallery_id, value: gallery.id %>
+          <%= f.file_field :image, multiple: true, class: 'form-control' %>
+        </div>
+        <div class="col-lg-7 progress-bar-div">
+          <div id="progress" class="progress">
+            <div class="progress-bar bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;"><span class="sr-only"></span></div>
+          </div>
         </div>
       </div>
-
-    </div>
-  <% end %>
-
-</div>
-
-
+    <% end %>
+  </div>
 
 <% end %>
 
 <div id="photos" class="clearfix">
   <%= render gallery.photos %>
 </div>
+
+<div>
+  <%= image_tag(img.image_url(:content, anchor: 'photos').to_s, class: 'img-rounded content-photo') if img %>
+</div>
+
+<hr>
+<%= form_for img do |f| %>
+  <div class="row">
+    <div class="col-lg-4">
+      <%= f.text_field :description, class: 'form-control', placeholder: 'Image description' %>
+    </div>
+    <div class="col-lg-4">
+      <%= f.text_field :mode_list, class: 'form-control' %>
+      Modes: <%= raw img.mode_list.map { |t| t }.join(', ') %>
+    </div>
+    <div class="col-lg-2">
+      <button class="btn btn-default">Save</button>
+    </div>
+  </div>
+<% end %>
+<hr>
+
+

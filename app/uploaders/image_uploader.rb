@@ -54,6 +54,11 @@ class ImageUploader < CarrierWave::Uploader::Base
     process thumbing: [300, 200]
   end
 
+  version :content do
+    process thumbing: [770, 500]
+    process :watermarking
+  end
+
   version :big do
     process :watermarking
   end

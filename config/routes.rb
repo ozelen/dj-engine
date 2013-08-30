@@ -74,7 +74,7 @@ DjEngine::Application.routes.draw do
       match 'services/:id'     => 'services#show',             as: :slug_hotel_service
       match 'pricelist'        => 'hotels#pricelist',          as: :slug_hotel_pricelist
       match 'pricelist/edit'   => 'hotels#edit_pricelist',     as: :slug_edit_hotel_pricelist
-      match 'album'            => 'hotels#album',              as: :slug_hotel_album
+      match 'album(/:photo_id)'=> 'hotels#album',              as: :album
       match 'albums/edit'      => 'hotels#edit_albums',        as: :slug_edit_hotel_albums
       match 'comments'         => 'hotels#comments',           as: :slug_hotel_comments
       match 'blog'             => 'hotels#blog',               as: :slug_hotel_blog
