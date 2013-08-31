@@ -1,0 +1,38 @@
+<div class="hotel-item clearfix">
+
+  <div class="caption">
+    <h3><%= link_to hotel.node.header, node_path(hotel.node.name) %></h3>
+    <div>
+      <%= hotel.type.name rescue '' %>
+    </div>
+  </div>
+</div>
+
+<div>
+  Rooms:
+  <ul>
+    <% hotel.rooms.each do |room| %>
+      <li>
+        <%= room.name %> / <%= room.type.name rescue '' %> /
+        <br>
+        <%= render 'values/structured_list', valuable: room %>
+
+      </li>
+    <% end %>
+  </ul>
+  Services:
+  <ul>
+    <% hotel.services.each do |service| %>
+      <li>
+        <%= service.name %> / <%= service.type.name rescue '' %> / <br>
+        <%= render 'values/structured_list', valuable: service %>
+      </li>
+    <% end %>
+  </ul>
+
+  <br>
+
+  <%= render 'values/structured_list', valuable: hotel %>
+
+
+</div>
