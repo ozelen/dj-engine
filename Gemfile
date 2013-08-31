@@ -51,3 +51,4 @@ gem 'rmagick'
 gem 'acts_as_commentable_with_threading'
 gem 'geocoder'
 gem 'acts-as-taggable-on'
+gem 'redcarpet' # markdown text

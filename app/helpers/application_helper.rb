@@ -24,6 +24,23 @@ module ApplicationHelper
     str + symbol * level
   end
 
+  def markdown(text)
+    options = {
+        hard_wrap: true,
+        filter_html: true,
+        autolink: true,
+        no_intraemphasis: true,
+        tables: true,
+        quote: true
+    }
+
+    markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML, options)
+    markdown.render(text).html_safe
+
+    #
+    #syntax_highlighter(Redcarpet.new(text, *options).to_html).html_safe
+  end
+
   #def channel_url
   #  channel = controller.controller_name.singularize
   #  comments_path(channel_type: channel, channel_id: controller.instance_variable_get("@#{channel}").node.name)
