@@ -10,6 +10,9 @@ class SlugConstraint
 end
 
 DjEngine::Application.routes.draw do
+
+
+
   # users and authentications
   match '/auth/:provider/callback' => 'authentications#create'
   devise_for :users, :controllers => {
@@ -118,9 +121,19 @@ DjEngine::Application.routes.draw do
       match 'comments'      => 'resorts#comments',  as: :resort_comments
     end
 
+    resources :tours
+    scope 'tours/:tour_id' do
+      match 'album(/:photo_id)' => 'tours#album',     as: :album
+      match 'comments'          => 'tours#comments',  as: :tour_comments
+      match 'hotels'            => 'tours#hotels',    as: :tour_hotels
+      match 'resorts'           => 'tours#resorts',   as: :tour_resorts
+      # TODO: match 'locations'   => 'tours#locations', as: :tour_comments
+      # TODO: match 'prices'      => 'tours#prices',    as: :prices
+    end
+
+
     resources :nodes, only: [:index, :new, :create]
     resources :nodes, path: '', except: [:index, :new, :create]
-
   end
 end
 

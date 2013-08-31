@@ -20,6 +20,9 @@ class Hotel < ActiveRecord::Base
   has_many :photos, through: :gallery
   has_many :posts, as: :channel
 
+  has_many :hotel_tour_assignments
+  has_many :tours, through: :hotel_tour_assignments
+
   has_one :location, as: :located
 
   accepts_nested_attributes_for :node, allow_destroy: true

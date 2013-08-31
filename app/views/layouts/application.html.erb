@@ -85,17 +85,20 @@
 
   <%= bootstrap_flash %>
 
+  <%= yield(:head) if content_for?(:head) %>
+
   <div class="row">
     <div class="col-lg-8">
       <%= content_for?(:content) ? yield(:content) : yield %>
     </div>
     <div class="col-lg-4">
 
-      <%= link_to "Sign in with Facebook", user_omniauth_authorize_path(:facebook) %> <br>
-      <%= link_to "Sign in with Vkontakte", user_omniauth_authorize_path(:vkontakte) %> <br>
-      <%= link_to "Sign in with Twitter", user_omniauth_authorize_path(:twitter) %>
-
       <%= yield(:sidebar) if content_for?(:sidebar) %>
+
+      <%= link_to "Sign in with Facebook",  user_omniauth_authorize_path(:facebook) %> <br>
+      <%= link_to "Sign in with Vkontakte", user_omniauth_authorize_path(:vkontakte) %> <br>
+      <%= link_to "Sign in with Twitter",   user_omniauth_authorize_path(:twitter) %>
+
     </div>
   </div>
 

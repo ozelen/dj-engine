@@ -38,9 +38,31 @@
 
 .visual-header {
   color: white;
+  background-position: left center;
+  background-repeat: no-repeat;
+  height: 320px;
   text-shadow:
-      -1px -1px 0 #000,
-      1px -1px 0 #000,
-      -1px 1px 0 #000,
-      1px 1px 0 #000;
+      -1px -1px 0 #333,
+      1px -1px  0 #333,
+      -1px 1px  0 #333,
+      1px 1px   0 #333;
+
+
+  h1 {
+    margin-left: -60px;
+    padding-left: 60px;
+    background-color:rgba(0,0,0,0.5);
+  }
+
+  .offer-bar {
+    border-radius: 6px;
+    background: #333;
+    height: 320px;
+    margin-bottom: 30px;
+    margin-left: -25px;
+    padding-left: 20px;
+    padding-top: 20px;
+    margin-top: 20px;
+  }
+
 }

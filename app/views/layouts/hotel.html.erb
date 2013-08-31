@@ -9,11 +9,13 @@
     ['Contacts',    '#',                                        -1 ]
 ]
    section = 'section'
+   cover_photo = @hotel.gallery.rand(:cover).image_url(:content) rescue nil
+
 %>
 
 <% content_for :content do %>
 
-  <%= render 'layouts/visual_header', menu: menu, header: @hotel.node.header, section: section, title: @hotel.node.title, cover: @hotel.gallery.rand(:cover).image_url(:content)%>
+  <%= render 'layouts/visual_header', menu: menu, header: @hotel.node.header, section: section, title: @hotel.node.title, cover: cover_photo%>
 
   <%= yield %>
 

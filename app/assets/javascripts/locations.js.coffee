@@ -60,7 +60,7 @@ initialize = ->
   )
   map
 
-google.maps.event.addDomListener window, "load", initialize
+google.maps.event.addDomListener window, "load", initialize if $("#map-canvas")[0]
 
 move_marker = ->
   pos = getLocationByForm()
@@ -69,7 +69,7 @@ move_marker = ->
 
 
 $ ->
-  if $('form#new_hotel')
+  if $('form#new_hotel')[0]
     $.ajax(
         url: $("#address").attr "data"
         dataType: "json"

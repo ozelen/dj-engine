@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130823141514) do
+ActiveRecord::Schema.define(:version => 20130831035506) do
 
   create_table "assignments", :force => true do |t|
     t.integer  "user_id"
@@ -129,6 +129,16 @@ ActiveRecord::Schema.define(:version => 20130823141514) do
   end
 
   add_index "galleries", ["imageable_id", "imageable_type"], :name => "index_galleries_on_imageable_id_and_imageable_type"
+
+  create_table "hotel_tour_assignments", :force => true do |t|
+    t.integer  "hotel_id"
+    t.integer  "tour_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "hotel_tour_assignments", ["hotel_id"], :name => "index_hotel_tour_assignments_on_hotel_id"
+  add_index "hotel_tour_assignments", ["tour_id"], :name => "index_hotel_tour_assignments_on_tour_id"
 
   create_table "hotel_translations", :force => true do |t|
     t.integer  "hotel_id"
@@ -376,6 +386,16 @@ ActiveRecord::Schema.define(:version => 20130823141514) do
     t.datetime "updated_at",  :null => false
   end
 
+  create_table "resort_tour_assignments", :force => true do |t|
+    t.integer  "resort_id"
+    t.integer  "tour_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "resort_tour_assignments", ["resort_id"], :name => "index_resort_tour_assignments_on_resort_id"
+  add_index "resort_tour_assignments", ["tour_id"], :name => "index_resort_tour_assignments_on_tour_id"
+
   create_table "resorts", :force => true do |t|
     t.integer  "type_id"
     t.datetime "created_at", :null => false
@@ -472,6 +492,17 @@ ActiveRecord::Schema.define(:version => 20130823141514) do
   create_table "tags", :force => true do |t|
     t.string "name"
   end
+
+  create_table "tours", :force => true do |t|
+    t.string   "slug"
+    t.string   "name"
+    t.text     "description"
+    t.integer  "user_id"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  add_index "tours", ["user_id"], :name => "index_tours_on_user_id"
 
   create_table "type_translations", :force => true do |t|
     t.integer  "type_id"

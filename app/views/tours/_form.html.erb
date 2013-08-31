@@ -1,0 +1,91 @@
+<%= form_for @tour, :html => { :class => 'form-horizontal' } do |f| %>
+
+  <% if @tour.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@tour.errors.count, "error") %> prohibited this tour from being saved:</h2>
+
+      <ul>
+      <% @tour.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= f.label :slug, class: 'form-label col-lg-2' %>
+    <div class=" col-lg-10">
+      <%= f.text_field :slug, class: 'form-control' %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :name, class: 'form-label col-lg-2' %>
+    <div class=" col-lg-10">
+      <%= f.text_field :name, class: 'form-control' %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :description, class: 'form-label col-lg-2' %>
+    <div class=" col-lg-10">
+      <%= f.text_area :description, class: 'form-control' %>
+    </div>
+  </div>
+  <fieldset>
+    <legend>Administrative Settings</legend>
+
+    <div class="form-group">
+      <%= f.label :user_id, :class => 'control-label col-lg-2' %>
+      <div class="col-lg-10">
+        <%= f.select :user_id, options_from_collection_for_select(current_user.users_available, :id, :name), {}, {class: 'form-control'} %>
+      </div>
+    </div>
+
+  </fieldset>
+
+  <!-- Resorts -->
+  <fieldset>
+
+    <legend>Resorts</legend>
+    <%= f.fields_for :resort_tour_assignments do |builder| %>
+      <%= render 'resort_tour_assignment_fields', f:builder, f_tour: f %>
+    <% end %>
+
+    <div class="row">
+      <div class="col-lg-10"></div>
+      <div class="col-lg-2">
+        <%= link_to_add_fields "Add a Resort", f, :resort_tour_assignments %>
+      </div>
+    </div>
+
+  </fieldset>
+
+
+
+
+  <!-- / Resorts -->
+
+  <!-- Hotels -->
+
+  <fieldset>
+    <legend>Hotels</legend>
+    <%= f.fields_for :hotel_tour_assignments do |builder| %>
+      <%= render 'hotel_tour_assignment_fields', f:builder %>
+    <% end %>
+
+    <div class="row">
+      <div class="col-lg-10"></div>
+      <div class="col-lg-2">
+        <%= link_to_add_fields "Add a Hotel", f, :hotel_tour_assignments %>
+      </div>
+    </div>
+
+  </fieldset>
+
+  <!-- / Hotels -->
+
+  <div class="btn-group">
+    <%= link_to 'Cancel', tour_path(@tour), class: 'btn btn-default' %>
+    <%= f.submit class: 'btn btn-success' %>
+  </div>
+
+<% end %>

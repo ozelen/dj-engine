@@ -1,13 +1,28 @@
+<% content_for :banner do %>
+  <div class="jumbotron" style="background-image: url(<%= cover %>);">
+    <h1><%= header %> <small><%= section %></small></h1>
+    <p>
+      <%= title %>
+    </p>
+  </div>
+<% end %>
 
-<div class="jumbotron visual-header" style="background-image: url(<%= cover %>); background-position: center">
-  <h1><%= header %> <small><%= section %></small></h1>
-  <p>
-    <%= title %>
-  </p>
+
+<div class="row visual-header clearfix">
+  <div class="col-lg-8">
+    <%= yield(:banner) %>
+  </div>
+  <div class="col-lg-4">
+    <div class="jumbotron offer-bar">
+      <h3>Book Now!</h3>
+      <p>
+        Super offer
+      </p>
+    </div>
+  </div>
 </div>
 
-
-<ul class="nav nav-pills hotel-menu">
+<ul class="nav nav-pills hotel-menu clearfix">
 
   <% menu.each do |item| %>
     <li <%= 'class="active"'.html_safe if request.fullpath == item[1] %> ><a href="<%= item[1] %>">
