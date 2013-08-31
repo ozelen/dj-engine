@@ -5,7 +5,7 @@
   <h1>Info</h1>
 </div>
 
-  <%= @hotel.node.content.html_safe if @hotel.node.content %>
+  <%= markdown @hotel.node.content if @hotel.node.content %>
 
 <% if can? :manage, @hotel %>
 <div class="form-actions pull-right clearfix btn-group">
