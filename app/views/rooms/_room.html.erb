@@ -1,0 +1,14 @@
+<div class="media">
+  <a class="pull-left" href="#">
+    <% img = (room.gallery.title.image_url(:thumb) rescue nil) %>
+    <%= image_tag(img, class: 'img-rounded ') if img %>
+  </a>
+  <div class="media-body">
+    <h3 class="media-heading">
+      <%= link_to room.name, slug_hotel_room_path(@hotel, room) %>
+    </h3>
+
+    Room description
+
+  </div>
+</div>

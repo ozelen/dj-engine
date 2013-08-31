@@ -8,19 +8,7 @@
   </div>
 <% end %>
 
-<% @rooms.in_groups_of 3 do |rooms| %>
-    <div class="row">
-    <% rooms.each do |room| %>
-        <%= render( partial: 'hotels/item_thumbnail', locals: {
-                header:     link_to(room.name, slug_hotel_room_path(@hotel, room)),
-                teaser:     'Standard',
-                price:      room.price,
-                edit:       edit_hotel_room_path(room.hotel, room),
-                destroy:    hotel_room_path(room.hotel, room)
-        }) if room %>
-    <% end %>
-    </div>
-<% end %>
+<%= render @rooms %>
 
 
 

@@ -3,7 +3,7 @@
     ['Rooms',       slug_hotel_rooms_path(@hotel),              @hotel.rooms.count     ],
     ['Services',    slug_hotel_services_path(@hotel),           @hotel.services.count  ],
     ['Blog',        slug_hotel_blog_path(@hotel),               -1 ],
-    ['Photos',      album_path(@hotel),                         -1 ],
+    ['Photos',      hotel_album_path(@hotel),                   -1 ],
     ['Prices',      slug_hotel_pricelist_path(@hotel),          -1 ],
     ['Comments',    slug_hotel_comments_path(@hotel),           @hotel.comment_threads.count ],
     ['Contacts',    '#',                                        -1 ]
@@ -13,12 +13,12 @@
 
 %>
 
-<% content_for :content do %>
-
+<% content_for :head do %>
   <%= render 'layouts/visual_header', menu: menu, header: @hotel.node.header, section: section, title: @hotel.node.title, cover: cover_photo%>
+<% end %>
 
+<% content_for :content do %>
   <%= yield %>
-
 <% end %>
 
 <%= render template: "layouts/application" %>

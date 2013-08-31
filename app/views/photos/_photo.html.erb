@@ -1,8 +1,18 @@
   <div id="file_<%= photo.id %>" class="photo-item">
     <div class="_thumbnail" title="<%= photo.description %>">
       <%# link_to "Delete", photo, method: :delete, remote: true, data: { confirm: 'Are you sure?' } %>
-      <% selected = (params[:photo_id] || photo.gallery.photos.first.id).to_i %>
-      <%= link_to image_tag(photo.image_url(:mini).to_s, class: 'img-rounded ' + (selected == photo.id ? 'active' : '')), album_path(photo.gallery.imageable, photo, anchor: 'album') %>
+      <%
+         selected = (params[:photo_id] || photo.gallery.photos.first.id).to_i
+         photo_path =
+             case photo.gallery.imageable.class.name
+               when 'Room'
+                 room_album_path(@hotel, @room, photo) # special workaround for room and other paths which must have additional variables in their routes (such as hotel slug)
+               else
+                 send("#{photo.gallery.imageable.class.name.parameterize}_album_path", photo.gallery.imageable, photo, anchor: 'album') rescue '#error'
+             end
+
+      %>
+      <%= link_to image_tag(photo.image_url(:mini).to_s, class: 'img-rounded ' + (selected == photo.id ? 'active' : '')), photo_path %>
 
     </div>
 

@@ -117,7 +117,7 @@ class HotelsController < ApplicationController
   end
 
   def find_hotel
-    id = params[:id] || params[:hotel_id] || params[:hotel]
+    id = params[:id] || params[:hotel_id] || params[:hotel_slug]
     @node = Node.find_by_name(id)
     @hotel = @node.accessible if id
   end

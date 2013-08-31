@@ -4,7 +4,6 @@
 <div class="page-header">
   <h1>Info</h1>
 </div>
-
   <%= markdown @hotel.node.content if @hotel.node.content %>
 
 <% if can? :manage, @hotel %>

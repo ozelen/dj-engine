@@ -4,7 +4,7 @@ class SlugConstraint
   end
 
   def matches? request
-    node = Node.find_by_name request[@type.parameterize]
+    node = Node.find_by_name request[@type.parameterize+'_slug']
     node && node.accessible_type == @type ? true : false
   end
 end
@@ -69,15 +69,16 @@ DjEngine::Application.routes.draw do
     end
 
     # shortcut to hotel by slug
-    get ':hotel_id'                    => 'hotels#show', constraints: SlugConstraint.new('Hotel'), as: :hotel
-    scope ':hotel', constraints: SlugConstraint.new('Hotel') do
+    get ':hotel_slug'          => 'hotels#show', constraints: SlugConstraint.new('Hotel'), as: :slug_hotel
+    scope ':hotel_slug', constraints: SlugConstraint.new('Hotel') do
       match 'rooms'            => 'rooms#index',               as: :slug_hotel_rooms
       match 'rooms/:id'        => 'rooms#show',                as: :slug_hotel_room
+      match 'rooms/:id/album(/:photo_id)'        => 'rooms#show',                as: :room_album
       match 'services'         => 'services#index',            as: :slug_hotel_services
       match 'services/:id'     => 'services#show',             as: :slug_hotel_service
       match 'pricelist'        => 'hotels#pricelist',          as: :slug_hotel_pricelist
       match 'pricelist/edit'   => 'hotels#edit_pricelist',     as: :slug_edit_hotel_pricelist
-      match 'album(/:photo_id)'=> 'hotels#album',              as: :album
+      match 'album(/:photo_id)'=> 'hotels#album',              as: :hotel_album
       match 'albums/edit'      => 'hotels#edit_albums',        as: :slug_edit_hotel_albums
       match 'comments'         => 'hotels#comments',           as: :slug_hotel_comments
       match 'blog'             => 'hotels#blog',               as: :slug_hotel_blog
@@ -98,9 +99,9 @@ DjEngine::Application.routes.draw do
       resources :post, only: :show
     end
 
-    get ':stream' => 'streams#show', constraints: SlugConstraint.new('Stream')
+    get ':stream_slug' => 'streams#show', constraints: SlugConstraint.new('Stream')
 
-    scope ':stream', constraints: SlugConstraint.new('Stream') do
+    scope ':stream_slug', constraints: SlugConstraint.new('Stream') do
       resources :hotels, only: :index
       get 'resorts'         => 'resorts#index', as: :stream_resorts
       get 'posts/:post_id'  => 'posts#show'
@@ -111,9 +112,9 @@ DjEngine::Application.routes.draw do
     # Resorts
     resources :resorts
     get 'resorts' => 'resorts#index', as: :resorts
-    match ':resort'               => 'resorts#show',      as: :resort,          constraints: SlugConstraint.new('Resort')
+    match ':resort_slug'    => 'resorts#show',      as: :resort,          constraints: SlugConstraint.new('Resort')
 
-    scope ':resort', constraints: SlugConstraint.new('Resort') do
+    scope ':resort_slug', constraints: SlugConstraint.new('Resort') do
       match 'hotels'        => 'resorts#hotels',    as: :resort_hotels
       match 'blog'          => 'resorts#blog',      as: :resort_blog
       match 'posts/:post_id'=> 'posts#show',        as: :resort_post
@@ -123,7 +124,7 @@ DjEngine::Application.routes.draw do
 
     resources :tours
     scope 'tours/:tour_id' do
-      match 'album(/:photo_id)' => 'tours#album',     as: :album
+      match 'album(/:photo_id)' => 'tours#album',     as: :tour_album
       match 'comments'          => 'tours#comments',  as: :tour_comments
       match 'hotels'            => 'tours#hotels',    as: :tour_hotels
       match 'resorts'           => 'tours#resorts',   as: :tour_resorts

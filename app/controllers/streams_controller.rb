@@ -81,7 +81,8 @@ class StreamsController < ApplicationController
   end
 
   def find_stream
-    id = params[:stream] || params[:id] || params[:stream_id]
+    id = params[:stream_id] || params[:stream_slug] || params[:id]
+    #render text: params; return
     if id
       @node = Node.find_by_name(id)
       @stream = @node.accessible if id
