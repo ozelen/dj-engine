@@ -13,8 +13,15 @@ class Type < ActiveRecord::Base
   translates :name
 
 
-  def collection_for_parent_select
-    ancestry_options(self.subtree.unscoped.arrange(:order => 'name')) {|i| "#{'-' * i.depth} #{i.name}" }
+  def collection_for_parent_select slug=nil
+    if slug
+      root = Type.find_by_slug(slug)
+      subtree = root.subtree
+    else
+      subtree = self.subtree.unscoped
+    end
+
+    ancestry_options(subtree.arrange(:order => 'name')) {|i| "#{'-' * i.depth} #{i.name}" }
   end
 
   def ancestry_options(items)

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130831035506) do
+ActiveRecord::Schema.define(:version => 20130901165059) do
 
   create_table "assignments", :force => true do |t|
     t.integer  "user_id"
@@ -554,8 +554,8 @@ ActiveRecord::Schema.define(:version => 20130831035506) do
   add_index "users", ["username"], :name => "index_users_on_username"
 
   create_table "values", :force => true do |t|
-    t.string   "field_id"
-    t.string   "measure_id"
+    t.integer  "field_id",       :limit => 255
+    t.integer  "measure_id",     :limit => 255
     t.string   "value_string"
     t.integer  "value_integer"
     t.float    "value_float"
@@ -563,8 +563,9 @@ ActiveRecord::Schema.define(:version => 20130831035506) do
     t.time     "value_time"
     t.integer  "evaluated_id"
     t.string   "evaluated_type"
-    t.datetime "created_at",     :null => false
-    t.datetime "updated_at",     :null => false
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
+    t.boolean  "value_boolean"
   end
 
   add_index "values", ["evaluated_id", "evaluated_type"], :name => "index_values_on_evaluated_id_and_evaluated_type"

@@ -1,33 +1,20 @@
 
 <%= render('types/fields_of_type_and_ancestors', type: type.parent, f: f, existed: existed) if type.parent %>
+<!-- TODO: group fields by categories -->
+
 <% type.fields.each do |field| %>
+
     <%= f.fields_for field do |fd| %>
-
             <%
-               new_object = fd.object.send(:values).klass.new
-               new_object.field = fd.object
-               #new_object.field_id = field.object.id
-               id = new_object.object_id
+               existing = f.object.values.select{|v| v if v.field_id == field.id }[0]
+               obj = existing || fd.object.values.new
+               obj.field = fd.object
+               id = obj.object_id
             %>
-            <%= f.fields_for(:values, new_object, child_index: id) do |val| %>
-                <% if !existed.include? val.object.field_id  %>
+            <%= f.fields_for(:values, obj, child_index: id) do |val| %>
 
-                <div class="form-group">
-                  <% req = field.required? ? '* ' : ''  %>
-                  <%= val.label :value_string, req + field.name, class: 'col-lg-3 control-label' %>
-                  <div class="col-lg-<%= field.measure_category.measures.blank? ? 9 : 6 %>">
-                    <%= val.text_field :value_string, class: 'form-control', placeholder: field.name %> <%= val.hidden_field :field_id %>
-                  </div>
+                <%= render 'types/field_form', field: field, val: val %>
 
-                  <% if !field.measure_category.measures.blank? %>
-                      <div class="col-lg-3">
-                        <%= val.select :measure_id, options_from_collection_for_select(field.measure_category.measures, :id, :name), {}, {class: "form-control"}  %>
-                      </div>
-                  <% end %>
-
-                </div>
-
-                <% end %>
             <% end %>
     <% end %>
 <% end %>
