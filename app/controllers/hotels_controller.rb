@@ -57,6 +57,7 @@ class HotelsController < ApplicationController
     @hotel.user_id = current_user.id
     @hotel.type = Type.find_by_slug('hotels')
     @hotel.location = Location.new
+    @hotel.address = Address.new
 
     respond_to do |format|
       format.html # new.html.erb

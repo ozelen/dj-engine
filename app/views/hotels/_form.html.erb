@@ -117,6 +117,14 @@
 
     </fieldset>
 
+  <fieldset>
+    <legend>Address</legend>
+    <%= f.fields_for :address do |builder| %>
+      <%= render 'addresses/form', f: builder %>
+    <% end %>
+  </fieldset>
+
+
     <fieldset>
       <legend>Actions</legend>
       <div class="form-group">
