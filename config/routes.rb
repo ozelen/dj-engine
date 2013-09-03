@@ -128,6 +128,7 @@ DjEngine::Application.routes.draw do
       match 'comments'          => 'tours#comments',  as: :tour_comments
       match 'hotels'            => 'tours#hotels',    as: :tour_hotels
       match 'resorts'           => 'tours#resorts',   as: :tour_resorts
+      match 'contacts'           => 'tours#contacts', as: :tour_contacts
       # TODO: match 'locations'   => 'tours#locations', as: :tour_comments
       # TODO: match 'prices'      => 'tours#prices',    as: :prices
     end

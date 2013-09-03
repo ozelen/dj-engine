@@ -59,6 +59,13 @@
 
   </fieldset>
 
+  <fieldset>
+    <legend>Contacts</legend>
+    <%= f.fields_for :address do |builder| %>
+      <%= render 'addresses/form', f:builder %>
+    <% end %>
+  </fieldset>
+
 
 
 

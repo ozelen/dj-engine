@@ -1,6 +1,10 @@
 class ToursController < ApplicationController
   layout 'tour', except: :index
   before_filter :find_tour, except: [:new, :create, :index]
+
+  def contacts
+  end
+
   def index
     @tours = Tour.all
 
@@ -25,6 +29,7 @@ class ToursController < ApplicationController
   # GET /tours/new.json
   def new
     @tour = Tour.new
+    @tour.address = Address.new
 
     respond_to do |format|
       format.html # new.html.erb

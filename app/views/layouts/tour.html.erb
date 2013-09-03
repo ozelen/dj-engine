@@ -2,8 +2,9 @@
     ['Description', tour_path(@tour),                 -1 ],
     ['Hotels',      tour_hotels_path(@tour),          -1 ],
     ['Resorts',     tour_resorts_path(@tour),         -1 ],
-    ['Photos',      album_path(@tour),                -1 ],
+    ['Photos',      tour_album_path(@tour),                -1 ],
     ['Comments',    tour_comments_path(@tour),        -1 ],
+    ['Contacts',    tour_contacts_path(@tour),        -1 ],
 ]
    section = 'section'
    cover_photo = @tour.gallery.rand(:cover).image_url(:content) rescue nil
