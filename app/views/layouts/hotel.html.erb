@@ -6,7 +6,7 @@
     ['Photos',      hotel_album_path(@hotel),                   -1 ],
     ['Prices',      slug_hotel_pricelist_path(@hotel),          -1 ],
     ['Comments',    slug_hotel_comments_path(@hotel),           @hotel.comment_threads.count ],
-    ['Contacts',    '#',                                        -1 ]
+    ['Contacts',    slug_hotel_contacts_path(@hotel),           -1 ]
 ]
    section = 'section'
    cover_photo = @hotel.gallery.rand(:cover).image_url(:content) rescue nil

@@ -41,8 +41,13 @@ marker = undefined
 getLocationByForm = ->
   new google.maps.LatLng($('#latitude').val(), $('#longitude').val())
 
+getLocationByAttributes = ->
+  new google.maps.LatLng($('#map-canvas').attr('lat'), $('#map-canvas').attr('lng'))
+
 initialize = ->
-  current_location = getLocationByForm()
+  div = $("#map-canvas")
+  edit_mode = !(div.attr('mode') == 'display')
+  current_location = if edit_mode then getLocationByForm() else getLocationByAttributes()
   options =
     zoom: 13
     mapTypeId: google.maps.MapTypeId.ROADMAP
@@ -50,7 +55,7 @@ initialize = ->
   map = new google.maps.Map(document.getElementById("map-canvas"), options)
   marker = new google.maps.Marker(
       map: map
-      draggable: true
+      draggable: edit_mode ? true : false
       animation: google.maps.Animation.DROP
       position: current_location
   )

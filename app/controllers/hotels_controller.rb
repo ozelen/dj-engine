@@ -11,6 +11,9 @@ class HotelsController < ApplicationController
     end
   end
 
+  def contacts
+  end
+
   def pricelist
   end
 
@@ -122,6 +125,5 @@ class HotelsController < ApplicationController
     @node = Node.find_by_name(id)
     @hotel = @node.accessible if id
   end
-
 
 end
