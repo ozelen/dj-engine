@@ -1,19 +1,7 @@
 <fieldset>
-  <legend>Properties</legend>
+  <legend>Amenities</legend>
 
   <% if evaluated.type %>
-
-      <% evaluated.values.each do |value| %>
-          <% if value.id %>
-              <div class="form-group">
-                  <label class="control-label col-lg-3"><%= value.field.name %></label>
-                  <div id="dynamic_value_<%= value.id %>" class="col-lg-9">
-                    <%= render 'values/show_value_item', value: value %>
-                  </div>
-              </div>
-          <% end %>
-      <% end %>
-
       <% existed = f.object.values.map{|v| v.field_id.to_i if v.id } %>
       <%= render partial: 'types/fields_of_type_and_ancestors', locals:{type: evaluated.type, f: f, existed: existed} %>
       </table>
