@@ -16,8 +16,10 @@ namespace :import do
     def new_fields
       fields = []
       classes.each do |c|
-        field = Field.find_by_slug c.value.name
-        fields.push field if field
+        if c.value
+          field = Field.find_by_slug c.value.name
+          fields.push field if field
+        end
       end
       fields
     end

@@ -4,15 +4,29 @@ namespace :import do
     I18n.locale = :uk
     hr 100, '#'
     # .where('id = 61') # bungalo
-    HbObject.limit(10).each do |o|
+    # ('Id >= 510 and Id <= 520')
+    HbObject.where('Id = 512').each do |o|
 
       puts "Object##{o.Id}     #{o.content.title('ru')} [#{o.slug}]"
-      puts "Type:         #{o.new_class.name}" rescue nil
-      puts "Profile:      #{o.new_prof.root.name}"
-      puts "Properties:   #{o.new_fields.inspect}"
+      puts "Type:         #{o.new_class.name}"      rescue nil
+      puts "Profile:      #{o.new_prof.root.name}"  rescue nil
+      puts "Properties:   #{o.new_fields.inspect}"  rescue nil
+
+      # photos path
+      object_photos_dir     = "public/uploads/legacy/#{o.Id}"
+      object_album_dir      = object_photos_dir+'/albums/album'
+      object_categories_dir = object_photos_dir+'/categories'
+
+      hotel_photos = images_in(object_album_dir)
 
       hotel = obj_create o
       classify hotel, o.new_fields
+
+      hotel_photos.each do |path|
+        file = File.open path
+        hotel.gallery.photos.new(image: file)
+      end
+      hotel.save
 
       o.hb_categories.each do |c|
         pref = (c.profile.value.name rescue '') == 'rooms' ? 'room   ' : 'service'
@@ -68,6 +82,17 @@ namespace :import do
     end
     new_object.save!
     new_object
+  end
+
+  def images_in directory
+    arr = []
+    if File.directory?(directory)
+      Dir.foreach(directory) do |dir|
+        f_path = "#{directory}/#{dir}/big.jpg"
+        arr.push f_path if File.exist?(f_path)
+      end
+    end
+    arr
   end
 
 end

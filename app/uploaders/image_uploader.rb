@@ -42,6 +42,9 @@ class ImageUploader < CarrierWave::Uploader::Base
   # end
 
   # Create different versions of your uploaded files:
+  version :origin_secret do
+  end
+
   version :mini do
      process thumbing: 50
   end
