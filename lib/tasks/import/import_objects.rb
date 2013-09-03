@@ -17,16 +17,10 @@ namespace :import do
       object_album_dir      = object_photos_dir+'/albums/album'
       object_categories_dir = object_photos_dir+'/categories'
 
-      hotel_photos = images_in(object_album_dir)
-
       hotel = obj_create o
       classify hotel, o.new_fields
 
-      hotel_photos.each do |path|
-        file = File.open path
-        hotel.gallery.photos.new(image: file)
-      end
-      hotel.save
+      import_images(hotel, object_album_dir)
 
       o.hb_categories.each do |c|
         pref = (c.profile.value.name rescue '') == 'rooms' ? 'room   ' : 'service'
@@ -82,6 +76,14 @@ namespace :import do
     end
     new_object.save!
     new_object
+  end
+
+  def import_images dir, obj
+    images_in(dir).each do |path|
+      file = File.open path
+      obj.gallery.photos.new(image: file)
+    end
+    obj.save
   end
 
   def images_in directory
