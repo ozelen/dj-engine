@@ -5,6 +5,7 @@ class ApplicationController < ActionController::Base
   helper_method :is_editing?
 
   before_filter :set_locale
+  before_filter :find_stream
 
   private
 
@@ -43,6 +44,17 @@ class ApplicationController < ActionController::Base
   def find_hotel
     slug = params[:hotel_id] || params[:hotel_slug]
     @hotel = Node.find_by_name(slug).accessible
+  end
+
+  def find_stream
+    @stream ||= nil
+    @all_streams = Stream.all
+    id = params[:stream_slug]
+    if id
+      node = Node.find_by_name(id)
+      @stream = node.accessible if id
+    end
+    @stream
   end
 
 end

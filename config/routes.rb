@@ -99,7 +99,7 @@ DjEngine::Application.routes.draw do
       resources :post, only: :show
     end
 
-    get ':stream_slug' => 'streams#show', constraints: SlugConstraint.new('Stream')
+    get ':stream_slug' => 'streams#show', constraints: SlugConstraint.new('Stream'), as: :stream_slug
 
     scope ':stream_slug', constraints: SlugConstraint.new('Stream') do
       resources :hotels, only: :index
