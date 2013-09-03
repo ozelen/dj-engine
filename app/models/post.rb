@@ -2,7 +2,7 @@ class Post < ActiveRecord::Base
   belongs_to :user
   belongs_to :channel, polymorphic: true
   has_one :gallery, as: :imageable
-  attr_accessible :channel_id, :channel_type, :content, :slug, :teaser, :title, :tag_list
+  attr_accessible :channel_id, :channel_type, :content, :slug, :teaser, :title, :tag_list, :portal_list
   translates :content, :teaser, :title
   after_create :create_gallery
 

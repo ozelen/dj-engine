@@ -17,7 +17,7 @@ namespace :import do
 
     #import_types
     #import_objects
-    import_news
+    #import_news
 
   end
 end
