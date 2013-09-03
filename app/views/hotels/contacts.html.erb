@@ -1,14 +1,19 @@
-<% adr = @hotel.address %>
+<%
+   adr = @hotel.address
+   phone_list = [adr.phone1, adr.phone2, adr.phone3].select{|x| x if x.present? }.join(', ')
+%>
 
 <h1>Address</h1>
 
 <address>
   <strong><%= @hotel.name %></strong> <br>
-  <%= @hotel.location.address %> <br>
   <%= adr.address %> <br>
-  Phones: <%= [adr.phone1, adr.phone2, adr.phone3].select{|x| x if x.present? }.join(', ') %> <br>
+  <% if phone_list.present? %>  Phones: <%= phone_list %> <br> <% end %>
   <% if adr.fax.present?     %> FAX: <%= adr.fax %> <br> <% end %>
   <% if adr.skype.present?   %> Skype: <%= adr.skype %> <br> <% end %>
   <% if adr.website.present? %> <%= link_to 'Website', adr.website, target: :_blank %> <br> <% end %>
 </address>
-<div id="map-canvas" style="height: 300px" lat="<%= @hotel.location.latitude %>" lng="<%= @hotel.location.longitude %>" mode="display" ></div>
+<% if @hotel.location %>
+  <%= @hotel.location.address %> <br>
+  <div id="map-canvas" style="height: 300px" lat="<%= @hotel.location.latitude %>" lng="<%= @hotel.location.longitude %>" mode="display" ></div>
+<% end %>
