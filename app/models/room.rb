@@ -1,12 +1,12 @@
 class Room < ActiveRecord::Base
   belongs_to :hotel
   belongs_to :type
-  has_many :prices
+  has_many :prices, dependent: :destroy
   has_many :periods, through: :prices
   has_many :tags, as: :taggable
-  has_one :gallery, as: :imageable
+  has_one :gallery, as: :imageable, dependent: :destroy
 
-  has_many :values, as: :evaluated
+  has_many :values, as: :evaluated, dependent: :destroy
   has_many :fields, through: :values
   has_many :field_categories, through: :fields
 

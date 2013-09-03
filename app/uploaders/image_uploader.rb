@@ -7,6 +7,10 @@ class ImageUploader < CarrierWave::Uploader::Base
     File.delete path if version_name.blank?
   end
 
+  def filename
+    obj = model.gallery.imageable
+    "#{obj.class.name.parameterize}_#{obj.id}.#{model.image.file.extension}" if original_filename
+  end
 
   # Include RMagick or MiniMagick support:
   include CarrierWave::RMagick
@@ -58,12 +62,24 @@ class ImageUploader < CarrierWave::Uploader::Base
   end
 
   version :content do
-    process thumbing: [770, 500]
+    process reducing: [770, 500]
+    process :watermarking
+  end
+
+  version :cover do
+    process reducing: [770, 320]
     process :watermarking
   end
 
   version :big do
     process :watermarking
+  end
+
+  def reducing val1, val2=nil
+    val2 ||= val1
+    manipulate! format: "jpg" do |source|
+      source = source.resize_to_fit val1, val2
+    end
   end
 
   def thumbing val1, val2=nil

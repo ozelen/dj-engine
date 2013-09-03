@@ -30,8 +30,10 @@ namespace :import do
         new_category.hotel_id = hotel.id
         new_category.save
         classify new_category, c.new_fields
-
         c.show_classes
+
+        category_album_dir = object_categories_dir+"/#{c.Id}/album"
+        import_images(new_category, category_album_dir)
         hr 40, '`'
       end
 
@@ -78,7 +80,7 @@ namespace :import do
     new_object
   end
 
-  def import_images dir, obj
+  def import_images obj, dir
     images_in(dir).each do |path|
       file = File.open path
       obj.gallery.photos.new(image: file)

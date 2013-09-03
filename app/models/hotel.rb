@@ -3,27 +3,25 @@ class Hotel < ActiveRecord::Base
   belongs_to :city
   belongs_to :user
   belongs_to :type
-  has_many :values, as: :evaluated
-  has_many :rooms
-  has_many :services
-  has_many :tags, as: :taggable
-  has_many :assignments, as: :assigned
+  has_many :values,     as: :evaluated
+  has_many :rooms,      dependent: :destroy
+  has_many :services,   dependent: :destroy
 
-  has_many :values, as: :evaluated
+  has_many :values, as: :evaluated, dependent: :destroy
   has_many :fields, through: :values
   has_many :field_categories, through: :fields
 
-  has_many :periods
+  has_many :periods, dependent: :destroy
   has_many :prices, through: :periods
 
-  has_one :gallery, as: :imageable
+  has_one :gallery, as: :imageable, dependent: :destroy
   has_many :photos, through: :gallery
-  has_many :posts, as: :channel
+  has_many :posts, as: :channel, dependent: :destroy
 
-  has_many :hotel_tour_assignments
+  has_many :hotel_tour_assignments, dependent: :destroy
   has_many :tours, through: :hotel_tour_assignments
 
-  has_one :location, as: :located
+  has_one :location, as: :located, dependent: :destroy
 
   accepts_nested_attributes_for :node, allow_destroy: true
   accepts_nested_attributes_for :values, allow_destroy: true
