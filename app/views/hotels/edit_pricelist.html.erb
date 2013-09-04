@@ -11,9 +11,7 @@
     <div class="row period-list pull-right">
       <%= link_to_add_fields "Add new period", f, :periods %>
       <%= f.submit nil, :class => 'btn btn-success' %>
-      <%= link_to 'Cancel', pricelist_path, class: 'btn btn-default' %>
+      <%= link_to 'Cancel', slug_hotel_pricelist_path(@hotel), class: 'btn btn-default' %>
     </div>
-
-
 
 <% end %>
