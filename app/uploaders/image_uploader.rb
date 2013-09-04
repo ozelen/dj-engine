@@ -67,7 +67,7 @@ class ImageUploader < CarrierWave::Uploader::Base
   end
 
   version :cover do
-    process reducing: [770, 320]
+    process thumbing: [770, 320]
     process :watermarking
   end
 

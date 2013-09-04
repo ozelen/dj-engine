@@ -20,7 +20,7 @@ namespace :import do
       hotel = obj_create o
       classify hotel, o.new_fields
 
-      import_images(hotel, object_album_dir)
+      import_images(hotel, object_album_dir, find_gallery(o, 'Objects'))
 
       o.hb_categories.each do |c|
         pref = (c.profile.value.name rescue '') == 'rooms' ? 'room   ' : 'service'
@@ -33,7 +33,7 @@ namespace :import do
         c.show_classes
 
         category_album_dir = object_categories_dir+"/#{c.Id}/album"
-        import_images(new_category, category_album_dir)
+        import_images(new_category, category_album_dir, find_gallery(c, 'Categories'))
         hr 40, '`'
       end
 
@@ -80,10 +80,16 @@ namespace :import do
     new_object
   end
 
-  def import_images obj, dir
+  def find_gallery legacy_object, object_type
+    LegacyGalleries.where("OwnerId = #{legacy_object.Id} and OwnerTable = '#{object_type}'")[0]
+  end
+
+  def import_images obj, dir, gallery=nil
+
     images_in(dir).each do |path|
-      file = File.open path
-      obj.gallery.photos.new(image: file)
+      tags = (gallery.present? and gallery.TitleImage == path[1]) ? 'title, cover' : nil
+      file = File.open path[0]
+      obj.gallery.photos.new(image: file, mode_list: tags)
     end
     obj.save
   end
@@ -93,7 +99,7 @@ namespace :import do
     if File.directory?(directory)
       Dir.foreach(directory) do |dir|
         f_path = "#{directory}/#{dir}/big.jpg"
-        arr.push f_path if File.exist?(f_path)
+        arr.push [f_path, dir] if File.exist?(f_path)
       end
     end
     arr
