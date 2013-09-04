@@ -7,6 +7,7 @@ namespace :import do
     require 'tasks/import/models/classifications'
     require 'tasks/import/models/objects'
     require 'tasks/import/models/news'
+    require 'tasks/import/models/images'
     require 'tasks/import/helpers'
     require 'tasks/import/import_types'
     require 'tasks/import/import_objects'
