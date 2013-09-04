@@ -34,6 +34,10 @@ namespace :import do
       end
     end
 
+    def location
+      LegacyLocations.where("OwnerId = #{self.id} and OwnerTable = 'Objects'")[0]
+    end
+
     def type
       self.classes.select{|c| c.TypeOf==self.table }[0]
     end
@@ -106,6 +110,14 @@ namespace :import do
       content_page('info').data.content loc rescue ''
     end
 
+    def contacts loc
+      content_page('contacts').data.content loc rescue ''
+    end
+
+    def periods
+      LegacyPeriods.where("ObjId = #{self.Id}")
+    end
+
     set_table_name 'Objects'
     set_primary_key 'Id'
 
@@ -125,6 +137,40 @@ namespace :import do
     def console_title
       "[#{self.id}] #{self.name} /#{self.typical_name}/ [#{self.profile_name}]"
     end
+
+    def prices
+      LegacyPrices.where("CatId = #{self.Id}")
+    end
   end
   ###
+
+  class LegacyLocations < HotelBase
+    set_table_name 'Locations'
+
+  end
+
+  class LegacyPeriods < HotelBase
+    set_table_name 'Periods'
+
+    def since
+      self.Begin
+    end
+
+    def till
+      self.End
+    end
+  end
+
+  class LegacyPrices < HotelBase
+    set_table_name 'Prices'
+
+    def by_period period_id
+      self.where("PerId = #{period_id}")
+    end
+
+    def by_category category_id
+      self.where("CatId = #{category_id}")
+    end
+  end
+
 end

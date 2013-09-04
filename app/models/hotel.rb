@@ -11,7 +11,7 @@ class Hotel < ActiveRecord::Base
   has_many :fields, through: :values
   has_many :field_categories, through: :fields
 
-  has_many :periods, dependent: :destroy
+  has_many :periods, dependent: :destroy, dependent: :destroy
   has_many :prices, through: :periods
 
   has_one :gallery, as: :imageable, dependent: :destroy

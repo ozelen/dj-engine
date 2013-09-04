@@ -3,7 +3,7 @@
    phone_list = [adr.phone1, adr.phone2, adr.phone3].select{|x| x if x.present? }.join(', ')
 %>
 
-<h1>Address</h1>
+<h1>Contacts</h1>
 
 <address>
   <strong><%= @hotel.name %></strong> <br>
@@ -12,6 +12,7 @@
   <% if adr.fax.present?     %> FAX: <%= adr.fax %> <br> <% end %>
   <% if adr.skype.present?   %> Skype: <%= adr.skype %> <br> <% end %>
   <% if adr.website.present? %> <%= link_to 'Website', adr.website, target: :_blank %> <br> <% end %>
+  <% if adr.email.present? %> <%= mail_to adr.email %> <br> <% end %>
 </address>
 <% if @hotel.location %>
   <%= @hotel.location.address %> <br>

@@ -20,6 +20,8 @@ namespace :import do
       hotel = obj_create o
       classify hotel, o.new_fields
 
+      periods_index = import_periods!(hotel, o)
+
       import_images(hotel, object_album_dir, find_gallery(o, 'Objects'))
 
       o.hb_categories.each do |c|
@@ -31,6 +33,8 @@ namespace :import do
         new_category.save
         classify new_category, c.new_fields
         c.show_classes
+
+        import_prices(new_category, c, periods_index)
 
         category_album_dir = object_categories_dir+"/#{c.Id}/album"
         import_images(new_category, category_album_dir, find_gallery(c, 'Categories'))
@@ -51,7 +55,22 @@ namespace :import do
     profile = ''
     if legacy_object.instance_of? HbObject
       slug = legacy_object.AccountCode.blank? ? legacy_object.Id : legacy_object.AccountCode
-      new_object = Hotel.create!(node_attributes: {name: slug})
+      # TODO: substitute escapeHTML to sanitize after migration on rails 4
+      location = legacy_object.location
+      location_attributes = location ? {
+          latitude:  location.lat,
+          longitude: location.lng
+      } : {}
+      new_object = Hotel.create!(
+          node_attributes: {name: slug},
+          address_attributes: {
+              email: legacy_object.Email,
+              phone1: legacy_object.Mob,
+              phone2: legacy_object.Phones
+          },
+          location_attributes: location_attributes
+      )
+      puts new_object.address
       puts new_object.inspect
     elsif legacy_object.instance_of? HbCategory
       profile = legacy_object.new_prof.root.slug rescue 'services'
@@ -71,8 +90,10 @@ namespace :import do
 
       I18n.locale = loc == :ua ? :uk : loc
 
-      new_object.name = name
-      new_object.description = descr
+      new_object.name               = name
+      new_object.description        = descr
+      new_object.address.address    = legacy_object.contacts(loc) if legacy_object.instance_of? HbObject
+
       new_object.save!
       #puts "#{loc}: #{name}\n# Descr: #{descr}\n\n"
     end
@@ -103,6 +124,25 @@ namespace :import do
       end
     end
     arr
+  end
+
+  def import_periods! new_object, legacy_object
+    periods_index = []
+    legacy_object.periods.each do |p|
+      if p.since and p.till
+        new_period = new_object.periods.create(since: p.since, till: p.till)
+        periods_index.push [p.Id, new_period.id]
+      end
+    end
+    periods_index
+  end
+
+  def import_prices new_category, legacy_category, periods_index
+    legacy_category.prices.each do |price|
+      selected = periods_index.select {|per| per[1] if per[0] == price.PerId }[0]
+      period_id = selected[1]
+      new_category.prices.new(period_id: period_id, value: price.Price)
+    end
   end
 
 end
