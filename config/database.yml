@@ -10,14 +10,14 @@ development:
   timeout: 5000
 
 skiworld:
-  adapter: mysql
+  adapter: mysql2
   database: skiworld
   username: djerelo
   password: djerelo
   encoding: utf8
 
 hotelbase:
-  adapter: mysql
+  adapter: mysql2
   database: hotelbase
   username: djerelo
   password: djerelo

@@ -5,7 +5,10 @@ namespace :import do
     hr 100, '#'
     # .where('id = 61') # bungalo
     # ('Id >= 510 and Id <= 520')
-    HbObject.where('Id = 512').each do |o|
+    # ('Id = 512') #vykrutasy
+    # .order('Id DESC')
+    # TODO: unique validation fail
+    HbObject.where('id < 552').order('Id DESC').each do |o|
 
       puts "Object##{o.Id}     #{o.content.title('ru')} [#{o.slug}]"
       puts "Type:         #{o.new_class.name}"      rescue nil
@@ -22,7 +25,7 @@ namespace :import do
 
       periods_index = import_periods!(hotel, o)
 
-      import_images(hotel, object_album_dir, find_gallery(o, 'Objects'))
+      #import_images(hotel, object_album_dir, find_gallery(o, 'Objects'))
 
       o.hb_categories.each do |c|
         pref = (c.profile.value.name rescue '') == 'rooms' ? 'room   ' : 'service'
@@ -34,10 +37,10 @@ namespace :import do
         classify new_category, c.new_fields
         c.show_classes
 
-        import_prices(new_category, c, periods_index)
+        import_prices(new_category, c, periods_index) if new_category.instance_of? Room
 
         category_album_dir = object_categories_dir+"/#{c.Id}/album"
-        import_images(new_category, category_album_dir, find_gallery(c, 'Categories'))
+        #import_images(new_category, category_album_dir, find_gallery(c, 'Categories'))
         hr 40, '`'
       end
 
@@ -61,15 +64,15 @@ namespace :import do
           latitude:  location.lat,
           longitude: location.lng
       } : {}
-      new_object = Hotel.create!(
+      new_object = Hotel.new(
           node_attributes: {name: slug},
           address_attributes: {
-              email: legacy_object.Email,
-              phone1: legacy_object.Mob,
-              phone2: legacy_object.Phones
+              email:  Sanitize.clean(legacy_object.Email),
+              phone1: Sanitize.clean(legacy_object.Mob),
+              phone2: Sanitize.clean(legacy_object.Phones)
           },
           location_attributes: location_attributes
-      )
+      ).save(validate: false)
       puts new_object.address
       puts new_object.inspect
     elsif legacy_object.instance_of? HbCategory
@@ -90,9 +93,9 @@ namespace :import do
 
       I18n.locale = loc == :ua ? :uk : loc
 
-      new_object.name               = name
-      new_object.description        = descr
-      new_object.address.address    = legacy_object.contacts(loc) if legacy_object.instance_of? HbObject
+      new_object.name               = Sanitize.clean name
+      new_object.description        = ReverseMarkdown.parse_string descr
+      new_object.address.address    = ReverseMarkdown.parse_string legacy_object.contacts(loc) if legacy_object.instance_of? HbObject
 
       new_object.save!
       #puts "#{loc}: #{name}\n# Descr: #{descr}\n\n"
@@ -109,6 +112,7 @@ namespace :import do
 
     images_in(dir).each do |path|
       tags = (gallery.present? and gallery.TitleImage == path[1]) ? 'title, cover' : nil
+      puts "Importing image #{path[1]} #{tags}"
       file = File.open path[0]
       obj.gallery.photos.new(image: file, mode_list: tags)
     end

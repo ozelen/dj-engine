@@ -20,7 +20,8 @@ end
 
 group :development do
   gem "nifty-generators"
-  gem 'mysql'
+  gem 'mysql2'
+  gem 'activerecord-mysql-adapter'
 end
 
 gem "therubyracer"
@@ -52,3 +53,5 @@ gem 'acts_as_commentable_with_threading'
 gem 'geocoder'
 gem 'acts-as-taggable-on'
 gem 'redcarpet' # markdown text
+gem 'reverse_markdown'
+gem 'sanitize'
