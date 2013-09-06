@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130903033403) do
+ActiveRecord::Schema.define(:version => 20130906142123) do
 
   create_table "addresses", :force => true do |t|
     t.string   "email"
@@ -29,6 +29,7 @@ ActiveRecord::Schema.define(:version => 20130903033403) do
   end
 
   add_index "addresses", ["addressable_id", "addressable_type"], :name => "index_addresses_on_addressable_id_and_addressable_type"
+  add_index "addresses", ["email"], :name => "index_addresses_on_email"
 
   create_table "assignments", :force => true do |t|
     t.integer  "user_id"
@@ -50,6 +51,11 @@ ActiveRecord::Schema.define(:version => 20130903033403) do
     t.string   "token"
   end
 
+  add_index "authentications", ["provider", "uid"], :name => "index_authentications_on_provider_and_uid"
+  add_index "authentications", ["provider"], :name => "index_authentications_on_provider"
+  add_index "authentications", ["uid"], :name => "index_authentications_on_uid"
+  add_index "authentications", ["user_id"], :name => "index_authentications_on_user_id"
+
   create_table "cities", :force => true do |t|
     t.string   "name"
     t.text     "description"
@@ -58,18 +64,6 @@ ActiveRecord::Schema.define(:version => 20130903033403) do
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
   end
-
-  create_table "city_translations", :force => true do |t|
-    t.integer  "city_id"
-    t.string   "locale"
-    t.string   "name"
-    t.text     "description"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
-  end
-
-  add_index "city_translations", ["city_id"], :name => "index_city_translations_on_city_id"
-  add_index "city_translations", ["locale"], :name => "index_city_translations_on_locale"
 
   create_table "comments", :force => true do |t|
     t.integer  "commentable_id",   :default => 0
@@ -96,6 +90,7 @@ ActiveRecord::Schema.define(:version => 20130903033403) do
     t.datetime "updated_at", :null => false
   end
 
+  add_index "field_categories", ["slug"], :name => "index_field_categories_on_slug"
   add_index "field_categories", ["type_id"], :name => "index_field_categories_on_type_id"
 
   create_table "field_category_translations", :force => true do |t|
@@ -195,7 +190,10 @@ ActiveRecord::Schema.define(:version => 20130903033403) do
     t.datetime "updated_at",   :null => false
   end
 
+  add_index "locations", ["address"], :name => "index_locations_on_address"
+  add_index "locations", ["latitude"], :name => "index_locations_on_latitude"
   add_index "locations", ["located_id", "located_type"], :name => "index_locations_on_located_id_and_located_type"
+  add_index "locations", ["longitude"], :name => "index_locations_on_longitude"
 
   create_table "measure_categories", :force => true do |t|
     t.string   "name"
@@ -235,6 +233,8 @@ ActiveRecord::Schema.define(:version => 20130903033403) do
     t.datetime "updated_at",          :null => false
   end
 
+  add_index "measures", ["measure_category_id"], :name => "index_measures_on_measure_category_id"
+
   create_table "mercury_images", :force => true do |t|
     t.string   "image_file_name"
     t.string   "image_content_type"
@@ -270,6 +270,7 @@ ActiveRecord::Schema.define(:version => 20130903033403) do
   end
 
   add_index "nodes", ["accessible_id", "accessible_type"], :name => "index_nodes_on_accessible_id_and_accessible_type"
+  add_index "nodes", ["name"], :name => "index_nodes_on_name"
 
   create_table "period_translations", :force => true do |t|
     t.integer  "period_id"
@@ -292,6 +293,8 @@ ActiveRecord::Schema.define(:version => 20130903033403) do
     t.datetime "created_at",     :null => false
     t.datetime "updated_at",     :null => false
   end
+
+  add_index "periods", ["hotel_id"], :name => "index_periods_on_hotel_id"
 
   create_table "photos", :force => true do |t|
     t.string   "image"
@@ -329,6 +332,7 @@ ActiveRecord::Schema.define(:version => 20130903033403) do
   end
 
   add_index "posts", ["channel_id", "channel_type"], :name => "index_posts_on_channel_id_and_channel_type"
+  add_index "posts", ["slug"], :name => "index_posts_on_slug"
   add_index "posts", ["user_id"], :name => "index_posts_on_user_id"
 
   create_table "price_translations", :force => true do |t|
@@ -351,6 +355,11 @@ ActiveRecord::Schema.define(:version => 20130903033403) do
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
   end
+
+  add_index "prices", ["measure_id"], :name => "index_prices_on_measure_id"
+  add_index "prices", ["period_id"], :name => "index_prices_on_period_id"
+  add_index "prices", ["room_id"], :name => "index_prices_on_room_id"
+  add_index "prices", ["value"], :name => "index_prices_on_value"
 
   create_table "region_translations", :force => true do |t|
     t.integer  "region_id"
@@ -388,6 +397,8 @@ ActiveRecord::Schema.define(:version => 20130903033403) do
     t.datetime "updated_at", :null => false
   end
 
+  add_index "resorts", ["type_id"], :name => "index_resorts_on_type_id"
+
   create_table "room_translations", :force => true do |t|
     t.integer  "room_id"
     t.string   "locale"
@@ -411,6 +422,7 @@ ActiveRecord::Schema.define(:version => 20130903033403) do
     t.integer  "type_id"
   end
 
+  add_index "rooms", ["hotel_id"], :name => "index_rooms_on_hotel_id"
   add_index "rooms", ["type_id"], :name => "index_rooms_on_type_id"
 
   create_table "service_translations", :force => true do |t|
@@ -437,6 +449,7 @@ ActiveRecord::Schema.define(:version => 20130903033403) do
     t.integer  "type_id"
   end
 
+  add_index "services", ["hotel_id"], :name => "index_services_on_hotel_id"
   add_index "services", ["type_id"], :name => "index_services_on_type_id"
 
   create_table "streams", :force => true do |t|
@@ -470,6 +483,8 @@ ActiveRecord::Schema.define(:version => 20130903033403) do
     t.datetime "updated_at",  :null => false
   end
 
+  add_index "tours", ["name"], :name => "index_tours_on_name"
+  add_index "tours", ["slug"], :name => "index_tours_on_slug"
   add_index "tours", ["user_id"], :name => "index_tours_on_user_id"
 
   create_table "type_translations", :force => true do |t|
@@ -537,5 +552,7 @@ ActiveRecord::Schema.define(:version => 20130903033403) do
   end
 
   add_index "values", ["evaluated_id", "evaluated_type"], :name => "index_values_on_evaluated_id_and_evaluated_type"
+  add_index "values", ["field_id"], :name => "index_values_on_field_id"
+  add_index "values", ["measure_id"], :name => "index_values_on_measure_id"
 
 end
