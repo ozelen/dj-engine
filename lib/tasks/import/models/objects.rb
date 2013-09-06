@@ -28,6 +28,7 @@ namespace :import do
       I18n.locale = :uk
       classes.each do |c|
         #puts " * #{c.key.data.title('ru')}:#{c.value.data.title('ru')} "
+        next unless c.value
         cat = FieldCategory.find_by_slug c.key.name
         fld = Field.find_by_slug c.value.name
         puts " * #{c.key.name}:#{c.value.name} => #{cat.name} : #{fld.name} " if cat and fld
@@ -50,8 +51,23 @@ namespace :import do
       self.classes.select{|c| c.ProfileOf==self.table }[0]
     end
 
+    def root_type
+      slug =
+          case self.table
+            when 'Objects' then 'hotels'
+            when 'Categories' then 'rooms'
+            else 'services'
+          end
+      Type.find_by_slug(slug)
+    end
+
     def new_class
-      self.caption ? Type.find_by_slug(self.caption.value.name) : self.new_type
+
+      if self.caption && self.caption.value
+          Type.find_by_slug(self.caption.value.name) # rescue root_type # hard work around
+        else
+          self.new_type
+      end
     end
 
     def new_type
@@ -87,7 +103,7 @@ namespace :import do
     end
 
     def content
-      self.page.data
+      self.page.try(:data)
     end
 
     def console_title
@@ -142,6 +158,35 @@ namespace :import do
       LegacyPrices.where("CatId = #{self.Id}")
     end
   end
+
+  class HbRegion < HbObjective
+    set_table_name 'Regions'
+    set_primary_key 'Id'
+
+  end
+
+  class HbSettlement < HbObjective
+    set_table_name 'Settlements'
+    set_primary_key 'id'
+
+    def table
+      'Settlements'
+    end
+
+    def Id
+      id
+    end
+
+    def region
+      HbRegion.find(region_id) rescue nil
+    end
+
+    def district
+      HbRegion.find(district_id) rescue nil
+    end
+
+  end
+
   ###
 
   class LegacyLocations < HotelBase

@@ -1,15 +1,20 @@
 namespace :import do
+
   def import_objects
     Hotel.destroy_all
+    City.destroy_all
+    cities_index = [] # indexing cities not to call db every time
+
     I18n.locale = :uk
     hr 100, '#'
-    # .where('id = 61') # bungalo
-    # ('Id >= 510 and Id <= 520')
-    # ('Id = 512') #vykrutasy
-    # .order('Id DESC')
-    # TODO: unique validation fail
-    HbObject.where('id < 552').order('Id DESC').each do |o|
 
+    HbSettlement.where("PageId is not null").each do |c|
+      new_city = obj_create(c)
+      cities_index[c.id] = new_city.id if new_city
+    end
+
+    # TODO: unique validation fail
+    HbObject.all.each do |o|
       puts "Object##{o.Id}     #{o.content.title('ru')} [#{o.slug}]"
       puts "Type:         #{o.new_class.name}"      rescue nil
       puts "Profile:      #{o.new_prof.root.name}"  rescue nil
@@ -21,6 +26,13 @@ namespace :import do
       object_categories_dir = object_photos_dir+'/categories'
 
       hotel = obj_create o
+
+      if o.Settlement and cities_index[o.Settlement]
+        hotel.city_id = cities_index[o.Settlement]
+        hotel.save!
+      end
+
+      puts "City: #{hotel.city_id}"
       classify hotel, o.new_fields
 
       periods_index = import_periods!(hotel, o)
@@ -28,8 +40,9 @@ namespace :import do
       #import_images(hotel, object_album_dir, find_gallery(o, 'Objects'))
 
       o.hb_categories.each do |c|
+        next unless c.content
         pref = (c.profile.value.name rescue '') == 'rooms' ? 'room   ' : 'service'
-        puts "#{pref}       #{c.content.title 'ru'} /#{c.new_class.name rescue ''}/ #{c.new_prof.root.name rescue 'no class'} "
+        puts "[#{c.Id}] #{pref}       #{c.content.title 'ru'} /#{c.new_class.name rescue ''}/ #{c.new_prof.root.name rescue 'no class'} "
 
         new_category = obj_create c
         new_category.hotel_id = hotel.id
@@ -56,41 +69,54 @@ namespace :import do
 
   def obj_create legacy_object
     profile = ''
-    if legacy_object.instance_of? HbObject
-      slug = legacy_object.AccountCode.blank? ? legacy_object.Id : legacy_object.AccountCode
-      # TODO: substitute escapeHTML to sanitize after migration on rails 4
-      location = legacy_object.location
-      location_attributes = location ? {
-          latitude:  location.lat,
-          longitude: location.lng
-      } : {}
-      new_object = Hotel.new(
-          node_attributes: {name: slug},
-          address_attributes: {
-              email:  Sanitize.clean(legacy_object.Email),
-              phone1: Sanitize.clean(legacy_object.Mob),
-              phone2: Sanitize.clean(legacy_object.Phones)
-          },
-          location_attributes: location_attributes
-      ).save(validate: false)
-      puts new_object.address
-      puts new_object.inspect
-    elsif legacy_object.instance_of? HbCategory
+
+    if legacy_object.instance_of? HbCategory
       profile = legacy_object.new_prof.root.slug rescue 'services'
       if profile == 'rooms'
         new_object = Room.create!
       else
         new_object = Service.create!
       end
+
+    else
+      location = legacy_object.location
+      location_attributes = location ? {
+          latitude:  location.lat,
+          longitude: location.lng
+      } : {}
+
+      if legacy_object.instance_of? HbObject
+        slug = legacy_object.AccountCode.blank? ? legacy_object.Id : legacy_object.AccountCode
+        slug = Node.find_by_name(slug) ? "#{slug}_d_#{legacy_object.Id}" : slug
+        # TODO: substitute escapeHTML to sanitize after migration on rails 4
+        new_object = Hotel.create!(
+            node_attributes: {name: slug},
+            address_attributes: {
+                email:  Sanitize.clean(legacy_object.Email),
+                phone1: Sanitize.clean(legacy_object.Mob),
+                phone2: Sanitize.clean(legacy_object.Phones)
+            },
+            location_attributes: location_attributes
+        )
+
+      elsif legacy_object.instance_of? HbSettlement
+        return unless legacy_object.Ident
+        puts "Importing city #{legacy_object.title('ru')}"
+        location_attributes.merge({ address: [legacy_object.name, legacy_object.district, legacy_object.region].select{|x| x if x.present? }.join(', ') })
+        new_object = City.create!(
+            node_attributes: {name: legacy_object.Ident},
+            location_attributes: location_attributes
+        )
+      end
     end
 
     type = legacy_object.new_class || Type.find_by_slug(profile) || Type.find_by_slug('services')
-    new_object.type_id = type.id
+    new_object.type_id = type.id unless legacy_object.instance_of? HbSettlement
 
     [:ru, :ua, :en].each do |loc|
       name  = legacy_object.title(loc)
       descr = legacy_object.info(loc)
-
+      puts "[#{loc}] #{name}"
       I18n.locale = loc == :ua ? :uk : loc
 
       new_object.name               = Sanitize.clean name
@@ -144,8 +170,10 @@ namespace :import do
   def import_prices new_category, legacy_category, periods_index
     legacy_category.prices.each do |price|
       selected = periods_index.select {|per| per[1] if per[0] == price.PerId }[0]
-      period_id = selected[1]
-      new_category.prices.new(period_id: period_id, value: price.Price)
+      if selected
+        period_id = selected[1]
+        new_category.prices.new(period_id: period_id, value: price.Price)
+      end
     end
   end
 
