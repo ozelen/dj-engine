@@ -1,5 +1,8 @@
 <%- model_class = Hotel -%>
-<% title (@hotel.node.header + (@hotel.node.title ? ' &mdash; ' + @hotel.node.title : '')).html_safe + ' | Djerelo.Info' %>
+<% title (
+         (@hotel.node.header rescue '') +
+             ( '&mdash; ' + @hotel.node.title rescue '' )
+         ).html_safe + ' | Djerelo.Info' rescue '' %>
 
 <div class="page-header">
   <h1>Info</h1>

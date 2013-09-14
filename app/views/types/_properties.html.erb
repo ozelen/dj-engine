@@ -1,5 +1,12 @@
-<fieldset>
-  <legend>Amenities</legend>
+<fieldset id="amenities">
+  <legend><h2>Amenities</h2></legend>
+
+  <% evaluated.type.upgoing_field_categories.each do |category| %>
+    <%= content_tag_for :fieldset, category do %>
+      <legend><%= category.name %></legend>
+
+    <% end %>
+  <% end %>
 
   <% if evaluated.type %>
       <% existed = f.object.values.map{|v| v.field_id.to_i if v.id } %>

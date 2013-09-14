@@ -34,4 +34,9 @@ class Type < ActiveRecord::Base
     result
   end
 
+  def upgoing_field_categories
+    # TODO: provide full list of upgoing and own field categories
+    root.field_categories
+  end
+
 end
