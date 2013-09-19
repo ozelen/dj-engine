@@ -14,7 +14,7 @@ class ApplicationController < ActionController::Base
   end
 
   def set_locale
-    I18n.default_locale = 'ru'
+    I18n.default_locale = :ru
     I18n.locale = params[:locale].present? ? params[:locale] : I18n.default_locale
     # current_user.locale
     # request.subdomain
@@ -23,7 +23,9 @@ class ApplicationController < ActionController::Base
   end
 
   def default_url_options(options = {})
-    {locale: I18n.locale}
+    {
+        locale: I18n.locale == I18n.default_locale ? nil : I18n.locale
+    }
   end
 
 

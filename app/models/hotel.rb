@@ -98,4 +98,14 @@ class Hotel < ActiveRecord::Base
     Node.find_by_name(slug).accessible
   end
 
+  def get_photos_from_collection *col
+    arr = []
+    col.each {|c| c.map{|x| arr.concat(x.photos) } }
+    arr
+  end
+
+  def all_photos limit=nil
+    photos.dup.concat(get_photos_from_collection(rooms, services))
+  end
+
 end

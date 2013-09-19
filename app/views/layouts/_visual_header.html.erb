@@ -1,36 +1,86 @@
+<%
+   home_page = request.fullpath == menu[0][1]
+%>
+
 <% content_for :banner do %>
-  <div class="jumbotron" style="background-image: url(<%= cover %>);">
-    <h1><%= header %> <small><%= section %></small></h1>
-    <p>
-      <%= title %>
-    </p>
+  <%
+     slides = gallery.photos#.tagged_with(:cover)
+     cover = gallery.rand(:cover).image_url(:cover) rescue nil
+     title = gallery.rand(:title).image_url(:mini) rescue nil
+  %>
+  <% if slides.count > 1# and false %>
+    <div id="header-carousel" class="carousel slide">
+      <ol class="carousel-indicators">
+        <% slides.each_with_index do |slide, i| %>
+          <li data-target="#header-carousel" data-slide-to="<%= i %>" class="<%= 'active' if i==0 %>"></li>
+        <% end %>
+      </ol>
+      <div class="carousel-inner">
+
+        <% slides.each_with_index do |slide, i| %>
+          <div class="item <%= 'active' if i==0 %> cover-image" style="background-image: url(<%= slide.image_url(:cover) %>);">
+          </div>
+        <% end %>
+      </div>
+      <a class="left carousel-control" href="#header-carousel" data-slide="prev">
+        <span class="icon-prev"></span>
+      </a>
+      <a class="right carousel-control" href="#header-carousel" data-slide="next">
+        <span class="icon-next"></span>
+      </a>
+    </div>
+  <% else %>
+    <div class="cover-image" style="background-image: url(<%= cover %>);">
+
+    </div>
+  <% end %>
+<% end %>
+
+<% if home_page %>
+  <div class="row visual-header clearfix <%= 'mini' unless home_page %>">
+    <div class="col-lg-8 slides ">
+      <%= yield(:banner)  %>
+    </div>
+    <div class="col-lg-4 booking ">
+      <%= yield(:offer)  %>
+    </div>
   </div>
 <% end %>
 
-
-<div class="row visual-header clearfix <%= 'mini' unless request.fullpath == menu[0][1] %>">
-  <div class="col-lg-8">
-    <%= yield(:banner) %>
+<nav class="navbar navbar-default navbar-static-top object-menu" role="navigation">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <%= link_to header, menu[0][1], class: 'navbar-brand' %>
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <%# link_to menu[0][0], menu[0][1], class: "navbar-brand" %>
   </div>
-  <div class="col-lg-4">
-    <div class="jumbotron offer-bar">
-      <h3>Book Now!</h3>
-      <p>
-        Super offer
-      </p>
-    </div>
-  </div>
-</div>
 
-<ul class="nav nav-pills hotel-menu clearfix">
-
-  <% menu.each do |item| %>
-    <li <%= 'class="active"'.html_safe if request.fullpath == item[1] %> ><a href="<%= item[1] %>">
-      <% if item[2]>0 %>
-        <span class="badge pull-right"><%= item[2] %></span>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse navbar-ex1-collapse">
+    <ul class="nav navbar-nav">
+      <% menu.each_with_index do |item, i| %>
+        <% next if item[2]==0 or item[2]==nil %>
+        <li class="<%= 'active' if (request.fullpath =~ /#{item[1]}/ and i!=0) or (request.fullpath == item[1] and i==0) %>" >
+          <%= link_to item[0], item[1] %>
+        </li>
       <% end %>
-      <%= item[0] %> </a>
-    </li>
-  <% end %>
+    </ul>
 
-</ul>
+    <% if content_for?(:manage_menu) %>
+      <ul class="nav navbar-nav navbar-right">
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Manage <b class="caret"></b></a>
+          <ul class="dropdown-menu">
+            <%= yield(:manage_menu) %>
+          </ul>
+        </li>
+      </ul>
+    <% end %>
+
+  </div><!-- /.navbar-collapse -->
+</nav>

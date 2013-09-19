@@ -6,6 +6,7 @@ class Service < ActiveRecord::Base
   has_many :fields, through: :values
   has_many :field_categories, through: :fields
   has_one :gallery, as: :imageable, dependent: :destroy
+  has_many :photos, through: :gallery
 
   accepts_nested_attributes_for :values, allow_destroy: true
 

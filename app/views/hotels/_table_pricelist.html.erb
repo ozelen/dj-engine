@@ -2,13 +2,13 @@
   <thead>
   <tr>
     <th class="name text-center">Room</th>
-    <% @hotel.periods.each do |period| %>
+    <% @periods.reverse.each do |period| %>
         <%
            since = l(period.since, format: :short) if period.since
            till =  l(period.till, format: :short) if period.since
         %>
         <th class="period-title text-center text-primary">
-          <%= l period.since, format: :short %> - <%= l period.till, format: :short %>
+          <%= l period.since, format: :short %> - <%= l period.till, format: :long %>
           <div>
             <%= period.name %>
           </div>
@@ -20,7 +20,7 @@
   <% @hotel.rooms.each do |room| %>
       <tr>
         <td class=""><%= room.name %> </td>
-        <% @hotel.periods.each do |period| %>
+        <% @periods.each do |period| %>
             <% price = period.prices.select{|k| k['room_id'] == room.id } %>
             <td class="text-center price-value text-info"><%= price[0].value if !price.blank? %></td>
             <% #period.prices. %>

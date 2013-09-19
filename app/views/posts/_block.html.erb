@@ -4,7 +4,6 @@
 <%= render 'posts/ajax_form', channel: channel %>
 
 <div id="posts">
-  <%= render params[:tag] ? channel.posts.tagged_with(params[:tag]) : channel.posts
-  %>
+  <%= render params[:tag] ? channel.posts.tagged_with(params[:tag]) : channel.posts %>
 </div>
 

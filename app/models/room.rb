@@ -5,6 +5,7 @@ class Room < ActiveRecord::Base
   has_many :periods, through: :prices
   has_many :tags, as: :taggable
   has_one :gallery, as: :imageable, dependent: :destroy
+  has_many :photos, through: :gallery
 
   has_many :values, as: :evaluated, dependent: :destroy
   has_many :fields, through: :values

@@ -1,0 +1,25 @@
+<%
+   image_mode       ||= :mini
+   show_description ||= false
+   show_amenities   ||= false
+%>
+<div class="media">
+  <a class="pull-left" href="#">
+    <%= image_tag category.gallery.title.image_url(image_mode), class: :thumbnail if category.gallery.title %>
+  </a>
+  <div class="media-body">
+    <h4 class="media-heading"><%= link_to category.name, [@hotel, category] %></h4>
+    <p><%= category.type.name %></p>
+
+    <% if show_description %>
+      <%= markdown truncate(category.description, length: 100, separator: ' ') %>
+    <% end %>
+
+    <% if show_amenities %>
+      <%= render('values/structured_list', valuable: category) %>
+    <% end %>
+
+    <%= link_to('Full description', [@hotel, category]) %>
+
+  </div>
+</div>

@@ -2,7 +2,8 @@ class CitiesController < ApplicationController
   #load_and_authorize_resource
   # GET /cities
   # GET /cities.json
-  before_filter :find_city, only: [:show, :edit, :update, :destroy]
+  before_filter :find_city, except: [:new, :my, :index, :create]
+  layout 'city', except: [:index, :new]
   def index
     @cities = City.all
 
@@ -20,6 +21,9 @@ class CitiesController < ApplicationController
       format.html # show.html.erb
       format.json { render json: @city }
     end
+  end
+
+  def description
   end
 
   # GET /cities/new
@@ -86,7 +90,9 @@ class CitiesController < ApplicationController
   end
 
   def find_city
-    @city = Node.find_by_name(params[:id]).accessible
+    id = params[:id] || params[:city_id] || params[:city_slug]
+    @node = Node.find_by_name(id)
+    @city = @node.accessible if id
   end
 
 end

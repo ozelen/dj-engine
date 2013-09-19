@@ -1,5 +1,5 @@
 class HotelsController < ApplicationController
-  before_filter :find_hotel, except: [:new, :my, :index, :create, :new] # [:show, :edit, :update, :destroy, :pricelist, :edit_pricelist]
+  before_filter :find_hotel, except: [:new, :my, :index, :create] # [:show, :edit, :update, :destroy, :pricelist, :edit_pricelist]
   layout 'hotel', except: [:index, :new]
   # GET /hotels
   # GET /hotels.json
@@ -15,6 +15,7 @@ class HotelsController < ApplicationController
   end
 
   def pricelist
+    @periods = @hotel.periods.find(:all, :order => "till desc", :limit => 5)
   end
 
   def albums

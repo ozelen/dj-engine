@@ -15,4 +15,5 @@
 //= require jquery-fileupload/basic
 //= require jquery.ui.datepicker
 //= require jquery.ui.autocomplete
+//= require twitter/bootstrap
 //= require_tree .

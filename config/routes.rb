@@ -72,10 +72,10 @@ DjEngine::Application.routes.draw do
     get ':hotel_slug'          => 'hotels#show', constraints: SlugConstraint.new('Hotel'), as: :slug_hotel
     scope ':hotel_slug', constraints: SlugConstraint.new('Hotel') do
       match 'rooms'            => 'rooms#index',               as: :slug_hotel_rooms
-      match 'rooms/:id'        => 'rooms#show',                as: :slug_hotel_room
+      get   'rooms/:id'        => 'rooms#show',                as: :hotel_room
       match 'rooms/:id/album(/:photo_id)'        => 'rooms#show',                as: :room_album
       match 'services'         => 'services#index',            as: :slug_hotel_services
-      match 'services/:id'     => 'services#show',             as: :slug_hotel_service
+      get   'services/:id'     => 'services#show',             as: :hotel_service
       match 'pricelist'        => 'hotels#pricelist',          as: :slug_hotel_pricelist
       match 'pricelist/edit'   => 'hotels#edit_pricelist',     as: :slug_edit_hotel_pricelist
       match 'album(/:photo_id)'=> 'hotels#album',              as: :hotel_album
@@ -85,6 +85,8 @@ DjEngine::Application.routes.draw do
       match 'posts/:post_id'   => 'posts#show',                as: :hotel_post
       match 'blog/tags/:tag'   => 'hotels#blog',               as: :tag
       match 'contacts'         => 'hotels#contacts',           as: :slug_hotel_contacts
+      match 'description'      => 'hotels#description',        as: :slug_hotel_description
+      match 'book'             => 'hotels#book',               as: :slug_hotel_book
     end
 
     scope 'hotels/:hotel_id' do
@@ -107,6 +109,17 @@ DjEngine::Application.routes.draw do
       get 'posts/:post_id'  => 'posts#show'
       get 'blog'            => 'streams#blog', as: :stream_blog
       get 'blog/tags/:tag'  => 'streams#blog', as: :tag
+    end
+
+    # Cities
+    match ':city_slug'      => 'cities#show',       as: :slug_city,          constraints: SlugConstraint.new('City')
+    scope ':city_slug', constraints: SlugConstraint.new('City') do
+      match 'description'   => 'cities#description',  as: :city_description
+      match 'hotels'        => 'cities#hotels',       as: :city_hotels
+      match 'resorts'       => 'cities#resorts',      as: :city_resorts
+      match 'location'      => 'cities#location',     as: :city_location
+      match 'album'         => 'cities#album',        as: :city_album
+      match 'comments'      => 'cities#comments',     as: :city_comments
     end
 
     # Resorts

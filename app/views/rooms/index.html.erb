@@ -1,14 +1,12 @@
 <%- model_class = Room -%>
 <% title 'Rooms, ' + @hotel.node.header %>
 
-<% if can? :manage, @hotel %>
-  <% if @rooms.blank? %><h3>No rooms in your hotel</h3><% end %>
-  <div class="panel clearfix">
-    <%= link_to 'Create new  Room', new_hotel_room_path(@hotel), :class => 'btn btn-primary btn-large btn-block pull-right' %>
-  </div>
-<% end %>
+<h1>Rooms</h1>
 
-<%= render @rooms %>
+<% @rooms.each do |room| %>
+  <%= render 'categories/teaser', category: room, image_mode: :small, show_description: true, show_amenities: true %>
+  <hr>
+<% end %>
 
 
 

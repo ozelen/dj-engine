@@ -2,27 +2,6 @@
 
 <h1>Pricelist</h1>
 
-<%= link_to 'Edit room prices', pricelist_edit_path(@hotel), class: 'btn btn-default pull-right' %>
 <h3>Rooms</h3>
 
 <%= render 'table_pricelist' %>
-
-
-<h3>Services</h3>
-
-<table class="table table-striped">
-  <thead>
-  <tr>
-    <td>Service</td>
-    <td>Price</td>
-  </tr>
-  </thead>
-  <tbody>
-  <% @hotel.services.each do |service| %>
-      <tr>
-        <td><%= service.name %></td>
-        <td></td>
-      </tr>
-  <% end %>
-  </tbody>
-</table>
