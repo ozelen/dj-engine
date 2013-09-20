@@ -27,8 +27,14 @@
   <% end %>
 </fieldset>
 
+<% comments = commentable.comment_threads.paginate(page: params[:page], per_page: 10) %>
+
+<%= will_paginate comments, renderer: BootstrapPagination::Rails, bootstrap: 3 %>
+
 <div id="comments">
-  <% commentable.comment_threads.each do |comment| %>
+  <% comments.each do |comment| %>
     <%= render comment %>
   <% end %>
 </div>
+
+<%= will_paginate comments, renderer: BootstrapPagination::Rails, bootstrap: 3 %>

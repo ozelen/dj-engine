@@ -71,22 +71,22 @@ DjEngine::Application.routes.draw do
     # shortcut to hotel by slug
     get ':hotel_slug'          => 'hotels#show', constraints: SlugConstraint.new('Hotel'), as: :slug_hotel
     scope ':hotel_slug', constraints: SlugConstraint.new('Hotel') do
-      get 'rooms'            => 'rooms#index',                 as: :slug_hotel_rooms
-      get   'rooms/:id'      => 'rooms#show',                  as: :slug_hotel_room
-      get 'rooms/:id/album(/:photo_id)'        => 'rooms#show',                as: :room_album
-      get 'services'           => 'services#index',            as: :slug_hotel_services
-      get 'services/:id'       => 'services#show',             as: :slug_hotel_service
-      match 'pricelist'        => 'hotels#pricelist',          as: :slug_hotel_pricelist
-      match 'pricelist/edit'   => 'hotels#edit_pricelist',     as: :slug_edit_hotel_pricelist
-      match 'album(/:photo_id)'=> 'hotels#album',              as: :hotel_album
-      match 'albums/edit'      => 'hotels#edit_albums',        as: :slug_edit_hotel_albums
-      match 'comments'         => 'hotels#comments',           as: :slug_hotel_comments
-      match 'blog'             => 'hotels#blog',               as: :slug_hotel_blog
-      match 'posts/:post_id'   => 'posts#show',                as: :hotel_post
-      match 'blog/tags/:tag'   => 'hotels#blog',               as: :tag
-      match 'contacts'         => 'hotels#contacts',           as: :slug_hotel_contacts
-      match 'description'      => 'hotels#description',        as: :slug_hotel_description
-      match 'book'             => 'hotels#book',               as: :slug_hotel_book
+      get 'rooms'                         => 'rooms#index',               as: :slug_hotel_rooms
+      get 'rooms/:id'                     => 'rooms#show',                as: :slug_hotel_room
+      get 'rooms/:id/album(/:photo_id)'   => 'rooms#show',                as: :room_album
+      get 'services'                      => 'services#index',            as: :slug_hotel_services
+      get 'services/:id'                  => 'services#show',             as: :slug_hotel_service
+      get 'pricelist'                     => 'hotels#pricelist',          as: :slug_hotel_pricelist
+      get 'pricelist/edit'                => 'hotels#edit_pricelist',     as: :slug_edit_hotel_pricelist
+      get 'album(/:photo_id)'             => 'hotels#album',              as: :hotel_album
+      get 'albums/edit'                   => 'hotels#edit_albums',        as: :slug_edit_hotel_albums
+      get 'comments(/:page)'              => 'hotels#comments',           as: :slug_hotel_comments
+      get 'blog'                          => 'hotels#blog',               as: :slug_hotel_blog
+      get 'posts/:post_id'                => 'posts#show',                as: :hotel_post
+      get 'blog/tags/:tag'                => 'hotels#blog',               as: :tag
+      get 'contacts'                      => 'hotels#contacts',           as: :slug_hotel_contacts
+      get 'description'                   => 'hotels#description',        as: :slug_hotel_description
+      get 'book'                          => 'hotels#book',               as: :slug_hotel_book
     end
 
     scope 'hotels/:hotel_id' do
