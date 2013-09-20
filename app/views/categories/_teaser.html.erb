@@ -8,7 +8,8 @@
     <%= image_tag category.gallery.title.image_url(image_mode), class: :thumbnail if category.gallery.title %>
   </a>
   <div class="media-body">
-    <h4 class="media-heading"><%= link_to category.name, [@hotel, category] %></h4>
+    <h4 class="media-heading"><%= link_to category.name, send("slug_hotel_#{category.class.name.parameterize}_path", @hotel, category) %></h4>
+
     <p><%= category.type.name %></p>
 
     <% if show_description %>

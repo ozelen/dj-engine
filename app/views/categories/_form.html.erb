@@ -1,4 +1,4 @@
-<%= form_for [@hotel, @room], :html => { :class => 'form-horizontal' } do |f| %>
+<%= form_for [@hotel, category], :html => { :class => 'form-horizontal' } do |f| %>
 
   <div class="form-group">
     <%= f.label :name, :class => 'control-label col-lg-3' %>
@@ -14,16 +14,15 @@
     </div>
   </div>
 
-
   <div class="form-group">
     <%= f.label :type, :class => 'col-lg-3 control-label' %>
     <div class="col-lg-9">
       <%# f.select(:type_id, Type.find_by_slug('rooms').children.collection_for_parent_select, {}, {class: 'form-control'}) %>
-      <%= f.select(:type_id, @room.type.collection_for_parent_select('rooms'), {}, {class: 'form-control'}) %>
+      <%= f.select(:type_id, category.type.collection_for_parent_select(controller_name), {}, {class: 'form-control'}) %>
     </div>
   </div>
 
-  <%= render 'types/properties', evaluated: @room, f: f %>
+  <%= render 'types/properties', evaluated: category, f: f %>
 
 
   <%= f.hidden_field :hotel_id, :class => 'number_field' %>

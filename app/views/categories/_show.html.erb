@@ -1,0 +1,24 @@
+<% title category.name + ', ' + @hotel.node.header %>
+
+<div class="page-header">
+  <h1><%= category.name %></h1>
+</div>
+
+<%= render 'photos/dynamic_form', gallery: category.gallery %>
+
+<div class="row">
+  <div class="col-lg-9">
+
+    <h3>Description</h3>
+    <div>
+      <%= markdown category.description %>
+    </div>
+
+    <% if category.respond_to?(:comment_threads) %>
+      <h3>Comments</h3>
+      <%= render 'comments/comments_block', commentable: category %>
+    <% end %>
+
+  </div>
+
+</div>

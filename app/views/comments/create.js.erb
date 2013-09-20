@@ -1,1 +1,5 @@
 $('#comments').append('<%= escape_javascript(render @comment) %>')
+$('#comment_title').val('')
+$('#comment_body').val('')
+$('#add_comment_button').show()
+$('#add_comment_form').hide()

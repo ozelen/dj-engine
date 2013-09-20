@@ -71,11 +71,11 @@ DjEngine::Application.routes.draw do
     # shortcut to hotel by slug
     get ':hotel_slug'          => 'hotels#show', constraints: SlugConstraint.new('Hotel'), as: :slug_hotel
     scope ':hotel_slug', constraints: SlugConstraint.new('Hotel') do
-      match 'rooms'            => 'rooms#index',               as: :slug_hotel_rooms
-      get   'rooms/:id'        => 'rooms#show',                as: :hotel_room
-      match 'rooms/:id/album(/:photo_id)'        => 'rooms#show',                as: :room_album
-      match 'services'         => 'services#index',            as: :slug_hotel_services
-      get   'services/:id'     => 'services#show',             as: :hotel_service
+      get 'rooms'            => 'rooms#index',                 as: :slug_hotel_rooms
+      get   'rooms/:id'      => 'rooms#show',                  as: :slug_hotel_room
+      get 'rooms/:id/album(/:photo_id)'        => 'rooms#show',                as: :room_album
+      get 'services'           => 'services#index',            as: :slug_hotel_services
+      get 'services/:id'       => 'services#show',             as: :slug_hotel_service
       match 'pricelist'        => 'hotels#pricelist',          as: :slug_hotel_pricelist
       match 'pricelist/edit'   => 'hotels#edit_pricelist',     as: :slug_edit_hotel_pricelist
       match 'album(/:photo_id)'=> 'hotels#album',              as: :hotel_album

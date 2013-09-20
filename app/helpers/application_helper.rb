@@ -24,10 +24,10 @@ module ApplicationHelper
     str + symbol * level
   end
 
-  def markdown(text)
+  def markdown(text, options=nil)
     return unless text
 
-    options = {
+    options ||= {
         hard_wrap: true,
         filter_html: true,
         autolink: true,
@@ -36,7 +36,7 @@ module ApplicationHelper
         quote: true
     }
 
-    markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML, options)
+    markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML.new(hard_wrap: true), options)
     markdown.render(text).html_safe
 
   end
