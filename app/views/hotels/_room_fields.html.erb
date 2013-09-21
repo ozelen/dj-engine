@@ -1,6 +1,9 @@
 <fieldset>
   <div class="form-group">
-    <div class="col-lg-3"></div>
+    <div class="col-lg-3">
+      <% type = f.object.type || Type.find_by_slug(f.object.class.name.pluralize.parameterize) %>
+      <%= f.select(:type_id, type.collection_for_parent_select('rooms'), {}, {class: 'form-control'}) %>
+    </div>
     <div class="col-lg-7">
       <%= f.text_field :name, placeholder: "Room name", class: 'form-control' %>
     </div>

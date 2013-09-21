@@ -1,0 +1,6 @@
+<h1>Location</h1>
+
+<% if @city.location %>
+  <%= @city.location.address %> <br>
+  <div id="map-canvas" style="height: 300px" lat="<%= @city.location.latitude %>" lng="<%= @city.location.longitude %>" mode="display" ></div>
+<% end %>

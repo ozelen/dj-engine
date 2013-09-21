@@ -15,7 +15,7 @@ class ResortsController < ApplicationController
   end
 
   def hotels
-    @hotels = Hotel.all # TODO: resort hotels scope
+    @hotels = Hotel.paginate(page: params[:page], per_page: 10) # TODO: resort hotels scope
     render template: 'hotels/index'
   end
 
@@ -92,7 +92,7 @@ class ResortsController < ApplicationController
 private
 
   def find_resort
-    id = params[:id] || params[:resort_id] || params[:resort]
+    id = params[:id] || params[:resort_id] || params[:resort_slug]
     if id
       @node = Node.find_by_name(id)
       @resort = @node.accessible if id

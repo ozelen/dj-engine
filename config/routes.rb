@@ -69,6 +69,7 @@ DjEngine::Application.routes.draw do
     end
 
     # shortcut to hotel by slug
+    get 'hotels(/page/:page)'             => 'hotels#index', as: :hotels_path
     get ':hotel_slug'          => 'hotels#show', constraints: SlugConstraint.new('Hotel'), as: :slug_hotel
     scope ':hotel_slug', constraints: SlugConstraint.new('Hotel') do
       get 'rooms'                         => 'rooms#index',               as: :slug_hotel_rooms

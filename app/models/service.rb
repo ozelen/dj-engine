@@ -12,6 +12,7 @@ class Service < ActiveRecord::Base
 
   attr_accessible :description, :hotel_id, :name, :price, :type_id, :values_attributes
 
+  after_create :create_gallery
 
   translates :name, :description, :price
 

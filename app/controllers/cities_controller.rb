@@ -13,6 +13,17 @@ class CitiesController < ApplicationController
     end
   end
 
+  def hotels
+    @hotels = @city.hotels.paginate(page: params[:page], per_page: 10) # TODO: resort hotels scope
+    render template: 'hotels/index'
+  end
+
+  def location
+  end
+
+  def album
+  end
+
   # GET /cities/1
   # GET /cities/1.json
   def show

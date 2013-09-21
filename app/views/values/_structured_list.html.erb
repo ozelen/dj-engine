@@ -2,7 +2,8 @@
   <% valuable.field_categories.uniq.each do |category| %>
       <% cat_values = valuable.values.select{|v| v.field.field_category == category } %>
       <li>
-        <%= category.name %>: <%= cat_values.map{|v| v.field.name }.join(',') %>
+        <strong><%= category.name %></strong>:
+        <%= cat_values.map{|v| v.field.name }.join(', ') %>
       </li>
   <% end %>
 </ul>

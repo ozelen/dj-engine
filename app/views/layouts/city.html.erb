@@ -1,5 +1,5 @@
 <% menu = [
-    [@city.name,    slug_city_path(@city),        -1 ],
+    ['Overview',    slug_city_path(@city),        -1 ],
     ['Description', city_description_path(@city), -1 ],
     ['Resorts',     city_resorts_path(@city),     -1 ],
     ['Hotels',      city_hotels_path(@city),      -1 ],
@@ -7,12 +7,18 @@
     ['Photos',      city_album_path(@city),       -1 ]
     #['Comments',    city_comments_path,    @city.comment_threads.count ]
 ]
-section = 'section'
-cover_photo = @hotel.gallery.rand(:cover).image_url(:content) rescue nil
+   cover_photo = @city.gallery.rand(:cover).image_url(:content) rescue nil
+   title_photo = @city.gallery.rand(:title).image_url(:mini)    rescue nil
 %>
 
+<% content_for :page_title do %>
+  <h1>
+    <%= link_to @city.name, resort_path(@city) %>
+  </h1>
+<% end %>
+
 <% content_for :head do %>
-  <%= render 'layouts/visual_header', menu: menu, header: @city.node.header, section: section, title: @city.node.title, gallery: @city.gallery %>
+  <%= render 'layouts/visual_header', menu: menu, header: @city.node.header, title: @city.node.title, gallery: @city.gallery %>
 <% end %>
 
 <% content_for :content do %>

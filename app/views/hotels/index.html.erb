@@ -5,6 +5,8 @@
 
 <div class="row">
 
-      <%= render @hotels %>
+  <%= render @hotels %>
+
+  <%= will_paginate @hotels, renderer: BootstrapPagination::Rails, bootstrap: 3 %>
 
 </div>
