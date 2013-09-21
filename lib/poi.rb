@@ -1,4 +1,4 @@
-require "poi/acts_as_poi"
+require "./lib/poi/acts_as_poi"
 
 module Poi
 end

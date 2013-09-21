@@ -18,7 +18,8 @@ class City < ActiveRecord::Base
   accepts_nested_attributes_for  :node, :location
   attr_accessible :region_id, :node_attributes, :location_attributes
 
-  default_scope include: :node, order: "nodes.header ASC"
+  #default_scope includes({node: :translations}).order("node_translations.header ASC")
+  default_scope order: :updated_at
 
   def to_param
     self.node.name

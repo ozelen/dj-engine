@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130921104408) do
+ActiveRecord::Schema.define(:version => 20130921110605) do
 
   create_table "addresses", :force => true do |t|
     t.string   "email"
@@ -266,6 +266,7 @@ ActiveRecord::Schema.define(:version => 20130921104408) do
   end
 
   add_index "nodes", ["accessible_id", "accessible_type"], :name => "index_nodes_on_accessible_id_and_accessible_type"
+  add_index "nodes", ["header"], :name => "index_nodes_on_header"
   add_index "nodes", ["name"], :name => "index_nodes_on_name"
 
   create_table "period_translations", :force => true do |t|

@@ -52,7 +52,7 @@ class Hotel < ActiveRecord::Base
 
   acts_as_poi
 
-  #default_scope joins(:node).joins("left outer join node_translations as t on nodes.id = t.node_id and t.locale = '#{I18n.locale}'").order('t.header ASC')
+  default_scope includes({node: :translations}).order("node_translations.header ASC")
 
   def to_param
     self.node.name

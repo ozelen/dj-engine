@@ -37,6 +37,7 @@ class ResortsController < ApplicationController
   def new
     @resort = Resort.new
     @resort.node = Node.new
+    @cities = City.all
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @resort }

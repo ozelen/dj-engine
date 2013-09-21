@@ -2,7 +2,7 @@ require File.expand_path('../boot', __FILE__)
 
 require 'rails/all'
 require './lib/core_ext/string'
-require 'poi'
+require './lib/poi'
 
 if defined?(Bundler)
   # If you precompile assets before deploying to production, use this line

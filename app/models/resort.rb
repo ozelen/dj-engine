@@ -1,4 +1,5 @@
 class Resort < ActiveRecord::Base
+
   # virtual model for resort's behaviour
   belongs_to :type
   has_one :location, as: :located
@@ -7,10 +8,10 @@ class Resort < ActiveRecord::Base
   has_one :gallery, as: :imageable
   has_many :photos, through: :gallery
 
-  has_many :resort_tour_assignments
+  has_many :resort_tour_assignments, dependent: :destroy
   has_many :tours, through: :resort_tour_assignments
 
-  has_many :resort_city_assignments
+  has_many :resort_city_assignments, dependent: :destroy
   has_many :cities, through: :resort_city_assignments
 
   accepts_nested_attributes_for :node, allow_destroy: true
