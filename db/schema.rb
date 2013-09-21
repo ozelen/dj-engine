@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130906142123) do
+ActiveRecord::Schema.define(:version => 20130921104408) do
 
   create_table "addresses", :force => true do |t|
     t.string   "email"
@@ -57,12 +57,10 @@ ActiveRecord::Schema.define(:version => 20130906142123) do
   add_index "authentications", ["user_id"], :name => "index_authentications_on_user_id"
 
   create_table "cities", :force => true do |t|
-    t.string   "name"
-    t.text     "description"
     t.float    "location"
     t.integer  "region_id"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "comments", :force => true do |t|
@@ -165,14 +163,12 @@ ActiveRecord::Schema.define(:version => 20130906142123) do
   add_index "hotel_translations", ["locale"], :name => "index_hotel_translations_on_locale"
 
   create_table "hotels", :force => true do |t|
-    t.string   "name"
-    t.text     "description"
     t.float    "location"
     t.integer  "city_id"
     t.integer  "user_id"
     t.string   "ident"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
     t.integer  "type_id"
   end
 
@@ -375,11 +371,19 @@ ActiveRecord::Schema.define(:version => 20130906142123) do
 
   create_table "regions", :force => true do |t|
     t.integer  "parent_id"
-    t.string   "name"
-    t.text     "description"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
+
+  create_table "resort_city_assignments", :force => true do |t|
+    t.integer  "resort_id"
+    t.integer  "city_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "resort_city_assignments", ["city_id"], :name => "index_resort_city_assignments_on_city_id"
+  add_index "resort_city_assignments", ["resort_id"], :name => "index_resort_city_assignments_on_resort_id"
 
   create_table "resort_tour_assignments", :force => true do |t|
     t.integer  "resort_id"

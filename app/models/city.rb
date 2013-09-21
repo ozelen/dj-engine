@@ -1,4 +1,6 @@
 class City < ActiveRecord::Base
+  extend Poi
+
   belongs_to :region
   has_many :hotels
   has_one :location, as: :located, dependent: :destroy
@@ -7,11 +9,16 @@ class City < ActiveRecord::Base
   has_one :gallery, as: :imageable
   has_many :photos, through: :gallery
 
+  has_many :resort_city_assignments
+  has_many :resorts, through: :resort_city_assignments
+
   after_create :create_gallery
   acts_as_taggable_on :portals
 
   accepts_nested_attributes_for  :node, :location
   attr_accessible :region_id, :node_attributes, :location_attributes
+
+  default_scope include: :node, order: "nodes.header ASC"
 
   def to_param
     self.node.name

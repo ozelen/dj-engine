@@ -8,7 +8,6 @@ class NodesController < ApplicationController
 
   def index
     @nodes = Node.all
-    @node = Node.find_by_name!('skiworld')
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @nodes }

@@ -5,7 +5,7 @@ class CitiesController < ApplicationController
   before_filter :find_city, except: [:new, :my, :index, :create]
   layout 'city', except: [:index, :new]
   def index
-    @cities = City.all
+    @cities = City.order_by_name
 
     respond_to do |format|
       format.html # index.html.erb
@@ -35,6 +35,9 @@ class CitiesController < ApplicationController
   end
 
   def description
+  end
+
+  def resorts
   end
 
   # GET /cities/new

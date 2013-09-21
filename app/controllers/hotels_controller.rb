@@ -4,7 +4,7 @@ class HotelsController < ApplicationController
   # GET /hotels
   # GET /hotels.json
   def index
-    @hotels = Hotel.paginate(page: params[:page], per_page: 10)
+    @hotels = Hotel.order_by_name.paginate(page: params[:page], per_page: 10)
     respond_to do |format|
       format.html { render layout: 'stream' if params[:stream] }
       format.json { render json: @hotels }

@@ -1,4 +1,6 @@
 class Hotel < ActiveRecord::Base
+  extend Poi
+
   has_one :node, as: :accessible, dependent: :destroy#, after_add: :create_node #, before_destroy: :destroy_node
   belongs_to :city
   belongs_to :user
@@ -42,13 +44,15 @@ class Hotel < ActiveRecord::Base
                   :gallery_attributes, :photos_attributes,
                   :location_attributes, :address_attributes
 
-  translates :name, :description
-
   validate :validate_properties
 
   acts_as_commentable
 
   after_create :create_gallery
+
+  acts_as_poi
+
+  #default_scope joins(:node).joins("left outer join node_translations as t on nodes.id = t.node_id and t.locale = '#{I18n.locale}'").order('t.header ASC')
 
   def to_param
     self.node.name
@@ -92,10 +96,6 @@ class Hotel < ActiveRecord::Base
 
   def slug=(slug)
     node.name=slug
-  end
-
-  def self.find_by_slug slug
-    Node.find_by_name(slug).accessible
   end
 
   def get_photos_from_collection *col

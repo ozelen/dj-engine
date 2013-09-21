@@ -113,7 +113,7 @@ DjEngine::Application.routes.draw do
     end
 
     # Cities
-    match ':city_slug'      => 'cities#show',       as: :slug_city,          constraints: SlugConstraint.new('City')
+    get ':city_slug'      => 'cities#show',           as: :slug_city,          constraints: SlugConstraint.new('City')
     scope ':city_slug', constraints: SlugConstraint.new('City') do
       match 'description'   => 'cities#description',  as: :city_description
       match 'hotels'        => 'cities#hotels',       as: :city_hotels
@@ -125,8 +125,8 @@ DjEngine::Application.routes.draw do
 
     # Resorts
     resources :resorts
-    get 'resorts' => 'resorts#index', as: :resorts
-    match ':resort_slug'    => 'resorts#show',      as: :resort,          constraints: SlugConstraint.new('Resort')
+    #get 'resorts' => 'resorts#index', as: :resorts
+    match ':resort_slug'    => 'resorts#show',      as: :slug_resort,          constraints: SlugConstraint.new('Resort')
 
     scope ':resort_slug', constraints: SlugConstraint.new('Resort') do
       match 'hotels'        => 'resorts#hotels',    as: :resort_hotels

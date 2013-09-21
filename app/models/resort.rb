@@ -10,10 +10,15 @@ class Resort < ActiveRecord::Base
   has_many :resort_tour_assignments
   has_many :tours, through: :resort_tour_assignments
 
+  has_many :resort_city_assignments
+  has_many :cities, through: :resort_city_assignments
+
   accepts_nested_attributes_for :node, allow_destroy: true
   accepts_nested_attributes_for :gallery, :photos, allow_destroy: true
   accepts_nested_attributes_for :location, allow_destroy: true
-  attr_accessible :gallery_attributes, :node_attributes, :location_attributes
+  accepts_nested_attributes_for :resort_city_assignments, allow_destroy: true
+
+  attr_accessible :gallery_attributes, :node_attributes, :location_attributes, :resort_city_assignments_attributes
   acts_as_commentable
 
   after_create :create_gallery
