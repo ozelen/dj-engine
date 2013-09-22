@@ -14,6 +14,12 @@
 
   <%= render 'nodes/fields_for_accessible', f: f %>
 
+  <fieldset>
+    <legend>location</legend>
+    <!-- Location -->
+    <%= render 'locations/form', f: f %>
+  </fieldset>
+
   <!-- Resorts -->
   <fieldset>
 
@@ -23,15 +29,19 @@
     <% end %>
 
     <div class="row">
-      <div class="col-lg-10"></div>
-      <div class="col-lg-2">
+      <div class="col-lg-offset-3 col-lg-2">
         <%= link_to_add_fields "Add a City", f, :resort_city_assignments %>
       </div>
     </div>
 
   </fieldset>
 
-  <div class="actions">
-    <%= f.submit %>
+  <hr>
+
+  <div class="row">
+    <div class="col-lg-9 col-lg-offset-3">
+      <%= f.submit class: 'btn btn-primary' %>
+    </div>
   </div>
+
 <% end %>

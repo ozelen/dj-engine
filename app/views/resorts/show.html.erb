@@ -1,4 +1,9 @@
-<h1><%= @resort.node.header %></h1>
+<% content_for :page_title do %>
+  <h1>
+    <%= link_to @resort.name, resort_path(@resort) %> <small>resort</small>
+  </h1>
+<% end %>
+
 <div class="content">
   <%= markdown @resort.node.content %>
 </div>

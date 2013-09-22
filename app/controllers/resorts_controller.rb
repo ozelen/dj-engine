@@ -1,6 +1,6 @@
 class ResortsController < ApplicationController
   before_filter :find_resort, except: [:new, :create]
-  layout 'resort', only: [:show, :hotels, :blog, :album]
+  layout 'resort', except: [:index, :new]
   def index
     @resorts = Resort.all
     #@resorts = params[:stream] ? Resort.all : Stream.find_by_slug(params[:stream]).resorts
@@ -11,12 +11,20 @@ class ResortsController < ApplicationController
     end
   end
 
+  def description
+  end
+
   def album
   end
 
   def hotels
-    @hotels = Hotel.paginate(page: params[:page], per_page: 10) # TODO: resort hotels scope
-    render template: 'hotels/index'
+    @hotels = @resort.hotels.paginate(page: params[:page], per_page: 10)
+  end
+
+  def hotels_city
+    @city = City.find_by_slug(params[:city])
+    @hotels = @city.hotels.paginate(page: params[:page], per_page: 10)
+    render template: 'resorts/hotels'
   end
 
   def blog
@@ -37,6 +45,7 @@ class ResortsController < ApplicationController
   def new
     @resort = Resort.new
     @resort.node = Node.new
+    @resort.location = Location.new
     @cities = City.all
     respond_to do |format|
       format.html # new.html.erb
@@ -46,6 +55,7 @@ class ResortsController < ApplicationController
 
   # GET /resorts/1/edit
   def edit
+    @cities = City.all
   end
 
   # POST /resorts
@@ -96,6 +106,8 @@ private
     if id
       @node = Node.find_by_name(id)
       @resort = @node.accessible if id
+      connected_cities_arr = @resort.cities.to_a
+      @cities = Location.near(@resort.location, 20).where(located_type: 'City').map{|l| l.located if connected_cities_arr.include?(l.located) }
     end
   end
 

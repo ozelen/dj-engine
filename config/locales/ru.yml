@@ -8,6 +8,9 @@ ru:
     index:
       title: "Список гостиниц"
 
+  units:
+    distance:
+      km_to: "км. до:"
 
   time:
     formats:

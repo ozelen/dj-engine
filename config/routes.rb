@@ -129,11 +129,13 @@ DjEngine::Application.routes.draw do
     match ':resort_slug'    => 'resorts#show',      as: :slug_resort,          constraints: SlugConstraint.new('Resort')
 
     scope ':resort_slug', constraints: SlugConstraint.new('Resort') do
-      match 'hotels'        => 'resorts#hotels',    as: :resort_hotels
-      match 'blog'          => 'resorts#blog',      as: :resort_blog
-      match 'posts/:post_id'=> 'posts#show',        as: :resort_post
-      match 'album'         => 'resorts#album',     as: :resort_album
-      match 'comments'      => 'resorts#comments',  as: :resort_comments
+      match 'description'   => 'resorts#description', as: :resort_description
+      match 'hotels'        => 'resorts#hotels',      as: :resort_hotels
+      match 'hotels/:city'  => 'resorts#hotels_city', as: :resort_hotels_city
+      match 'blog'          => 'resorts#blog',        as: :resort_blog
+      match 'posts/:post_id'=> 'posts#show',          as: :resort_post
+      match 'album'         => 'resorts#album',       as: :resort_album
+      match 'comments'      => 'resorts#comments',    as: :resort_comments
     end
 
     resources :tours

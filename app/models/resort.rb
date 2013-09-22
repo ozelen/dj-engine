@@ -14,6 +14,8 @@ class Resort < ActiveRecord::Base
   has_many :resort_city_assignments, dependent: :destroy
   has_many :cities, through: :resort_city_assignments
 
+  has_many :hotels, through: :cities
+
   accepts_nested_attributes_for :node, allow_destroy: true
   accepts_nested_attributes_for :gallery, :photos, allow_destroy: true
   accepts_nested_attributes_for :location, allow_destroy: true
@@ -31,6 +33,10 @@ class Resort < ActiveRecord::Base
 
   def name
     node.header
+  end
+
+  def description
+    node.content
   end
 
 end

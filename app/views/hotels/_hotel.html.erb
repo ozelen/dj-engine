@@ -1,11 +1,18 @@
-<div class="hotel-item clearfix">
+<%
+   landmark       ||= @default_landmark
+   landmark_link  ||= nil
+%>
 
+<div class="hotel-item clearfix">
 
   <div class="caption">
     <h3><%= link_to hotel.node.header, node_path(hotel.node.name) %></h3>
     <div>
       <%= hotel.type.name rescue '' %>
     </div>
+    <% if landmark.present? %>
+      <%= distance_between(hotel, landmark, landmark_link) %>
+    <% end %>
   </div>
 
 </div>

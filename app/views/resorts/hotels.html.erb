@@ -1,0 +1,19 @@
+<%- model_class = Hotel -%>
+<div class="page-header">
+  <h1><%= @resort.name %>, hotels</h1>
+</div>
+
+<ul class="nav nav-tabs">
+  <li class="<%= 'active' unless params[:city] %>"><%= link_to 'All cities', resort_hotels_path(@resort) %></li>
+  <% @cities.each do |city| %>
+    <li class="<%= 'active' if params[:city] == city.node.name %>"><%= link_to city.name, resort_hotels_city_path(@resort, city) %></li>
+  <% end %>
+</ul>
+
+<div class="row">
+
+  <%= render @hotels, landmark: @resort %>
+
+  <%= will_paginate @hotels, renderer: BootstrapPagination::Rails, bootstrap: 3 %>
+
+</div>

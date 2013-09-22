@@ -1,18 +1,20 @@
 <% menu = [
-    ['Info',        slug_resort_path(@resort),      -1 ],
-    ['Hotels',      resort_hotels_path(@resort),    -1 ],
-    ['Blog',        resort_blog_path(@resort),      -1 ],
-    ['Photos',      resort_album_path(@resort),     -1 ],
+    ['Overview',    slug_resort_path(@resort),        -1 ],
+    ['Description', resort_description_path(@resort), -1 ],
+    ['Hotels',      resort_hotels_path(@resort),      -1 ],
+    ['Blog',        resort_blog_path(@resort),        -1 ],
+    ['Photos',      resort_album_path(@resort),       -1 ],
     ['Comments',    resort_comments_path(@resort),  @resort.comment_threads.count ],
 ]
    cover_photo = @resort.gallery.rand(:cover).image_url(:content) rescue nil
    title_photo = @resort.gallery.rand(:title).image_url(:mini)    rescue nil
 %>
 
-<% content_for :page_title do %>
-  <h1>
-    <%= link_to @resort.name, resort_path(@resort) %>
-  </h1>
+<% content_for :manage_menu do %>
+  <% if can? :manage, @resort %>
+    <li><%= link_to t('.edit',    :default => t("helpers.links.edit")),     edit_resort_path(@resort) %></li>
+    <li><%= link_to t('.destroy', :default => t("helpers.links.destroy")),  resort_path(@resort), :method => 'delete', :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) } %></li>
+  <% end %>
 <% end %>
 
 <% content_for :head do %>
