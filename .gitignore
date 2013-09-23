@@ -16,7 +16,7 @@
 
 /.idea
 /.idea/*
-Gemfile.lock
+#Gemfile.lock
 
 /public/uploads
 /public/uploads/*
