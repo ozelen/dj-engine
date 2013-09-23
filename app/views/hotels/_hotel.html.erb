@@ -65,7 +65,7 @@
                   <%= hotel.current_period.title %> <span class="caret"></span>
                 </button>
                 <ul class="dropdown-menu" role="menu">
-                  <% hotel.periods.each do |period| %>
+                  <% hotel.periods.last(5).each do |period| %>
                     <%= content_tag_for(:li, period, class: period == hotel.current_period ? 'active' : nil) do %>
                       <a href="#"><%= period.title %></a>
                     <% end %>

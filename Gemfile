@@ -57,3 +57,4 @@ gem 'redcarpet' # markdown text
 gem 'reverse_markdown'
 gem 'sanitize'
 gem 'will_paginate-bootstrap'
+gem 'fog'
