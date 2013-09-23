@@ -21,4 +21,18 @@ class Room < ActiveRecord::Base
 
   acts_as_commentable
 
+  def caption
+    if name.present? and type.present? and type.parent.present?
+      "#{name} (#{type.name})"
+    elsif name.present?
+      name
+    elsif type.present?
+      type.name
+    end
+  end
+
+  def price_per_period preiod
+    prices.last.value if preiod.present? and prices.last
+  end
+
 end

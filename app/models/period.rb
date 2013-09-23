@@ -9,7 +9,8 @@ class Period < ActiveRecord::Base
   translates :name
 
   def title
-    "#{self.name} (#{self.since.to_formatted_s :short} - #{self.till.to_formatted_s :short})"
+    dates = "#{self.since.to_formatted_s :short} - #{self.till.to_formatted_s :short}"
+    name.present? ? "#{name} (#{dates})" : dates
   end
 
 

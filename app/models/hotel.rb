@@ -108,4 +108,8 @@ class Hotel < ActiveRecord::Base
     photos.dup.concat(get_photos_from_collection(rooms, services))
   end
 
+  def current_period
+    periods.last # TODO: select current period
+  end
+
 end

@@ -1,18 +1,70 @@
 <%
    landmark       ||= @default_landmark
    landmark_link  ||= nil
+   img              = hotel.gallery.title.image_url(:small) rescue nil
 %>
 
 <div class="hotel-item clearfix">
-
-  <div class="caption">
-    <h3><%= link_to hotel.node.header, node_path(hotel.node.name) %></h3>
-    <div>
-      <%= hotel.type.name rescue '' %>
+  <div class="row">
+    <div class="col-lg-6 col-lg-offset-2">
+      <h3>
+        <%= link_to hotel.node.header, node_path(hotel.node.name) %>
+        <small><%= hotel.type.name rescue '' %></small>
+      </h3>
     </div>
-    <% if landmark.present? %>
-      <%= distance_between(hotel, landmark, landmark_link) %>
-    <% end %>
+    <div class="col-lg-3">
+
+    </div>
   </div>
+  <div class="row">
+    <div class="col-lg-2">
+      <%= image_tag(img, class: 'img-rounded thumbnail') if img %>
+
+      <div class="row">
+        <div class="col-lg-4">
+          <% if hotel.periods.present? %>
+            <div class="btn-group">
+              <button type="button" class="btn btn-xs btn-default dropdown-toggle" data-toggle="dropdown">
+                <%= hotel.current_period.title %> <span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu" role="menu">
+                <% hotel.periods.each do |period| %>
+                  <li class="<%= 'active' if period == hotel.current_period %>"><a href="#"><%= period.title %></a></li>
+                <% end %>
+              </ul>
+            </div>
+          <% end %>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="col-lg-10 details">
+      <h6><%= distance_between(hotel, landmark, landmark_link) if landmark.present? %></h6>
+      <% if hotel.rooms.present? %>
+        <% hotel.rooms.take(4).each do |room| %>
+          <div class="row">
+            <div class="col-lg-10">
+              <%= room.caption %>
+            </div>
+            <div class="col-lg-2">
+              <% room.prices.each do |price| %>
+                <span class="price <%= 'closed' unless price.period == hotel.current_period %>"><%= price.value %></span>
+              <% end %>
+            </div>
+          </div>
+        <% end %>
+        <% if hotel.rooms.count > 4 %>
+          <div class="row">
+            <div class="col-lg-10">
+              <%= link_to "See all rooms (#{hotel.rooms.count})", slug_hotel_rooms_path(hotel) %>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
+
+    </div>
+  </div>
+
 
 </div>
