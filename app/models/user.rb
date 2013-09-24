@@ -11,17 +11,24 @@ class User < ActiveRecord::Base
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me
-  before_update :remain_roles_for_non_admin
+  before_save :remain_roles_for_non_admin, :set_email_to_address
 
   has_many :hotels
   has_many :assignments
   has_many :authentications, dependent: :destroy
   has_many :posts, as: :channel
+  has_one :address, as: :addressable, dependent: :destroy
 
-  attr_accessible :username, :password, :email, :first_name, :last_name, :address, :phone, :password_confirmation, :roles
+  accepts_nested_attributes_for :address, allow_destroy: true
+
+  attr_accessible :username, :password, :email, :first_name, :last_name, :address, :phone, :password_confirmation, :roles, :address_attributes
 
   def name
     "#{self.first_name} #{self.last_name}"
+  end
+
+  def set_email_to_address # ugly workaround, but don't want to extern the email into other (not necessary) model
+    address.email = email if address
   end
 
   scope :with_role, lambda { |role| {:conditions => "roles_mask & #{2**ROLES.index(role.to_s)} > 0"} }
@@ -40,10 +47,17 @@ class User < ActiveRecord::Base
     roles.include? role.to_s
   end
 
+  def admin?
+    role? :admin
+  end
 
   def remain_roles_for_non_admin
-    this_user = User.find(self.id)
-    self.roles_mask = User.find(self.id).roles_mask if !this_user.role? :admin # Work around to omit self setting roles for non admins
+    if new_record?
+      self.roles_mask = nil unless username=='oleksa' and valid?
+    else
+      this_user = User.find(self.id)
+      self.roles_mask = User.find(self.id).roles_mask if !this_user.role? :admin # Work around to omit self setting roles for non admins
+    end
   end
 
   def users_available
