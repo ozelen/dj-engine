@@ -13,7 +13,7 @@ namespace :import do
       cities_index[c.id] = new_city.id if new_city
     end
 
-    HbObject.all.each do |o|
+    HbObject.where("Id = 512").each do |o|
       puts "Object##{o.Id}     #{o.content.title('ru')} [#{o.slug}]"
       puts "Type:         #{o.new_class.name}"      rescue nil
       puts "Profile:      #{o.new_prof.root.name}"  rescue nil
@@ -79,7 +79,7 @@ namespace :import do
 
     else
 
-      location = if legacy_object.respond_to? :location
+      location = if legacy_object.location
                    legacy_object.location
                  elsif legacy_object.respond_to? :lat, :lng
                    legacy_object
@@ -95,7 +95,9 @@ namespace :import do
       if legacy_object.instance_of? HbObject
         slug = legacy_object.AccountCode.blank? ? legacy_object.Id : legacy_object.AccountCode
         slug = Node.find_by_name(slug) ? "#{slug}_d_#{legacy_object.Id}" : slug
+        slug = 'uniqname'
         # TODO: substitute escapeHTML to sanitize after migration on rails 4
+        puts "Create hotel #{slug}"
         new_object = Hotel.create!(
             node_attributes: {name: slug},
             address_attributes: {

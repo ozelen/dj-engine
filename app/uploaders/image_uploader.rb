@@ -22,7 +22,7 @@ class ImageUploader < CarrierWave::Uploader::Base
 
   # Choose what kind of storage to use for this uploader:
   # storage :file
-  storage :fog
+  storage Rails.env.production? ? :fog : :file
 
   #include CarrierWave:MimeTypes
   #process :set_content_type
@@ -57,21 +57,17 @@ class ImageUploader < CarrierWave::Uploader::Base
   end
 
   version :small do
-    process thumbing: 100
-  end
-
-  version :thumb do
-    process thumbing: [300, 200]
+    process thumbing: 150
   end
 
   version :content do
-    process reducing: [770, 500]
+    process reducing: [840, 460]
     process :watermarking
   end
 
-  version :cover do
-    process thumbing: [770, 320]
-  end
+  #version :cover do
+  #  process thumbing: [770, 320]
+  #end
 
   version :big do
     process :watermarking
