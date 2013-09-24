@@ -13,7 +13,6 @@ namespace :import do
       cities_index[c.id] = new_city.id if new_city
     end
 
-    # TODO: unique validation fail
     HbObject.all.each do |o|
       puts "Object##{o.Id}     #{o.content.title('ru')} [#{o.slug}]"
       puts "Type:         #{o.new_class.name}"      rescue nil
@@ -37,7 +36,7 @@ namespace :import do
 
       periods_index = import_periods!(hotel, o)
 
-      #import_images(hotel, object_album_dir, find_gallery(o, 'Objects'))
+      import_images(hotel, object_album_dir, find_gallery(o, 'Objects'))
 
       o.hb_categories.each do |c|
         next unless c.content
@@ -53,7 +52,7 @@ namespace :import do
         import_prices(new_category, c, periods_index) if new_category.instance_of? Room
 
         category_album_dir = object_categories_dir+"/#{c.Id}/album"
-        #import_images(new_category, category_album_dir, find_gallery(c, 'Categories'))
+        import_images(new_category, category_album_dir, find_gallery(c, 'Categories'))
         hr 40, '`'
       end
 
@@ -79,11 +78,19 @@ namespace :import do
       end
 
     else
-      location = legacy_object.location
-      location_attributes = location ? {
+
+      location = if legacy_object.respond_to? :location
+                   legacy_object.location
+                 elsif legacy_object.respond_to? :lat, :lng
+                   legacy_object
+                 else
+                   {lat:nil,lng:nil}
+                 end
+
+      location_attributes = {
           latitude:  location.lat,
           longitude: location.lng
-      } : {}
+      }
 
       if legacy_object.instance_of? HbObject
         slug = legacy_object.AccountCode.blank? ? legacy_object.Id : legacy_object.AccountCode
