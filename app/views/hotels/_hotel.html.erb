@@ -8,8 +8,8 @@
   <div class="row">
     <div class="col-lg-10 col-lg-offset-2">
       <h3>
-        <%= link_to hotel.node.header, node_path(hotel.node.name) %>
-        <small><%= hotel.type.name rescue '' %>, <%= hotel.city.name %></small>
+        <%= link_to hotel.name, slug_hotel_path(hotel) %>
+        <small><%= hotel.type.name rescue '' %>, <%= hotel.city.name rescue '' %></small>
       </h3>
     </div>
     <div class="col-lg-3">

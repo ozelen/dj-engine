@@ -150,18 +150,6 @@ ActiveRecord::Schema.define(:version => 20130921110605) do
   add_index "hotel_tour_assignments", ["hotel_id"], :name => "index_hotel_tour_assignments_on_hotel_id"
   add_index "hotel_tour_assignments", ["tour_id"], :name => "index_hotel_tour_assignments_on_tour_id"
 
-  create_table "hotel_translations", :force => true do |t|
-    t.integer  "hotel_id"
-    t.string   "locale"
-    t.string   "name"
-    t.text     "description"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
-  end
-
-  add_index "hotel_translations", ["hotel_id"], :name => "index_hotel_translations_on_hotel_id"
-  add_index "hotel_translations", ["locale"], :name => "index_hotel_translations_on_locale"
-
   create_table "hotels", :force => true do |t|
     t.float    "location"
     t.integer  "city_id"
@@ -542,8 +530,8 @@ ActiveRecord::Schema.define(:version => 20130921110605) do
   add_index "users", ["username"], :name => "index_users_on_username"
 
   create_table "values", :force => true do |t|
-    t.integer  "field_id",       :limit => 255
-    t.integer  "measure_id",     :limit => 255
+    t.integer  "field_id"
+    t.integer  "measure_id"
     t.string   "value_string"
     t.integer  "value_integer"
     t.float    "value_float"
@@ -551,8 +539,8 @@ ActiveRecord::Schema.define(:version => 20130921110605) do
     t.time     "value_time"
     t.integer  "evaluated_id"
     t.string   "evaluated_type"
-    t.datetime "created_at",                    :null => false
-    t.datetime "updated_at",                    :null => false
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
     t.boolean  "value_boolean"
   end
 

@@ -1,8 +1,8 @@
 class CreateValues < ActiveRecord::Migration
   def change
     create_table :values do |t|
-      t.string :field_id
-      t.string :measure_id
+      t.integer :field_id
+      t.integer :measure_id
 
       t.string :value_string
       t.integer :value_integer

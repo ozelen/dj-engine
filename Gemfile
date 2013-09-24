@@ -17,12 +17,16 @@ group :development do
   gem "nifty-generators"
   gem 'mysql2'
   gem 'activerecord-mysql-adapter'
+  gem 'taps', require: false
   gem 'sqlite3'
 end
 
 group :production do
-  gem 'pg'
+  gem 'taps'
 end
+
+gem 'pg'
+#gem 'activerecord-postgres-adapter'
 
 gem "therubyracer"
 gem "less-rails" #Sprockets (what Rails 3.1 uses for its asset pipeline) supports LESS
