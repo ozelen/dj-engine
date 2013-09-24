@@ -6,10 +6,10 @@
 
 <div class="hotel-item clearfix">
   <div class="row">
-    <div class="col-lg-6 col-lg-offset-2">
+    <div class="col-lg-10 col-lg-offset-2">
       <h3>
-        <%= link_to hotel.node.header, node_path(hotel.node.name) %>
-        <small><%= hotel.type.name rescue '' %></small>
+        <%= link_to hotel.name, slug_hotel_path(hotel) %>
+        <small><%= hotel.type.name rescue '' %>, <%= hotel.city.name rescue '' %></small>
       </h3>
     </div>
     <div class="col-lg-3">
@@ -19,37 +19,29 @@
   <div class="row">
     <div class="col-lg-2">
       <%= image_tag(img, class: 'img-rounded thumbnail') if img %>
-
-      <div class="row">
-        <div class="col-lg-4">
-          <% if hotel.periods.present? %>
-            <div class="btn-group">
-              <button type="button" class="btn btn-xs btn-default dropdown-toggle" data-toggle="dropdown">
-                <%= hotel.current_period.title %> <span class="caret"></span>
-              </button>
-              <ul class="dropdown-menu" role="menu">
-                <% hotel.periods.each do |period| %>
-                  <li class="<%= 'active' if period == hotel.current_period %>"><a href="#"><%= period.title %></a></li>
-                <% end %>
-              </ul>
-            </div>
-          <% end %>
-        </div>
-      </div>
-
     </div>
 
     <div class="col-lg-10 details">
-      <h6><%= distance_between(hotel, landmark, landmark_link) if landmark.present? %></h6>
+
+      <div class="row">
+        <div class="col-lg-9">
+          <span class="distance" data-toggle="tooltip" data-placement="bottom" title="Distance does not consider road connections">
+            <%= distance_between(hotel, landmark, landmark_link) if landmark.present? %>
+          </span>
+        </div>
+      </div>
       <% if hotel.rooms.present? %>
         <% hotel.rooms.take(4).each do |room| %>
-          <div class="row">
+          <div class="row room">
             <div class="col-lg-10">
-              <%= room.caption %>
+              <%= link_to room.caption, slug_hotel_room_path(hotel, room) %>
             </div>
-            <div class="col-lg-2">
+            <div class="col-lg-2 price">
               <% room.prices.each do |price| %>
-                <span class="price <%= 'closed' unless price.period == hotel.current_period %>"><%= price.value %></span>
+                <% closed = price.period != hotel.current_period ? ' closed' : '' %>
+                <%= content_tag_for(:span, price, class: "period_#{price.period.id} #{closed}") do %>
+                  <%= price.value %>
+                <% end %>
               <% end %>
             </div>
           </div>
@@ -61,6 +53,29 @@
             </div>
           </div>
         <% end %>
+
+        <div class="row periods">
+          <div class="col-lg-9">
+            Prices are shown by period:
+          </div>
+          <div class="col-lg-3">
+            <% if hotel.periods.present? %>
+              <div class="btn-group pull-right">
+                <button type="button" class="btn btn-xs btn-default dropdown-toggle" data-toggle="dropdown">
+                  <%= hotel.current_period.title %> <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" role="menu">
+                  <% hotel.periods.last(5).each do |period| %>
+                    <%= content_tag_for(:li, period, class: period == hotel.current_period ? 'active' : nil) do %>
+                      <a href="#"><%= period.title %></a>
+                    <% end %>
+                  <% end %>
+                </ul>
+              </div>
+            <% end %>
+          </div>
+        </div>
+
       <% end %>
 
     </div>

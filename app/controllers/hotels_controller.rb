@@ -56,6 +56,10 @@ class HotelsController < ApplicationController
   def new
     @hotel = Hotel.new
     authorize! :create, @hotel
+    unless current_user.present?
+      redirect_to signup_url, notice: 'Register first'
+      return
+    end
 
     @hotel.node     = Node.new
     @hotel.user_id  = current_user.id

@@ -52,7 +52,7 @@ class Hotel < ActiveRecord::Base
 
   acts_as_poi
 
-  default_scope includes({node: :translations}).order("node_translations.header ASC")
+  default_scope includes({node: :translations}, :rooms, :services, :periods, :photos) # .order("node_translations.header ASC")
 
   def to_param
     self.node.name
