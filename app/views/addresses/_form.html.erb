@@ -1,10 +1,11 @@
-
-<div class="form-group">
-  <%= f.label :email, :class => 'control-label col-lg-3' %>
-  <div class="col-lg-9">
-    <%= f.text_field :email, :class => 'form-control', placeholder: 'Email' %>
+<% unless f.object.addressable_type == 'User' %>
+  <div class="form-group">
+    <%= f.label :email, :class => 'control-label col-lg-3' %>
+    <div class="col-lg-9">
+      <%= f.text_field :email, :class => 'form-control', placeholder: 'Email' %>
+    </div>
   </div>
-</div>
+<% end %>
 
 <div class="form-group">
   <%= f.label :website, :class => 'control-label col-lg-3' %>

@@ -48,14 +48,11 @@ DjEngine::Application.routes.draw do
 
     # User sessions
     resources :user_sessions
-    match 'login'  => "user_sessions#new",      as: :login
-    match 'logout' => "user_sessions#destroy",  as: :logout
 
     # User's preferences
     resources :users
-    resource :user, :as => 'account'  # a convenience route
-    match 'register' => 'users#new', :as => :signup
-    match 'account' => 'users#edit', :as => :account
+    resource :user, :as   => 'account'      # a convenience route
+
 
     # Hotels
     # hotel controls
