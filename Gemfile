@@ -63,3 +63,4 @@ gem 'sanitize'
 gem 'will_paginate-bootstrap'
 gem 'fog'
 gem "recaptcha", :require => "recaptcha/rails"
+gem 'activerecord-postgres-hstore'

@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  legatee_id: 1
+  legatee_type: MyString
+  legator_id: 1
+  legator_table: MyString
+
+two:
+  legatee_id: 1
+  legatee_type: MyString
+  legator_id: 1
+  legator_table: MyString

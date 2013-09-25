@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  provider: MyString
+  leader_id: 1
+  leader_type: MyString
+  params: MyString
+
+two:
+  provider: MyString
+  leader_id: 1
+  leader_type: MyString
+  params: MyString
