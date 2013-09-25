@@ -10,6 +10,7 @@ namespace :import do
     require 'tasks/import/models/images'
     require 'tasks/import/models/agreements'
     require 'tasks/import/models/comments'
+    require 'tasks/import/models/leads'
     require 'tasks/import/helpers'
     require 'tasks/import/import_types'
     require 'tasks/import/import_objects'
@@ -19,7 +20,7 @@ namespace :import do
 
     ### ACTION ###
 
-    import_types
+    #import_types
     import_objects
     #import_news
 

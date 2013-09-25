@@ -1,0 +1,55 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Dealable:</b>
+  <%= @deal.dealable_id %>
+</p>
+
+<p>
+  <b>Dealable type:</b>
+  <%= @deal.dealable_type %>
+</p>
+
+<p>
+  <b>Person name:</b>
+  <%= @deal.person_name %>
+</p>
+
+<p>
+  <b>Login:</b>
+  <%= @deal.login %>
+</p>
+
+<p>
+  <b>Password:</b>
+  <%= @deal.password %>
+</p>
+
+<p>
+  <b>Price:</b>
+  <%= @deal.price %>
+</p>
+
+<p>
+  <b>Begin date:</b>
+  <%= @deal.begin_date %>
+</p>
+
+<p>
+  <b>Expire date:</b>
+  <%= @deal.expire_date %>
+</p>
+
+<p>
+  <b>Contacts:</b>
+  <%= @deal.contacts %>
+</p>
+
+<p>
+  <b>Status:</b>
+  <%= @deal.status %>
+</p>
+
+
+<%= link_to 'Edit', edit_deal_path(@deal) %> |
+<%= link_to 'Back', deals_path %>

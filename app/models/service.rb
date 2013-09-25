@@ -7,10 +7,12 @@ class Service < ActiveRecord::Base
   has_many :field_categories, through: :fields
   has_one :gallery, as: :imageable, dependent: :destroy
   has_many :photos, through: :gallery
+  has_one :skiworld_legacy, as: :legatee, dependent: :destroy
 
   accepts_nested_attributes_for :values, allow_destroy: true
+  accepts_nested_attributes_for :skiworld_legacy, allow_destroy: true
 
-  attr_accessible :description, :hotel_id, :name, :price, :type_id, :values_attributes
+  attr_accessible :description, :hotel_id, :name, :price, :type_id, :values_attributes, :skiworld_legacy_attributes
 
   after_create :create_gallery
 

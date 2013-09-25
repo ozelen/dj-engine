@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130924191024) do
+ActiveRecord::Schema.define(:version => 20130925130036) do
 
   create_table "addresses", :force => true do |t|
     t.string   "email"
@@ -185,6 +185,19 @@ ActiveRecord::Schema.define(:version => 20130924191024) do
   add_index "hotels", ["city_id"], :name => "index_hotels_on_city_id"
   add_index "hotels", ["type_id"], :name => "index_hotels_on_type_id"
   add_index "hotels", ["user_id"], :name => "index_hotels_on_user_id"
+
+  create_table "leads", :force => true do |t|
+    t.string   "provider"
+    t.integer  "leader_id"
+    t.string   "leader_type"
+    t.string   "params"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  add_index "leads", ["leader_id", "leader_type"], :name => "index_leads_on_leader_id_and_leader_type"
+  add_index "leads", ["params"], :name => "index_leads_on_params"
+  add_index "leads", ["provider"], :name => "index_leads_on_provider"
 
   create_table "locations", :force => true do |t|
     t.string   "address"
@@ -466,6 +479,19 @@ ActiveRecord::Schema.define(:version => 20130924191024) do
 
   add_index "services", ["hotel_id"], :name => "index_services_on_hotel_id"
   add_index "services", ["type_id"], :name => "index_services_on_type_id"
+
+  create_table "skiworld_legacies", :force => true do |t|
+    t.integer  "legatee_id"
+    t.string   "legatee_type"
+    t.integer  "legator_id"
+    t.string   "legator_table"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+  end
+
+  add_index "skiworld_legacies", ["legatee_id", "legatee_type"], :name => "index_skiworld_legacies_on_legatee_id_and_legatee_type"
+  add_index "skiworld_legacies", ["legator_id"], :name => "index_skiworld_legacies_on_legator_id"
+  add_index "skiworld_legacies", ["legator_table"], :name => "index_skiworld_legacies_on_legator_table"
 
   create_table "streams", :force => true do |t|
     t.datetime "created_at", :null => false

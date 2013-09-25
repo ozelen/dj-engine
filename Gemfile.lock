@@ -34,6 +34,10 @@ GEM
       activerecord (>= 3.2.9)
       activesupport (>= 3.2.9)
       mysql (>= 2.9.0)
+    activerecord-postgres-hstore (0.7.6)
+      activerecord (>= 3.1)
+      pg-hstore (>= 1.1.5)
+      rake
     activeresource (3.2.13)
       activemodel (= 3.2.13)
       activesupport (= 3.2.13)
@@ -180,6 +184,7 @@ GEM
       cocaine (~> 0.5.0)
       mime-types
     pg (0.15.1)
+    pg-hstore (1.2.0)
     polyglot (0.3.3)
     rack (1.4.5)
     rack-cache (1.2)
@@ -266,6 +271,7 @@ PLATFORMS
 
 DEPENDENCIES
   activerecord-mysql-adapter
+  activerecord-postgres-hstore
   acts-as-taggable-on
   acts_as_commentable_with_threading
   ancestry

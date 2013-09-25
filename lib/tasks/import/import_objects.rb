@@ -2,16 +2,13 @@ namespace :import do
 
   def import_objects
     Hotel.destroy_all
-    #City.destroy_all
+    City.destroy_all
     cities_index = [] # indexing cities not to call db every time
 
     I18n.locale = :uk
     hr 100, '#'
 
-    #HbSettlement.where("PageId is not null").each do |c|
-    #  new_city = obj_create(c)
-    #  cities_index[c.id] = new_city.id if new_city
-    #end
+    import_cities cities_index
 
     HbObject.all.each do |o|
       puts "Object##{o.Id}     #{o.content.title('ru')} [#{o.slug}]"
@@ -68,26 +65,29 @@ namespace :import do
     end
   end
 
+  def import_cities cities_index
+    HbSettlement.where("PageId is not null").each do |c|
+      new_city = obj_create(c)
+      cities_index[c.id] = new_city.id if new_city
+    end
+  end
+
   def obj_create legacy_object
     profile = ''
 
     if legacy_object.instance_of? HbCategory
       profile = legacy_object.new_prof.root.slug rescue 'services'
-      if profile == 'rooms'
-        new_object = Room.create!
-      else
-        new_object = Service.create!
-      end
-
+      klass = profile == 'rooms' ? Room : Service
+      new_object = klass.create!(skiworld_legacy_attributes: { legator_id: legacy_object.Id, legator_table: 'Categories' })
     else
 
       location = if legacy_object.location
                    legacy_object.location
                  elsif legacy_object.respond_to? :lat, :lng
                    legacy_object
-                 else
-                   nil
                  end
+
+      location_attributes = { latitude:  location.lat, longitude: location.lng } if location
 
       if legacy_object.instance_of? HbObject
         slug = legacy_object.AccountCode.blank? ? legacy_object.Id : legacy_object.AccountCode
@@ -97,14 +97,12 @@ namespace :import do
         puts "Create hotel #{slug}"
         new_object = Hotel.new(
             node_attributes: {name: slug},
-            address_attributes: {
-                email:  Sanitize.clean(legacy_object.Email),
-                phone1: Sanitize.clean(legacy_object.Mob),
-                phone2: Sanitize.clean(legacy_object.Phones)
-            }
+            address_attributes: { email:  Sanitize.clean(legacy_object.Email), phone1: Sanitize.clean(legacy_object.Mob), phone2: Sanitize.clean(legacy_object.Phones) },
+            skiworld_legacy_attributes: { legator_id: legacy_object.Id, legator_table: 'Objects' },
+            lead_attributes: { provider: 'nezabarom', params: BookitHotel.get_attributes_by_object_id(legacy_object.Id) }
         )
 
-        new_object.location_attributes = { latitude:  location.lat, longitude: location.lng } if location
+        new_object.location_attributes = location_attributes if location_attributes.present?
 
         deals = Agreement.find_by_object_id legacy_object.Id
         deals_array = []
@@ -155,7 +153,9 @@ namespace :import do
         location_attributes.merge({ address: [legacy_object.name, legacy_object.district, legacy_object.region].select{|x| x if x.present? }.join(', ') })
         new_object = City.create!(
             node_attributes: {name: legacy_object.Ident},
-            location_attributes: location_attributes
+            location_attributes: location_attributes,
+            skiworld_legacy_attributes: { legator_id: legacy_object.Id, legator_table: 'Cities' },
+            lead_attributes: { provider: 'nezabarom', params: BookitCity.get_attributes_by_object_id(legacy_object.Id) }
         )
       end
     end
@@ -186,7 +186,7 @@ namespace :import do
   end
 
   def import_images obj, dir, gallery=nil
-    return # skip for a while, because toooo long
+    #return # skip for a while, because toooo long
     images_in(dir).each do |path|
       tags = (gallery.present? and gallery.TitleImage == path[1]) ? 'title, cover' : nil
       puts "Importing image #{path[1]} #{tags}"

@@ -11,10 +11,16 @@ class Room < ActiveRecord::Base
   has_many :fields, through: :values
   has_many :field_categories, through: :fields
 
+  has_one :lead, as: :leader, dependent: :destroy
+  has_one :skiworld_legacy, as: :legatee, dependent: :destroy
+
   accepts_nested_attributes_for :gallery
   accepts_nested_attributes_for :values, allow_destroy: true
+  accepts_nested_attributes_for :skiworld_legacy, allow_destroy: true
+  accepts_nested_attributes_for :lead, allow_destroy: true
+  accepts_nested_attributes_for :skiworld_legacy, allow_destroy: true
 
-  attr_accessible :description, :hotel_id, :name, :price, :type_id, :gallery_attributes, :values_attributes
+  attr_accessible :description, :hotel_id, :name, :price, :type_id, :gallery_attributes, :values_attributes, :skiworld_legacy_attributes
   translates :name, :description
 
   after_create :create_gallery

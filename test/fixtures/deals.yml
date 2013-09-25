@@ -1,0 +1,25 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  dealable_id: 1
+  dealable_type: MyString
+  person_name: MyString
+  login: MyString
+  password: MyString
+  price: 1
+  begin_date: 2013-09-24
+  expire_date: 2013-09-24
+  contacts: MyText
+  status: 1
+
+two:
+  dealable_id: 1
+  dealable_type: MyString
+  person_name: MyString
+  login: MyString
+  password: MyString
+  price: 1
+  begin_date: 2013-09-24
+  expire_date: 2013-09-24
+  contacts: MyText
+  status: 1

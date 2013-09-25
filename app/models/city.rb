@@ -12,11 +12,18 @@ class City < ActiveRecord::Base
   has_many :resort_city_assignments, dependent: :destroy
   has_many :resorts, through: :resort_city_assignments
 
+  has_one :lead, as: :leader, dependent: :destroy
+  has_one :skiworld_legacy, as: :legatee, dependent: :destroy
+
   after_create :create_gallery
   acts_as_taggable_on :portals
 
-  accepts_nested_attributes_for  :node, :location
-  attr_accessible :region_id, :node_attributes, :location_attributes
+  accepts_nested_attributes_for  :node, :location, allow_destroy: true
+  accepts_nested_attributes_for :skiworld_legacy, allow_destroy: true
+  accepts_nested_attributes_for :lead, allow_destroy: true
+
+  attr_accessible :region_id, :node_attributes, :location_attributes,
+                  :lead_attributes, :skiworld_legacy_attributes
 
   default_scope includes({node: :translations}).order("node_translations.header ASC")
   #default_scope order: :updated_at
