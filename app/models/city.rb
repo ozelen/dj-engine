@@ -3,13 +3,13 @@ class City < ActiveRecord::Base
 
   belongs_to :region
   has_many :hotels
-  has_one :location, as: :located, dependent: :destroy
-  has_one :node, as: :accessible, :dependent => :destroy
+  has_one :location, as: :located,  dependent: :destroy
+  has_one :node, as: :accessible,   dependent: :destroy
 
-  has_one :gallery, as: :imageable
+  has_one :gallery, as: :imageable, dependent: :destroy
   has_many :photos, through: :gallery
 
-  has_many :resort_city_assignments
+  has_many :resort_city_assignments, dependent: :destroy
   has_many :resorts, through: :resort_city_assignments
 
   after_create :create_gallery

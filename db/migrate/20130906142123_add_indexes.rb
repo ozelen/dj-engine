@@ -1,6 +1,5 @@
 class AddIndexes < ActiveRecord::Migration
   def up
-    add_index :nodes, :name
     add_index :rooms, :hotel_id
     add_index :services, :hotel_id
     add_index :periods, :hotel_id

@@ -2,10 +2,10 @@ class Resort < ActiveRecord::Base
 
   # virtual model for resort's behaviour
   belongs_to :type
-  has_one :location, as: :located
-  has_one :node, as: :accessible, dependent: :destroy
+  has_one :location, as: :located, dependent: :destroy
+  has_one :node, as: :accessible,   dependent: :destroy
   has_many :posts, as: :channel
-  has_one :gallery, as: :imageable
+  has_one :gallery, as: :imageable, dependent: :destroy
   has_many :photos, through: :gallery
 
   has_many :resort_tour_assignments, dependent: :destroy

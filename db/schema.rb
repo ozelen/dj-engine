@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130921110605) do
+ActiveRecord::Schema.define(:version => 20130924191024) do
 
   create_table "addresses", :force => true do |t|
     t.string   "email"
@@ -21,7 +21,7 @@ ActiveRecord::Schema.define(:version => 20130921110605) do
     t.string   "phone3"
     t.string   "fax"
     t.string   "skype"
-    t.string   "address"
+    t.text     "address"
     t.integer  "addressable_id"
     t.string   "addressable_type"
     t.datetime "created_at",       :null => false
@@ -29,7 +29,6 @@ ActiveRecord::Schema.define(:version => 20130921110605) do
   end
 
   add_index "addresses", ["addressable_id", "addressable_type"], :name => "index_addresses_on_addressable_id_and_addressable_type"
-  add_index "addresses", ["email"], :name => "index_addresses_on_email"
 
   create_table "assignments", :force => true do |t|
     t.integer  "user_id"
@@ -75,10 +74,33 @@ ActiveRecord::Schema.define(:version => 20130921110605) do
     t.integer  "rgt"
     t.datetime "created_at",                       :null => false
     t.datetime "updated_at",                       :null => false
+    t.string   "username"
   end
 
   add_index "comments", ["commentable_id", "commentable_type"], :name => "index_comments_on_commentable_id_and_commentable_type"
   add_index "comments", ["user_id"], :name => "index_comments_on_user_id"
+
+  create_table "deals", :force => true do |t|
+    t.integer  "dealable_id"
+    t.string   "dealable_type"
+    t.string   "person_name"
+    t.string   "login"
+    t.string   "password"
+    t.integer  "price"
+    t.date     "begin_date"
+    t.date     "expire_date"
+    t.text     "contacts"
+    t.integer  "status"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+  end
+
+  add_index "deals", ["begin_date"], :name => "index_deals_on_begin_date"
+  add_index "deals", ["dealable_id", "dealable_type"], :name => "index_deals_on_dealable_id_and_dealable_type"
+  add_index "deals", ["expire_date"], :name => "index_deals_on_expire_date"
+  add_index "deals", ["person_name"], :name => "index_deals_on_person_name"
+  add_index "deals", ["price"], :name => "index_deals_on_price"
+  add_index "deals", ["status"], :name => "index_deals_on_status"
 
   create_table "field_categories", :force => true do |t|
     t.string   "name"

@@ -1,9 +1,9 @@
 class Tour < ActiveRecord::Base
   belongs_to :user
-  has_one :gallery, as: :imageable
-  has_many :locations, as: :located
-  has_many :hotel_tour_assignments
-  has_many :resort_tour_assignments
+  has_one :gallery, as: :imageable,   dependent: :destroy
+  has_many :locations, as: :located,  dependent: :destroy
+  has_many :hotel_tour_assignments,   dependent: :destroy
+  has_many :resort_tour_assignments,  dependent: :destroy
   has_many :hotels,  through: :hotel_tour_assignments
   has_many :resorts, through: :resort_tour_assignments
   has_one :address, as: :addressable

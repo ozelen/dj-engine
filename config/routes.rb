@@ -13,6 +13,9 @@ DjEngine::Application.routes.draw do
 
 
 
+  resources :deals
+
+
   # users and authentications
   match '/auth/:provider/callback' => 'authentications#create'
   devise_for :users, :controllers => {

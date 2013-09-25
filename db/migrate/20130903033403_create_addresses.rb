@@ -1,5 +1,5 @@
 class CreateAddresses < ActiveRecord::Migration
-  def change
+  def self.up
     create_table :addresses do |t|
       t.string :email
       t.string :website
@@ -8,11 +8,15 @@ class CreateAddresses < ActiveRecord::Migration
       t.string :phone3
       t.string :fax
       t.string :skype
-      t.string :address
+      t.text :address
       t.belongs_to :addressable, polymorphic: true
 
       t.timestamps
     end
     add_index :addresses, [:addressable_id, :addressable_type]
+  end
+
+  def self.down
+    drop_table :addresses
   end
 end

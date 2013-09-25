@@ -6,7 +6,7 @@ class Node < ActiveRecord::Base
   validates :name, uniqueness: true, presence: true
   before_validation :generate_name
 
-  default_scope with_translations(I18n.locale).order('node_translations.header ASC')
+  #default_scope with_translations(I18n.locale).order('node_translations.header ASC') # makes terrible mistakes
 
   def self.from_param(param)
     find_by_name!(param)

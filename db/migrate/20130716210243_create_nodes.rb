@@ -1,7 +1,7 @@
 class CreateNodes < ActiveRecord::Migration
-  def change
+  def self.up
     create_table :nodes do |t|
-      t.integer :parent
+      t.string :parent
       t.string :name
       t.string :title
       t.string :header
@@ -9,5 +9,10 @@ class CreateNodes < ActiveRecord::Migration
 
       t.timestamps
     end
+
+    add_index :parent
+    add_index :name
+    add_index :header
+
   end
 end

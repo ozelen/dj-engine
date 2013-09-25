@@ -2,18 +2,18 @@ namespace :import do
 
   def import_objects
     Hotel.destroy_all
-    City.destroy_all
+    #City.destroy_all
     cities_index = [] # indexing cities not to call db every time
 
     I18n.locale = :uk
     hr 100, '#'
 
-    HbSettlement.where("PageId is not null").each do |c|
-      new_city = obj_create(c)
-      cities_index[c.id] = new_city.id if new_city
-    end
+    #HbSettlement.where("PageId is not null").each do |c|
+    #  new_city = obj_create(c)
+    #  cities_index[c.id] = new_city.id if new_city
+    #end
 
-    HbObject.where("Id = 512").each do |o|
+    HbObject.all.each do |o|
       puts "Object##{o.Id}     #{o.content.title('ru')} [#{o.slug}]"
       puts "Type:         #{o.new_class.name}"      rescue nil
       puts "Profile:      #{o.new_prof.root.name}"  rescue nil
@@ -33,6 +33,8 @@ namespace :import do
 
       puts "City: #{hotel.city_id}"
       classify hotel, o.new_fields
+
+      hotel.save
 
       periods_index = import_periods!(hotel, o)
 
@@ -84,29 +86,68 @@ namespace :import do
                  elsif legacy_object.respond_to? :lat, :lng
                    legacy_object
                  else
-                   {lat:nil,lng:nil}
+                   nil
                  end
-
-      location_attributes = {
-          latitude:  location.lat,
-          longitude: location.lng
-      }
 
       if legacy_object.instance_of? HbObject
         slug = legacy_object.AccountCode.blank? ? legacy_object.Id : legacy_object.AccountCode
-        slug = Node.find_by_name(slug) ? "#{slug}_d_#{legacy_object.Id}" : slug
-        slug = 'uniqname'
+        puts "slug: #{slug}"
+        slug = Node.find_by_name(slug.to_s) ? "#{slug}_d_#{legacy_object.Id}" : slug
         # TODO: substitute escapeHTML to sanitize after migration on rails 4
         puts "Create hotel #{slug}"
-        new_object = Hotel.create!(
+        new_object = Hotel.new(
             node_attributes: {name: slug},
             address_attributes: {
                 email:  Sanitize.clean(legacy_object.Email),
                 phone1: Sanitize.clean(legacy_object.Mob),
                 phone2: Sanitize.clean(legacy_object.Phones)
-            },
-            location_attributes: location_attributes
+            }
         )
+
+        new_object.location_attributes = { latitude:  location.lat, longitude: location.lng } if location
+
+        deals = Agreement.find_by_object_id legacy_object.Id
+        deals_array = []
+        deals.each do |deal|
+          deals_array.push  deal.attributes(new_object.id) if deal.present?
+        end
+
+        new_object.deals_attributes = deals_array
+        new_object.save
+
+        comments = LegacyComment.get_by_topic(legacy_object.Topic)
+        puts "Importing comments (#{comments.count})"
+        comments.each do |comment|
+          puts "#{comment.Title}\n#{comment.Content}\n---"
+          user = nil
+          commenter_email   = comment.Email
+          commenter_name    = comment.Username
+          commenter_email ||= find_email(comment.Content)[0] rescue nil
+          commenter_name  ||= username_from_email(commenter_email) rescue nil
+          if commenter_email.present?
+            user   = User.find_by_email(commenter_email)
+            user ||= User.new(email: commenter_email, username: commenter_name)
+            if user.valid?
+              user.save
+            else
+              user = nil
+            end
+          end
+          user_id = user.present? ? user.id : nil
+          puts "commenter: #{commenter_name} user: #{user_id} email: #{commenter_email}"
+          new_comment = Comment.new( commentable: new_object, title: comment.Title, body: comment.Content)
+
+          if user.present?
+            new_comment.user_id = user.id
+          elsif commenter_name.present?
+            new_comment.username = commenter_name
+          else
+            new_comment.username = 'Anonymous'
+          end
+
+          new_comment.save if new_comment.valid?
+
+        end
 
       elsif legacy_object.instance_of? HbSettlement
         return unless legacy_object.Ident
@@ -126,6 +167,7 @@ namespace :import do
       name  = legacy_object.title(loc)
       descr = legacy_object.info(loc)
       puts "[#{loc}] #{name}"
+
       I18n.locale = loc == :ua ? :uk : loc
 
       new_object.name               = Sanitize.clean name
@@ -144,7 +186,7 @@ namespace :import do
   end
 
   def import_images obj, dir, gallery=nil
-
+    return # skip for a while, because toooo long
     images_in(dir).each do |path|
       tags = (gallery.present? and gallery.TitleImage == path[1]) ? 'title, cover' : nil
       puts "Importing image #{path[1]} #{tags}"

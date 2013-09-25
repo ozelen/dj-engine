@@ -2,9 +2,9 @@ class Comment < ActiveRecord::Base
   acts_as_nested_set :scope => [:commentable_id, :commentable_type]
 
   validates :body, :presence => true
-  validates :user, :presence => true
+  #validates :user, :presence => true
 
-  attr_accessible :commentable, :title, :body, :user_id
+  attr_accessible :commentable, :title, :body, :user_id, :username
 
   # NOTE: install the acts_as_votable plugin if you
   # want user to vote on the quality of comments.
@@ -46,5 +46,9 @@ class Comment < ActiveRecord::Base
   # given the commentable class name and id
   def self.find_commentable(commentable_str, commentable_id)
     commentable_str.constantize.find(commentable_id)
+  end
+
+  def user_name
+    user.present? ? user.name : username
   end
 end
