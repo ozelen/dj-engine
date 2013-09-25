@@ -1,0 +1,41 @@
+<h1>Listing deals</h1>
+
+<table>
+  <tr>
+    <th>Dealable</th>
+    <th>Dealable type</th>
+    <th>Person name</th>
+    <th>Login</th>
+    <th>Password</th>
+    <th>Price</th>
+    <th>Begin date</th>
+    <th>Expire date</th>
+    <th>Contacts</th>
+    <th>Status</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @deals.each do |deal| %>
+  <tr>
+    <td><%= deal.dealable_id %></td>
+    <td><%= deal.dealable_type %></td>
+    <td><%= deal.person_name %></td>
+    <td><%= deal.login %></td>
+    <td><%= deal.password %></td>
+    <td><%= deal.price %></td>
+    <td><%= deal.begin_date %></td>
+    <td><%= deal.expire_date %></td>
+    <td><%= deal.contacts %></td>
+    <td><%= deal.status %></td>
+    <td><%= link_to 'Show', deal %></td>
+    <td><%= link_to 'Edit', edit_deal_path(deal) %></td>
+    <td><%= link_to 'Destroy', deal, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Deal', new_deal_path %>

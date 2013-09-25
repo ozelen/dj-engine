@@ -1,0 +1,57 @@
+<%= form_for(@deal) do |f| %>
+  <% if @deal.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@deal.errors.count, "error") %> prohibited this deal from being saved:</h2>
+
+      <ul>
+      <% @deal.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :dealable_id %><br />
+    <%= f.number_field :dealable_id %>
+  </div>
+  <div class="field">
+    <%= f.label :dealable_type %><br />
+    <%= f.text_field :dealable_type %>
+  </div>
+  <div class="field">
+    <%= f.label :person_name %><br />
+    <%= f.text_field :person_name %>
+  </div>
+  <div class="field">
+    <%= f.label :login %><br />
+    <%= f.text_field :login %>
+  </div>
+  <div class="field">
+    <%= f.label :password %><br />
+    <%= f.text_field :password %>
+  </div>
+  <div class="field">
+    <%= f.label :price %><br />
+    <%= f.number_field :price %>
+  </div>
+  <div class="field">
+    <%= f.label :begin_date %><br />
+    <%= f.date_select :begin_date %>
+  </div>
+  <div class="field">
+    <%= f.label :expire_date %><br />
+    <%= f.date_select :expire_date %>
+  </div>
+  <div class="field">
+    <%= f.label :contacts %><br />
+    <%= f.text_area :contacts %>
+  </div>
+  <div class="field">
+    <%= f.label :status %><br />
+    <%= f.number_field :status %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
