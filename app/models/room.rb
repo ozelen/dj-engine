@@ -28,7 +28,7 @@ class Room < ActiveRecord::Base
   acts_as_commentable
 
   def caption
-    if name.present? and type.present? and type.parent.present?
+    if name.present? && type.present? && type.parent.present?
       "#{name} (#{type.name})"
     elsif name.present?
       name
@@ -37,8 +37,8 @@ class Room < ActiveRecord::Base
     end
   end
 
-  def price_per_period preiod
-    prices.last.value if preiod.present? and prices.last
+  def price_per_period period
+    prices.last.value if period.present? && prices.last
   end
 
 end

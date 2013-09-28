@@ -15,7 +15,7 @@ class HotelsController < ApplicationController
   end
 
   def pricelist
-    @periods = @hotel.periods.find(:all, :order => "till desc", :limit => 5)
+    @periods = @hotel.periods.all( :order => "till desc", :limit => 5)
   end
 
   def albums
