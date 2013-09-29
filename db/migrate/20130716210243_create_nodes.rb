@@ -10,9 +10,9 @@ class CreateNodes < ActiveRecord::Migration
       t.timestamps
     end
 
-    add_index :parent
-    add_index :name
-    add_index :header
+    add_index :nodes, :parent
+    add_index :nodes, :name
+    add_index :nodes, :header
 
   end
 end
