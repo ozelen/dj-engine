@@ -1,21 +1,29 @@
 namespace :import do
 
   def import_objects
-    Hotel.destroy_all
-    City.destroy_all
+    puts "Droppirang old data"
+    #Hotel.destroy_all
+    #City.destroy_all
     cities_index = [] # indexing cities not to call db every time
 
     I18n.locale = :uk
     hr 100, '#'
 
-    import_cities cities_index
+    #SkiworldLegacy.find_all_by_legator_table('Cities').each { |c| cities_index[c.legator_id] = c.legatee_id }
+    #import_cities cities_index
 
     HbObject.all.each do |o|
+      exists    = SkiworldLegacy.where("legator_id = ? and legator_table = ?", o.Id, 'Objects').present?
+      new_city  = SkiworldLegacy.where("legator_table = 'Cities' and legator_id = ?", o.Settlement)[0] rescue nil
+      hr 50, '+'
       puts "Object##{o.Id}     #{o.content.title('ru')} [#{o.slug}]"
       puts "Type:         #{o.new_class.name}"      rescue nil
       puts "Profile:      #{o.new_prof.root.name}"  rescue nil
       puts "Properties:   #{o.new_fields.inspect}"  rescue nil
+      puts "CITY          #{new_city.present? ? new_city.legatee.name : 'NOT FOUND'}"
+      puts "EXISTS?       #{exists}"
 
+      next if exists
       # photos path
       object_photos_dir     = "public/uploads/legacy/#{o.Id}"
       object_album_dir      = object_photos_dir+'/albums/album'
@@ -23,7 +31,10 @@ namespace :import do
 
       hotel = obj_create o
 
-      if o.Settlement and cities_index[o.Settlement]
+
+
+      #if o.Settlement and cities_index[o.Settlement]
+      if new_city.try(:id)
         hotel.city_id = cities_index[o.Settlement]
         hotel.save!
       end
@@ -39,7 +50,7 @@ namespace :import do
 
       o.hb_categories.each do |c|
         next unless c.content
-        pref = (c.profile.value.name rescue '') == 'rooms' ? 'room   ' : 'service'
+        pref = (c.profile.value.name rescue '') == 'rooms' ? 'room' : 'service'
         puts "[#{c.Id}] #{pref}       #{c.content.title 'ru'} /#{c.new_class.name rescue ''}/ #{c.new_prof.root.name rescue 'no class'} "
 
         new_category = obj_create c
@@ -61,7 +72,7 @@ namespace :import do
 
   def classify object, fields
     fields.each do |field|
-      object.values.create(field_id: field.id)
+      object.values.create(field_id: field.id, value_boolean: true)
     end
   end
 
@@ -79,6 +90,7 @@ namespace :import do
       profile = legacy_object.new_prof.root.slug rescue 'services'
       klass = profile == 'rooms' ? Room : Service
       new_object = klass.create!(skiworld_legacy_attributes: { legator_id: legacy_object.Id, legator_table: 'Categories' })
+      puts "PROFILE: #{profile}; CATEGORY: #{klass.name}"
     else
 
       location = if legacy_object.location
@@ -161,7 +173,7 @@ namespace :import do
     end
 
     type = legacy_object.new_class || Type.find_by_slug(profile) || Type.find_by_slug('services')
-    new_object.type_id = type.id unless legacy_object.instance_of? HbSettlement
+    new_object.type_id = type.id if type and !legacy_object.instance_of? HbSettlement
 
     [:ru, :ua, :en].each do |loc|
       name  = legacy_object.title(loc)
