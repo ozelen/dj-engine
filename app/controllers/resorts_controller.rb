@@ -44,6 +44,7 @@ class ResortsController < ApplicationController
   # GET /resorts/new.json
   def new
     @resort = Resort.new
+    authorize! :create, @resort
     @resort.node = Node.new
     @resort.location = Location.new
     @cities = City.all
@@ -62,7 +63,7 @@ class ResortsController < ApplicationController
   # POST /resorts.json
   def create
     @resort = Resort.new(params[:resort])
-
+    authorize! :create, @resort
     respond_to do |format|
       if @resort.save
         format.html { redirect_to @resort, notice: 'Resort was successfully created.' }
@@ -77,6 +78,7 @@ class ResortsController < ApplicationController
   # PUT /resorts/1
   # PUT /resorts/1.json
   def update
+    authorize! :manage, @resort
     respond_to do |format|
       if @resort.update_attributes(params[:resort])
         format.html { redirect_to @resort, notice: 'Resort was successfully updated.' }
@@ -91,6 +93,7 @@ class ResortsController < ApplicationController
   # DELETE /resorts/1
   # DELETE /resorts/1.json
   def destroy
+    authorize! :destroy, @resort
     @resort.destroy
 
     respond_to do |format|

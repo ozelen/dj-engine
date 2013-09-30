@@ -29,6 +29,7 @@ class PricesController < ApplicationController
   # GET /Prices/new
   # GET /Prices/new.json
   def new
+    authorize! :manage, @hotel
     @price = Price.new
     @room = Room.find(params[:room_id])
     @hotel = @room.hotel
@@ -53,6 +54,7 @@ class PricesController < ApplicationController
 
   # GET /Prices/1/edit
   def edit
+    authorize! :manage, @hotel
     @price = Price.find(params[:id])
     @room  = @price.room
     @hotel = @room.hotel
@@ -63,6 +65,7 @@ class PricesController < ApplicationController
   # POST /Prices
   # POST /Prices.json
   def create
+    authorize! :manage, @hotel
     @price = Price.new(params[:price])
     @hotel = Hotel.find params[:hotel_id]
     @room = Room.find(params[:room_id])
@@ -81,6 +84,7 @@ class PricesController < ApplicationController
   # PUT /Prices/1
   # PUT /Prices/1.json
   def update
+    authorize! :manage, @hotel
     @price = Price.find(params[:id])
     @room = @price.room
     @hotel = @room.hotel
@@ -99,6 +103,7 @@ class PricesController < ApplicationController
   # DELETE /Prices/1
   # DELETE /Prices/1.json
   def destroy
+    authorize! :manage, @hotel
     @price = Price.find(params[:id])
     @room = @price.room
     @hotel = @room.hotel

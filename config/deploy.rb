@@ -1,4 +1,5 @@
 require "bundler/capistrano"
+require 'capistrano-db-tasks'
 
 server "146.185.150.99", :web, :app, :db, primary: true
 
@@ -11,6 +12,23 @@ set :use_sudo, false
 set :scm, "git"
 set :repository, "git@github.com:ozelen/#{application}.git"
 set :branch, "master"
+
+
+
+
+# if you haven't already specified
+set :rails_env, "production"
+
+# if you want to remove the dump file after loading
+set :db_local_clean, true
+
+# If you want to import assets, you can change default asset dir (default = system)
+# This directory must be in your shared directory on the server
+set :assets_dir, %w(public/assets public/att)
+
+# if you want to work on a specific local environment (default = ENV['RAILS_ENV'] || 'development')
+set :locals_rails_env, "production"
+
 
 default_run_options[:pty] = true
 ssh_options[:forward_agent] = true

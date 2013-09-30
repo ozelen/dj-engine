@@ -25,6 +25,7 @@ class PhotosController < ApplicationController
   # GET /photos/new.json
   def new
     @photo = Photo.new
+    authorize! :manage, @photo.gallery.imageable
 
     respond_to do |format|
       format.html # new.html.erb
@@ -35,16 +36,15 @@ class PhotosController < ApplicationController
   # GET /photos/1/edit
   def edit
     @photo = Photo.find(params[:id])
+    authorize! :manage, @photo.gallery.imageable
   end
 
   # POST /photos
   # POST /photos.json
   def create
-    #@photo = Photo.create(params[:photo])
+    authorize! :manage, @photo.gallery.imageable
     respond_to do |format|
-      format.js {
-        @photo = Photo.create(params[:photo])
-      }
+      format.js
       format.html {
         @photo = Photo.create(params[:photo])
         @photo.save ?
@@ -58,7 +58,7 @@ class PhotosController < ApplicationController
   # PUT /photos/1.json
   def update
     @photo = Photo.find(params[:id])
-
+    authorize! :manage, @photo.gallery.imageable
     respond_to do |format|
       if @photo.update_attributes(params[:photo])
         format.html { redirect_to @photo, notice: 'Photo was successfully updated.' }
@@ -73,6 +73,7 @@ class PhotosController < ApplicationController
   # DELETE /photos/1
   # DELETE /photos/1.json
   def destroy
+    authorize! :manage, @photo.gallery.imageable
     @photo = Photo.find(params[:id])
     @photo.destroy
 

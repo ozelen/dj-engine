@@ -45,6 +45,7 @@ class RoomsController < ApplicationController
   # POST /rooms
   # POST /rooms.json
   def create
+    authorize! :manage, @hotel
     @room = Room.new(params[:room])
 
     respond_to do |format|
@@ -61,6 +62,7 @@ class RoomsController < ApplicationController
   # PUT /rooms/1
   # PUT /rooms/1.json
   def update
+    authorize! :manage, @hotel
     @room = Room.find params[:id]
     respond_to do |format|
       if @room.update_attributes(params[:room])
@@ -76,6 +78,7 @@ class RoomsController < ApplicationController
   # DELETE /rooms/1
   # DELETE /rooms/1.json
   def destroy
+    authorize! :manage, @hotel
     @room = Room.find params[:id]
     @room.destroy
 

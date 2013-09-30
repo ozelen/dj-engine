@@ -67,3 +67,4 @@ gem 'activerecord-postgres-hstore'
 
 gem 'capistrano'
 gem 'unicorn'
+gem "capistrano-db-tasks", require: false
