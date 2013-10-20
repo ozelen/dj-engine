@@ -61,6 +61,10 @@ gem 'redcarpet' # markdown text
 gem 'reverse_markdown'
 gem 'sanitize'
 gem 'will_paginate-bootstrap'
-gem 'fog'
+gem 'fog', :git => 'https://github.com/fog/fog.git'
 gem "recaptcha", :require => "recaptcha/rails"
 gem 'activerecord-postgres-hstore'
+
+gem 'capistrano', '~> 2.15'
+gem 'unicorn'
+gem "capistrano-db-tasks", require: false

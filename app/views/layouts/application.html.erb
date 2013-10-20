@@ -80,6 +80,7 @@
         <% end %>
       </ul>
 
+      <% if current_user && current_user.role?(:admin) %>
       <ul class="nav navbar-nav navbar-right">
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">Admin <b class="caret"></b></a>
@@ -89,12 +90,14 @@
             <li><%= link_to 'Streams', streams_path %></li>
             <li><%= link_to 'Resorts', resorts_path %></li>
             <li><%= link_to 'Hotels', hotels_path %></li>
-            <li><%= link_to 'Users', users_path %></li>
-            <li><%= link_to "Types", types_path %></li>
+            <li><%= link_to 'Deals',  deals_path %></li>
+            <li><%= link_to 'Users',  users_path %></li>
+            <li><%= link_to "Types",  types_path %></li>
             <li><%= link_to "Measures", measure_categories_path %></li>
           </ul>
         </li>
       </ul>
+      <% end %>
 
     </nav>
   </div>

@@ -18,7 +18,7 @@
 <% end %>
 
 <% content_for :head do %>
-  <%= render 'layouts/visual_header', menu: menu, header: @resort.node.header, title: @resort.node.title, gallery: @resort.gallery %>
+  <%= render 'layouts/visual_header', poi: @resort, menu: menu, header: @resort.node.header, title: @resort.node.title, gallery: @resort.gallery %>
 <% end %>
 
 <% content_for :content do %>

@@ -29,10 +29,10 @@
         <span class="icon-next"></span>
       </a>
     </div>
-  <% else %>
-    <div class="cover-image" style="background-image: url(<%= cover %>);">
-
-    </div>
+  <% elsif cover %>
+    <div class="cover-image" style="background-image: url(<%= cover %>);"></div>
+  <% elsif poi.location.present? %>
+    <%= render 'layouts/map', location: poi.location %>
   <% end %>
 <% end %>
 

@@ -22,7 +22,8 @@ class ImageUploader < CarrierWave::Uploader::Base
 
   # Choose what kind of storage to use for this uploader:
   # storage :file
-  storage Rails.env.production? ? :fog : :file
+  #storage Rails.env.production? ? :fog : :file
+  storage :fog
 
   #include CarrierWave:MimeTypes
   #process :set_content_type

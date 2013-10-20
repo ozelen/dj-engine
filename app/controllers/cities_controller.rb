@@ -54,13 +54,13 @@ class CitiesController < ApplicationController
 
   # GET /cities/1/edit
   def edit
-    authorize! :manage, @hotel
+    authorize! :manage, @city
   end
 
   # POST /cities
   # POST /cities.json
   def create
-    authorize! :manage, @city
+    authorize! :create, @city
     @city = City.new(params[:city])
 
     respond_to do |format|

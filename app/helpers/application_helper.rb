@@ -24,6 +24,10 @@ module ApplicationHelper
     str + symbol * level
   end
 
+  def category_type cat
+    cat.type.name unless cat.type.root?
+  end
+
   def markdown(text, options=nil)
     return unless text
 

@@ -1,4 +1,4 @@
-<%= form_for(@deal) do |f| %>
+<%= form_for(@deal, html: {class: 'form-horizontal'}) do |f| %>
   <% if @deal.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@deal.errors.count, "error") %> prohibited this deal from being saved:</h2>
@@ -11,47 +11,60 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :dealable_id %><br />
-    <%= f.number_field :dealable_id %>
+    <%= f.hidden_field  :dealable_id %>
+    <%= f.hidden_field  :dealable_type %>
+
+  <div class="form-group">
+    <%= f.label :person_name, class: 'col-lg-2 control-label' %>
+    <div class="col-lg-10">
+      <%= f.text_field :person_name, class: 'form-control' %>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :dealable_type %><br />
-    <%= f.text_field :dealable_type %>
+  <div class="form-group">
+    <%= f.label :login, class: 'col-lg-2 control-label' %>
+    <div class="col-lg-10">
+      <%= f.text_field :login, class: 'form-control' %>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :person_name %><br />
-    <%= f.text_field :person_name %>
+  <div class="form-group">
+    <%= f.label :password, class: 'col-lg-2 control-label' %>
+    <div class="col-lg-10">
+      <%= f.text_field :password, class: 'form-control' %>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :login %><br />
-    <%= f.text_field :login %>
+  <div class="form-group">
+    <%= f.label :price, class: 'col-lg-2 control-label' %>
+    <div class="col-lg-10">
+      <%= f.number_field :price, class: 'form-control' %>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :password %><br />
-    <%= f.text_field :password %>
+  <div class="form-group">
+    <%= f.label :begin_date, class: 'col-lg-2 control-label' %>
+    <div class="col-lg-10">
+      <%= f.date_select :begin_date %>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :price %><br />
-    <%= f.number_field :price %>
+  <div class="form-group">
+    <%= f.label :expire_date, class: 'col-lg-2 control-label' %>
+    <div class="col-lg-10">
+      <%= f.date_select :expire_date %>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :begin_date %><br />
-    <%= f.date_select :begin_date %>
+  <div class="form-group">
+    <%= f.label :contacts, class: 'col-lg-2 control-label' %>
+    <div class="col-lg-10">
+      <%= f.text_area :contacts, class: 'form-control', rows: 5 %>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :expire_date %><br />
-    <%= f.date_select :expire_date %>
+  <div class="form-group">
+    <%= f.label :status, class: 'col-lg-2 control-label' %>
+    <div class="col-lg-10">
+      <%= f.number_field :status, class: 'form-control' %>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :contacts %><br />
-    <%= f.text_area :contacts %>
-  </div>
-  <div class="field">
-    <%= f.label :status %><br />
-    <%= f.number_field :status %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
+  <div class="form-group">
+    <div class="actions col-lg-offset-2 col-lg-10">
+      <%= f.submit class: 'btn btn-primary' %>
+    </div>
   </div>
 <% end %>

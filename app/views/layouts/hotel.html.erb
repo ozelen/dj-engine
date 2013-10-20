@@ -22,15 +22,18 @@
     <li><%= link_to t('.destroy', :default => t("helpers.links.destroy")),  hotel_path(@hotel), :method => 'delete', :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) } %></li>
     <li><%= link_to 'Create new  Room', new_hotel_room_path(@hotel) %></li>
     <li><%= link_to 'Edit room prices', pricelist_edit_path(@hotel) %></li>
+    <li><%= link_to "Deals (#{@hotel.deals.count})", hotel_deals_path(@hotel) %></li>
+    <li><%= link_to "Leads (#{@hotel.leads.count})", hotel_leads_path(@hotel) %></li>
   <% end %>
 <% end %>
 
 <% content_for :offer do %>
-  <%= render 'hotels/booking_form_offer' %>
+  <%= raw '<h3>Address</h3>' if @hotel.leads.blank? %>
+  <%= render @hotel.leads.present? ? 'hotels/booking_form_offer' : 'address' %>
 <% end %>
 
 <% content_for :head do %>
-  <%= render 'layouts/visual_header', menu: menu, header: @hotel.node.header, title: @hotel.node.title, gallery: @hotel.gallery %>
+  <%= render 'layouts/visual_header', poi: @hotel, menu: menu, header: @hotel.node.header, title: @hotel.node.title, gallery: @hotel.gallery %>
 <% end %>
 
 <% content_for :content do %>

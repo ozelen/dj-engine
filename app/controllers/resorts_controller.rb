@@ -19,6 +19,7 @@ class ResortsController < ApplicationController
 
   def hotels
     @hotels = @resort.hotels.paginate(page: params[:page], per_page: 10)
+    @cities = @resort.cities
   end
 
   def hotels_city
@@ -44,6 +45,7 @@ class ResortsController < ApplicationController
   # GET /resorts/new.json
   def new
     @resort = Resort.new
+    authorize! :create, @resort
     @resort.node = Node.new
     @resort.location = Location.new
     @cities = City.all
@@ -62,7 +64,7 @@ class ResortsController < ApplicationController
   # POST /resorts.json
   def create
     @resort = Resort.new(params[:resort])
-
+    authorize! :create, @resort
     respond_to do |format|
       if @resort.save
         format.html { redirect_to @resort, notice: 'Resort was successfully created.' }
@@ -77,6 +79,7 @@ class ResortsController < ApplicationController
   # PUT /resorts/1
   # PUT /resorts/1.json
   def update
+    authorize! :manage, @resort
     respond_to do |format|
       if @resort.update_attributes(params[:resort])
         format.html { redirect_to @resort, notice: 'Resort was successfully updated.' }
@@ -91,6 +94,7 @@ class ResortsController < ApplicationController
   # DELETE /resorts/1
   # DELETE /resorts/1.json
   def destroy
+    authorize! :destroy, @resort
     @resort.destroy
 
     respond_to do |format|
@@ -103,12 +107,8 @@ private
 
   def find_resort
     id = params[:id] || params[:resort_id] || params[:resort_slug]
-    if id
-      @node = Node.find_by_name(id)
-      @resort = @node.accessible if id
-      connected_cities_arr = @resort.cities.to_a
-      @cities = Location.near(@resort.location, 20).where(located_type: 'City').map{|l| l.located if connected_cities_arr.include?(l.located) }
-    end
+    @node = Node.find_by_name(id)
+    @resort = @node.accessible if id
   end
 
 end

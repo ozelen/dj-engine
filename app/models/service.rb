@@ -12,6 +12,8 @@ class Service < ActiveRecord::Base
   accepts_nested_attributes_for :values, allow_destroy: true
   accepts_nested_attributes_for :skiworld_legacy, allow_destroy: true
 
+  acts_as_category
+
   attr_accessible :description, :hotel_id, :name, :price, :type_id, :values_attributes, :skiworld_legacy_attributes
 
   after_create :create_gallery

@@ -15,13 +15,17 @@ class HotelsController < ApplicationController
   end
 
   def pricelist
-    @periods = @hotel.periods.find(:all, :order => "till desc", :limit => 5)
+    @periods = @hotel.periods.all( :order => "till desc", :limit => 5)
   end
 
   def albums
   end
 
   def album
+  end
+
+  def leads
+    @leads = @hotel.leads
   end
 
   def edit_albums
@@ -57,7 +61,7 @@ class HotelsController < ApplicationController
     @hotel = Hotel.new
     authorize! :create, @hotel
     unless current_user.present?
-      redirect_to signup_url, notice: 'Register first'
+      redirect_to new_user_registration_url(proceed: 'new_hotel'), notice: 'Register first'
       return
     end
 

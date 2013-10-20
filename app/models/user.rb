@@ -61,11 +61,7 @@ class User < ActiveRecord::Base
   end
 
   def users_available
-    if self.role? :admin
-      User.all
-    else
-      [self]
-    end
+    self.role?(:admin) ? User.all : [self]
   end
 
   def apply_omniauth(auth)
@@ -82,13 +78,7 @@ class User < ActiveRecord::Base
 
   def self.find_for_oauth(auth, user_params, signed_in_resource=nil)
     authentication = Authentication.where(:provider => auth.provider, :uid => auth.uid).first
-    if authentication
-      user = authentication.user
-    else
-      user = signed_in_resource || User.create( user_params )
-    end
-
-    user
+    authentication ? authentication.user : (signed_in_resource || User.create( user_params ))
   end
 
 

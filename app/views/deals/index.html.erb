@@ -1,41 +1,28 @@
 <h1>Listing deals</h1>
 
-<table>
+<table class="table table-striped">
   <tr>
-    <th>Dealable</th>
-    <th>Dealable type</th>
     <th>Person name</th>
-    <th>Login</th>
-    <th>Password</th>
     <th>Price</th>
     <th>Begin date</th>
     <th>Expire date</th>
-    <th>Contacts</th>
+    <th>Address</th>
     <th>Status</th>
-    <th></th>
-    <th></th>
     <th></th>
   </tr>
 
 <% @deals.each do |deal| %>
   <tr>
-    <td><%= deal.dealable_id %></td>
-    <td><%= deal.dealable_type %></td>
-    <td><%= deal.person_name %></td>
-    <td><%= deal.login %></td>
-    <td><%= deal.password %></td>
+    <td><%= link_to deal.person_name, edit_deal_path(deal) %></td>
     <td><%= deal.price %></td>
-    <td><%= deal.begin_date %></td>
-    <td><%= deal.expire_date %></td>
-    <td><%= deal.contacts %></td>
-    <td><%= deal.status %></td>
-    <td><%= link_to 'Show', deal %></td>
-    <td><%= link_to 'Edit', edit_deal_path(deal) %></td>
+    <td><%= l deal.begin_date if deal.begin_date %></td>
+    <td><%= l deal.expire_date if deal.expire_date %></td>
+    <td><%= markdown truncate(deal.contacts, length: 20, separator: '.') %></td>
+    <td><%= deal.status ? 'active' : 'disabled' %></td>
     <td><%= link_to 'Destroy', deal, method: :delete, data: { confirm: 'Are you sure?' } %></td>
   </tr>
 <% end %>
 </table>
 
 <br />
-
-<%= link_to 'New Deal', new_deal_path %>
+<%= link_to 'New Deal', new_hotel_deal_path(@hotel), class: 'btn btn-primary' if @hotel %>
