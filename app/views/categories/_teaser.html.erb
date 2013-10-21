@@ -10,7 +10,7 @@
   <div class="media-body">
     <h4 class="media-heading"><%= link_to category.name, send("slug_hotel_#{category.class.name.parameterize}_path", @hotel, category) %></h4>
 
-    <p><%= category.type.name %></p>
+    <p><%= category.try(:type,:name) %></p>
 
     <% if show_description %>
       <%= markdown truncate(category.description, length: 100, separator: ' ') %>

@@ -5,7 +5,7 @@ class SlugConstraint
 
   def matches? request
     node = Node.find_by_name request[@type.parameterize+'_slug']
-    node && node.accessible_type == @type ? true : false
+    node && node.accessible_type == @type
   end
 end
 

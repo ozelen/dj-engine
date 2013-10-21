@@ -25,7 +25,7 @@ class TypesController < ApplicationController
   # GET /types/new.json
   def new
     @type = Type.new
-
+    authorize! :create, @type
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @type }
@@ -41,6 +41,7 @@ class TypesController < ApplicationController
   # POST /types.json
   def create
     @type = Type.new(params[:type])
+    authorize! :create, @type
 
     respond_to do |format|
       if @type.save
@@ -57,6 +58,7 @@ class TypesController < ApplicationController
   # PUT /types/1.json
   def update
     @type = Type.find(params[:id])
+    authorize! :manage, @type
 
     respond_to do |format|
       if @type.update_attributes(params[:type])
@@ -73,6 +75,7 @@ class TypesController < ApplicationController
   # DELETE /types/1.json
   def destroy
     @type = Type.find(params[:id])
+    authorize! :destroy, @type
     @type.destroy
 
     respond_to do |format|

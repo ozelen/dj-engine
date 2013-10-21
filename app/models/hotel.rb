@@ -108,7 +108,7 @@ class Hotel < ActiveRecord::Base
 
   def get_photos_from_collection *col
     arr = []
-    col.each {|c| c.map{|x| arr.concat(x.photos) } }
+    col.each { |c| c.map{ |x| arr.concat(x.photos) } }
     arr
   end
 

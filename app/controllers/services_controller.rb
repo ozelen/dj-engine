@@ -28,6 +28,7 @@ class ServicesController < ApplicationController
   # GET /services/new
   # GET /services/new.json
   def new
+    authorize! :manage, @hotel
     @service = Service.new
     @service.hotel_id = @hotel.id
 
@@ -39,12 +40,14 @@ class ServicesController < ApplicationController
 
   # GET /services/1/edit
   def edit
+    authorize! :manage, @hotel
     @service = Service.find(params[:id])
   end
 
   # POST /services
   # POST /services.json
   def create
+    authorize! :manage, @hotel
     @service = Service.new(params[:service])
 
     respond_to do |format|
@@ -61,6 +64,7 @@ class ServicesController < ApplicationController
   # PUT /services/1
   # PUT /services/1.json
   def update
+    authorize! :manage, @hotel
     @service = Service.find(params[:id])
 
     respond_to do |format|
@@ -77,6 +81,7 @@ class ServicesController < ApplicationController
   # DELETE /services/1
   # DELETE /services/1.json
   def destroy
+    authorize! :manage, @hotel
     @service = Service.find(params[:id])
     @service.destroy
 

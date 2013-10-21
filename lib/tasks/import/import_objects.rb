@@ -117,12 +117,15 @@ namespace :import do
         new_object.location_attributes = location_attributes if location_attributes.present?
 
         deals = Agreement.find_by_object_id legacy_object.Id
-        deals_array = []
+      #  deals_array = []
+
+        deals.map! {|deal| deal.attributes(new_object.id) if deal.present?}
+=begin
         deals.each do |deal|
           deals_array.push  deal.attributes(new_object.id) if deal.present?
         end
-
-        new_object.deals_attributes = deals_array
+=end
+        new_object.deals_attributes = deals
         new_object.save
 
         comments = LegacyComment.get_by_topic(legacy_object.Topic)

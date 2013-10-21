@@ -3,11 +3,7 @@ class Authentication < ActiveRecord::Base
   attr_accessible :user_id, :provider, :uid, :provider, :uid, :token
 
   def provider_name
-    if provider == 'open_id'
-      "OpenID"
-    else
-      provider.titleize
-    end
+    provider == 'open_id' ? 'OpenID' : provider.titleize
   end
 
 end
