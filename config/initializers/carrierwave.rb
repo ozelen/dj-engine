@@ -34,7 +34,7 @@ CarrierWave.configure do |config|
       aws_access_key_id: 'AKIAJD553Y7CKLHWQTFA', # S3_CONFIG['key'],
       aws_secret_access_key: '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' # S3_CONFIG['secret'],
   }
-  config.fog_directory = 'djerelo' #S3_CONFIG['bucket']
+  config.fog_directory = 'besthotels' #S3_CONFIG['bucket']
   #config.fog_public     = true
   #config.fog_attributes = {'Cache-Control'=>'max-age=315576000'}
 end
