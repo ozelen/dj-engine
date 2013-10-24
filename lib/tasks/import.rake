@@ -20,7 +20,7 @@ namespace :import do
 
     ### ACTION ###
 
-    #import_types
+    import_types
     import_objects
     #import_news
 

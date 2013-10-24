@@ -45,7 +45,8 @@ class ApplicationController < ActionController::Base
 
   def find_hotel
     slug = params[:hotel_id] || params[:hotel_slug]
-    @hotel = Node.find_by_name(slug).accessible
+    node = Node.find_by_name(slug)
+    @hotel = node ? node.accessible : nil
   end
 
   def find_stream

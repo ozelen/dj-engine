@@ -13,6 +13,14 @@ development:
   pool: 5
   timeout: 5000
 
+production:
+  adapter: postgresql
+  database: djerelo
+  username: ozelen
+  password: 322
+  pool: 5
+  timeout: 5000
+
 skiworld:
   adapter: mysql2
   database: skiworld

@@ -12,7 +12,7 @@
 %>
 
 <% content_for :head do %>
-  <%= render 'layouts/visual_header', menu: menu, header: @tour.name, section: section, title: '', cover: cover_photo%>
+  <%= render 'layouts/visual_header', poi: @tour, menu: menu, header: @tour.name, section: section, title: '', cover: cover_photo%>
 <% end %>
 
 <% content_for :content do %>

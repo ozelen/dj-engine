@@ -20,8 +20,9 @@ class LocationsController < ApplicationController
     Geocoder.configure(language: I18n.locale)
     params[:query] = '77.123.178.205' if params[:query] == request.remote_ip && Rails.env.development?
     result = Geocoder.search(params[:query])
-    result = Geocoder.search("#{result[0].data['city']} #{result[0].data['region_name']} #{result[0].data['country_name']}") if result[0].data['ip']
     render json: result.to_json
+    #result = Geocoder.search("#{result[0].data['city']} #{result[0].data['region_name']} #{result[0].data['country_name']}") if result[0].data['ip']
+    #render json: result.to_json
   end
 
 end

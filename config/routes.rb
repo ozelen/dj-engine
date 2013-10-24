@@ -66,6 +66,7 @@ DjEngine::Application.routes.draw do
       resources :galleries
       resources :photos
       resources :posts, only: :show
+      resources :deals
     end
 
     # shortcut to hotel by slug
@@ -88,6 +89,7 @@ DjEngine::Application.routes.draw do
       get 'contacts'                      => 'hotels#contacts',           as: :slug_hotel_contacts
       get 'description'                   => 'hotels#description',        as: :slug_hotel_description
       get 'book'                          => 'hotels#book',               as: :slug_hotel_book
+      get 'leads'                         => 'hotels#leads',              as: :hotel_leads
     end
 
     scope 'hotels/:hotel_id' do

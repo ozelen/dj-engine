@@ -1,10 +1,10 @@
 # encoding: utf-8
 
 class ImageUploader < CarrierWave::Uploader::Base
-  after :store, :delete_original_file
+  #after :store, :delete_original_file
 
   def delete_original_file(new_file)
-    File.delete path if version_name.blank?
+    File.delete path if version_name.blank? && File.exist?(new_file)
   end
 
   def filename
@@ -22,7 +22,8 @@ class ImageUploader < CarrierWave::Uploader::Base
 
   # Choose what kind of storage to use for this uploader:
   # storage :file
-  storage Rails.env.production? ? :fog : :file
+  #storage Rails.env.production? ? :fog : :file
+  storage :fog
 
   #include CarrierWave:MimeTypes
   #process :set_content_type

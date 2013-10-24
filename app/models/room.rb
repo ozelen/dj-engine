@@ -20,13 +20,13 @@ class Room < ActiveRecord::Base
   accepts_nested_attributes_for :lead, allow_destroy: true
   accepts_nested_attributes_for :skiworld_legacy, allow_destroy: true
 
-  attr_accessible :description, :hotel_id, :name, :price, :type_id, :gallery_attributes, :values_attributes, :skiworld_legacy_attributes
+  acts_as_category
+  acts_as_commentable
   translates :name, :description
 
-  after_create :create_gallery
+  attr_accessible :description, :hotel_id, :name, :price, :type_id, :gallery_attributes, :values_attributes, :skiworld_legacy_attributes
 
-  acts_as_commentable
-
+<<<<<<< HEAD
   def caption
     if name.present? && type.present? && type.parent.present?
       "#{name} (#{type.name})"
@@ -36,6 +36,9 @@ class Room < ActiveRecord::Base
       type.name
     end
   end
+=======
+  after_create :create_gallery
+>>>>>>> 25b0825ce600bee7efa9ee67b770ee31be19ba93
 
   def price_per_period period
     prices.last.value if period.present? && prices.last

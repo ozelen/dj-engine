@@ -1,13 +1,16 @@
 class DealsController < ApplicationController
   # GET /deals
   # GET /deals.json
+  before_filter :find_hotel
   def index
-    @deals = Deal.all
+
+    @deals = @hotel ? @hotel.deals : Deal.all
 
     respond_to do |format|
-      format.html # index.html.erb
+      format.html { render layout: 'hotel' if @hotel }
       format.json { render json: @deals }
     end
+
   end
 
   # GET /deals/1
@@ -25,7 +28,7 @@ class DealsController < ApplicationController
   # GET /deals/new.json
   def new
     @deal = Deal.new
-
+    @deal.dealable = @hotel
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @deal }

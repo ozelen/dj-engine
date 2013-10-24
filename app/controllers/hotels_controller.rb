@@ -24,6 +24,10 @@ class HotelsController < ApplicationController
   def album
   end
 
+  def leads
+    @leads = @hotel.leads
+  end
+
   def edit_albums
   end
 
@@ -57,7 +61,7 @@ class HotelsController < ApplicationController
     @hotel = Hotel.new
     authorize! :create, @hotel
     unless current_user.present?
-      redirect_to signup_url, notice: 'Register first'
+      redirect_to new_user_registration_url(proceed: 'new_hotel'), notice: 'Register first'
       return
     end
 

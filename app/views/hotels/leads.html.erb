@@ -1,0 +1,9 @@
+<h1>Leads for <%= @hotel.name %></h1>
+<% @leads.each do |lead| %>
+  <div class="panel panel-default">
+    <div class="panel-heading"><%= lead.provider.titleize %></div>
+    <div class="panel-body">
+      <%= render "leads/nezabarom", lead: lead %>
+    </div>
+  </div>
+<% end %>

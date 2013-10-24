@@ -11,6 +11,10 @@ namespace :import do
   class LegacyGalleries < HotelBase
     set_table_name 'Modules'
     set_primary_key 'Id'
+
+    def images
+      LegacyImages.where("AlbumId = ?", Id)
+    end
   end
 
 end

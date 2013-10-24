@@ -2,15 +2,22 @@
    image_mode       ||= :mini
    show_description ||= false
    show_amenities   ||= false
+   type = category_type category
 %>
 <div class="media">
   <a class="pull-left" href="#">
     <%= image_tag category.gallery.title.image_url(image_mode), class: :thumbnail if category.gallery.title %>
   </a>
   <div class="media-body">
-    <h4 class="media-heading"><%= link_to category.name, send("slug_hotel_#{category.class.name.parameterize}_path", @hotel, category) %></h4>
+    <h4 class="media-heading"><%= link_to category.caption, send("slug_hotel_#{category.class.name.parameterize}_path", @hotel, category) %></h4>
 
+<<<<<<< HEAD
     <p><%= category.try(:type,:name) %></p>
+=======
+    <% if type && !category.name %>
+      <p><%= type %></p>
+    <% end %>
+>>>>>>> 25b0825ce600bee7efa9ee67b770ee31be19ba93
 
     <% if show_description %>
       <%= markdown truncate(category.description, length: 100, separator: ' ') %>
@@ -20,7 +27,7 @@
       <%= render('values/structured_list', valuable: category) %>
     <% end %>
 
-    <%= link_to('Full description', [@hotel, category]) %>
+    <%= link_to('Full description', [@hotel, category]) if category.description.present? %>
 
   </div>
 </div>

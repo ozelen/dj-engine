@@ -200,7 +200,20 @@ namespace :import do
     LegacyGalleries.where("OwnerId = #{legacy_object.Id} and OwnerTable = '#{object_type}'")[0]
   end
 
-  def import_images obj, dir, gallery=nil
+  def import_images obj, dir, gallery
+    #return # skip for a while, because toooo long
+    gallery.images.each do |img|
+      tags = (gallery.present? and gallery.TitleImage == path[1]) ? 'title, cover' : nil
+      puts "Importing image #{path[1]} #{tags}"
+      fname = "/#{img.Id}/big"
+      ext = ".jpg"
+      file = File.open(dir + fname + ext )
+      #obj.gallery.photos.new(image: file, mode_list: tags)
+    end
+    obj.save
+  end
+
+  def import_all_images_from_dir obj, dir, gallery=nil
     #return # skip for a while, because toooo long
     images_in(dir).each do |path|
       tags = (gallery.present? and gallery.TitleImage == path[1]) ? 'title, cover' : nil

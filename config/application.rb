@@ -3,6 +3,7 @@ require File.expand_path('../boot', __FILE__)
 require 'rails/all'
 require './lib/core_ext/string'
 require './lib/poi'
+require './lib/category'
 require 'net/http'
 
 if defined?(Bundler)

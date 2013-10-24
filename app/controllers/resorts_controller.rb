@@ -19,6 +19,7 @@ class ResortsController < ApplicationController
 
   def hotels
     @hotels = @resort.hotels.paginate(page: params[:page], per_page: 10)
+    @cities = @resort.cities
   end
 
   def hotels_city
@@ -106,12 +107,8 @@ private
 
   def find_resort
     id = params[:id] || params[:resort_id] || params[:resort_slug]
-    if id
-      @node = Node.find_by_name(id)
-      @resort = @node.accessible if id
-      connected_cities_arr = @resort.cities.to_a
-      @cities = Location.near(@resort.location, 20).where(located_type: 'City').map{|l| l.located if connected_cities_arr.include?(l.located) }
-    end
+    @node = Node.find_by_name(id)
+    @resort = @node.accessible if id
   end
 
 end
