@@ -20,9 +20,15 @@ namespace :import do
 
     ### ACTION ###
 
-    import_types
-    import_objects
-    #import_news
+    cold = false
+
+
+    import_types if cold
+
+    import_objects cold
+
+    import_news if cold
+
 
   end
 end

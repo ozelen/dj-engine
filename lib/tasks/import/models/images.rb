@@ -13,7 +13,7 @@ namespace :import do
     set_primary_key 'Id'
 
     def images
-      LegacyImages.where("AlbumId = ?", Id)
+      LegacyImages.where("AlbumId = ?", self.Id)
     end
   end
 

@@ -65,10 +65,7 @@ gem 'fog', :git => 'https://github.com/fog/fog.git'
 gem "recaptcha", :require => "recaptcha/rails"
 gem 'activerecord-postgres-hstore'
 
-<<<<<<< HEAD
-gem 'capistrano'
-=======
+
 gem 'capistrano', '~> 2.15'
->>>>>>> 25b0825ce600bee7efa9ee67b770ee31be19ba93
 gem 'unicorn'
 gem "capistrano-db-tasks", require: false

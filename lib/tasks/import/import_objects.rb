@@ -1,17 +1,23 @@
 namespace :import do
 
-  def import_objects
+  def import_objects(cold=false)
     puts "Droppirang old data"
-    #Hotel.destroy_all
-    #City.destroy_all
+
+    if cold
+      Hotel.destroy_all
+      City.destroy_all
+    end
+
     cities_index = [] # indexing cities not to call db every time
 
     I18n.locale = :uk
     hr 100, '#'
 
-    #SkiworldLegacy.find_all_by_legator_table('Cities').each { |c| cities_index[c.legator_id] = c.legatee_id }
-    #import_cities cities_index
-
+    City.first.present? ?
+        SkiworldLegacy.find_all_by_legator_table('Cities').each { |c| cities_index[c.legator_id] = c.legatee_id }
+      :
+        import_cities(cities_index)
+    # where("Id in (301, 338)")
     HbObject.all.each do |o|
       exists    = SkiworldLegacy.where("legator_id = ? and legator_table = ?", o.Id, 'Objects').present?
       new_city  = SkiworldLegacy.where("legator_table = 'Cities' and legator_id = ?", o.Settlement)[0] rescue nil
@@ -111,21 +117,21 @@ namespace :import do
             node_attributes: {name: slug},
             address_attributes: { email:  Sanitize.clean(legacy_object.Email), phone1: Sanitize.clean(legacy_object.Mob), phone2: Sanitize.clean(legacy_object.Phones) },
             skiworld_legacy_attributes: { legator_id: legacy_object.Id, legator_table: 'Objects' },
-            lead_attributes: { provider: 'nezabarom', params: BookitHotel.get_attributes_by_object_id(legacy_object.Id) }
+            leads_attributes: [{ provider: 'nezabarom', params: BookitHotel.get_attributes_by_object_id(legacy_object.Id) }]
         )
 
         new_object.location_attributes = location_attributes if location_attributes.present?
 
         deals = Agreement.find_by_object_id legacy_object.Id
-      #  deals_array = []
+        deals_array = []
 
-        deals.map! {|deal| deal.attributes(new_object.id) if deal.present?}
-=begin
+#        deals.map! {|deal| deal.attributes(new_object.id) if deal.present?}
+
         deals.each do |deal|
           deals_array.push  deal.attributes(new_object.id) if deal.present?
         end
-=end
-        new_object.deals_attributes = deals
+
+        new_object.deals_attributes = deals_array
         new_object.save
 
         comments = LegacyComment.get_by_topic(legacy_object.Topic)
@@ -201,14 +207,23 @@ namespace :import do
   end
 
   def import_images obj, dir, gallery
+    return unless gallery
     #return # skip for a while, because toooo long
     gallery.images.each do |img|
-      tags = (gallery.present? and gallery.TitleImage == path[1]) ? 'title, cover' : nil
-      puts "Importing image #{path[1]} #{tags}"
-      fname = "/#{img.Id}/big"
-      ext = ".jpg"
-      file = File.open(dir + fname + ext )
-      #obj.gallery.photos.new(image: file, mode_list: tags)
+      tags = (gallery.present? and gallery.TitleImage == img.Id) ? 'title, cover' : nil
+      puts "Importing image #{img.Id} #{tags}"
+
+      %w(jpg png gif).each do |ext|
+        fpath = "#{dir}/#{img.Id}/big.#{ext}"
+        if File.exists? fpath
+          file = File.open fpath
+          obj.gallery.photos.new(image: file, mode_list: tags)
+          break
+        else
+          next
+        end
+      end
+
     end
     obj.save
   end

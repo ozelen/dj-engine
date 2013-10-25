@@ -26,19 +26,17 @@ class Room < ActiveRecord::Base
 
   attr_accessible :description, :hotel_id, :name, :price, :type_id, :gallery_attributes, :values_attributes, :skiworld_legacy_attributes
 
-<<<<<<< HEAD
-  def caption
-    if name.present? && type.present? && type.parent.present?
-      "#{name} (#{type.name})"
-    elsif name.present?
-      name
-    elsif type.present?
-      type.name
-    end
-  end
-=======
+  #def caption
+  #  if name.present? && type.present? && type.parent.present?
+  #    "#{name} (#{type.name})"
+  #  elsif name.present?
+  #    name
+  #  elsif type.present?
+  #    type.name
+  #  end
+  #end
+
   after_create :create_gallery
->>>>>>> 25b0825ce600bee7efa9ee67b770ee31be19ba93
 
   def price_per_period period
     prices.last.value if period.present? && prices.last
