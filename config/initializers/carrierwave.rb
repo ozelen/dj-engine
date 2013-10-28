@@ -30,7 +30,7 @@ CarrierWave.configure do |config|
   config.fog_credentials = {
       persistent: false,
       provider: "AWS",
-      #region: 'eu-west-1',
+      region: 'eu-west-1',
       aws_access_key_id: 'AKIAJD553Y7CKLHWQTFA', # S3_CONFIG['key'],
       aws_secret_access_key: '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' # S3_CONFIG['secret'],
   }
