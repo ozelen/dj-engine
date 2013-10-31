@@ -53,11 +53,18 @@ class User < ActiveRecord::Base
 
   def remain_roles_for_non_admin
     if new_record?
-      self.roles_mask = nil unless username=='oleksa' and valid?
+      self.roles_mask = nil
     else
-      this_user = User.find(self.id)
-      self.roles_mask = User.find(self.id).roles_mask if !this_user.role? :admin # Work around to omit self setting roles for non admins
+      self.roles_mask = User.find(self.id).roles_mask unless self.managed_by_admin? # Work around to omit self setting roles for non admins
     end
+  end
+
+  def managed_by_admin
+    @managed_by_admin = true
+  end
+
+  def managed_by_admin?
+    @managed_by_admin
   end
 
   def users_available

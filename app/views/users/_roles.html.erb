@@ -1,0 +1,12 @@
+<% if current_user.admin? %>
+    <%= f.label :roles, class: 'form-label col-lg-3' %>
+    <div class="form-group col-lg-9">
+      <% for role in User::ROLES %>
+          <div class="checkbox">
+            <label><%=h role.humanize %>
+              <%= check_box_tag "user[roles][]", role, @user.roles.include?(role) %>
+            </label>
+          </div>
+      <% end %>
+    </div>
+<% end %>

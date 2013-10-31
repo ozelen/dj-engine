@@ -13,6 +13,7 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(params[:user])
+    @user.managed_by_admin if current_user.role? :admin
     if @user.save
       redirect_to root_url, :notice => "Registration successful."
     else
@@ -26,6 +27,9 @@ class UsersController < ApplicationController
 
   def update
     @user = User.find(params[:id])
+    @user.managed_by_admin if current_user.role? :admin
+    return if trying_to_takeover
+
     if @user.update_attributes(params[:user])
       redirect_to root_url, :notice  => "Successfully updated profile."
     else
@@ -35,7 +39,13 @@ class UsersController < ApplicationController
 
   def destroy
     @user = User.find(params[:id])
+    return if trying_to_takeover
     @user.destroy
     redirect_to users_url, :notice => "Successfully destroyed user."
+  end
+
+  # fuck off a user which trying to fuck the founder off :)
+  def trying_to_takeover
+    @user.email == 'ozelen@djerelo.info' && current_user.email != 'ozelen@djerelo.info'
   end
 end
