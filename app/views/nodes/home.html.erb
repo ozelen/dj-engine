@@ -1,35 +1,50 @@
 <!-- Main jumbotron for a primary marketing message or call to action -->
-<div class="jumbotron clearfix">
-  <h1>Add your Hotel!</h1>
-  <p>
-    Do you have a hotel and want to increase amount of clients? Sign up and add your hotel.
-    Add photos, rooms and categories. Manage visitors loading. Advertise your page through social networks.
-  </p>
-  <p><%= link_to 'Add Hotel for free &raquo;'.html_safe, new_hotel_path, class:"btn btn-success btn-large pull-right" %></p>
-</div>
 
-<div class="body-content">
 
-  <!-- Example row of columns -->
-  <div class="row">
-    <div class="col-lg-4">
-      <h2>Blog</h2>
-      <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-      <p><a class="btn btn-default" href="#">View details &raquo;</a></p>
+<% content_for :head do %>
+    <div class="jumbotron clearfix">
+      <h1>Add your Hotel!</h1>
+      <p>
+        Do you have a hotel and want to increase amount of clients? Sign up and add your hotel.
+        Add photos, rooms and categories. Manage visitors loading. Advertise your page through social networks.
+      </p>
+      <p><%= link_to 'Add Hotel for free &raquo;'.html_safe, new_hotel_path, class:"btn btn-success btn-large pull-right" %></p>
     </div>
-    <div class="col-lg-4">
-      <h2>Last added</h2>
-      <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-      <p><a class="btn btn-default" href="#">View details &raquo;</a></p>
+
+
+    <div class="body-content">
+
+      <!-- Example row of columns -->
+      <div class="row">
+        <div class="col-lg-4">
+          <h2>Resorts</h2>
+          <!--TODO: resorts list-->
+        </div>
+        <div class="col-lg-4">
+          <h2>Hotels</h2>
+          <!--TODO: hotels list-->
+          <ul>
+          <% @hotels.each do |hotel| %>
+            <li><%= link_to hotel.name, slug_hotel_path(hotel) %></li>
+          <% end %>
+          </ul>
+          <%= link_to 'View all hotels', hotels_path %>
+        </div>
+        <div class="col-lg-4">
+          <h2>Last comments</h2>
+          <!--TODO: last comments list-->
+        </div>
+      </div>
+
+      <hr>
+
+
     </div>
-    <div class="col-lg-4">
-      <h2>Last comments</h2>
-      <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
-      <p><a class="btn btn-default" href="#">View details &raquo;</a></p>
-    </div>
-  </div>
 
-  <hr>
+<% end %>
 
+<% content_for :offer do %>
+    <h3>Book now!</h3>
+    <%= render 'hotels/booking_form_offer' %>
+<% end %>
 
-</div>
