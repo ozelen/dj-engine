@@ -2,7 +2,8 @@
 
    landmark       ||= @default_landmark
    landmark_link  ||= nil
-   img              = hotel.gallery.title.image_url(:mini) rescue nil
+   image_version  ||=:small
+   img              = hotel.gallery.title.image_url(image_version) rescue nil
 %>
 
 <div class="hotel-item clearfix">
@@ -18,11 +19,11 @@
     </div>
   </div>
   <div class="row">
-    <div class="col-lg-2">
-      <%= image_tag img if img %>
+    <div class="col-lg-3">
+      <%= image_tag(img, class: 'img-circle thumbnail') if img %>
     </div>
 
-    <div class="col-lg-10 details">
+    <div class="col-lg-9 details">
 
       <div class="row">
         <div class="col-lg-9">
