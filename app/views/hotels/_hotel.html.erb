@@ -1,12 +1,13 @@
 <%
+
    landmark       ||= @default_landmark
    landmark_link  ||= nil
-   img              = hotel.gallery.title.image_url(:small) rescue nil
+   img              = hotel.gallery.title.image_url(:mini) rescue nil
 %>
 
 <div class="hotel-item clearfix">
   <div class="row">
-    <div class="col-lg-10 col-lg-offset-2">
+    <div class="col-lg-10">
       <h3>
         <%= link_to hotel.name, slug_hotel_path(hotel) %>
         <small><%= hotel.type.name rescue '' %>, <%= hotel.city.name rescue '' %></small>
@@ -18,7 +19,7 @@
   </div>
   <div class="row">
     <div class="col-lg-2">
-      <%= image_tag(img, class: 'img-rounded thumbnail') if img %>
+      <%= image_tag img if img %>
     </div>
 
     <div class="col-lg-10 details">

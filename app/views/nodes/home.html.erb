@@ -5,8 +5,8 @@
     <div class="jumbotron clearfix">
       <h1>Add your Hotel!</h1>
       <p>
-        Do you have a hotel and want to increase amount of clients? Sign up and add your hotel.
-        Add photos, rooms and categories. Manage visitors loading. Advertise your page through social networks.
+        You have a hotel and want to increase amount of clients? Sign up and add add it in BestHotels!
+        Show up photos, rooms and categories. Manage visitors loading. Advertise your page through social networks.
       </p>
       <p><%= link_to 'Add Hotel for free &raquo;'.html_safe, new_hotel_path, class:"btn btn-success btn-large pull-right" %></p>
     </div>
@@ -18,21 +18,16 @@
       <div class="row">
         <div class="col-lg-4">
           <h2>Resorts</h2>
-          <!--TODO: resorts list-->
+          <%= render Resort.all %>
         </div>
         <div class="col-lg-4">
           <h2>Hotels</h2>
-          <!--TODO: hotels list-->
-          <ul>
-          <% @hotels.each do |hotel| %>
-            <li><%= link_to hotel.name, slug_hotel_path(hotel) %></li>
-          <% end %>
-          </ul>
+          <%= render @hotels %>
           <%= link_to 'View all hotels', hotels_path %>
         </div>
         <div class="col-lg-4">
           <h2>Last comments</h2>
-          <!--TODO: last comments list-->
+          <%= render @comments, show_commentable: true, truncate_text: true %>
         </div>
       </div>
 

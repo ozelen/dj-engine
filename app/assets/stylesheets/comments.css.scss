@@ -9,3 +9,12 @@
 #add_comment_button {
   margin-top: 20px;
 }
+
+.comment {
+  &.shrink {
+    max-height: 100px;
+    overflow: hidden;
+    a.expand_link { display: block; }
+  }
+  a.expand_link { display: none; }
+}

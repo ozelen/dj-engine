@@ -49,4 +49,25 @@ module ApplicationHelper
     will_paginate instance, renderer: BootstrapPagination::Rails, bootstrap: 3
   end
 
+  def find_path(instance)
+    case instance
+      when Hotel
+        slug_hotel_path(instance)
+      when Room
+        slug_hotel_room_path(instance.hotel, instance)
+      when Service
+        slug_hotel_service_path(instance.hotel, instance)
+      when Resort
+        slug_resort_path(instance)
+      when Stream
+        slug_stream_path(instance)
+      when Tour
+        tour_path(instance)
+      when Post
+        post_path(instance)
+      when City
+        city_path(instance)
+    end
+  end
+
 end

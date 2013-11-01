@@ -15,7 +15,7 @@ gem "jquery-fileupload-rails"
 
 group :development do
   gem "nifty-generators"
-  gem 'mysql2'
+  gem 'mysql2' # required for importing legacy
   gem 'activerecord-mysql-adapter'
   gem 'taps', require: false
   gem 'sqlite3'
