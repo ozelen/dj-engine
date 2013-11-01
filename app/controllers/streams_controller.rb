@@ -1,6 +1,6 @@
 class StreamsController < ApplicationController
   before_filter :find_stream, except: [:new, :create]
-  layout 'stream', only: [:blog, :show]
+  layout 'stream', except: [:index, :new]
   # GET /streams
   # GET /streams.json
   def index
@@ -13,6 +13,10 @@ class StreamsController < ApplicationController
   end
 
   def blog
+  end
+
+  def news
+    @posts = Post.tagged_with('ski').paginate(page: params[:page], per_page: 10)
   end
 
   # GET /streams/1

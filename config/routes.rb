@@ -108,10 +108,13 @@ DjEngine::Application.routes.draw do
 
     scope ':stream_slug', constraints: SlugConstraint.new('Stream') do
       resources :hotels, only: :index
-      get 'resorts'         => 'resorts#index', as: :stream_resorts
-      get 'posts/:post_id'  => 'posts#show'
-      get 'blog'            => 'streams#blog', as: :stream_blog
-      get 'blog/tags/:tag'  => 'streams#blog', as: :tag
+      get 'resorts'         => 'resorts#index',       as: :stream_resorts
+      get 'news'            => 'streams#news',        as: :stream_news
+      get 'posts/:post_id'  => 'posts#show',          as: :stream_posts
+      get 'blog'            => 'streams#blog',        as: :stream_blog
+      get 'blog/tags/:tag'  => 'streams#blog',        as: :tag
+      get 'hotels'          => 'streams#hotels',      as: :stream_hotels
+      get 'tours'          =>  'streams#tours',       as: :stream_tours
     end
 
     # Cities

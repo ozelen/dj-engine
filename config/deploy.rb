@@ -43,6 +43,12 @@ namespace :deploy do
     end
   end
 
+  desc "Invoke rake task"
+  # usage: cap deploy:invoke task=db:seed
+  task :invoke do
+    run "cd '#{current_path}' && #{rake} #{ENV['task']} RAILS_ENV=#{rails_env}"
+  end
+
   task :setup_config, roles: :app do
     sudo "ln -nfs #{current_path}/config/nginx.conf /etc/nginx/sites-enabled/#{application}"
     sudo "ln -nfs #{current_path}/config/unicorn_init.sh /etc/init.d/unicorn_#{application}"

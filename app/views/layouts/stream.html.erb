@@ -1,10 +1,30 @@
-<% @stream ||= Stream.find_by_slug(params[:stream]) %>
+<%# @stream ||= Stream.find_by_slug(params[:stream]) %>
+
+<% menu = [
+        ['Overview',    stream_slug_path(@stream),        -1 ],
+        ['Resorts',     stream_resorts_path(@stream),     -1 ],
+        ['News',        stream_news_path(@stream),       -1 ],
+        ['Blog',        stream_blog_path(@stream),        -1 ],
+        ['Tours',       stream_tours_path(@stream),       -1 ],
+        ['Hotels',      resort_hotels_path(@stream),      -1 ],
+]
+   cover_photo = nil #@stream.gallery.rand(:cover).image_url(:content) rescue nil
+   title_photo = nil #@stream.gallery.rand(:title).image_url(:mini)    rescue nil
+%>
+
+<% content_for :manage_menu do %>
+    <% if can? :manage, @stream %>
+        <li><%= link_to t('.edit',    :default => t("helpers.links.edit")),     edit_stream_path(@stream) %></li>
+        <li><%= link_to t('.destroy', :default => t("helpers.links.destroy")),  stream_path(@stream), :method => 'delete', :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) } %></li>
+    <% end %>
+<% end %>
+
+<% content_for :head do %>
+    <%= render 'layouts/poi_menu', menu: menu, header: @stream.node.header, title: @stream.node.title %>
+<% end %>
+
 <% content_for :content do %>
-
-    <%= render 'streams/stream_header', active_item: controller_name.capitalize %>
-
-  <%= yield %>
-
+    <%= yield %>
 <% end %>
 
 <%= render template: "layouts/application" %>
