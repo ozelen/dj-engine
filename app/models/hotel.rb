@@ -60,11 +60,7 @@ class Hotel < ActiveRecord::Base
 
   acts_as_poi
 
-  #default_scope includes({node: :translations}, :rooms, :services, :periods, :photos) # .order("node_translations.header ASC")
-
-  #scope :published, includes(:deals).order('deals.expire_date DESC')
-  scope :published, joins(:deals).where('deals.expire_date IS NOT NULL').order('deals.expire_date DESC')
-  default_scope includes(node: :translations).joins(:deals).where('deals.expire_date IS NOT NULL').order('deals.expire_date DESC')
+  default_scope order("deal_expire DESC")
 
   def to_param
     self.node.name

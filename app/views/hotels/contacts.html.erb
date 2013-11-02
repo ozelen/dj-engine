@@ -1,5 +1,6 @@
 <h1>Contacts</h1>
 
 <%= render 'address' %>
+<%= link_to(@hotel.city.name, find_path(@hotel.city)) if @hotel.city %><br>
 
-<%= render 'map', location: @hotel.location %>
+<%= render 'layouts/map', location: @hotel.location %>

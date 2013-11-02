@@ -4,7 +4,7 @@ class NodesController < ApplicationController
   # GET /nodes
   # GET /nodes.json
   def home
-    @hotels = Hotel.published.limit(10)
+    @hotels = Hotel.limit(10)
     @comments = Comment.latest.limit(5)
   end
 

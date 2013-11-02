@@ -66,7 +66,7 @@ module ApplicationHelper
       when Post
         post_path(instance)
       when City
-        city_path(instance)
+        slug_city_path(instance)
     end
   end
 

@@ -14,16 +14,15 @@
         <small><%= hotel.type.name rescue '' %>, <%= hotel.city.name rescue '' %></small>
       </h3>
     </div>
-    <div class="col-lg-3">
-
+    <div class="col-lg-2">
     </div>
   </div>
   <div class="row">
-    <div class="col-lg-3">
-      <%= image_tag(img, class: 'img-circle thumbnail') if img %>
+    <div class="col-lg-4 thumbnail-container">
+      <%= image_tag(img, class: 'img-circle thumbnail hotel-thumbnail') if img %>
     </div>
 
-    <div class="col-lg-9 details">
+    <div class="col-lg-8 details">
 
       <div class="row">
         <div class="col-lg-9">
@@ -56,15 +55,16 @@
           </div>
         <% end %>
 
-        <div class="row periods">
-          <div class="col-lg-9">
-            Prices are shown by period:
-          </div>
-          <div class="col-lg-3">
+        <div class="periods row">
+
+          <div class="col-lg-12">
             <% if hotel.periods.present? %>
-              <div class="btn-group pull-right">
-                <button type="button" class="btn btn-xs btn-default dropdown-toggle" data-toggle="dropdown">
-                  <%= hotel.current_period.title %> <span class="caret"></span>
+              <div class="btn-group">
+                <button type="button" class="btn btn-xs btn-default dropdown-toggle select-period" data-toggle="dropdown">
+                  <span class="title">
+                    <%= hotel.current_period.title %>
+                  </span>
+                  <span class="caret"></span>
                 </button>
                 <ul class="dropdown-menu" role="menu">
                   <% hotel.periods.last(5).each do |period| %>

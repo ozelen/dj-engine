@@ -14,7 +14,7 @@ class CitiesController < ApplicationController
   end
 
   def hotels
-    @hotels = @city.hotels.paginate(page: params[:page], per_page: 10) # TODO: resort hotels scope
+    @hotels = @city.hotels.paginate(page: params[:page], per_page: 20)
     render template: 'hotels/index'
   end
 

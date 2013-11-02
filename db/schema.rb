@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130925130036) do
+ActiveRecord::Schema.define(:version => 20131102190600) do
 
   create_table "addresses", :force => true do |t|
     t.string   "email"
@@ -177,12 +177,16 @@ ActiveRecord::Schema.define(:version => 20130925130036) do
     t.integer  "city_id"
     t.integer  "user_id"
     t.string   "ident"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
     t.integer  "type_id"
+    t.integer  "donated"
+    t.date     "deal_expire"
   end
 
   add_index "hotels", ["city_id"], :name => "index_hotels_on_city_id"
+  add_index "hotels", ["deal_expire"], :name => "index_hotels_on_deal_expire"
+  add_index "hotels", ["donated"], :name => "index_hotels_on_donated"
   add_index "hotels", ["type_id"], :name => "index_hotels_on_type_id"
   add_index "hotels", ["user_id"], :name => "index_hotels_on_user_id"
 
