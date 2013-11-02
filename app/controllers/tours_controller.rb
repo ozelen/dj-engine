@@ -1,5 +1,5 @@
 class ToursController < ApplicationController
-  layout 'tour', except: :index
+  layout 'tour', except: [:index, :new]
   before_filter :find_tour, except: [:new, :create, :index]
 
   def contacts

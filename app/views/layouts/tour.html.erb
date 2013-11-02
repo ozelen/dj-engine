@@ -12,7 +12,8 @@
 %>
 
 <% content_for :head do %>
-  <%= render 'layouts/visual_header', poi: @tour, menu: menu, header: @tour.name, section: section, title: '', cover: cover_photo%>
+    <%= render 'layouts/visual_header', poi: @tour, menu: menu, header: @tour.name, title: '',
+               gallery: @tour.gallery %>
 <% end %>
 
 <% content_for :content do %>

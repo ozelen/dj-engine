@@ -31,7 +31,7 @@
     </div>
   <% elsif cover %>
     <div class="cover-image" style="background-image: url(<%= cover %>);"></div>
-  <% elsif poi.location.present? %>
+  <% elsif poi.respond_to?(:location) && poi.location.present? %>
     <%= render 'layouts/map', location: poi.location %>
   <% end %>
 <% end %>

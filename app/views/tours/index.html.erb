@@ -1,17 +1,5 @@
 <h1>Listing tours</h1>
 
-
-<% @tours.each do |tour| %>
-
-  <%= content_tag_for :div, tour do %>
-
-    <%= link_to tour.name, tour %>
-
-  <% end %>
-
-<% end %>
-
-
-</table>
+<%= render @tours %>
 
 <%= link_to 'New Tour', new_tour_path, class: 'btn btn-primary pull-right' %>
