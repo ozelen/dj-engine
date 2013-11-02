@@ -63,6 +63,7 @@ class PhotosController < ApplicationController
       if @photo.update_attributes(params[:photo])
         format.html { redirect_to @photo, notice: 'Photo was successfully updated.' }
         format.json { head :no_content }
+        format.js
       else
         format.html { render action: "edit" }
         format.json { render json: @photo.errors, status: :unprocessable_entity }

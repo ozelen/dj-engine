@@ -29,23 +29,13 @@
 <div>
   <%= image_tag(img.image_url(:content, anchor: 'photos').to_s, class: 'img-rounded content-photo') if img %>
 </div>
+<hr>
 
-<% if can? :manage, gallery.imageable %>
-  <hr>
-  <%= form_for img do |f| %>
-    <div class="row">
-      <div class="col-lg-4">
-        <%= f.text_field :description, class: 'form-control', placeholder: 'Image description' %>
-      </div>
-      <div class="col-lg-4">
-        <%= f.text_field :mode_list, class: 'form-control' %>
-        Modes: <%= raw img.mode_list.map { |t| t }.join(', ') %>
-      </div>
-      <div class="col-lg-2">
-        <button class="btn btn-default">Save</button>
-      </div>
-    </div>
-  <% end if img %>
-  <hr>
-<% end %>
+<div class="image-description checktags">
+  <% if can? :manage, gallery.imageable %>
+      <%= render 'photos/properties_form', img: img %>
+  <% else %>
+      <%= img.description; %>
+  <% end %>
+</div>
 

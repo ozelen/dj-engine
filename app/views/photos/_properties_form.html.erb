@@ -1,0 +1,27 @@
+<fieldset>
+  <legend>Edit Image properties</legend>
+  <%= form_for img, remote: true do |f| %>
+      <div class="row">
+        <div class="form-group col-lg-8">
+          <%= f.text_area :description, rows: 3, class: 'form-control', placeholder: 'Image description' %>
+        </div>
+
+        <div class="form-group col-lg-4 tag-checkboxes">
+          <ul>
+            <% Photo.mode_counts.each do |mode| %>
+                <li>
+                  <label>
+                    <%= check_box_tag nil, mode.name, f.object.modes.include?(mode) %>
+                    <%= mode.name %>
+                  </label>
+                </li>
+            <% end %>
+          </ul>
+          <%= f.hidden_field :mode_list, class: "form-control" %>
+        </div>
+        <div class="col-lg-8">
+          <%= f.submit class: 'btn btn-default' %>
+        </div>
+      </div>
+  <% end if img %>
+</fieldset>
