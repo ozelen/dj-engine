@@ -38,6 +38,22 @@
       <%= f.label :tag_list, "Tags (separated by commas)" %>
       <%= f.text_field :tag_list, class: "form-control" %>
     </div>
+
+    <div class="form-group tag-checkboxes">
+      <%= f.label :tag_list, "Streams" %>
+      <ul>
+      <% Post.portal_counts.each do |portal| %>
+        <li>
+          <label>
+            <%= check_box_tag nil, portal.name, f.object.portals.include?(portal) %>
+            <%= portal.name %>
+          </label>
+        </li>
+      <% end %>
+      </ul>
+      <%= f.hidden_field :portal_list, class: "form-control" %>
+    </div>
+
     <div class="actions">
       <%= f.submit class: 'btn btn-success' %>
       <% if @post.new_record? %>

@@ -3,7 +3,7 @@
 <a id="new_post_link" class="btn btn-primary" href="#" onclick="$('#form_post').show(); $(this).hide(); return false">Add a new post</a>
 <%= render 'posts/ajax_form', channel: channel %>
 
-<div id="posts">
+<div id="posts" class="checktags">
   <%= render params[:tag] ? channel.posts.tagged_with(params[:tag]) : channel.posts %>
 </div>
 
