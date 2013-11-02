@@ -18,7 +18,8 @@ class ResortsController < ApplicationController
   end
 
   def hotels
-    @hotels = @resort.hotels.paginate(page: params[:page], per_page: 10)
+    # worked around with to_a, in some reason will_paginate sees only one page and cuts items per page value
+    @hotels = @resort.hotels.to_a.paginate(page: params[:page], per_page: 10)
     @cities = @resort.cities
   end
 

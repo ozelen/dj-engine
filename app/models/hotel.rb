@@ -64,7 +64,7 @@ class Hotel < ActiveRecord::Base
 
   #scope :published, includes(:deals).order('deals.expire_date DESC')
   scope :published, joins(:deals).where('deals.expire_date IS NOT NULL').order('deals.expire_date DESC')
-  default_scope joins(:deals).where('deals.expire_date IS NOT NULL').order('deals.expire_date DESC')
+  default_scope includes(node: :translations).joins(:deals).where('deals.expire_date IS NOT NULL').order('deals.expire_date DESC')
 
   def to_param
     self.node.name
