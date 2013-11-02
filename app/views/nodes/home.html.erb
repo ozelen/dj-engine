@@ -3,39 +3,52 @@
 
 <% content_for :head do %>
     <div class="jumbotron clearfix">
-      <h1>Add your Hotel!</h1>
+      <h1>Welcome to BestHotels in UA!</h1>
       <p>
-        You have a hotel and want to increase amount of clients? Sign up and add add it in BestHotels!
-        Show up photos, rooms and categories. Manage visitors loading. Advertise your page through social networks.
+        We've just opened! So, sorry for some bugs, we're working hard on them :).
       </p>
-      <p><%= link_to 'Add Hotel for free &raquo;'.html_safe, new_hotel_path, class:"btn btn-success btn-large pull-right" %></p>
+      <p>
+        BestHotels is the evolution of <a href="http://skiworld.org.ua">SkiWorld.org.ua</a> and satellite projects:
+        <a href="httpd://zdravtour.net">ZdravTour</a>,
+        <a href="httpd://yarem4e.com">Yarem4e</a>,
+        <a href="httpd://dragobrat.org.ua">Dragorat</a>,
+        <a href="httpd://greenworld.com.ua">GreenWorld</a>.
+        Our mission is to represent Ukrainian resorts and hotels and their infrastructure in convenient and user-friendly way.
+      </p>
+      <p>
+        Enjoy,<br>
+        Oleksiy Zelenyuk, CEO
+      </p>
+      <%# link_to 'Add Hotel for free &raquo;'.html_safe, new_hotel_path, class:"btn btn-success btn-large pull-right" %>
     </div>
 
 
     <div class="body-content">
 
-      <!-- Example row of columns -->
       <div class="row">
         <div class="col-lg-4">
           <h2>Resorts</h2>
           <%= render Resort.all %>
         </div>
         <div class="col-lg-4">
-          <h2>Hotels</h2>
-          <%= render @hotels %>
-          <%= link_to 'View all hotels', hotels_path %>
+          <h2>Streams</h2>
+          <%= render Stream.all %>
         </div>
         <div class="col-lg-4">
-          <h2>Last comments</h2>
-          <%= render @comments, show_commentable: true, truncate_text: true %>
+          <h2>Tours</h2>
+          <%= render Tour.limit(5) %>
         </div>
       </div>
 
       <hr>
 
-
     </div>
 
+<% end %>
+
+<% content_for :sidebar do %>
+    <h2>Last comments</h2>
+    <%= render @comments, show_commentable: true, truncate_text: true %>
 <% end %>
 
 <% content_for :offer do %>
@@ -43,3 +56,14 @@
     <%= render 'hotels/booking_form_offer' %>
 <% end %>
 
+<div class="row">
+  <div class="col-lg-6">
+    <h2>Hotels</h2>
+    <%= render @hotels %>
+    <%= link_to 'View all hotels', hotels_path %>
+  </div>
+  <div class="col-lg-6">
+    <h2>Latest posts</h2>
+    <%= render Post.limit(10) %>
+  </div>
+</div>

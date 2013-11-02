@@ -7,7 +7,7 @@
     %>
     <%# path = params[:resort] ? post_path(@resort, post) : [post.channel, post] %>
     <h3><%= link_to post.title, path %></h3>
-    <p><%= post.teaser || truncate(post.content, length: 300, separator: '.' ) %></p>
+    <p><%= post.teaser || truncate(markdown(post.content), length: 300, separator: '.' ).html_safe %></p>
 
     <% unless post.comment_threads.blank? %>
       <%= post.comment_threads.count %> comments

@@ -60,7 +60,7 @@ module ApplicationHelper
       when Resort
         slug_resort_path(instance)
       when Stream
-        slug_stream_path(instance)
+        stream_slug_path(instance)
       when Tour
         tour_path(instance)
       when Post
