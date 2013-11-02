@@ -1,5 +1,6 @@
 module LocationsHelper
   def distance_between obj1, obj2, link = nil
+    return unless obj1.location
     radius = 1
     distance = obj1.location.distance_to(obj2.location)
     if distance.present?
