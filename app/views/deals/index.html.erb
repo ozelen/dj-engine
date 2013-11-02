@@ -17,11 +17,20 @@
     <td><%= deal.price %></td>
     <td><%= l deal.begin_date if deal.begin_date %></td>
     <td><%= l deal.expire_date if deal.expire_date %></td>
-    <td><%= markdown truncate(deal.contacts, length: 20, separator: '.') %></td>
+    <td><%= markdown truncate(deal.contacts, length: 20, separator: ' ') %></td>
     <td><%= deal.status ? 'active' : 'disabled' %></td>
     <td><%= link_to 'Destroy', deal, method: :delete, data: { confirm: 'Are you sure?' } %></td>
   </tr>
 <% end %>
+  <tr>
+    <th></th>
+    <th><%= @hotel.donated %></th>
+    <th></th>
+    <th><%= l @hotel.deal_expire %></th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
 </table>
 
 <br />
