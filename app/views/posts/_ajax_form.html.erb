@@ -3,7 +3,7 @@
   <h3><%= @post.new_record? ? 'New Post' : 'Edit Post' %></h3>
   <%= form_for(@post, remote: true, html: {role: 'form'}) do |f| %>
 
-    <%= hidden_field_tag :channel_id, channel.id %>
+    <%= hidden_field_tag :channel_id, channel.id if channel %>
     <%= hidden_field_tag :channel_type, channel.class.name %>
 
     <% if @post.errors.any? %>
