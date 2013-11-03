@@ -4,9 +4,19 @@
   </h1>
 <% end %>
 
-<div class="content">
-  <%= markdown @resort.node.content %>
+<div class="row">
+  <div class="col-lg-6">
+    <h4>Description</h4>
+    <%= markdown truncate(@resort.node.content, length: 500, separator: '.') %>
+  </div>
+  <div class="col-lg-6">
+    <h4>Blog</h4>
+    <%= render @resort.posts.limit(5) %>
+  </div>
 </div>
 
-<%= link_to 'Edit', edit_resort_path(@resort) %> |
-<%= link_to 'Back', resorts_path %>
+<% content_for :sidebar do %>
+  <h4>Hotels</h4>
+  <%= render @hotels %>
+<% end %>
+

@@ -36,6 +36,7 @@ class ResortsController < ApplicationController
   # GET /resorts/1
   # GET /resorts/1.json
   def show
+    @hotels = @resort.hotels.by_resort.limit(5)
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @resort }
