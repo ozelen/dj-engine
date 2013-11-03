@@ -19,3 +19,5 @@ $ ->
     $(this).closest('.row').before($(this).data('fields').replace(regexp, time))
     event.preventDefault()
     initComponents()
+
+  $(".carousel").carousel interval: 3200

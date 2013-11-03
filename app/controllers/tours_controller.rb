@@ -5,6 +5,9 @@ class ToursController < ApplicationController
   def contacts
   end
 
+  def description
+  end
+
   def index
     @tours = Tour.all
 

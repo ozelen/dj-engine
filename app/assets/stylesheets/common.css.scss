@@ -1,6 +1,6 @@
 body {
-  padding-top: 50px;
-  padding-bottom: 20px;
+//  padding-top: 50px;
+//  padding-bottom: 20px;
 }
 
 header#page-header {
@@ -13,6 +13,7 @@ header#page-header {
   background: linear-gradient(to bottom,  rgba(169,3,41,1) 0%,rgba(143,2,34,1) 44%,rgba(109,0,25,1) 100%); /* W3C */
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a90329', endColorstr='#6d0019',GradientType=0 ); /* IE6-9 */
   border-bottom: 3px solid #f1da36;
+  margin-bottom: 0px;
   a {
     color: #f9aa99
   }
@@ -119,6 +120,10 @@ header#page-header {
       height: 320px;
       margin-left: -15px;
     }
+  }
+
+  .carousel-inner {
+    background: #181414;
   }
 }
 

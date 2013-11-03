@@ -30,15 +30,15 @@
 
       <div class="row">
         <div class="col-lg-4">
-          <h2>Resorts</h2>
+          <h4>Resorts</h4>
           <%= render Resort.all %>
         </div>
         <div class="col-lg-4">
-          <h2>Streams</h2>
+          <h4>Streams</h4>
           <%= render Stream.all %>
         </div>
         <div class="col-lg-4">
-          <h2>Tours</h2>
+          <h4>Tours</h4>
           <%= render Tour.limit(5) %>
         </div>
       </div>
@@ -50,7 +50,7 @@
 <% end %>
 
 <% content_for :sidebar do %>
-    <h2>Last comments</h2>
+    <h4>Last comments</h4>
     <%= render @comments, show_commentable: true, truncate_text: true %>
 <% end %>
 
@@ -61,12 +61,12 @@
 
 <div class="row">
   <div class="col-lg-6">
-    <h2>Hotels</h2>
+    <h4>Hotels</h4>
     <%= render @hotels %>
     <%= link_to 'View all hotels', hotels_path %>
   </div>
   <div class="col-lg-6">
-    <h2>Latest posts</h2>
+    <h4>Latest posts</h4>
     <%= render Post.limit(10) %>
   </div>
 </div>

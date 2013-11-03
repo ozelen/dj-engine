@@ -1,5 +1,6 @@
+<h4>Description</h4>
 
 <%= markdown @tour.description %>
+<%= link_to('Full description', tour_description_path(@tour)) %>
 
-<%= link_to 'Edit', edit_tour_path(@tour) %> |
-<%= link_to 'Back', tours_path %>
+

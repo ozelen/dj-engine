@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131102190600) do
+ActiveRecord::Schema.define(:version => 20131103134958) do
 
   create_table "addresses", :force => true do |t|
     t.string   "email"
@@ -519,6 +519,19 @@ ActiveRecord::Schema.define(:version => 20131102190600) do
     t.string "name"
   end
 
+  create_table "tour_translations", :force => true do |t|
+    t.integer  "tour_id"
+    t.string   "locale"
+    t.string   "name"
+    t.string   "title"
+    t.text     "description"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  add_index "tour_translations", ["locale"], :name => "index_tour_translations_on_locale"
+  add_index "tour_translations", ["tour_id"], :name => "index_tour_translations_on_tour_id"
+
   create_table "tours", :force => true do |t|
     t.string   "slug"
     t.string   "name"
@@ -526,6 +539,7 @@ ActiveRecord::Schema.define(:version => 20131102190600) do
     t.integer  "user_id"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
+    t.string   "title"
   end
 
   add_index "tours", ["name"], :name => "index_tours_on_name"

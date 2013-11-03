@@ -145,11 +145,12 @@ DjEngine::Application.routes.draw do
 
     resources :tours
     scope 'tours/:tour_id' do
-      match 'album(/:photo_id)'           => 'tours#album',     as: :tour_album
-      match 'comments(/page/:page)'       => 'tours#comments',  as: :tour_comments
-      match 'hotels'                      => 'tours#hotels',    as: :tour_hotels
-      match 'resorts'                     => 'tours#resorts',   as: :tour_resorts
-      match 'contacts'                    => 'tours#contacts', as: :tour_contacts
+      match 'album(/:photo_id)'           => 'tours#album',         as: :tour_album
+      match 'comments(/page/:page)'       => 'tours#comments',      as: :tour_comments
+      match 'hotels'                      => 'tours#hotels',        as: :tour_hotels
+      match 'resorts'                     => 'tours#resorts',       as: :tour_resorts
+      match 'contacts'                    => 'tours#contacts',      as: :tour_contacts
+      match 'description'                 => 'tours#description',   as: :tour_description
       # TODO: match 'locations'           => 'tours#locations', as: :tour_comments
       # TODO: match 'prices'              => 'tours#prices',    as: :prices
     end
