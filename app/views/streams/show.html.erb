@@ -1,5 +1,22 @@
+<div class="row">
+  <div class="col-lg-6">
+    <h2>Resorts</h2>
+    <%= render Resort.tagged_with(@stream.node.name) %>
+  </div>
 
-<div class="btn-group">
-  <%= link_to 'Edit', edit_stream_path(@stream), class: 'btn btn-default' %>
-  <%= link_to 'Back', streams_path, class: 'btn btn-default' %>
+  <div class="col-lg-6">
+    <h2>Tours</h2>
+    <%= render Tour.tagged_with(@stream.node.name).limit(5) %>
+  </div>
 </div>
+
+<hr>
+
+<div id="posts" class="checktags">
+  <h2>News</h2>
+  <%= render Post.tagged_with(@stream.node.name).limit(10) %>
+</div>
+
+<%= content_for(:sidebar) do %>
+    <%= render Hotel.tagged_with(@stream.node.name).limit(10) %>
+<% end %>

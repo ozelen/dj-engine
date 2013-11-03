@@ -90,6 +90,13 @@
 
   <!-- / Hotels -->
 
+
+    <fieldset class="checktags">
+      <legend>Portals</legend>
+      <%= render 'tags/checktags', f: f, tags: f.object.portals %>
+    </fieldset>
+
+
   <div class="btn-group">
     <%= link_to 'Cancel', tour_path(@tour), class: 'btn btn-default' %>
     <%= f.submit class: 'btn btn-success' %>

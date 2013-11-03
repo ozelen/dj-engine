@@ -11,8 +11,15 @@
 
 %>
 
+<% content_for :manage_menu do %>
+    <% if can? :manage, @tour %>
+        <li><%= link_to t('.edit',    :default => t("helpers.links.edit")),     edit_tour_path(@tour) %></li>
+        <li><%= link_to t('.destroy', :default => t("helpers.links.destroy")),  tour_path(@tour), :method => 'delete', :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) } %></li>
+    <% end %>
+<% end %>
+
 <% content_for :head do %>
-    <%= render 'layouts/visual_header', poi: @tour, menu: menu, header: @tour.name, title: '',
+    <%= render 'layouts/visual_header', poi: @tour, menu: menu, header: 'Tour', title: '',
                gallery: @tour.gallery %>
 <% end %>
 

@@ -1,0 +1,13 @@
+<div class="form-group tag-checkboxes">
+  <ul>
+    <% Post.portal_counts.each do |portal| %>
+        <li>
+          <label>
+            <%= check_box_tag nil, portal.name, tags.include?(portal) %>
+            <%= portal.name %>
+          </label>
+        </li>
+    <% end %>
+  </ul>
+  <%= f.hidden_field :portal_list, class: "form-control" %>
+</div>

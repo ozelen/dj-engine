@@ -50,16 +50,19 @@ class Hotel < ActiveRecord::Base
                   :gallery_attributes, :photos_attributes,
                   :location_attributes, :address_attributes,
                   :deals_attributes, :leads_attributes,
-                  :skiworld_legacy_attributes
+                  :skiworld_legacy_attributes,
+                  :portal_list
 
   validate :validate_properties
 
   acts_as_commentable
+  acts_as_taggable_on :portals
 
   after_create :create_gallery
 
   acts_as_poi
 
+  scope :by_resort, lambda { includes(node: :translations) }
   default_scope order("deal_expire DESC")
 
   def to_param

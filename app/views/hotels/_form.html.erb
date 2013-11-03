@@ -94,12 +94,22 @@
 
     </fieldset>
 
-  <fieldset>
-    <legend>Address</legend>
-    <%= f.fields_for :address do |builder| %>
-      <%= render 'addresses/form', f: builder %>
+    <fieldset>
+        <legend>Address</legend>
+        <%= f.fields_for :address do |builder| %>
+          <%= render 'addresses/form', f: builder %>
+        <% end %>
+    </fieldset>
+
+    <% if current_user.role? :admin %>
+
+        <fieldset class="checktags">
+          <legend>Portals</legend>
+          <%= render 'tags/checktags', f: f, tags: f.object.portals %>
+        </fieldset>
+
     <% end %>
-  </fieldset>
+
 
 
     <fieldset>

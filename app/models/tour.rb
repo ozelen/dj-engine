@@ -11,7 +11,7 @@ class Tour < ActiveRecord::Base
   accepts_nested_attributes_for :hotel_tour_assignments, allow_destroy: true
   accepts_nested_attributes_for :resort_tour_assignments, allow_destroy: true
   accepts_nested_attributes_for :address, allow_destroy: true
-  attr_accessible :description, :name, :slug, :user_id, :hotel_tour_assignments_attributes, :resort_tour_assignments_attributes, :address_attributes
+  attr_accessible :description, :name, :slug, :user_id, :hotel_tour_assignments_attributes, :resort_tour_assignments_attributes, :address_attributes, :portal_list
 
 
   acts_as_commentable

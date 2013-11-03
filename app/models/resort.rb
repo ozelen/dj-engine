@@ -21,11 +21,13 @@ class Resort < ActiveRecord::Base
   accepts_nested_attributes_for :location, allow_destroy: true
   accepts_nested_attributes_for :resort_city_assignments, allow_destroy: true
 
-  attr_accessible :gallery_attributes, :node_attributes, :location_attributes, :resort_city_assignments_attributes
+  attr_accessible :gallery_attributes, :node_attributes, :location_attributes, :resort_city_assignments_attributes, :portal_list
+
   acts_as_commentable
+  acts_as_taggable_on :portals
 
   after_create :create_gallery
-  acts_as_taggable_on :portals
+
 
   def to_param
     self.node.name
