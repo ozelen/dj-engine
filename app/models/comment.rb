@@ -4,7 +4,7 @@ class Comment < ActiveRecord::Base
   validates :body, :presence => true
   #validates :user, :presence => true
 
-  attr_accessible :commentable, :title, :body, :user_id, :username
+  attr_accessible :commentable, :title, :body, :user_id, :username, :created_at
 
   # NOTE: install the acts_as_votable plugin if you
   # want user to vote on the quality of comments.

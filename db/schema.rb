@@ -29,6 +29,7 @@ ActiveRecord::Schema.define(:version => 20131103134958) do
   end
 
   add_index "addresses", ["addressable_id", "addressable_type"], :name => "index_addresses_on_addressable_id_and_addressable_type"
+  add_index "addresses", ["email"], :name => "index_addresses_on_email"
 
   create_table "assignments", :force => true do |t|
     t.integer  "user_id"
@@ -281,7 +282,7 @@ ActiveRecord::Schema.define(:version => 20131103134958) do
   add_index "node_translations", ["node_id"], :name => "index_node_translations_on_node_id"
 
   create_table "nodes", :force => true do |t|
-    t.integer  "parent"
+    t.string   "parent"
     t.string   "name"
     t.string   "title"
     t.string   "header"
@@ -295,6 +296,7 @@ ActiveRecord::Schema.define(:version => 20131103134958) do
   add_index "nodes", ["accessible_id", "accessible_type"], :name => "index_nodes_on_accessible_id_and_accessible_type"
   add_index "nodes", ["header"], :name => "index_nodes_on_header"
   add_index "nodes", ["name"], :name => "index_nodes_on_name"
+  add_index "nodes", ["parent"], :name => "index_nodes_on_parent"
 
   create_table "period_translations", :force => true do |t|
     t.integer  "period_id"

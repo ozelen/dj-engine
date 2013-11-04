@@ -27,12 +27,16 @@ namespace :import do
     def show_classes
       I18n.locale = :uk
       classes.each do |c|
-        #puts " * #{c.key.data.title('ru')}:#{c.value.data.title('ru')} "
+        #puts " ~ #{c.key.data.title('ru')}:#{c.value.data.title('ru')} "
         next unless c.value
         cat = FieldCategory.find_by_slug c.key.name
         fld = Field.find_by_slug c.value.name
         puts " * #{c.key.name}:#{c.value.name} => #{cat.name} : #{fld.name} " if cat and fld
       end
+    end
+
+    def class_service_types
+      classes.map {|c| Type.find_by_slug(c.value.name) if c.key && c.value && c.value.name!='hotels' && (c.key.name == 'services' || c.key.name == 'entertainments') }
     end
 
     def location

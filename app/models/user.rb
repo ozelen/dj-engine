@@ -11,7 +11,7 @@ class User < ActiveRecord::Base
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me
-  before_save :remain_roles_for_non_admin, :set_email_to_address
+  #before_save :remain_roles_for_non_admin, :set_email_to_address
 
   has_many :hotels
   has_many :assignments

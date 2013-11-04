@@ -1,7 +1,7 @@
 namespace :import do
 
   def import_objects(cold=false)
-    puts "Droppirang old data"
+    puts "Dropping old data"
 
     if cold
       Hotel.destroy_all
@@ -31,7 +31,7 @@ namespace :import do
 
       next if exists
       # photos path
-      object_photos_dir     = "public/uploads/legacy/#{o.Id}"
+      object_photos_dir     = "public/legacy/hotcat/objects/#{o.Id}"
       object_album_dir      = object_photos_dir+'/albums/album'
       object_categories_dir = object_photos_dir+'/categories'
 
@@ -72,7 +72,24 @@ namespace :import do
         hr 40, '`'
       end
 
+      add_services_from_classification o, hotel
+
       hr 50, '.'
+    end
+  end
+
+  def add_services_from_classification(legacy_object, new_object)
+    legacy_object.class_service_types.each do |t|
+
+      if t
+        existing = new_object.services.find_by_type_id(t.id)
+        if existing
+          puts "Service #{t.slug} has already been created"
+        else
+          new_object.services.create(type_id: t.id)
+          puts "Added missed service: #{t.slug}"
+        end
+      end
     end
   end
 
@@ -125,48 +142,12 @@ namespace :import do
         deals = Agreement.find_by_object_id legacy_object.Id
         deals_array = []
 
-#        deals.map! {|deal| deal.attributes(new_object.id) if deal.present?}
-
         deals.each do |deal|
           deals_array.push  deal.attributes(new_object.id) if deal.present?
         end
 
         new_object.deals_attributes = deals_array
         new_object.save
-
-        comments = LegacyComment.get_by_topic(legacy_object.Topic)
-        puts "Importing comments (#{comments.count})"
-        comments.each do |comment|
-          puts "#{comment.Title}\n#{comment.Content}\n---"
-          user = nil
-          commenter_email   = comment.Email
-          commenter_name    = comment.Username
-          commenter_email ||= find_email(comment.Content)[0] rescue nil
-          commenter_name  ||= username_from_email(commenter_email) rescue nil
-          if commenter_email.present?
-            user   = User.find_by_email(commenter_email)
-            user ||= User.new(email: commenter_email, username: commenter_name)
-            if user.valid?
-              user.save
-            else
-              user = nil
-            end
-          end
-          user_id = user.present? ? user.id : nil
-          puts "commenter: #{commenter_name} user: #{user_id} email: #{commenter_email}"
-          new_comment = Comment.new( commentable: new_object, title: comment.Title, body: comment.Content)
-
-          if user.present?
-            new_comment.user_id = user.id
-          elsif commenter_name.present?
-            new_comment.username = commenter_name
-          else
-            new_comment.username = 'Anonymous'
-          end
-
-          new_comment.save if new_comment.valid?
-
-        end
 
       elsif legacy_object.instance_of? HbSettlement
         return unless legacy_object.Ident
@@ -179,6 +160,9 @@ namespace :import do
             lead_attributes: { provider: 'nezabarom', params: BookitCity.get_attributes_by_object_id(legacy_object.Id) }
         )
       end
+
+      import_comments(legacy_object.Topic, new_object) if legacy_object.respond_to? :Topic and legacy_object.Topic and legacy_object.Topic!=0
+
     end
 
     type = legacy_object.new_class || Type.find_by_slug(profile) || Type.find_by_slug('services')
@@ -207,7 +191,12 @@ namespace :import do
   end
 
   def import_images obj, dir, gallery
-    return unless gallery
+    unless gallery
+      puts "NO GALLERY for: #{obj}"
+      return
+    end
+
+    puts "Importing images for object id: #{obj.id}, gallery id: #{obj.gallery.id}, object name: #{obj.name}, hash: #{obj}"
     #return # skip for a while, because toooo long
     gallery.images.each do |img|
       tags = (gallery.present? and gallery.TitleImage == img.Id) ? 'title, cover' : nil
@@ -217,7 +206,8 @@ namespace :import do
         fpath = "#{dir}/#{img.Id}/big.#{ext}"
         if File.exists? fpath
           file = File.open fpath
-          obj.gallery.photos.new(image: file, mode_list: tags)
+          photo = obj.gallery.photos.create(image: file, mode_list: tags)
+          puts "New created photo #{photo.id}"
           break
         else
           next

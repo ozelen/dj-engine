@@ -15,6 +15,7 @@ namespace :import do
     require 'tasks/import/import_types'
     require 'tasks/import/import_objects'
     require 'tasks/import/import_news'
+    require 'tasks/import/import_comments'
 
 
 

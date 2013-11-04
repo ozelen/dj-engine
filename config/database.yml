@@ -7,7 +7,7 @@ development:
 #  adapter: sqlite3
 #  database: db/development.sqlite3
   adapter: postgresql
-  database: djerelo
+  database: besthotels
   username: ozelen
   password: 322
   pool: 5

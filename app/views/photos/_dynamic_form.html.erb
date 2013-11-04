@@ -35,7 +35,7 @@
   <% if can? :manage, gallery.imageable %>
       <%= render 'photos/properties_form', img: img %>
   <% else %>
-      <%= img.description; %>
+      <%= img.description if img; %>
   <% end %>
 </div>
 

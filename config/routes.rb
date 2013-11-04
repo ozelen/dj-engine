@@ -28,6 +28,8 @@ DjEngine::Application.routes.draw do
     root :to => 'nodes#home'
     get 'home', :to => 'nodes#home'
 
+    resources :photos
+
     # Admin settings: types and measures
     resources :measures
     resources :measure_categories
