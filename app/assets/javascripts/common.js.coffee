@@ -21,3 +21,12 @@ $ ->
     initComponents()
 
   $(".carousel").carousel interval: 3200
+
+  $("input.check_all").change ->
+    control = $(this)
+    control.closest('form').find(':checkbox').each ->
+      $(this)[0].checked = control[0].checked
+
+  $('.media-body.comment').click ->
+    checkbox = $(this).find('input:checkbox[name="selected[]"]')[0]
+    checkbox.checked = !checkbox.checked

@@ -18,7 +18,7 @@ namespace :import do
       :
         import_cities(cities_index)
     # where("Id in (301, 338)")
-    HbObject.all.each do |o|
+    HbObject.where('Id = 78').each do |o|
       exists    = SkiworldLegacy.where("legator_id = ? and legator_table = ?", o.Id, 'Objects').present?
       new_city  = SkiworldLegacy.where("legator_table = 'Cities' and legator_id = ?", o.Settlement)[0] rescue nil
       hr 50, '+'
@@ -187,7 +187,7 @@ namespace :import do
   end
 
   def find_gallery legacy_object, object_type
-    LegacyGalleries.where("OwnerId = #{legacy_object.Id} and OwnerTable = '#{object_type}'")[0]
+    LegacyGalleries.where("ModuleHandler = 'album' and OwnerId = #{legacy_object.Id} and OwnerTable = '#{object_type}'")[0]
   end
 
   def import_images obj, dir, gallery
@@ -196,7 +196,7 @@ namespace :import do
       return
     end
 
-    puts "Importing images for object id: #{obj.id}, gallery id: #{obj.gallery.id}, object name: #{obj.name}, hash: #{obj}"
+    puts "Importing images for object id: #{obj.id}, gallery id: #{obj.gallery.id}, object name: #{obj.name}, hash: #{obj}, amount: #{gallery.images.count}"
     #return # skip for a while, because toooo long
     gallery.images.each do |img|
       tags = (gallery.present? and gallery.TitleImage == img.Id) ? 'title, cover' : nil

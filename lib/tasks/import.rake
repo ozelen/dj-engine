@@ -16,6 +16,7 @@ namespace :import do
     require 'tasks/import/import_objects'
     require 'tasks/import/import_news'
     require 'tasks/import/import_comments'
+    require 'tasks/import/reimport.rb'
 
 
 
@@ -24,11 +25,13 @@ namespace :import do
     cold = false
 
 
-    import_types if cold
+    #import_types if cold
 
-    import_objects cold
+    #import_objects cold
 
-    import_news if cold
+    #import_news #if cold
+
+    reimport_albums
 
 
   end

@@ -25,4 +25,13 @@ class CommentsController < ApplicationController
 
   def destroy
   end
+
+  def destroy_bunch
+    Comment.destroy(params[:selected])
+    respond_to do |format|
+      format.html { redirect_to comments_path }
+      format.json { head :no_content }
+    end
+  end
+
 end

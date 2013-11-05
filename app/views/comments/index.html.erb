@@ -1,2 +1,18 @@
-<h1>Comments#index</h1>
-<p>Find me in app/views/comments/index.html.erb</p>
+<h1>Latest Comments</h1>
+
+  <%= form_tag comments_path, :method => 'get' do %>
+      <p>
+        <%= text_field_tag :search, params[:search] %>
+        <%= submit_tag "Search", :name => nil %>
+      </p>
+  <% end %>
+
+<%= form_tag delete_bunch_of_comments_path, :method => 'get' do %>
+    <label>
+      <input type="checkbox" class="check_all" />
+      Select all
+    </label>
+
+    <%= submit_tag "Delete selected", name: :delete %>
+    <%= render Comment.latest.search(params[:search]).paginate(page: params[:page], per_page: 500), show_commentable: true %>
+<% end %>

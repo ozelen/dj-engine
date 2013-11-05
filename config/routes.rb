@@ -42,6 +42,7 @@ DjEngine::Application.routes.draw do
     resources :galleries
     resources :photos
     resources :comments
+    get "destroy_bunch" => "comments#destroy_bunch", as: :delete_bunch_of_comments
 
     # Location and addresses
     get "locations/search" => "locations#search"

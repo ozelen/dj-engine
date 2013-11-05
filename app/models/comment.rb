@@ -53,4 +53,14 @@ class Comment < ActiveRecord::Base
   def user_name
     user.present? ? user.name : username
   end
+
+  def self.search(search)
+    if search
+      s = "%#{search}%"
+      find(:all, :conditions => ['body LIKE ? or title LIKE ?', s,s])
+    else
+      find(:all)
+    end
+  end
+
 end
