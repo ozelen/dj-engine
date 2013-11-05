@@ -11,7 +11,7 @@
       <div class="carousel-inner">
 
         <% slides.each_with_index do |slide, i| %>
-            <div class="item <%= 'active' if i==0 %> cover-image" style="background-image: url(<%= slide.gallery.title.image_url(:content) %>);">
+            <div class="item <%= 'active' if i==0 %> cover-image" style="background-image: url(<%= slide.gallery.title_url(:content) %>);">
               <div class="carousel-caption">
                 <h3><%= link_to slide.name, find_path(slide) %></h3>
                 <p> <%= link_to slide.city.name, find_path(slide.city) %> </p>

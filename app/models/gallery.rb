@@ -9,6 +9,10 @@ class Gallery < ActiveRecord::Base
     rand(:title) || photos.first rescue 'no photo'
   end
 
+  def title_url(version)
+    title.image_url(version) if title
+  end
+
   def rand(mode)
     arr = self.photos.tagged_with(mode)
     a = arr.blank? ? gallery.photos.first : arr.sample rescue nil
