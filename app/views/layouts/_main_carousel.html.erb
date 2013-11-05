@@ -1,0 +1,35 @@
+<% slides = Hotel.limit(5) %>
+<div class="row">
+  <div class="col-lg-8">
+
+    <div id="header-carousel" class="carousel slide main-carousel">
+      <ol class="carousel-indicators">
+        <% slides.each_with_index do |slide, i| %>
+            <li data-target="#header-carousel" data-slide-to="<%= i %>" class="<%= 'active' if i==0 %>"></li>
+        <% end %>
+      </ol>
+      <div class="carousel-inner">
+
+        <% slides.each_with_index do |slide, i| %>
+            <div class="item <%= 'active' if i==0 %> cover-image" style="background-image: url(<%= slide.gallery.title.image_url(:content) %>);">
+              <div class="carousel-caption">
+                <h3><%= link_to slide.name, find_path(slide) %></h3>
+                <p> <%= link_to slide.city.name, find_path(slide.city) %> </p>
+              </div>
+            </div>
+        <% end %>
+      </div>
+      <a class="left carousel-control" href="#header-carousel" data-slide="prev">
+        <span class="icon-prev"></span>
+      </a>
+      <a class="right carousel-control" href="#header-carousel" data-slide="next">
+        <span class="icon-next"></span>
+      </a>
+    </div>
+
+
+  </div>
+  <div class="col-lg-4">
+    <h1>Offers</h1>
+  </div>
+</div>

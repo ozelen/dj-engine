@@ -122,10 +122,37 @@ header#page-header {
     }
   }
 
-  .carousel-inner {
-    background: #181414;
-  }
 }
+
+.carousel {
+  .carousel-inner {
+    background: #382c2c;
+    .item {
+      background-position: center;
+    }
+    a {
+      color: #fff;
+    }
+  }
+
+  .carousel-caption {
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.2);
+    padding-top: 0;
+    h3 {
+      margin-top: 5px;
+    }
+  }
+
+  .carousel-indicators {
+    bottom: 0px;
+  }
+
+}
+
+
 
 .all-photos {
   margin-top: 10px;

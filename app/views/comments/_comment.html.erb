@@ -1,6 +1,7 @@
 <%
    show_commentable ||= false
    truncate_text ||= false
+   checkboxes ||= false
 %>
 <div class="media">
   <!--<a class="pull-left" href="#">-->
@@ -8,7 +9,7 @@
   <!--</a>-->
   <div class="media-body comment">
     <h4 class="media-heading"><span class="text-primary">
-      <%= check_box_tag 'selected[]', comment.id if current_user.role? :admin  %>
+      <%= check_box_tag 'selected[]', comment.id if checkboxes && current_user.role?(:admin) %>
       <%= comment.user_name %>
     </span>
       <% if show_commentable and comment.commentable %>

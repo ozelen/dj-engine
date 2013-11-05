@@ -14,5 +14,5 @@
     </label>
 
     <%= submit_tag "Delete selected", name: :delete %>
-    <%= render Comment.latest.search(params[:search]).paginate(page: params[:page], per_page: 500), show_commentable: true %>
+    <%= render Comment.latest.search(params[:search]).paginate(page: params[:page], per_page: 500), show_commentable: true, checkboxes: true %>
 <% end %>
