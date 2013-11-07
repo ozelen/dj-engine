@@ -9,6 +9,6 @@
   <% if phone_list.present? %>  Phones: <%= phone_list %> <br> <% end %>
   <% if adr.fax.present?     %> FAX: <%= adr.fax %> <br> <% end %>
   <% if adr.skype.present?   %> Skype: <%= adr.skype %> <br> <% end %>
-  <% if adr.website.present? %> <%= link_to 'Website', adr.website, target: :_blank %> <br> <% end %>
+  <% if adr.website.present? %> <%= link_to 'Website', url_with_protocol(adr.website), target: :_blank %> <br> <% end %>
   <% if adr.email.present? %> <%= mail_to adr.email %> <br> <% end %>
 </address>

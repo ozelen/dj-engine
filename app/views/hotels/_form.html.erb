@@ -28,7 +28,7 @@
     <div class="form-group">
       <%= f.label :city_id, :class => 'control-label col-lg-3' %>
       <div class="col-lg-9">
-        <%= f.select :city_id, options_from_collection_for_select(City.all, :id, :name), {}, {class: 'form-control'} %>
+        <%= f.select :city_id, City.all.collect {|c| [ c.name, c.id ] }, {}, {class: 'form-control'} %>
       </div>
     </div>
 
