@@ -7,7 +7,7 @@
   <% @hotel.all_photos.take(12).each do |photo| %>
     <%= image_tag photo.image_url(:mini), class: 'pull-left' %>
   <% end %>
-  <%= link_to('See all album', hotel_album_path(@hotel)) %>
+  <%= link_to(t('albums.see_album'), hotel_album_path(@hotel)) %>
 </div>
 
 <% content_for :page_title do %>
@@ -18,7 +18,7 @@
 
 <% content_for :sidebar do %>
   <% if @hotel.posts.present? %>
-    <h3>Last posts</h3>
+    <h3><%= t('posts.latest') %></h3>
     <% @hotel.posts.limit(5).each do |post| %>
       <h4><%= link_to post.title, [@hotel, post] %></h4>
       <%= markdown truncate(post.teaser, length: 200, separator: ' ') %>
@@ -28,12 +28,12 @@
   <% end %>
 
   <% if @hotel.comment_threads.present? %>
-    <h3>Last comments</h3>
+    <h3><%= t('comments.latest') %></h3>
     <% @hotel.comment_threads.limit(5).each do |comment| %>
       <%= render comment %>
     <% end %>
     <br>
-    <p><%= link_to 'See all comments', slug_hotel_comments_path(@hotel) %></p>
+    <p><%= link_to t('comments.see_all'), slug_hotel_comments_path(@hotel) %></p>
     <hr>
   <% end %>
 
@@ -41,10 +41,10 @@
 
 <div class="row">
   <div class="col-lg-6">
-    <h3>Overview</h3>
+    <h3><%= t 'description' %></h3>
     <% if @hotel.description.present? %>
       <%= markdown truncate(@hotel.description, length: 500, separator: '.') %>
-      <%= link_to('Full description', slug_hotel_description_path(@hotel)) %>
+      <%= link_to(t('full_desc'), slug_hotel_description_path(@hotel)) %>
       <hr>
     <% end %>
 
@@ -53,22 +53,22 @@
   <div class="col-lg-6">
 
     <% if @hotel.rooms.present? %>
-      <h3>Rooms</h3>
+      <h3><%= t 'rooms.h' %></h3>
       <% @hotel.rooms.limit(5).each do |room| %>
         <%= render 'categories/teaser', category: room %>
       <% end %>
       <br>
-      <%= link_to "See all rooms (#{@hotel.rooms.count})", slug_hotel_rooms_path(@hotel) if @hotel.rooms.count > 5 %>
+      <%= link_to "#{t 'rooms.see_all'} (#{@hotel.rooms.count})", slug_hotel_rooms_path(@hotel) if @hotel.rooms.count > 5 %>
       <hr>
     <% end %>
 
     <% if @hotel.services.present? %>
-      <h3>Services</h3>
+      <h3><%= t 'services.h' %></h3>
       <% @hotel.services.limit(5).each do |service| %>
         <%= render 'categories/teaser', category: service %>
       <% end %>
       <br>
-      <%= link_to "See all rooms (#{@hotel.rooms.count})", slug_hotel_rooms_path(@hotel) if @hotel.rooms.count > 5 %>
+      <%= link_to "#{t 'services.see_all'} (#{@hotel.services.count})", slug_hotel_services_path(@hotel) if @hotel.services.count > 5 %>
       <hr>
     <% end %>
 

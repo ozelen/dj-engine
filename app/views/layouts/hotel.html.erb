@@ -1,14 +1,14 @@
 <% menu = [
-    ['Hotel summary',   slug_hotel_path(@hotel),                -1 ],
-    ['Description', slug_hotel_description_path(@hotel),        @hotel.description.present? ],
-    ['Rooms',       slug_hotel_rooms_path(@hotel),              @hotel.rooms.count     ],
-    ['Services',    slug_hotel_services_path(@hotel),           @hotel.services.count  ],
-    ['Blog',        slug_hotel_blog_path(@hotel),               @hotel.posts.count     ],
-    ['Photos',      hotel_album_path(@hotel),                   @hotel.photos.count ],
-    ['Prices',      slug_hotel_pricelist_path(@hotel),          @hotel.periods.count ],
-    ['Comments',    slug_hotel_comments_path(@hotel),           @hotel.comment_threads.count ],
-    ['Book',        slug_hotel_book_path(@hotel),               -1 ],
-    ['Contacts',    slug_hotel_contacts_path(@hotel),           -1 ]
+    [t('hotels.summary' ), slug_hotel_path(@hotel),                -1 ],
+    [t('description'    ), slug_hotel_description_path(@hotel),        @hotel.description.present? ],
+    [t('rooms.h'        ), slug_hotel_rooms_path(@hotel),              @hotel.rooms.count     ],
+    [t('services.h'     ), slug_hotel_services_path(@hotel),           @hotel.services.count  ],
+    [t('blog'           ), slug_hotel_blog_path(@hotel),               @hotel.posts.count     ],
+    [t('photos.h'       ), hotel_album_path(@hotel),                   @hotel.photos.count ],
+    [t('prices.h'       ), slug_hotel_pricelist_path(@hotel),          @hotel.periods.count ],
+    [t('comments.h'     ), slug_hotel_comments_path(@hotel),           @hotel.comment_threads.count ],
+    [t('booking.h'      ), slug_hotel_book_path(@hotel),               -1 ],
+    [t('contacts.h'     ), slug_hotel_contacts_path(@hotel),           -1 ]
 ]
 
    cover_photo = @hotel.gallery.rand(:cover).image_url(:content) rescue nil

@@ -35,7 +35,7 @@
       <ul class="nav navbar-nav">
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-            <%= @stream.present? ? @stream.node.header : 'Streams' %>
+            <%= @stream.present? ? @stream.node.header : t('streams.h') %>
             <b class="caret"></b>
           </a>
           <ul class="dropdown-menu">
@@ -44,16 +44,16 @@
             <% end %>
           </ul>
         </li>
-        <li><%= link_to "Hotels", hotels_path  %></li>
-        <li><%= link_to "Tours", tours_path  %></li>
-        <li><%= link_to "Resorts", resorts_path  %></li>
-        <li><%= link_to "About", "/about"  %></li>
+        <li><%= link_to t('hotels.h'), hotels_path  %></li>
+        <li><%= link_to t('tours.h'), tours_path  %></li>
+        <li><%= link_to t('resorts.h'), resorts_path  %></li>
+        <li><%= link_to t('about'), '/about'  %></li>
       </ul>
 
       <ul class="nav navbar-nav navbar-right">
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown"><%= t :lang %> <b class="caret"></b></a>
-          <ul class="dropdown-menu" style="z-index:10; right: 10px; position: absolute">
+          <ul class="dropdown-menu">
             <li><%= link_to t(:lang, locale: :uk), locale: :uk %></li>
             <li><%= link_to t(:lang, locale: :ru), locale: :ru %></li>
             <li><%= link_to t(:lang, locale: :en), locale: :en %></li>
@@ -63,16 +63,16 @@
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown"><%= current_user.name %> <b class="caret"></b></a>
             <ul class="dropdown-menu">
-              <li><%= link_to "Sign out", destroy_user_session_path, :method => :delete %></li>
-              <li><%= link_to "Edit Profile", edit_user_registration_path %></li>
+              <li><%= link_to t('users.sign_out'), destroy_user_session_path, :method => :delete %></li>
+              <li><%= link_to t('users.edit_profile'), edit_user_registration_path %></li>
             </ul>
           </li>
         <% else %>
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Log In <b class="caret"></b></a>
             <ul class="dropdown-menu">
-              <li><%= link_to "Sign in", new_user_session_path %></li>
-              <li><%= link_to "Register", new_user_registration_path %></li>
+              <li><%= link_to t('users.sign_in'), new_user_session_path %></li>
+              <li><%= link_to t('users.register'), new_user_registration_path %></li>
             </ul>
           </li>
         <% end %>
@@ -81,22 +81,22 @@
       <% if current_user && current_user.role?(:admin) %>
       <ul class="nav navbar-nav navbar-right">
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Admin <b class="caret"></b></a>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown"> <%= t('users.admin') %> <b class="caret"></b></a>
           <ul class="dropdown-menu">
-            <li><%= link_to 'Create new Hotel', new_hotel_path %></li>
+            <li><%= link_to t('hotels.create'), new_hotel_path %></li>
             <li class="divider"></li>
-            <li><%= link_to 'Resorts',      resorts_path %></li>
-            <li><%= link_to 'Cities',       cities_path %></li>
-            <li><%= link_to 'Hotels',       hotels_path %></li>
-            <li><%= link_to 'Streams',      streams_path %></li>
+            <li><%= link_to t('resorts.h'),       resorts_path %></li>
+            <li><%= link_to t('cities.h'),        cities_path %></li>
+            <li><%= link_to t('hotels.h'),        hotels_path %></li>
+            <li><%= link_to t('streams.h'),       streams_path %></li>
             <li class="divider"></li>
-            <li><%= link_to 'Users',        users_path %></li>
-            <li><%= link_to 'Deals',        deals_path %></li>
+            <li><%= link_to t('users.h'),         users_path %></li>
+            <li><%= link_to t('deals.h'),         deals_path %></li>
             <li class="divider"></li>
-            <li><%= link_to 'Comments',     comments_path %></li>
+            <li><%= link_to t('comments.h'),      comments_path %></li>
             <li class="divider"></li>
-            <li><%= link_to "Types",        types_path %></li>
-            <li><%= link_to "Measures",     measure_categories_path %></li>
+            <li><%= link_to t('types'),           types_path %></li>
+            <li><%= link_to t('measures'),        measure_categories_path %></li>
           </ul>
         </li>
       </ul>
