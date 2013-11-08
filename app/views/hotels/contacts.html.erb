@@ -1,4 +1,4 @@
-<h1>Contacts</h1>
+<h1><%= t 'hotels.contacts' %></h1>
 
 <%= render 'address' %>
 <%= link_to(@hotel.city.name, find_path(@hotel.city)) if @hotel.city %><br>

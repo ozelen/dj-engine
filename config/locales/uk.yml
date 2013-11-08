@@ -4,9 +4,156 @@
 uk:
   lang: "Українська"
   hello: "Здоровенькі були!"
+
+  helpers:
+    links:
+      edit: "Редгувати %{obj}"
+      destroy: "Видалити %{obj}"
+      confirm: "Ви справді бажаєти видалити %{type} \"%{name}\"?"
+      create: "Створити %{obj}"
+
+  user: "Користувач"
+  users:
+    h: "Користувачі"
+    roles: "Ролі"
+    admin: "Адміністратор"
+    admininistration: "Адміністрація"
+    sign_out: "Вийти"
+    sign_out: "Увійти"
+    edit_profile: "Редагувати профіль"
+    crud: "користувача"
+
+  about: "Про проект"
+
+  home: "Головна сторінка"
+
+  all: "Все %{subject}"
+  see_all: "Дивитися всі %{subject}"
+  manage: "Курувати"
+  create: "Створити %{obj}"
+  update: "Редагувати %{obj}"
+  delete: "Видалити %{obj}"
+
+  city: "Населений пункт"
+  cities:
+    h: "Населені пункти"
+    all: "Всі населені пункти"
+    crud: "населений пункт"
+
+  hotel: "Готель"
   hotels:
+    h: "Готелі"
+
+    crud: "готель"
+    description: "Опис готелю"
+    album: "Фотоальбом готелю"
+    contacts: "Контакты готелю"
+    rooms: "Номера готелю"
+    comments: "Обсуждение готелю"
+    menu:
+      summary:      "Резюме"
+      description:  "Опис"
+      rooms:        "Номери"
+      services:     "Послуги"
+      blog:         "Блоґ"
+      photos:       "Фото"
+      prices:       "Ціни"
+      comments:     "Коментарі"
+      booking:      "Бронювання"
+      contacts:     "Контакти"
+
+    prices:
+      edit: "Редагувати ціни"
     index:
       title: "Список готелів"
+
+  room: "Кімната"
+  rooms:
+    rooms: "Кімнати"
+    see_all: "Дивитися всі комнаты"
+    crud: "комнату"
+    index:
+      title: "Кімнати"
+
+  service: "Послуга готелю"
+  services:
+    h: "Послуги готелю"
+    see_all: "Дивитися всі послуги"
+    crud: "послугу"
+    index:
+      title: "Послуги готелю"
+
+  deal: "Договір"
+  deals:
+    h: "Договори"
+    crud: "договір"
+
+  lead: "Партнерський зв’язок"
+  leads:
+    h: "Партнерські зв’язки"
+
+  photo: "Фото"
+  photos:
+    h: "Фотографії"
+    all: "Всі фотографії"
+    crud: "фотографію"
+    modes:
+      title: "Титульне фото"
+      cover: "Обкладинка"
+
+  album: "Альбом"
+  albums:
+    h: "Альбоми"
+    see_album: "Дивитися альбом"
+
+  description: "Опис"
+  full_desc: "Читати весь опис"
+
+  booking:
+    h: "Бронювання"
+    now: "Бронюйте зараз"
+
+  contacts:
+    h: "Контакти"
+
+  resort: "Курорт"
+  resorts:
+    h: "Курорти"
+    crud: "курорт"
+
+  stream: "Розділ"
+  streams:
+    h: "Розділи"
+    crud: "розділ"
+
+  comment: "Коментар"
+  comments:
+    h: "Комментарі"
+    latest: "Останні коментарі"
+    see_all: "Дивитися всі коментарі"
+    crud: "комментар"
+
+  tour: "Тур"
+  tours:
+    h: "Тури"
+    crud: "тур"
+
+  post: "Публикації"
+  posts:
+    h: Публикації
+    latest: Останні публікації
+    crud: "публикацію"
+
+  measures: "Одиниці виміру"
+  types: "Типи"
+  unit: "Одиниця виміру"
+  units:
+    h: "Одиниці виміру"
+    crud: "одиницю виміру"
+
+  units:
+    distance:
+      km_to: "км. до:"
 
   time:
     formats:

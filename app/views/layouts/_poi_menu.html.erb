@@ -15,7 +15,7 @@
   <div class="collapse navbar-collapse navbar-ex1-collapse">
     <ul class="nav navbar-nav">
       <% menu.each_with_index do |item, i| %>
-          <% next if item[2]==0 or item[2]==nil %>
+          <% next if (item[2]==0 or item[2]==nil) and cannot?(:manage, poi) %>
           <li class="<%= 'active' if (request.fullpath =~ /#{item[1]}/ and i!=0) or (request.fullpath == item[1] and i==0) %>" >
             <%= link_to item[0], item[1] %>
           </li>
@@ -25,7 +25,7 @@
     <% if content_for?(:manage_menu) %>
         <ul class="nav navbar-nav navbar-right">
           <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Manage <b class="caret"></b></a>
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><%= t :manage %> <b class="caret"></b></a>
             <ul class="dropdown-menu">
               <%= yield(:manage_menu) %>
             </ul>

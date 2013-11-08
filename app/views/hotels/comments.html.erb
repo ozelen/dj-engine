@@ -1,5 +1,5 @@
 <% title('Comments - ' + @hotel.node.header) %>
 
-<h1>Hotel Comments</h1>
+<h1><%= t 'hotels.comments' %></h1>
 
 <%= render 'comments/comments_block', commentable_type: 'Hotel', commentable: @hotel %>

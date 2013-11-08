@@ -1,7 +1,7 @@
 <%- model_class = Room -%>
 <% title 'Rooms, ' + @hotel.node.header %>
 
-<h1>Rooms</h1>
+<h1><%= t 'hotels.rooms' %></h1>
 
 <% @rooms.each do |room| %>
   <%= render 'categories/teaser', category: room, image_mode: :small, show_description: true, show_amenities: true %>

@@ -53,7 +53,7 @@
   <div class="col-lg-6">
 
     <% if @hotel.rooms.present? %>
-      <h3><%= t 'rooms.h' %></h3>
+      <h3><%= t 'rooms.rooms' %></h3>
       <% @hotel.rooms.limit(5).each do |room| %>
         <%= render 'categories/teaser', category: room %>
       <% end %>
