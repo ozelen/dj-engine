@@ -1,10 +1,11 @@
+<% title " - #{@tour.name}" %>
 <% menu = [
-    ['Description', tour_path(@tour),                 -1 ],
-    ['Hotels',      tour_hotels_path(@tour),          -1 ],
-    ['Resorts',     tour_resorts_path(@tour),         -1 ],
-    ['Photos',      tour_album_path(@tour),                -1 ],
-    ['Comments',    tour_comments_path(@tour),        -1 ],
-    ['Contacts',    tour_contacts_path(@tour),        -1 ],
+    [t('description'),  tour_path(@tour),                 -1 ],
+    [t('hotels.h'),     tour_hotels_path(@tour),          -1 ],
+    [t('resorts.h'),    tour_resorts_path(@tour),         -1 ],
+    [t('photos.h'),     tour_album_path(@tour),                -1 ],
+    [t('comments.h'),   tour_comments_path(@tour),        -1 ],
+    [t('contacts.h'),   tour_contacts_path(@tour),        -1 ],
 ]
    section = 'section'
    cover_photo = @tour.gallery.rand(:cover).image_url(:content) rescue nil
@@ -27,9 +28,9 @@
 
   <% if @tour.resorts || @tour.hotels %>
 
-    <h4>Accomodation</h4>
+    <h4><%= t 'accomodation' %></h4>
 
-    <h2>Resorts</h2>
+    <h4><%= t 'resorts.h' %></h4>
     <%= render @tour.resorts %>
 
     <h2>Hotels</h2>

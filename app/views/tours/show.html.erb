@@ -1,6 +1,8 @@
-<h4>Description</h4>
+<% title @tour.title || @tour.name %>
+
+<h4><%= t('description') %></h4>
 
 <%= markdown @tour.description %>
-<%= link_to('Full description', tour_description_path(@tour)) %>
+<%= link_to(t('full_desc'), tour_description_path(@tour)) %>
 
 

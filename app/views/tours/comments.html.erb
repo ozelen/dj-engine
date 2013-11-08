@@ -1,5 +1,5 @@
-<% title('Comments - ' + @tour.name) %>
+<% title t('comments.h') %>
 
-<h1>Tour Comments</h1>
+<h1><%= t('comments.h') %></h1>
 
 <%= render 'comments/comments_block', commentable_type: 'Tour', commentable: @tour %>

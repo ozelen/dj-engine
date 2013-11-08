@@ -1,5 +1,6 @@
-<h1>Listing tours</h1>
+<% title t('tours.h') %>
+<h1><%= t('tours.h') %></h1>
 
 <%= render @tours %>
 
-<%= link_to 'New Tour', new_tour_path, class: 'btn btn-primary pull-right' %>
+<%= link_to 'New Tour', new_tour_path, class: 'btn btn-primary pull-right' if can? :manage, Tour %>

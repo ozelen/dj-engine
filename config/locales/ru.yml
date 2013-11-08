@@ -7,11 +7,11 @@ ru:
 
   helpers:
     links:
-      edit: "Редактировать %{obj}"
-      destroy: "Удалить %{obj}"
+      edit: "Редактировать"
+      destroy: "Удалить"
       confirm: "Вы правда хотите удалить %{type} \"%{name}\"?"
-      create: "Создать %{obj}"
-      new: "Новый %{obj}"
+      create: "Создать"
+      new: "Новый"
 
   user: "Пользователь"
   users:
@@ -50,9 +50,11 @@ ru:
     crud: "населенный пункт"
     new: "Новый населенный пункт"
 
+  accomodation: "Жилье"
   hotel: "Гостиница"
   hotels:
     h: "Гостиницы"
+    all: "Все гостиницы"
     count: "%{count} гостиниц"
     crud: "гостиницу"
     description: "Описание гостиницы"

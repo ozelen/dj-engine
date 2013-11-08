@@ -44,6 +44,7 @@ en:
   hotel: "Hotel"
   hotels:
     h: "Hotels"
+    all: "All hotels"
     count: "%{count} hotels"
     crud: "hotel"
     description: "Hotel description"

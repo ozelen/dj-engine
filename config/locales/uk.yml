@@ -48,9 +48,11 @@ uk:
     crud: "населений пункт"
     new: "Новий населений пункт"
 
+  accomodation: "Житло"
   hotel: "Готель"
   hotels:
     h: "Готелі"
+    all: "Всі готелі"
     count: "%{count} готелів"
     crud: "готель"
     description: "Опис готелю"
