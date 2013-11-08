@@ -7,7 +7,146 @@ en:
     en: "English"
     uk: "Ukrainian"
     ru: "Russian"
-  hello: "Hello world"
+
+  user: "User"
+  users:
+    h: "Users"
+    roles: "Roles"
+    admin: "Admin"
+    admininistration: "Administration"
+    sign_out: "Log out"
+    sign_out: "Log in"
+    edit_profile: "Edit profile"
+    crud: "user"
+
+  about: "About project"
+
+  home: "Homepage"
+
+  all: "All %{subject}"
+  see_all: "See all %{subject}"
+  manage: "Manage"
+  create: "Create %{obj}"
+  update: "Edit %{obj}"
+  delete: "Destroy %{obj}"
+
+  city: "City"
+  cities:
+    h: "Cities"
+    all: "All cities"
+    crud: "city"
+
+  hotel: "Hotel"
   hotels:
+    h: "Hotels"
+
+    crud: "hotel"
+    description: "Hotel description"
+    album: "Hotel album"
+    contacts: "Hotel contacts"
+    rooms: "Hotel rooms"
+    comments: "Hotel comments"
+    menu:
+      summary:      "Summary"
+      description:  "Description"
+      rooms:        "Rooms"
+      services:     "Services"
+      blog:         "Blog"
+      photos:       "Photos"
+      prices:       "Prices"
+      comments:     "Comments"
+      booking:      "Booking"
+      contacts:     "Contacts"
+
+    prices:
+      edit: "Edit prices"
     index:
-      title: "Hotels list"
+      title: Hotel list
+
+  room: Room
+  rooms:
+    rooms: Rooms
+    see_all: See all rooms
+    crud: room
+    index:
+      title: Rooms
+
+  service: Hotel service
+  services:
+    h: Hotel services
+    see_all: See all services
+    crud: service
+    index:
+      title: Hotel services
+
+  deal: Agreement
+  deals:
+    h: Agreements
+    crud: agreement
+
+  lead: Lead
+  leads:
+    h: Leads
+
+  photo: Photo
+  photos:
+    h: Photots
+    all: All photos
+    crud: photo
+    modes:
+      title: Titile photo
+      cover: Cover
+
+  album: Album
+  albums:
+    h: Albums
+    see_album: See all album
+
+  description: Description
+  full_desc: Read all description
+
+  booking:
+    h: Booking
+    now: Book now
+
+  contacts:
+    h: Contacts
+
+  resort: Resort
+  resorts:
+    h: Resorts
+    crud: resort
+
+  stream: Stream
+  streams:
+    h: Streams
+    crud: stream
+
+  comment: Comment
+  comments:
+    h: Comments
+    latest: Last coments
+    see_all: See all comments
+    crud: comment
+
+  tour: "Tour"
+  tours:
+    h: Tours
+    crud: tour
+
+  post: Post
+  posts:
+    h: Posts
+    latest: Latest posts
+    crud: post
+
+  measures: Measure points
+  types: Types
+  unit: Measure point
+  units:
+    h: Measure points
+    crud: measure point
+
+  units:
+    distance:
+      km_to: km to
