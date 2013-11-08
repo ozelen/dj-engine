@@ -1,4 +1,11 @@
 
 <%= render @cities %>
 
+<hr>
+
+<div class="controls">
+  <%= link_to t('cities.new', obj: t('cities.crud')), new_city_path, class: 'btn btn-primary' %>
+</div>
+
 <%= paginate @cities %>
+

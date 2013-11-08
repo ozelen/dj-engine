@@ -45,7 +45,8 @@ class CitiesController < ApplicationController
   def new
     authorize! :create, @city
     @city = City.new
-
+    @city.location = Location.new
+    @city.node =  Node.new
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @city }
@@ -65,7 +66,6 @@ class CitiesController < ApplicationController
 
     respond_to do |format|
       if @city.save
-        @city.node = Node.new.create_from_accessible! params
         format.html { redirect_to @city, notice: 'City was successfully created.' }
         format.json { render json: @city, status: :created, location: @city }
       else

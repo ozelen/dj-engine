@@ -37,6 +37,7 @@ en:
     count: "%{count} cities"
     all: "All cities"
     crud: "city"
+    new: "New settlement"
 
   hotel: "Hotel"
   hotels:
