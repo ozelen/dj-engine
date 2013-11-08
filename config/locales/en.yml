@@ -11,6 +11,7 @@ en:
   user: "User"
   users:
     h: "Users"
+    count: "%{count} users"
     roles: "Roles"
     admin: "Admin"
     admininistration: "Administration"
@@ -33,13 +34,14 @@ en:
   city: "City"
   cities:
     h: "Cities"
+    count: "%{count} cities"
     all: "All cities"
     crud: "city"
 
   hotel: "Hotel"
   hotels:
     h: "Hotels"
-
+    count: "%{count} hotels"
     crud: "hotel"
     description: "Hotel description"
     album: "Hotel album"
@@ -66,6 +68,7 @@ en:
   room: Room
   rooms:
     rooms: Rooms
+    count: "%{count} rooms"
     see_all: See all rooms
     crud: room
     index:
@@ -74,6 +77,7 @@ en:
   service: Hotel service
   services:
     h: Hotel services
+    count: "%{count} services"
     see_all: See all services
     crud: service
     index:
@@ -82,11 +86,13 @@ en:
   deal: Agreement
   deals:
     h: Agreements
+    count: "%{count} deals"
     crud: agreement
 
   lead: Lead
   leads:
     h: Leads
+    count: "%{count} leads"
 
   photo: Photo
   photos:
@@ -100,6 +106,7 @@ en:
   album: Album
   albums:
     h: Albums
+    count: "%{count} albums"
     see_album: See all album
 
   description: Description
@@ -116,15 +123,18 @@ en:
   resorts:
     h: Resorts
     crud: resort
+    count: "%{count} resorts"
 
   stream: Stream
   streams:
     h: Streams
+    count: "%{count} streams"
     crud: stream
 
   comment: Comment
   comments:
     h: Comments
+    count: "%{count} comments"
     latest: Last coments
     see_all: See all comments
     crud: comment
@@ -132,11 +142,13 @@ en:
   tour: "Tour"
   tours:
     h: Tours
+    count: "%{count} tours"
     crud: tour
 
   post: Post
   posts:
     h: Posts
+    count: "%{count} posts"
     latest: Latest posts
     crud: post
 
@@ -145,8 +157,7 @@ en:
   unit: Measure point
   units:
     h: Measure points
+    count: "%{count} units"
     crud: measure point
-
-  units:
     distance:
-      km_to: km to
+          km_to: km to

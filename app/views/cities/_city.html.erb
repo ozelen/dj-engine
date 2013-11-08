@@ -1,1 +1,5 @@
 <h3><%= link_to city.name, slug_city_path(city) %></h3>
+<div class="city">
+  <%= link_to t('hotels.count', count: city.hotels.count), city_hotels_path(city) %>
+  <%= link_to t('resorts.count', count: city.resorts.count), city_resorts_path(city) %>
+</div>

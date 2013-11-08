@@ -1,7 +1,7 @@
-<h1>Resorts</h1>
+<h1><%= t 'resorts.h' %></h1>
 
-<div class="row">
+<div id="resorts">
   <%= render @resorts %>
 </div>
 
-<%= link_to 'New Resort', new_resort_path, class: 'btn btn-primary' %>
+<%= link_to t('helpers.links.new', obj: t('resorts.crud')), new_resort_path, class: 'btn btn-primary' if current_user and current_user.role? :admin %>

@@ -11,10 +11,13 @@ ru:
       destroy: "Удалить %{obj}"
       confirm: "Вы правда хотите удалить %{type} \"%{name}\"?"
       create: "Создать %{obj}"
+      new: "Новый %{obj}"
 
   user: "Пользователь"
   users:
     h: "Пользователи"
+    count: "%{count} users"
+    count: "%{count} пользователей"
     roles: "Роли"
     admin: "Администратор"
     admininistration: "Администрация"
@@ -37,13 +40,14 @@ ru:
   city: "Населенный пункт"
   cities:
     h: "Населенные пункты"
+    count: "%{count} населенных пунктов"
     all: "Все населенные пункты"
     crud: "населенный пункт"
 
   hotel: "Гостиница"
   hotels:
     h: "Гостиницы"
-
+    count: "%{count} гостиниц"
     crud: "гостиницу"
     description: "Описание гостиницы"
     album: "Фотоальбом гостиницы"
@@ -69,6 +73,7 @@ ru:
 
   room: "Комната"
   rooms:
+    count: "%{count} комнат"
     rooms: "Комнаты"
     see_all: "Смотреть все комнаты"
     crud: "комнату"
@@ -77,6 +82,7 @@ ru:
 
   service: "Услуга"
   services:
+    count: "%{count} услуг"
     h: "Услуги отеля"
     see_all: "Смотреть все услуги"
     crud: "услугу"
@@ -86,15 +92,18 @@ ru:
   deal: "Договор"
   deals:
     h: "Договоры"
+    count: "%{count} договоров"
     crud: "договор"
 
   lead: "Партнерская связь"
   leads:
     h: "Партнерские связи"
+    count: "%{count} партнерок"
 
   photo: "Фото"
   photos:
     h: "Фотографии"
+    count: "%{count} фотографий"
     all: "Все фотографии"
     crud: "фотографию"
     modes:
@@ -104,6 +113,7 @@ ru:
   album: "Альбом"
   albums:
     h: "Альбомы"
+    count: "%{count} фльбомов"
     see_album: "Смотреть альбом"
 
   description: "Описание"
@@ -118,17 +128,20 @@ ru:
 
   resort: "Курорт"
   resorts:
+    count: "%{count} курортов"
     h: "Курорты"
     crud: "курорт"
 
   stream: "Раздел"
   streams:
     h: "Разделы"
+    count: "%{count} разделов"
     crud: "раздел"
 
   comment: "Комментарий"
   comments:
     h: "Комментарии"
+    count: "%{count} комментариев"
     latest: "Последние комментарии"
     see_all: "Смотреть все комментарии"
     crud: "комментарий"
@@ -136,11 +149,13 @@ ru:
   tour: "Тур"
   tours:
     h: "Туры"
+    count: "%{count} туров"
     crud: "тур"
 
   post: "Публикация"
   posts:
     h: Публикации
+    count: "%{count} постов"
     latest: Последние публикации
     crud: "публикацию"
 

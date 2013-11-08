@@ -11,10 +11,12 @@ uk:
       destroy: "Видалити %{obj}"
       confirm: "Ви справді бажаєти видалити %{type} \"%{name}\"?"
       create: "Створити %{obj}"
+      new: "Новий %{obj}"
 
   user: "Користувач"
   users:
     h: "Користувачі"
+    count: "%{count} користувачів"
     roles: "Ролі"
     admin: "Адміністратор"
     admininistration: "Адміністрація"
@@ -37,13 +39,14 @@ uk:
   city: "Населений пункт"
   cities:
     h: "Населені пункти"
+    count: "%{count} населених пунктів"
     all: "Всі населені пункти"
     crud: "населений пункт"
 
   hotel: "Готель"
   hotels:
     h: "Готелі"
-
+    count: "%{count} готелів"
     crud: "готель"
     description: "Опис готелю"
     album: "Фотоальбом готелю"
@@ -67,17 +70,19 @@ uk:
     index:
       title: "Список готелів"
 
-  room: "Кімната"
+  room: "Номер"
   rooms:
-    rooms: "Кімнати"
+    rooms: "Номери"
+    count: "%{count} номерів"
     see_all: "Дивитися всі комнаты"
     crud: "комнату"
     index:
-      title: "Кімнати"
+      title: "Номери"
 
   service: "Послуга готелю"
   services:
     h: "Послуги готелю"
+    count: "%{count} послуг"
     see_all: "Дивитися всі послуги"
     crud: "послугу"
     index:
@@ -86,15 +91,18 @@ uk:
   deal: "Договір"
   deals:
     h: "Договори"
+    count: "%{count} договорів"
     crud: "договір"
 
   lead: "Партнерський зв’язок"
   leads:
     h: "Партнерські зв’язки"
+    count: "%{count} партнерок"
 
   photo: "Фото"
   photos:
     h: "Фотографії"
+    count: "%{count} фотографій"
     all: "Всі фотографії"
     crud: "фотографію"
     modes:
@@ -104,6 +112,7 @@ uk:
   album: "Альбом"
   albums:
     h: "Альбоми"
+    count: "%{count} альбомів"
     see_album: "Дивитися альбом"
 
   description: "Опис"
@@ -119,16 +128,19 @@ uk:
   resort: "Курорт"
   resorts:
     h: "Курорти"
+    count: "%{count} курортів"
     crud: "курорт"
 
   stream: "Розділ"
   streams:
     h: "Розділи"
+    count: "%{count} розділів"
     crud: "розділ"
 
   comment: "Коментар"
   comments:
     h: "Комментарі"
+    count: "%{count} коментарів"
     latest: "Останні коментарі"
     see_all: "Дивитися всі коментарі"
     crud: "комментар"
@@ -136,11 +148,13 @@ uk:
   tour: "Тур"
   tours:
     h: "Тури"
+    count: "%{count} турів"
     crud: "тур"
 
   post: "Публикації"
   posts:
     h: Публикації
+    count: "%{count} постів"
     latest: Останні публікації
     crud: "публикацію"
 
@@ -149,6 +163,7 @@ uk:
   unit: "Одиниця виміру"
   units:
     h: "Одиниці виміру"
+    count: "%{count} одиниць"
     crud: "одиницю виміру"
 
   units:
