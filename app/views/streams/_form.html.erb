@@ -2,7 +2,9 @@
 
   <%= render 'nodes/fields_for_accessible', f: f %>
 
-  <div class="actions">
-    <%= f.submit %>
+  <div class="actions row">
+    <div class="col-lg-offset-3 col-lg-9">
+      <%= f.submit class: 'btn btn-primary' %>
+    </div>
   </div>
 <% end %>

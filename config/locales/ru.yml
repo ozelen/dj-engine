@@ -148,6 +148,8 @@ ru:
     count: "%{count} разделов"
     crud: "раздел"
 
+  news: "Новости"
+
   discussion: "Обсуждение"
   comment: "Комментарий"
   comments:

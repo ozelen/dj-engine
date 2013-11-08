@@ -19,6 +19,10 @@ class StreamsController < ApplicationController
     @posts = Post.tagged_with('ski').paginate(page: params[:page], per_page: 10)
   end
 
+  def resorts
+    @resorts = Post.tagged_with('ski')
+  end
+
   # GET /streams/1
   # GET /streams/1.json
   def show

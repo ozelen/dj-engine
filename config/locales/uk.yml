@@ -146,6 +146,8 @@ uk:
     count: "%{count} розділів"
     crud: "розділ"
 
+  news: "Новини"
+
   discussion: "Обговорення"
   comment: "Коментар"
   comments:

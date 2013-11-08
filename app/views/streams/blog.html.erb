@@ -1,5 +1,5 @@
-<% title('Blog - ' + @stream.node.header) %>
+<% title t('blog') %>
+<h1><%= t 'blog' %></h1>
 
-<h1>Stream Blog</h1>
 
 <%= render 'posts/block', channel: @stream %>

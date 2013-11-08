@@ -1,5 +1,5 @@
-<h1>Streams</h1>
+<h1><%= t('streams.h') %></h1>
 
 <%= render @streams %>
 
-<%= link_to 'New Stream', new_stream_path %>
+<%= link_to t('create', obj: t('streams.crud')), new_stream_path, class: 'btn btn-primary' if can? :create, Stream %>

@@ -1,22 +1,24 @@
+<% title @stream.node.title %>
 <div class="row">
   <div class="col-lg-6">
-    <h2>Resorts</h2>
+    <h2><%= t 'resorts.h' %></h2>
     <%= render Resort.tagged_with(@stream.node.name) %>
   </div>
 
   <div class="col-lg-6">
-    <h2>Tours</h2>
-    <%= render Tour.tagged_with(@stream.node.name).limit(5) %>
+    <h2><%= t 'hotels.h' %></h2>
+    <%= render Hotel.tagged_with(@stream.node.name).limit(10) %>
   </div>
 </div>
 
 <hr>
 
 <div id="posts" class="checktags">
-  <h2>News</h2>
+  <h2><%= t 'news' %></h2>
   <%= render Post.tagged_with(@stream.node.name).limit(10) %>
 </div>
 
 <%= content_for(:sidebar) do %>
-    <%= render Hotel.tagged_with(@stream.node.name).limit(10) %>
+  <h2><%= t 'tours.h' %></h2>
+  <%= render Tour.tagged_with(@stream.node.name).limit(5) %>
 <% end %>

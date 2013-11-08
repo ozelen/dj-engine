@@ -1,6 +1,9 @@
-<% channel ||= @post.channel %>
+<%
+   channel ||= @post.channel
+   header_pref = @post.new_record? ? 'create' : 'update'
+%>
 <%= content_tag_for :div, @post, 'form' do %>
-  <h3><%= @post.new_record? ? 'New Post' : 'Edit Post' %></h3>
+  <h3><%= t(header_pref, obj: t('posts.crud')) %></h3>
   <%= form_for(@post, remote: true, html: {role: 'form'}) do |f| %>
 
     <%= hidden_field_tag :channel_id, channel.id if channel %>

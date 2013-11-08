@@ -1,12 +1,12 @@
 <%# @stream ||= Stream.find_by_slug(params[:stream]) %>
-
+<% title " - #{@stream.node.header}" %>
 <% menu = [
-        ['Overview',    stream_slug_path(@stream),        -1 ],
-        ['Resorts',     stream_resorts_path(@stream),     -1 ],
-        ['News',        stream_news_path(@stream),       -1 ],
-        ['Blog',        stream_blog_path(@stream),        -1 ],
-        ['Tours',       stream_tours_path(@stream),       -1 ],
-        ['Hotels',      resort_hotels_path(@stream),      -1 ],
+        [ t('stream'    ),          stream_slug_path(@stream),        -1 ],
+        [ t('resorts.h' ),          stream_resorts_path(@stream),     -1 ],
+        [ t('news'      ),          stream_news_path(@stream),        -1 ],
+        [ t('blog'      ),          stream_blog_path(@stream),        -1 ],
+        [ t('tours.h'   ),          stream_tours_path(@stream),       -1 ],
+        [ t('hotels.h'  ),          resort_hotels_path(@stream),      -1 ]
 ]
    cover_photo = nil #@stream.gallery.rand(:cover).image_url(:content) rescue nil
    title_photo = nil #@stream.gallery.rand(:title).image_url(:mini)    rescue nil
