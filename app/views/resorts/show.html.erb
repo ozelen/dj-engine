@@ -1,3 +1,4 @@
+<% title @resort.node.title || @resort.name %>
 <% content_for :page_title do %>
   <h1>
     <%= link_to @resort.name, resort_path(@resort) %> <small>resort</small>
@@ -6,17 +7,21 @@
 
 <div class="row">
   <div class="col-lg-6">
-    <h4>Description</h4>
+    <h4><%= t 'description' %></h4>
     <%= markdown truncate(@resort.node.content, length: 500, separator: '.') %>
+    <%= link_to t('full_desc'), resort_description_path(@resort) %>
+    <hr>
+    <h4><%= t('cities.h') %></h4>
+    <%= render @resort.cities %>
   </div>
   <div class="col-lg-6">
-    <h4>Blog</h4>
-    <%= render @resort.posts.limit(5) %>
+    <h4><%= t('hotels.h') %></h4>
+    <%= render @hotels %>
   </div>
 </div>
 
 <% content_for :sidebar do %>
-  <h4>Hotels</h4>
-  <%= render @hotels %>
+    <h4><%= t(:blog) %></h4>
+    <%= render @resort.posts.limit(5) %>
 <% end %>
 

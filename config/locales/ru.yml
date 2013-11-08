@@ -29,6 +29,9 @@ ru:
   about: "О проекте"
 
   home: "Главная страница"
+  homepage:
+    title: "BestHotels in UA - лучшие гостиницы Украины"
+
 
   all: "Все %{subject}"
   see_all: "Смотреть все %{subject}"
@@ -36,6 +39,8 @@ ru:
   create: "Создать %{obj}"
   update: "Редактировать %{obj}"
   delete: "Удалить %{obj}"
+
+  blog: "Блог"
 
   city: "Населенный пункт"
   cities:
@@ -129,9 +134,11 @@ ru:
 
   resort: "Курорт"
   resorts:
-    count: "%{count} курортов"
     h: "Курорты"
+    summary: "Страница курорта"
+    count: "%{count} курортов"
     crud: "курорт"
+    of: "курорта"
 
   stream: "Раздел"
   streams:
@@ -139,6 +146,7 @@ ru:
     count: "%{count} разделов"
     crud: "раздел"
 
+  discussion: "Обсуждение"
   comment: "Комментарий"
   comments:
     h: "Комментарии"

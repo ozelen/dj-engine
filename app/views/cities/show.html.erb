@@ -1,30 +1,22 @@
-<div class="row">
-  <div class="col-lg-6">
-    <h4>Overview</h4>
+<% title "#{@city.node.header} #{@city.node.title}" %>
+
+    <h4><%= t(:description) %></h4>
     <% if @city.description.present? %>
-      <%= markdown truncate(@city.description, length: 500, separator: '.') %>
-      <%= link_to('Full description', city_description_path(@city)) %>
+      <%= markdown truncate(@city.description, length: 1000, separator: '.') %>
+      <%= link_to(t('full_desc'), city_description_path(@city)) %>
       <hr>
     <% end %>
 
-    <h3>Resorts</h3>
-
+    <h4><%= t 'resorts.h' %></h4>
     <%= render @city.resorts %>
 
-    <%# render 'values/structured_list', valuable: @city %>
-  </div>
-  <div class="col-lg-6">
 
-    <% content_for :sidebar do %>
-      <% if @city.hotels.present? %>
-        <h4>Hotels</h4>
+
+<% content_for :sidebar do %>
+    <% if @city.hotels.present? %>
+        <h4><%= t 'hotels.h' %></h4>
         <%= render @city.hotels.limit(5) %>
         <%= link_to "See all hotels (#{@city.hotels.count})", city_hotels_path(@city) if @city.hotels.count > 5 %>
         <hr>
-      <% end %>
     <% end %>
-
-    <h4>Services</h4>
-
-  </div>
-</div>
+<% end %>

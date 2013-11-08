@@ -1,10 +1,10 @@
 <% menu = [
-    ['Overview',    slug_resort_path(@resort),        -1 ],
-    ['Description', resort_description_path(@resort), -1 ],
-    ['Hotels',      resort_hotels_path(@resort),      -1 ],
-    ['Blog',        resort_blog_path(@resort),        -1 ],
-    ['Photos',      resort_album_path(@resort),       -1 ],
-    ['Comments',    resort_comments_path(@resort),  @resort.comment_threads.count ],
+    [t('resorts.summary'),  slug_resort_path(@resort),        -1 ],
+    [t('description'),      resort_description_path(@resort), -1 ],
+    [t('hotels.h'),         resort_hotels_path(@resort),      -1 ],
+    [t('blog'),             resort_blog_path(@resort),        -1 ],
+    [t('photos.h'),         resort_album_path(@resort),       -1 ],
+    [t('comments.h'),       resort_comments_path(@resort),  @resort.comment_threads.count ],
 ]
    cover_photo = @resort.gallery.rand(:cover).image_url(:content) rescue nil
    title_photo = @resort.gallery.rand(:title).image_url(:mini)    rescue nil

@@ -1,10 +1,12 @@
-<%- model_class = Hotel -%>
+<% title_of_resort = "#{t 'hotels.h'} #{t('resorts.of')} \"#{@resort.node.header}\"" %>
+<% title title_of_resort %>
+
 <div class="page-header">
-  <h1><%= @resort.name %>, hotels</h1>
+  <h1><%= title_of_resort %></h1>
 </div>
 
 <ul class="nav nav-tabs">
-  <li class="<%= 'active' unless params[:city] %>"><%= link_to 'All cities', resort_hotels_path(@resort) %></li>
+  <li class="<%= 'active' unless params[:city] %>"><%= link_to t('cities.all'), resort_hotels_path(@resort) %></li>
   <% @resort.cities.each do |city| %>
     <li class="<%= 'active' if params[:city] == city.node.name %>"><%= link_to city.name, resort_hotels_city_path(@resort, city) %></li>
   <% end %>

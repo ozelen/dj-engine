@@ -23,6 +23,8 @@ en:
   about: "About project"
 
   home: "Homepage"
+  homepage:
+    title: "BestHotels in Ukraine"
 
   all: "All %{subject}"
   see_all: "See all %{subject}"

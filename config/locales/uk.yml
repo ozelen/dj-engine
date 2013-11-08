@@ -28,6 +28,8 @@ uk:
   about: "Про проект"
 
   home: "Головна сторінка"
+  homepage:
+      title: "BestHotels in UA - найкращі готелі України"
 
   all: "Все %{subject}"
   see_all: "Дивитися всі %{subject}"
@@ -35,6 +37,8 @@ uk:
   create: "Створити %{obj}"
   update: "Редагувати %{obj}"
   delete: "Видалити %{obj}"
+
+  blog: "Блоґ"
 
   city: "Населений пункт"
   cities:
@@ -53,7 +57,7 @@ uk:
     album: "Фотоальбом готелю"
     contacts: "Контакты готелю"
     rooms: "Номера готелю"
-    comments: "Обсуждение готелю"
+    comments: "Обговорення готелю"
     menu:
       summary:      "Резюме"
       description:  "Опис"
@@ -129,8 +133,10 @@ uk:
   resort: "Курорт"
   resorts:
     h: "Курорти"
+    summary: "Сторінка курорту"
     count: "%{count} курортів"
     crud: "курорт"
+    of: "курорту"
 
   stream: "Розділ"
   streams:
@@ -138,6 +144,7 @@ uk:
     count: "%{count} розділів"
     crud: "розділ"
 
+  discussion: "Обговорення"
   comment: "Коментар"
   comments:
     h: "Комментарі"

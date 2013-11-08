@@ -17,6 +17,9 @@ class ResortsController < ApplicationController
   def album
   end
 
+  def comments
+  end
+
   def hotels
     # worked around with to_a, in some reason will_paginate sees only one page and cuts items per page value
     @hotels = @resort.hotels.by_resort.to_a.paginate(page: params[:page], per_page: 20)
@@ -36,7 +39,7 @@ class ResortsController < ApplicationController
   # GET /resorts/1
   # GET /resorts/1.json
   def show
-    @hotels = @resort.hotels.by_resort.limit(5)
+    @hotels = @resort.hotels.by_resort.to_a.paginate(page: params[:page], per_page: 5)
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @resort }
