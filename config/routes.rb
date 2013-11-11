@@ -161,8 +161,17 @@ DjEngine::Application.routes.draw do
     end
 
 
+    #### Legacy ####
+
+    scope '(:lang)' do
+      get 'goto/:goto' => 'legacies#goto'
+    end
+
+    ####/Legacy ####
+
     resources :nodes, only: [:index, :new, :create]
     resources :nodes, path: '', except: [:index, :new, :create]
+
   end
 end
 
