@@ -1,6 +1,7 @@
 <% title " - #{@tour.name}" %>
 <% menu = [
     [t('description'),  tour_path(@tour),                 -1 ],
+    [t('blog'),         tour_blog_path(@tour),            -1 ],
     [t('hotels.h'),     tour_hotels_path(@tour),          -1 ],
     [t('resorts.h'),    tour_resorts_path(@tour),         -1 ],
     [t('photos.h'),     tour_album_path(@tour),                -1 ],

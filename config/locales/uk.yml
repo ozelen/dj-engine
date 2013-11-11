@@ -9,7 +9,6 @@ uk:
     links:
       edit: "Редгувати %{obj}"
       destroy: "Видалити %{obj}"
-      confirm: "Ви справді бажаєти видалити %{type} \"%{name}\"?"
       create: "Створити %{obj}"
       new: "Новий %{obj}"
 
@@ -37,6 +36,8 @@ uk:
   create: "Створити %{obj}"
   update: "Редагувати %{obj}"
   delete: "Видалити %{obj}"
+  confirm: "Ви справді бажаєти видалити %{obj}?"
+  confirm_poi: "Ви справді бажаєти видалити %{type} \"%{name}\"?"
 
   blog: "Блоґ"
 
@@ -162,6 +163,7 @@ uk:
     h: "Тури"
     count: "%{count} турів"
     crud: "тур"
+    of: "туру"
 
   post: "Публикації"
   posts:

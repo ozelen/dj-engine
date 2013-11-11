@@ -19,7 +19,7 @@
   <% if can? :manage, @hotel %>
     <%= yield(:hotel_manage_menu) %>
     <li><%= link_to t("helpers.links.edit", obj: t('hotels.crud')),     edit_hotel_path(@hotel) %></li>
-    <li><%= link_to t("helpers.links.destroy", obj: t('hotels.crud')), @hotel, :method => 'delete', data: { confirm: t("helpers.links.confirm", type: t('hotels.crud'), name: @hotel.name) } %></li>
+    <li><%= link_to t("helpers.links.destroy", obj: t('hotels.crud')), @hotel, :method => 'delete', data: { confirm: t("confirm_poi", type: t('hotels.crud'), name: @hotel.name) } %></li>
     <%# data: { confirm: t("helpers.links.confirm", type: t('hotels.crud'), name: @hotel.name) } %>
     <li><%= link_to t('helpers.links.create', obj: t('rooms.crud')), new_hotel_room_path(@hotel) %></li>
     <li><%= link_to t('hotels.prices.edit'), pricelist_edit_path(@hotel) %></li>

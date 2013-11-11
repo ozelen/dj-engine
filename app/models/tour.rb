@@ -6,6 +6,7 @@ class Tour < ActiveRecord::Base
   has_many :resort_tour_assignments,  dependent: :destroy
   has_many :hotels,  through: :hotel_tour_assignments
   has_many :resorts, through: :resort_tour_assignments
+  has_many :posts, as: :channel
   has_one :address, as: :addressable
 
   accepts_nested_attributes_for :hotel_tour_assignments, allow_destroy: true

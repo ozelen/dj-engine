@@ -1,0 +1,5 @@
+<% title_of_tour = "#{t 'blog'} #{t('tours.of')} \"#{@tour.name}\"" %>
+<% title title_of_tour %>
+<h1><%= title_of_tour %></h1>
+
+<%= render 'posts/block', channel: @tour %>

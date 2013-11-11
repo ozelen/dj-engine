@@ -113,7 +113,7 @@ DjEngine::Application.routes.draw do
       resources :hotels, only: :index
       get 'resorts(/page/:page)'          => 'streams#resorts',     as: :stream_resorts
       get 'news(/page/:page)'             => 'streams#news',        as: :stream_news
-      get 'posts/:post_id'                => 'posts#show',          as: :stream_posts
+      get 'posts/:post_id'                => 'posts#show',          as: :stream_post
       get 'blog(/page/:page)'             => 'streams#blog',        as: :stream_blog
       get 'blog/tags/:tag'                => 'streams#blog',        as: :tag
       get 'hotels'                        => 'streams#hotels',      as: :stream_hotels
@@ -154,6 +154,8 @@ DjEngine::Application.routes.draw do
       match 'resorts'                     => 'tours#resorts',       as: :tour_resorts
       match 'contacts'                    => 'tours#contacts',      as: :tour_contacts
       match 'description'                 => 'tours#description',   as: :tour_description
+      match 'blog(/page/:page)'           => 'tours#blog',          as: :tour_blog
+      match 'posts/:post_id'              => 'posts#show',          as: :tour_post
       # TODO: match 'locations'           => 'tours#locations', as: :tour_comments
       # TODO: match 'prices'              => 'tours#prices',    as: :prices
     end

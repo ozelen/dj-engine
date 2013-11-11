@@ -12,6 +12,10 @@ class Post < ActiveRecord::Base
 
   default_scope order('created_at DESC')
 
+  def name
+    title
+  end
+
   def to_param
     "#{id} #{slug}".parameterize
   end

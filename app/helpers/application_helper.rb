@@ -49,7 +49,7 @@ module ApplicationHelper
     will_paginate instance, renderer: BootstrapPagination::Rails, bootstrap: 3
   end
 
-  def find_path(instance)
+  def find_path(instance, opt_params={})
     case instance
       when Hotel
         slug_hotel_path(instance)
@@ -64,9 +64,23 @@ module ApplicationHelper
       when Tour
         tour_path(instance)
       when Post
-        post_path(instance)
+        if params[:stream_slug] then post_path(@stream, instance, opt_params)
+        elsif instance.channel_type == 'Resort' then post_path(@resort, instance, opt_params)
+        elsif instance.channel then send("#{instance.channel.class.name.parameterize}_post_path", instance.channel, instance, opt_params)  #[instance.channel, instance]
+        else; post_path(instance, opt_params); end
+
+
       when City
         slug_city_path(instance)
+      when Photo
+        case instance.gallery.imageable.class.name
+          when 'Room'
+            room_album_path(@hotel, @room, photo) # special workaround for room and other paths which must have additional variables in their routes (such as hotel slug)
+          when 'Post'
+            find_path(instance.gallery.imageable, {photo_id: instance.id})
+          else
+            send("#{photo.gallery.imageable.class.name.parameterize}_album_path", photo.gallery.imageable, photo, anchor: 'album') rescue '#error'
+        end
     end
   end
 

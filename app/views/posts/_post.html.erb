@@ -1,10 +1,6 @@
 <% unless post.new_record? && post.id.blank? %>
   <%= content_tag_for :div, post do %>
-    <% path =
-       if params[:stream] then post_path(@stream, post)
-       elsif post.channel_type == 'Resort' then post_path(@resort, post)
-       else [post.channel, post] end
-    %>
+    <% path = find_path post %>
     <%# path = params[:resort] ? post_path(@resort, post) : [post.channel, post] %>
     <h3><%= link_to post.title, path %></h3>
     <p><%=  post.teaser || truncate(  Sanitize.clean(post.content), length: 300, separator: '.' ) %></p>

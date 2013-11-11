@@ -9,7 +9,6 @@ ru:
     links:
       edit: "Редактировать"
       destroy: "Удалить"
-      confirm: "Вы правда хотите удалить %{type} \"%{name}\"?"
       create: "Создать"
       new: "Новый"
 
@@ -39,6 +38,8 @@ ru:
   create: "Создать %{obj}"
   update: "Редактировать %{obj}"
   delete: "Удалить %{obj}"
+  confirm: "Вы правда хотите удалить %{obj}?"
+  confirm_poi: "Вы правда хотите удалить %{type} \"%{name}\"?"
 
   blog: "Блог"
 
@@ -164,6 +165,7 @@ ru:
     h: "Туры"
     count: "%{count} туров"
     crud: "тур"
+    of: "тура"
 
   post: "Публикация"
   posts:

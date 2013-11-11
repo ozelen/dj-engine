@@ -21,6 +21,7 @@
         </div>
         <div class="col-lg-8">
           <%= f.submit class: 'btn btn-default' %>
+          <%= link_to t('delete', obj: t('photos.crud')), photo_path(img), method: :delete, remote: true, class: "btn btn-danger", data: { confirm: t("confirm", obj: t('photos.crud')) } %>
         </div>
       </div>
   <% end if img %>

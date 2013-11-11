@@ -23,11 +23,11 @@
 <% end %>
 
 <div id="photos" class="clearfix">
-  <%= render gallery.photos %>
+  <%= render gallery.photos if gallery.photos.count > 1 %>
 </div>
 
 <div>
-  <%= image_tag(img.image_url(:content, anchor: 'photos').to_s, class: 'img-rounded content-photo') if img %>
+  <%= image_tag(img.image_url(:content, anchor: 'photos').to_s, class: "img-rounded content-photo content_photo_#{img.id}") if img %>
 </div>
 <hr>
 

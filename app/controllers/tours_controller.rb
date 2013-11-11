@@ -45,6 +45,10 @@ class ToursController < ApplicationController
     @tour = Tour.find(params[:id])
   end
 
+  def blog
+    @posts = @tour.posts
+  end
+
   # POST /tours
   # POST /tours.json
   def create
