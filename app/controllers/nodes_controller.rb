@@ -8,7 +8,7 @@ class NodesController < ApplicationController
   end
 
   def index
-    @nodes = Node.all.paginate(page: params[:page], per_page: 20)
+    @nodes = Node.where(accessible_type: nil).paginate(page: params[:page], per_page: 20)
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @nodes }

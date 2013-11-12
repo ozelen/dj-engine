@@ -77,7 +77,7 @@ module ApplicationHelper
       when Photo
         case instance.gallery.imageable.class.name
           when 'Room'
-            room_album_path(@hotel, @room, photo) # special workaround for room and other paths which must have additional variables in their routes (such as hotel slug)
+            room_album_path(@hotel, @room, instance) # special workaround for room and other paths which must have additional variables in their routes (such as hotel slug)
           when 'Post'
             find_path(instance.gallery.imageable, {photo_id: instance.id})
           else
