@@ -169,9 +169,10 @@ DjEngine::Application.routes.draw do
 
     ####/Legacy ####
 
-    resources :nodes, only: [:index, :new, :create]
-    resources :nodes, path: '', except: [:index, :new, :create]
-
+    #resources :nodes, only: [:index, :new, :create, :edit]
+    #resources :nodes, path: '', except: [:index, :new, :create, :show]
+    resources :nodes
+    get '*name' => 'nodes#page', as: :slug_node
   end
 end
 

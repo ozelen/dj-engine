@@ -12,9 +12,9 @@ class Node < ActiveRecord::Base
     find_by_name!(param)
   end
 
-  def to_param
-    name
-  end
+  #def to_param
+  #  name
+  #end
 
   def generate_name
     self.name ||= header ? header.parameterize : id

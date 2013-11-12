@@ -51,6 +51,8 @@ module ApplicationHelper
 
   def find_path(instance, opt_params={})
     case instance
+      when Node
+        slug_node_path instance.name
       when Hotel
         slug_hotel_path(instance)
       when Room

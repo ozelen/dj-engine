@@ -1,35 +1,20 @@
+<%- model_class = Node -%>
+<div class="page-header">
+  <h1><%= @node.header %></h1>
+</div>
 
-  <div class="row-fluid">
-    <div class="span9">
-      <%= bootstrap_flash %>
+<div class="content">
+  <%= markdown @node.content %>
+</div>
 
-      <div id="page-div" class="page">
-        <h1 id="node_header">
-          <%= @node.header %>
-        </h1>
-
-        <div id="node_content">
-          <%= markdown @node.content %>
-        </div>
-      </div>
-
-    </div>
-
-    <div class="span3">
-      <div class="well sidebar-nav">
-        <ul class="nav nav-list">
-          <li class="nav-header">Sidebar</li>
-          <li><%= link_to "Link1", "/path1"  %></li>
-          <li><%= link_to "Link2", "/path2"  %></li>
-          <li><%= link_to "Link3", "/path3"  %></li>
-        </ul>
-      </div><!--/.well -->
-    </div><!--/span-->
-
-  </div><!--/row-->
-
-  <footer>
-    <p>&copy; Company 2013</p>
-  </footer>
-
-
+<% if can? :manage, :node %>
+  <div class="form-actions">
+    <%= link_to t("update", obj: t('pages.crud')),
+                edit_node_path(@node), :class => 'btn' %>
+    <%= link_to t("delete", obj: t('pages.crud')),
+                node_path(@node),
+                :method => 'delete',
+                :data => { :confirm => t('confirm', obj: t('pages.crud') ) },
+                :class => 'btn btn-danger' %>
+  </div>
+<% end %>

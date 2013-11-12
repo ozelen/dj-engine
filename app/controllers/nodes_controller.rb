@@ -1,5 +1,4 @@
 class NodesController < ApplicationController
-  load_and_authorize_resource find_by: :name
   before_filter :find_node, only: [:show, :edit, :update, :destroy]
   # GET /nodes
   # GET /nodes.json
@@ -9,7 +8,7 @@ class NodesController < ApplicationController
   end
 
   def index
-    @nodes = Node.all
+    @nodes = Node.all.paginate(page: params[:page], per_page: 20)
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @nodes }
@@ -30,23 +29,29 @@ class NodesController < ApplicationController
         format.json { render json: @node }
       end
     end
+  end
 
+  def show_by_slug
+    @node = Node.find_by_name params[:slug]
+    render :show
   end
 
   def page
     @node = Node.find_by_name params[:name]
     @page_title = @node.title
-    @object = @node.accessible
-    layout = @node.accessible_type.parameterize
-    instance_variable_set "@#{layout}", @node.accessible
-    render layout: layout
+    if @node.accessible
+      @object = @node.accessible
+      layout = @node.accessible_type.parameterize
+      instance_variable_set "@#{layout}", @node.accessible
+      render layout: layout
+    end
   end
 
   # GET /nodes/new
   # GET /nodes/new.json
   def new
     @node = Node.new
-
+    authorize! :create, @node
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @node }
@@ -55,12 +60,15 @@ class NodesController < ApplicationController
 
   # GET /nodes/1/edit
   def edit
+    @node = Node.find params[:id]
+    authorize! :manage, @node
   end
 
   # POST /nodes
   # POST /nodes.json
   def create
     @node = Node.new(params[:node])
+    authorize! :create, @node
 
     respond_to do |format|
       if @node.save
@@ -76,7 +84,8 @@ class NodesController < ApplicationController
   # PUT /nodes/1
   # PUT /nodes/1.json
   def update
-    render text: 'xz'; return
+    authorize! :manage, @node
+
     respond_to do |format|
       if @node.update_attributes(params[:node])
         format.html { redirect_to @node, notice: 'Node was successfully updated.' }
@@ -91,8 +100,9 @@ class NodesController < ApplicationController
   # DELETE /nodes/1
   # DELETE /nodes/1.json
   def destroy
-    @node.destroy
+    authorize! :destroy, @node
 
+    @node.destroy
     respond_to do |format|
       format.html { redirect_to nodes_url }
       format.json { head :no_content }
@@ -102,7 +112,7 @@ class NodesController < ApplicationController
 private
 
   def find_node
-    @node = Node.find_by_name!(params[:id])
+    @node = Node.find(params[:id])
   end
 
 end
