@@ -8,6 +8,8 @@ class Period < ActiveRecord::Base
 
   translates :name
 
+  default_scope order('till DESC')
+
   def title
     dates = "#{I18n.l(self.since, format: :short)} - #{I18n.l(self.till, format: :short)}" if since && till
     name.present? ? "#{name} (#{dates})" : dates

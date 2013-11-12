@@ -20,7 +20,7 @@
   <% @hotel.rooms.each do |room| %>
       <tr>
         <td class=""><%= room.name %> </td>
-        <% @periods.each do |period| %>
+        <% @periods.reverse.each do |period| %>
             <% price = period.prices.select{|k| k['room_id'] == room.id } %>
             <td class="text-center price-value text-info"><%= price[0].value if !price.blank? %></td>
             <% #period.prices. %>
