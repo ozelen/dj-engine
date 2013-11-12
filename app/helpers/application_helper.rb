@@ -81,7 +81,7 @@ module ApplicationHelper
           when 'Post'
             find_path(instance.gallery.imageable, {photo_id: instance.id})
           else
-            send("#{photo.gallery.imageable.class.name.parameterize}_album_path", photo.gallery.imageable, photo, anchor: 'album') rescue '#error'
+            send("#{instance.gallery.imageable.class.name.parameterize}_album_path", instance.gallery.imageable, instance, anchor: 'album')# rescue '#error'
         end
     end
   end

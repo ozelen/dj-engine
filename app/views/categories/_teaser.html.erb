@@ -5,11 +5,10 @@
    type = category_type category
 %>
 <div class="media">
-  <a class="pull-left" href="#">
-    <%= image_tag category.gallery.title.image_url(image_mode), class: :thumbnail if category.gallery.title %>
-  </a>
+
+  <%= link_to image_tag(category.gallery.title.image_url(image_mode), class: :thumbnail), find_path(category), class: 'pull-left' if category.gallery.title %>
   <div class="media-body">
-    <h4 class="media-heading"><%= link_to category.caption, send("slug_hotel_#{category.class.name.parameterize}_path", @hotel, category) %></h4>
+    <h4 class="media-heading"><%= link_to category.caption, find_path(category) %></h4>
 
     <% if type && !category.name %>
       <p><%= type %></p>
