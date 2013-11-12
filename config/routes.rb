@@ -81,6 +81,7 @@ DjEngine::Application.routes.draw do
       get 'rooms/:id/album(/:photo_id)'   => 'rooms#show',                as: :room_album
       get 'services'                      => 'services#index',            as: :slug_hotel_services
       get 'services/:id'                  => 'services#show',             as: :slug_hotel_service
+      get 'services/:id/album(/:photo_id)'=> 'rooms#show',                as: :service_album
       get 'pricelist'                     => 'hotels#pricelist',          as: :slug_hotel_pricelist
       get 'pricelist/edit'                => 'hotels#edit_pricelist',     as: :slug_edit_hotel_pricelist
       get 'album(/:photo_id)'             => 'hotels#album',              as: :hotel_album

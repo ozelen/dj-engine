@@ -2,7 +2,7 @@
    channel ||= @post.channel
    header_pref = @post.new_record? ? 'create' : 'update'
 %>
-<%= content_tag_for :div, @post, 'form' do %>
+<%= content_tag_for :div, @post, 'form', class: 'checktags' do %>
   <h3><%= t(header_pref, obj: t('posts.crud')) %></h3>
   <%= form_for(@post, remote: true, html: {role: 'form'}) do |f| %>
 
