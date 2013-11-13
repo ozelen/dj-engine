@@ -31,8 +31,9 @@ namespace :import do
 
     #import_news #if cold
 
-    reimport_albums
+    #reimport_albums
 
+    reimport_addreses
 
   end
 end

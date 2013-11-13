@@ -177,7 +177,7 @@ namespace :import do
 
       new_object.name               = Sanitize.clean name
       new_object.description        = ReverseMarkdown.parse_string descr
-      new_object.address.address    = ReverseMarkdown.parse_string legacy_object.contacts(loc) if legacy_object.instance_of? HbObject
+      new_object.address.addr    = ReverseMarkdown.parse_string legacy_object.contacts(loc) if legacy_object.instance_of? HbObject
 
       new_object.save!
       #puts "#{loc}: #{name}\n# Descr: #{descr}\n\n"

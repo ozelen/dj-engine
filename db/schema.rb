@@ -11,7 +11,18 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131103134958) do
+ActiveRecord::Schema.define(:version => 20131113192547) do
+
+  create_table "address_translations", :force => true do |t|
+    t.integer  "address_id"
+    t.string   "locale"
+    t.text     "addr"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "address_translations", ["address_id"], :name => "index_address_translations_on_address_id"
+  add_index "address_translations", ["locale"], :name => "index_address_translations_on_locale"
 
   create_table "addresses", :force => true do |t|
     t.string   "email"
@@ -21,11 +32,11 @@ ActiveRecord::Schema.define(:version => 20131103134958) do
     t.string   "phone3"
     t.string   "fax"
     t.string   "skype"
-    t.text     "address"
     t.integer  "addressable_id"
     t.string   "addressable_type"
     t.datetime "created_at",       :null => false
     t.datetime "updated_at",       :null => false
+    t.text     "addr"
   end
 
   add_index "addresses", ["addressable_id", "addressable_type"], :name => "index_addresses_on_addressable_id_and_addressable_type"
