@@ -20,7 +20,7 @@
 
 <body>
 
-<header id="page-header" class="navbar navbar-inverse navbar-default bs-docs-nav" role="banner">
+<header id="page-header" class="navbar navbar-inverse navbar-default bs-docs-nav <%= params[:stream_slug] %>" role="banner">
   <div class="container">
     <div class="navbar-header">
       <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".bs-navbar-collapse">
@@ -105,6 +105,21 @@
     </nav>
   </div>
 </header>
+
+<% if request.fullpath==root_path || params[:stream_slug] || !content_for?(:head) %>
+  <div class="strean-title <%= params[:stream_slug] %>">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8">
+          <h1><%= params[:stream_slug] ? @stream.node.header : t('homepage.name') %></h1>
+          <p><%= params[:stream_slug] ? @stream.node.title : t('homepage.title') %></p>
+          <%= yield(:stream_title) if content_for?(:stream_title) %>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>
+
 
 <div class="bs-header">
   <div class="container">

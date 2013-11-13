@@ -30,6 +30,6 @@
 
   </div>
   <div class="col-lg-4">
-    <h1>Offers</h1>
+    <%= yield(:offer)  if content_for?(:offer)  %>
   </div>
 </div>

@@ -33,7 +33,8 @@ uk:
 
   home: "Головна сторінка"
   homepage:
-      title: "BestHotels in UA - найкращі готелі України"
+    name: "BestHotels.in.ua"
+    title: "BestHotels in UA - найкращі готелі України"
 
   all: "Все %{subject}"
   see_all: "Дивитися всі %{subject}"

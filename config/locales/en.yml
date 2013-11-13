@@ -25,6 +25,7 @@ en:
   home: "Homepage"
   homepage:
     title: "BestHotels in Ukraine"
+    name: "BestHotels.in.ua"
 
   all: "All %{subject}"
   see_all: "See all %{subject}"

@@ -1,23 +1,34 @@
 <!-- Main jumbotron for a primary marketing message or call to action -->
 <% title t('homepage.title') %>
 
+<% content_for :offer do %>
+  <%# render 'hotels/booking_form_offer' %>
+<% end %>
+
 <% content_for :head do %>
 
-    <%= render 'layouts/main_carousel' %>
+    <%# render 'layouts/main_carousel' %>
 
     <div class="body-content">
 
       <div class="row">
-        <div class="col-lg-4">
-          <h4><%= t 'resorts.h' %></h4>
-          <%= render Resort.all %>
+        <div class="col-lg-8">
+          <h2><%= t 'resorts.h' %></h2>
+          <% Resort.all.in_groups_of(2) do |arr| %>
+            <div class="row">
+              <% arr.each do |resort| %>
+                <div class="col-lg-6">
+                  <%= render resort %>
+                </div>
+              <% end %>
+            </div>
+          <% end %>
         </div>
         <div class="col-lg-4">
-          <h4><%= t 'streams.h' %></h4>
+          <h2><%= t 'streams.h' %></h2>
           <%= render Stream.all %>
-        </div>
-        <div class="col-lg-4">
-          <h4><%= t 'tours.h' %></h4>
+
+          <h2><%= t 'tours.h' %></h2>
           <%= render Tour.limit(5) %>
         </div>
       </div>
@@ -29,23 +40,20 @@
 <% end %>
 
 <% content_for :sidebar do %>
-    <h4><%= t('comments.latest') %></h4>
+    <h2><%= t('comments.latest') %></h2>
     <%= render @comments, show_commentable: true, truncate_text: true %>
 <% end %>
 
-<% content_for :offer do %>
-    <h3><%= t('booking.now') %></h3>
-    <%= render 'hotels/booking_form_offer' %>
-<% end %>
+
 
 <div class="row">
   <div class="col-lg-6">
-    <h4><%= t 'hotels.h' %></h4>
+    <h2><%= t 'hotels.h' %></h2>
     <%= render @hotels %>
     <%= link_to 'View all hotels', hotels_path %>
   </div>
   <div class="col-lg-6">
-    <h4><%= t 'posts.latest' %></h4>
+    <h2><%= t 'posts.latest' %></h2>
     <%= render Post.limit(10) %>
   </div>
 </div>
