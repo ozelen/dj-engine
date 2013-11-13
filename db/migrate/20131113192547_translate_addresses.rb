@@ -2,7 +2,7 @@ class TranslateAddresses < ActiveRecord::Migration
   def self.up
 
     Address.create_translation_table!({
-                                          :addr => :string,
+                                          :addr => :text,
                                       }, {
                                           :migrate_data => true
                                       })
