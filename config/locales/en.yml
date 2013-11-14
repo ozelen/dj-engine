@@ -121,7 +121,8 @@ en:
     h: Booking
     now: Book now
     choose_dates: "Choose dates"
-    check_free: "Check for available rooms"
+    check_free: "Show free rooms only"
+    find: "Find"
 
   contacts:
     h: Contacts
@@ -145,6 +146,7 @@ en:
     latest: Last coments
     see_all: See all comments
     crud: comment
+    commented: "коментує"
 
   tour: "Tour"
   tours:

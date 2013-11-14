@@ -13,7 +13,7 @@
       <%= comment.user_name %>
     </span>
       <% if show_commentable and comment.commentable %>
-          about <%= link_to comment.commentable.name, find_path(comment.commentable) %>
+          <%= t 'comments.commented' %> <%= link_to comment.commentable.name, find_path(comment.commentable) %>
       <% end %>
       : <%= comment.title %></h4>
     <%= truncate_text ? truncate(comment.body, length: 200, separator: ' ') : comment.body %>

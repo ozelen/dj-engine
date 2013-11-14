@@ -26,6 +26,21 @@ header#page-header {
   }
 }
 
+div.strean-title {
+  height: 100px;
+  background: #4b0000 url(bg-best.png);
+  border-bottom: 3px solid #f1da36;
+  color: white;
+
+  &.ski {
+    background: #001734 url(bg-ski.png);
+  }
+
+  &.green {
+    background: #1c2e0b url(bg-green.png);
+  }
+}
+
 .bs-header {
   background: rgb(160,216,239); /* Old browsers */
   background: -moz-linear-gradient(top,  rgba(160,216,239,1) 0%, rgba(221,241,249,1) 65%, rgba(254,255,255,1) 100%); /* FF3.6+ */
@@ -189,17 +204,3 @@ nav.object-menu {
   z-index: 1001;
 }
 
-div.strean-title {
-  height: 100px;
-  background: url(bg-best.png);
-  border-bottom: 3px solid #f1da36;
-  color: white;
-
-  &.ski {
-    background-image: url(bg-ski.png);
-  }
-
-  &.green {
-    background-image: url(bg-green.png);
-  }
-}

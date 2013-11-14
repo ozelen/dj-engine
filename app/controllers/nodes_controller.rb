@@ -38,12 +38,16 @@ class NodesController < ApplicationController
 
   def page
     @node = Node.find_by_name params[:name]
-    @page_title = @node.title
-    if @node.accessible
-      @object = @node.accessible
-      layout = @node.accessible_type.parameterize
-      instance_variable_set "@#{layout}", @node.accessible
-      render layout: layout
+    if @node
+      @page_title = @node.title
+      if @node.accessible
+        @object = @node.accessible
+        layout = @node.accessible_type.parameterize
+        instance_variable_set "@#{layout}", @node.accessible
+        render layout: layout
+      end
+    else
+      raise ActionController::RoutingError.new('Not Found')
     end
   end
 
