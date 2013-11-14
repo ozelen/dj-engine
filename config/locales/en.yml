@@ -120,6 +120,8 @@ en:
   booking:
     h: Booking
     now: Book now
+    choose_dates: "Choose dates"
+    check_free: "Check for available rooms"
 
   contacts:
     h: Contacts
