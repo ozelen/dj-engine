@@ -12,6 +12,12 @@ class Post < ActiveRecord::Base
 
   default_scope order('created_at DESC')
 
+  before_save :to_markdown
+
+  def to_markdown
+    self.content = ReverseMarkdown.parse_string content
+  end
+
   def name
     title
   end
@@ -19,4 +25,6 @@ class Post < ActiveRecord::Base
   def to_param
     "#{id} #{slug}".parameterize
   end
+
+
 end

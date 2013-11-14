@@ -16,6 +16,12 @@ class Tour < ActiveRecord::Base
 
   translates :name, :description, :title
 
+  before_save :to_markdown
+
+  def to_markdown
+    self.description = ReverseMarkdown.parse_string description
+  end
+
   acts_as_commentable
   acts_as_taggable_on :portals
   after_create :create_gallery

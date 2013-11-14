@@ -8,6 +8,12 @@ class Node < ActiveRecord::Base
 
   #default_scope with_translations(I18n.locale).order('node_translations.header ASC') # makes terrible mistakes
 
+  before_save :to_markdown
+
+  def to_markdown
+    self.content = ReverseMarkdown.parse_string content
+  end
+
   def self.from_param(param)
     find_by_name!(param)
   end
