@@ -30,7 +30,7 @@
 
 <% content_for :offer do %>
   <%= raw '<h3>Address</h3>' if @hotel.leads.blank? %>
-  <%= render @hotel.leads.present? ? 'hotels/booking_form_offer' : 'hotels/address' %>
+  <%= render @hotel.leads.present? && @hotel.leads[0].params ? 'hotels/booking_form_offer' : 'hotels/address' %>
 <% end %>
 
 <% content_for :head do %>
