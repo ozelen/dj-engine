@@ -1,6 +1,6 @@
 <% adr = @tour.address %>
 <address>
-  <%= adr.address %> <br>
+  <%= adr.addr %> <br>
   Phones: <%= [adr.phone1, adr.phone2, adr.phone3].select{|x| x if x.present? }.join(', ') %> <br>
   <% if adr.fax.present?     %> FAX: <%= adr.fax %> <br> <% end %>
   <% if adr.skype.present?   %> Skype: <%= adr.skype %> <br> <% end %>
