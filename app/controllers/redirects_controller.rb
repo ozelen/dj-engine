@@ -1,4 +1,5 @@
 class RedirectsController < ApplicationController
+  load_and_authorize_resource
   # GET /redirects
   # GET /redirects.json
   def index
