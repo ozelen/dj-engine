@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Old domain:</b>
+  <%= @redirect.old_domain %>
+</p>
+
+<p>
+  <b>Old path:</b>
+  <%= @redirect.old_path %>
+</p>
+
+<p>
+  <b>New path:</b>
+  <%= @redirect.new_path %>
+</p>
+
+
+<%= link_to 'Edit', edit_redirect_path(@redirect) %> |
+<%= link_to 'Back', redirects_path %>

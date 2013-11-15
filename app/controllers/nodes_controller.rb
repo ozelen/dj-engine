@@ -38,7 +38,11 @@ class NodesController < ApplicationController
 
   def page
     @node = Node.find_by_name params[:name]
-    if @node
+    redirect = Redirect.where(old_path: request.fullpath, old_domain: request.host)[0]
+
+    if redirect
+      redirect_to "http://besthotels.in.ua#{redirect.new_path}"
+    elsif @node
       @page_title = @node.title
       if @node.accessible
         @object = @node.accessible
@@ -47,6 +51,7 @@ class NodesController < ApplicationController
         render layout: layout
       end
     else
+
       raise ActionController::RoutingError.new('Not Found')
     end
   end

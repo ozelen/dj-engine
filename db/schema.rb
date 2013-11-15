@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131113192547) do
+ActiveRecord::Schema.define(:version => 20131115172658) do
 
   create_table "address_translations", :force => true do |t|
     t.integer  "address_id"
@@ -397,6 +397,14 @@ ActiveRecord::Schema.define(:version => 20131113192547) do
   add_index "prices", ["period_id"], :name => "index_prices_on_period_id"
   add_index "prices", ["room_id"], :name => "index_prices_on_room_id"
   add_index "prices", ["value"], :name => "index_prices_on_value"
+
+  create_table "redirects", :force => true do |t|
+    t.string   "old_domain"
+    t.string   "old_path"
+    t.string   "new_path"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "region_translations", :force => true do |t|
     t.integer  "region_id"

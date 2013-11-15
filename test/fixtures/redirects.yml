@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  old_domain: MyString
+  old_path: MyString
+  new_path: MyString
+
+two:
+  old_domain: MyString
+  old_path: MyString
+  new_path: MyString

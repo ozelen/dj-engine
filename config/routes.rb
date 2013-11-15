@@ -13,6 +13,9 @@ DjEngine::Application.routes.draw do
 
 
 
+  resources :redirects
+
+
   resources :deals
 
 
