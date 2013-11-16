@@ -406,6 +406,10 @@ ActiveRecord::Schema.define(:version => 20131115172658) do
     t.datetime "updated_at", :null => false
   end
 
+  add_index "redirects", ["new_path"], :name => "index_redirects_on_new_path"
+  add_index "redirects", ["old_domain"], :name => "index_redirects_on_old_domain"
+  add_index "redirects", ["old_path"], :name => "index_redirects_on_old_path"
+
   create_table "region_translations", :force => true do |t|
     t.integer  "region_id"
     t.string   "locale"

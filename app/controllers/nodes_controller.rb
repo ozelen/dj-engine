@@ -38,10 +38,11 @@ class NodesController < ApplicationController
 
   def page
     @node = Node.find_by_name params[:name]
-    redirect = Redirect.where(old_path: request.fullpath, old_domain: request.host)[0]
 
-    if redirect
-      redirect_to "http://besthotels.in.ua#{redirect.new_path}"
+    redirect_path = Redirect.find_by_uri request
+
+    if redirect_path
+      redirect_to redirect_path
     elsif @node
       @page_title = @node.title
       if @node.accessible
