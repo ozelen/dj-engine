@@ -1,10 +1,11 @@
+<% hide_description ||= false %>
+
 <% unless post.new_record? && post.id.blank? %>
   <%= content_tag_for :div, post do %>
     <% path = find_path post %>
     <%# path = params[:resort] ? post_path(@resort, post) : [post.channel, post] %>
     <h3><%= link_to post.title, path %></h3>
-    <p><%=  post.teaser || truncate(  Sanitize.clean(post.content), length: 300, separator: '.' ) %></p>
-
+    <p><%= post.teaser || truncate(  Sanitize.clean(post.content), length: 300, separator: '.' ) unless hide_description %></p>
     <% unless post.comment_threads.blank? %>
       <%= post.comment_threads.count %> comments
     <% end %>

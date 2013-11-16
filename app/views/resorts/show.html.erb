@@ -1,27 +1,36 @@
 <% title @resort.node.title || @resort.name %>
 <% content_for :page_title do %>
   <h1>
-    <%= link_to @resort.name, resort_path(@resort) %> <small>resort</small>
+    <%= link_to @resort.name, resort_path(@resort) %>
   </h1>
 <% end %>
 
-<div class="row">
-  <div class="col-lg-6">
-    <h4><%= t 'description' %></h4>
-    <%= markdown truncate(@resort.node.content, length: 500, separator: '.') %>
-    <%= link_to t('full_desc'), resort_description_path(@resort) %>
-    <hr>
-    <h4><%= t('cities.h') %></h4>
-    <%= render @resort.cities %>
+<%= markdown truncate(@resort.node.content, length: 1000, separator: "\n") %>
+<%= link_to t('full_desc'), resort_description_path(@resort) %>
+<hr>
+
+
+<% if @resort.posts.any? && @resort.hotels.any? %>
+  <div class="row">
+    <div class="col-lg-7">
+      <h2><%= t('hotels.h') %></h2>
+      <%= render @hotels %>
+    </div>
+    <div class="col-lg-5">
+      <h2><%= t(:blog) %></h2>
+      <%= render @resort.posts.limit(5), hide_description: true %>
+    </div>
   </div>
-  <div class="col-lg-6">
-    <h4><%= t('hotels.h') %></h4>
-    <%= render @hotels %>
-  </div>
-</div>
+<% elsif @resort.posts.any? %>
+  <h2><%= t(:blog) %></h2>
+  <%= render @resort.posts.limit(5) %>
+<% elsif @resort.hotels.any? %>
+  <h2><%= t('hotels.h') %></h2>
+  <%= render @hotels %>
+<% end %>
 
 <% content_for :sidebar do %>
-    <h4><%= t(:blog) %></h4>
-    <%= render @resort.posts.limit(5) %>
+    <h2><%= t('cities.h') %>:</h2>
+    <%= render @resort.cities %>
 <% end %>
 
