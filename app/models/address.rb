@@ -5,7 +5,7 @@ class Address < ActiveRecord::Base
 
   before_save :to_markdown
 
-  def to_markdown
+  def to_markdown!
     self.addr = ReverseMarkdown.parse_string addr
   end
 end

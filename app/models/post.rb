@@ -12,9 +12,7 @@ class Post < ActiveRecord::Base
 
   default_scope order('created_at DESC')
 
-  before_save :to_markdown
-
-  def to_markdown
+  def to_markdown!
     self.content = ReverseMarkdown.parse_string content
   end
 
