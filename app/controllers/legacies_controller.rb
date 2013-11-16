@@ -8,9 +8,9 @@ class LegaciesController < ApplicationController
   def goto
     if params[:goto] =~ /\d.+/
       legacy = SkiworldLegacy.where(legator_id: params[:goto], legator_table: 'Objects')[0]
-      redirect_to host: "besthotels.in.ua#{slug_hotel_path(legacy.legatee)}" if legacy
+      redirect_to "http://besthotels.in.ua#{slug_hotel_path(legacy.legatee)}" if legacy
     else
-      redirect_to host: "besthotels.in.ua/#{params[:goto]}"
+      redirect_to "http://besthotels.in.ua/#{params[:goto]}"
     end
   end
 end
