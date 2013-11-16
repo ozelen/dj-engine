@@ -1,11 +1,10 @@
-<h1>Listing redirects</h1>
+<h1><%= t 'redirects' %></h1>
 
-<table>
+<table class="table striped-table">
   <tr>
     <th>Old domain</th>
     <th>Old path</th>
     <th>New path</th>
-    <th></th>
     <th></th>
     <th></th>
   </tr>
@@ -15,7 +14,6 @@
     <td><%= redirect.old_domain %></td>
     <td><%= redirect.old_path %></td>
     <td><%= redirect.new_path %></td>
-    <td><%= link_to 'Show', redirect %></td>
     <td><%= link_to 'Edit', edit_redirect_path(redirect) %></td>
     <td><%= link_to 'Destroy', redirect, method: :delete, data: { confirm: 'Are you sure?' } %></td>
   </tr>
@@ -24,4 +22,4 @@
 
 <br />
 
-<%= link_to 'New Redirect', new_redirect_path %>
+<%= link_to 'New Redirect', new_redirect_path, class: 'btn btn-primary' %>
