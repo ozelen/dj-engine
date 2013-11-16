@@ -14,7 +14,7 @@
       <div class="row">
         <div class="col-lg-8">
           <h2><%= t 'resorts.h' %></h2>
-          <% Resort.all.in_groups_of(2) do |arr| %>
+          <% Resort.tagged_with('best').in_groups_of(2) do |arr| %>
             <div class="row">
               <% arr.each do |resort| %>
                 <div class="col-lg-6">
