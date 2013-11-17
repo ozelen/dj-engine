@@ -3,8 +3,13 @@ class NodesController < ApplicationController
   # GET /nodes
   # GET /nodes.json
   def home
-    @hotels = Hotel.limit(10)
-    @comments = Comment.latest.limit(5)
+    redirect_path = Redirect.find_by_uri request
+    if redirect_path
+      redirect_to redirect_path
+    else
+      @hotels = Hotel.limit(10)
+      @comments = Comment.latest.limit(5)
+    end
   end
 
   def index
