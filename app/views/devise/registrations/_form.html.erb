@@ -3,14 +3,14 @@
   <%= devise_error_messages! %>
 
   <div class="form-group">
-    <%= f.label :username, class: 'col-lg-3 control-label' %>
+    <%= f.label :username, t('users.username'), class: 'col-lg-3 control-label' %>
     <div class="col-lg-9">
       <%= f.text_field :username, class: 'form-control', autofocus: true %>
     </div>
   </div>
 
   <div class="form-group">
-    <%= f.label :email, class: 'col-lg-3 control-label' %>
+    <%= f.label :email, t('users.email'), class: 'col-lg-3 control-label' %>
     <div class="col-lg-9">
       <%= f.text_field :email, class: 'form-control' %>
 
@@ -24,14 +24,14 @@
   <% if f.object.new_record? %>
 
     <div class="form-group">
-      <%= f.label :password, class: 'col-lg-3 control-label' %>
+      <%= f.label :password, t('users.password'), class: 'col-lg-3 control-label' %>
       <div class="col-lg-9">
         <%= f.password_field :password, autocomplete: :off, class: 'form-control' %>
       </div>
     </div>
 
     <div class="form-group">
-      <%= f.label :password_confirmation, class: 'col-lg-3 control-label' %>
+      <%= f.label :password_confirmation, t('users.password_confirmation'), class: 'col-lg-3 control-label' %>
       <div class="col-lg-9">
         <%= f.password_field :password_confirmation, class: 'form-control' %>
       </div>
@@ -39,31 +39,35 @@
 
   <% else %>
     <div class="form-group">
-      <%= f.label :current_password, class: 'col-lg-3 control-label' %>
+      <%= f.label :current_password, t('users.current_password'), class: 'col-lg-3 control-label' %>
       <div class="col-lg-9">
         <%= f.password_field :current_password, class: 'form-control' %>
       </div>
     </div>
   <% end %>
 
-  <div class="form-group">
-    <%= f.label :first_name, class: 'col-lg-3 control-label' %>
-    <div class="col-lg-9">
-      <%= f.text_field :first_name, class: 'form-control' %>
+  <% if params[:form]=='full' %>
+
+    <div class="form-group">
+      <%= f.label :first_name, t('users.first_name'), class: 'col-lg-3 control-label' %>
+      <div class="col-lg-9">
+        <%= f.text_field :first_name, class: 'form-control' %>
+      </div>
     </div>
-  </div>
 
-  <div class="form-group">
-    <%= f.label :last_name, class: 'col-lg-3 control-label' %>
-    <div class="col-lg-9">
-      <%= f.text_field :last_name, class: 'form-control' %>
+    <div class="form-group">
+      <%= f.label :last_name, t('users.last_name'), class: 'col-lg-3 control-label' %>
+      <div class="col-lg-9">
+        <%= f.text_field :last_name, class: 'form-control' %>
+      </div>
     </div>
-  </div>
 
-  <% f.object.address ||= Address.new %>
+    <% f.object.address ||= Address.new %>
 
-  <%= f.fields_for :address do |builder| %>
-    <%= render 'addresses/form', f: builder %>
+    <%= f.fields_for :address do |builder| %>
+      <%= render 'addresses/form', f: builder %>
+    <% end %>
+
   <% end %>
 
   <% if current_user and current_user.admin? %>
@@ -91,7 +95,7 @@
 
   <div class="form-group">
     <div class="col-lg-offset-3 col-lg-9">
-      <%= f.submit 'Register', class: ' btn btn-default' %>
+      <%= f.submit t('users.sign_up'), class: ' btn btn-default' %>
     </div>
   </div>
 

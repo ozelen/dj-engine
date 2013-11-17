@@ -3,6 +3,7 @@
 
 uk:
   lang: "Українська"
+  lang_short: "укр"
   hello: "Здоровенькі були!"
 
   helpers:
@@ -24,9 +25,25 @@ uk:
     roles: "Ролі"
     admin: "Адміністратор"
     admininistration: "Адміністрація"
+    log_in: "Вхід"
+    sign_up: "Реєстрація"
+    sign_in: "Увійти"
     sign_out: "Вийти"
-    sign_out: "Увійти"
     edit_profile: "Редагувати профіль"
+    username: "Ім’я користувача"
+    email: "Електронна пошта"
+    password: "Пароль"
+    password_confirmation: "Підтвердження паролю"
+    current_password: "Поточний пароль"
+    first_name: "Ім’я"
+    last_name: "Прізвище"
+    register_a_new_user: "Реєстрація нового користувача"
+
+  addresses:
+    website: "Вебсайт"
+    phone: "Телефон"
+    fax: "Факс"
+
     crud: "користувача"
 
   about: "Про проект"
@@ -167,6 +184,9 @@ uk:
     see_all: "Дивитися всі коментарі"
     crud: "комментар"
     commented: "commented"
+    to_leave_a_comment_you_need_to: "Щоб залишити відгук, вам необхідно "
+    register: "зареєструватися"
+    leave_a_comment: "Залишити відгук "
 
   tour: "Тур"
   tours:

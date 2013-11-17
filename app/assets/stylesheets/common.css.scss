@@ -39,6 +39,15 @@ div.strean-title {
   &.green {
     background: #1c2e0b url(bg-green.png);
   }
+
+  .lang-panel {
+    margin-top: 10px;
+    font-weight: bold;
+    a {
+      color: #f9aa99;
+      font-weight: normal;
+    }
+  }
 }
 
 .bs-header {
@@ -204,3 +213,10 @@ nav.object-menu {
   z-index: 1001;
 }
 
+.lang-panel {
+  list-style: none;
+  li {
+    float: right;
+    margin-right: 5px;
+  }
+}

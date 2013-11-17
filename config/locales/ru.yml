@@ -3,6 +3,7 @@
 
 ru:
   lang: "Русский"
+  lang_short: "рус"
   hello: "Приветствую Вас, землянин!"
 
   helpers:
@@ -26,10 +27,25 @@ ru:
     roles: "Роли"
     admin: "Администратор"
     admininistration: "Администрация"
-    sign_out: "Войти"
+    sign_up: "Регистрация"
+    log_in: "Вход"
     sign_out: "Выйти"
+    sign_in: "Войти"
     edit_profile: "Редактировать профиль"
     crud: "пользователя"
+    username: "Имя пользователя"
+    email: "Электронная почта"
+    password: "Пароль"
+    password_confirmation: "Подтверждение пароля"
+    current_password: "Текущий пароль"
+    first_name: "Имя"
+    last_name: "Фамилия"
+    register_a_new_user: "Регистрация нового пользователя"
+
+  addresses:
+    website: "Вебсайт"
+    phone: "Телефон"
+    fax: "Факс"
 
   about: "О проекте"
 
@@ -171,6 +187,9 @@ ru:
     see_all: "Смотреть все комментарии"
     crud: "комментарий"
     commented: "комментирует"
+    to_leave_a_comment_you_need_to: "Чтобы оставить отзыв, вам необходимо "
+    register: "зарегистрироваться"
+    leave_a_comment: "Оставить отзыв "
 
   tour: "Тур"
   tours:

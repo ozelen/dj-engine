@@ -1,3 +1,4 @@
+<% if defined?(:current_user) && current_user %>
 
 <p id="add_comment_button">
   <button class="btn btn-default" onclick="$('#add_comment_form').show(); $('#add_comment_button').hide()">Add a comment</button>
@@ -26,6 +27,14 @@
     <hr>
   <% end %>
 </fieldset>
+
+
+<% else %>
+
+  <%= t 'comments.to_leave_a_comment_you_need_to' %> <%= link_to t('comments.register'), new_user_registration_path %>
+  <hr>
+
+<% end %>
 
 <% comments = commentable.comment_threads.paginate(page: params[:page], per_page: 10) %>
 

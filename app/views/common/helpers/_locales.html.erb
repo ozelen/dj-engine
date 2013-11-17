@@ -1,0 +1,4 @@
+<ul class="lang-panel">
+  <li><%= link_to_unless( I18n.locale == :uk, t(:lang_short, locale: :uk), locale: :uk ) %></li>
+  <li><%= link_to_unless( I18n.locale == :ru, t(:lang_short, locale: :ru), locale: nil ) %></li>
+</ul>
