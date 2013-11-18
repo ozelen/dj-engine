@@ -9,7 +9,7 @@
   <!--</a>-->
   <div class="media-body comment">
     <h4 class="media-heading"><span class="text-primary">
-      <%= check_box_tag 'selected[]', comment.id if checkboxes && current_user.role?(:admin) %>
+      <%= check_box_tag 'selected[]', comment.id if checkboxes && can?(:manage, comment) %>
       <%= comment.user_name %>
     </span>
       <% if show_commentable and comment.commentable %>

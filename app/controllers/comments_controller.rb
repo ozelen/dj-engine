@@ -1,5 +1,8 @@
 class CommentsController < ApplicationController
+  load_and_authorize_resource
+
   def index
+    authorize! :manage, Comment
   end
 
   def show
