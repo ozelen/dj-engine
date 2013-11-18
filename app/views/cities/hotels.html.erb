@@ -1,0 +1,9 @@
+<%
+   p_title = "#{@city.name}, #{t 'hotels.h'}"
+   title p_title
+%>
+
+<h1><%= p_title %></h1>
+
+<%= render @hotels %>
+<%= will_paginate @hotels, renderer: BootstrapPagination::Rails, bootstrap: 3 %>

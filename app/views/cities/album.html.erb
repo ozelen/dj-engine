@@ -1,5 +1,5 @@
-<% title('Photos - ' + @city.name) %>
+<% title "#{ t 'photos.h' }" %>
 
-<h1>City Album</h1>
+<h1><%= t 'photos.h' %>, <%= @city.name %></h1>
 
 <%= render 'photos/dynamic_form', gallery: @city.gallery %>

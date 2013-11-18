@@ -1,2 +1,3 @@
-<h1>Resorts nearby</h1>
+<% title "#{@city.name}, #{t 'resorts.h'}" %>
+<h1><%= @city.name %>, <%= t 'resorts.h' %></h1>
 <%= render @city.resorts %>
