@@ -12,7 +12,7 @@
 
 <% content_for :page_title do %>
   <h1>
-    <%= link_to raw("#{image_tag(title_photo, class: 'title_image') if title_photo} #{@hotel.name}"), find_path(@hotel) %>
+    <%= link_to raw("#{image_tag(title_photo, class: 'title_image') if title_photo} #{@hotel.name}"), find_path(@hotel) %> <small> (<%= link_to @hotel.city.name, find_path(@hotel.city) if @hotel.city %>) </small>
   </h1>
 <% end %>
 

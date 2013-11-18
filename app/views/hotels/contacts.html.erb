@@ -1,4 +1,5 @@
-<h1><%= t 'hotels.contacts' %></h1>
+<% title "#{ t 'hotels.contacts' } \"#{@hotel.name}\" " %>
+<h1><%= t 'hotels.contacts' %> "<%= @hotel.name %>"</h1>
 
 <%= render 'address' %>
 <%= link_to(@hotel.city.name, find_path(@hotel.city)) if @hotel.city %><br>

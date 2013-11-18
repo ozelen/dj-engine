@@ -1,12 +1,12 @@
 <% title "#{@city.node.header} #{@city.node.title}" %>
 
 <% menu = [
-    ['Overview',    slug_city_path(@city),        -1 ],
-    ['Description', city_description_path(@city), -1 ],
-    ['Resorts',     city_resorts_path(@city),     -1 ],
-    ['Hotels',      city_hotels_path(@city),      -1 ],
-    ['Location',    city_location_path(@city),    -1 ],
-    ['Photos',      city_album_path(@city),       -1 ]
+    [t('cities.summary'),     slug_city_path(@city),        -1 ],
+    [t('description'),        city_description_path(@city), -1 ],
+    [t('resorts.h'),          city_resorts_path(@city),     -1 ],
+    [t('hotels.h'),           city_hotels_path(@city),      -1 ],
+    [t('location'),           city_location_path(@city),    -1 ],
+    [t('photos.h'),           city_album_path(@city),       -1 ]
     #['Comments',    city_comments_path,    @city.comment_threads.count ]
 ]
    cover_photo = @city.gallery.rand(:cover).image_url(:content) rescue nil
