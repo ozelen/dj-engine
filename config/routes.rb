@@ -169,6 +169,7 @@ DjEngine::Application.routes.draw do
 
     scope '(:lang)' do
       get 'goto/:goto' => 'legacies#goto'
+      get 'news/show/:slug' => 'legacies#news_item'
     end
 
     ####/Legacy ####

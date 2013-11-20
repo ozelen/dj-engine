@@ -13,4 +13,10 @@ class LegaciesController < ApplicationController
       redirect_to "http://besthotels.in.ua/#{params[:goto]}"
     end
   end
+
+  def news_item
+    @post = Post.find_by_slug params[:slug]
+    redirect_to (@post ? 'http://besthotels.in.ua' + post_path(@post) : root_url)
+  end
+
 end
