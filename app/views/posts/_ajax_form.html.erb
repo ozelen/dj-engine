@@ -45,6 +45,11 @@
     <%= render 'tags/checktags', f: f, tags: f.object.portals %>
 
     <div class="actions">
+      <label>
+        <%= check_box_tag :to_markdown %>
+        HTML to Markdown conversion
+      </label>
+      <br>
       <%= f.submit class: 'btn btn-success' %>
       <% if @post.new_record? %>
         <a href="#" onclick="$('#form_post').hide(); $('#new_post_link').show(); return false" class="btn btn-default">Cancel</a>

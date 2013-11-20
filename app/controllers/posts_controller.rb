@@ -54,6 +54,7 @@ class PostsController < ApplicationController
   # POST /posts.json
   def create
     @post = find_channel.posts.new(params[:post])
+    @post.to_markdown! if params[:to_markdown]
 
     respond_to do |format|
       if @post.save
