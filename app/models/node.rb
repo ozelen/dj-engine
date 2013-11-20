@@ -1,15 +1,24 @@
 class Node < ActiveRecord::Base
   belongs_to :accessible, polymorphic: true, dependent: :destroy
-  attr_accessible :content, :header, :name, :parent, :title, :accessible_id, :accessible_type
+  attr_accessible :content, :header, :name, :parent, :title, :accessible_id, :accessible_type, :to_markdown
   translates :header, :content, :title
 
   validates :name, uniqueness: true, presence: true
   before_validation :generate_name
+  before_save :to_markdown!
 
   #default_scope with_translations(I18n.locale).order('node_translations.header ASC') # makes terrible mistakes
 
+  def to_markdown
+    @to_markdown
+  end
+
+  def to_markdown=(bool)
+    @to_markdown = bool
+  end
+
   def to_markdown!
-    self.content = ReverseMarkdown.parse_string content
+    self.content = ReverseMarkdown.parse_string content if @to_markdown == '1' || @to_markdown == 'true'
   end
 
   def self.from_param(param)

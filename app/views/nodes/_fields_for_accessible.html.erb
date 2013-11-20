@@ -25,6 +25,13 @@
       <%= f.label :content, :class => 'control-label col-lg-3' %>
       <div class="col-lg-9">
         <%= f.text_area :content, :class => 'form-control', placeholder: 'Content', rows: 8 %>
+
+        <%# render 'common/widgets/to_markdown_checkbox' %>
+
+        <label>
+          <%= f.check_box :to_markdown %> HTML to Markdown conversion
+        </label>
+
       </div>
     </div>
 <% end %>

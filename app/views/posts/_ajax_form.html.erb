@@ -45,10 +45,9 @@
     <%= render 'tags/checktags', f: f, tags: f.object.portals %>
 
     <div class="actions">
-      <label>
-        <%= check_box_tag :to_markdown %>
-        HTML to Markdown conversion
-      </label>
+
+      <%= render 'common/widgets/to_markdown_checkbox' %>
+
       <br>
       <%= f.submit class: 'btn btn-success' %>
       <% if @post.new_record? %>
