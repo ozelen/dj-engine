@@ -16,6 +16,17 @@ class ApplicationController < ActionController::Base
   def set_locale
     I18n.default_locale = :ru
     I18n.locale = params[:locale].present? ? params[:locale] : I18n.default_locale
+
+    if I18n.locale == :ua
+      new_url = request.fullpath.gsub(/^\/ua/, '/uk')
+      redirect_to new_url unless request.fullpath == new_url
+    end
+
+    if request.fullpath.match /^\/ru/
+      new_url = request.fullpath.gsub(/^\/ru/, '')
+      redirect_to new_url unless request.fullpath == new_url
+    end
+
     # current_user.locale
     # request.subdomain
     # request.env['HTTP_ACCEPT_LANGUAGE']

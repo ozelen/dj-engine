@@ -26,7 +26,7 @@ DjEngine::Application.routes.draw do
   }
   resources :authentications
 
-  scope "(:locale)", locale: /(en|uk|ru)/ do # /#{I18n.available_locales.join('|')}/ do
+  scope "(:locale)", locale: /(en|uk|ru|ua)/ do # /#{I18n.available_locales.join('|')}/ do
     # Homepage
     root :to => 'nodes#home'
     get 'home', :to => 'nodes#home'
@@ -133,6 +133,7 @@ DjEngine::Application.routes.draw do
       match 'location'                    => 'cities#location',     as: :city_location
       match 'album'                       => 'cities#album',        as: :city_album
       match 'comments(/page/:page)'       => 'cities#comments',     as: :city_comments
+      match 'infrastructure(/:filter_types)' => 'legacies#city_infrastructure'
     end
 
     # Resorts
@@ -168,7 +169,7 @@ DjEngine::Application.routes.draw do
     #### Legacy ####
 
     scope '(:lang)' do
-      get 'goto/:goto' => 'legacies#goto'
+      get 'goto/:goto(/infrastructure/:filter_types)' => 'legacies#goto'
       get 'news/show/:slug' => 'legacies#news_item'
     end
 

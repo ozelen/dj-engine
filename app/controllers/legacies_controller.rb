@@ -10,8 +10,13 @@ class LegaciesController < ApplicationController
       legacy = SkiworldLegacy.where(legator_id: params[:goto], legator_table: 'Objects')[0]
       redirect_to "http://besthotels.in.ua#{slug_hotel_path(legacy.legatee)}" if legacy
     else
-      redirect_to "http://besthotels.in.ua/#{params[:goto]}"
+      redirect_to "http://besthotels.in.ua/#{params[:goto]}" + (params[:filter_types] ? '/hotels' : '')
     end
+  end
+
+  def city_infrastructure
+    @city = Node.find_by_name(params[:city_slug]).accessible
+    redirect_to city_hotels_url(@city)
   end
 
   def news_item
