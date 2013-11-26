@@ -16,7 +16,7 @@
     <h3 class="panel-title"><%= l(since, format: :long) %> - <%= l(till, format: :long) %> / <%= name %></h3>
   </div>
   <div id="period-<%= period.id %>-prices" class="<%= existing ? 'collapse' : 'in' %>">
-
+    <hr>
     <div class="form-group period-values">
       <div class="col-lg-2">
         <%= f.text_field :since, value: l(since, format: :default), class: 'form-control period-since datepicker', placeholder: 'Since' %>
@@ -53,5 +53,12 @@
         </div>
       </div>
   <% end %>
+
+    <%= f.hidden_field :_destroy %>
+    <%= link_to "Remove", '#', class: "remove_fields btn btn-small btn-danger pull-right" %>
+
   </div>
+
+
+
 </fieldset>
