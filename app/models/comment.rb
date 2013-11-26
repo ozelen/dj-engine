@@ -32,6 +32,8 @@ class Comment < ActiveRecord::Base
 
   scope :latest, includes(:commentable).order("created_at DESC")
 
+  default_scope includes(:commentable).order("created_at DESC")
+
   # Helper class method to lookup all comments assigned
   # to all commentable types for a given user.
   scope :find_comments_by_user, lambda { |user|
