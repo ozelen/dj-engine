@@ -20,7 +20,7 @@ class StreamsController < ApplicationController
   end
 
   def resorts
-    @resorts = Post.tagged_with('ski')
+    @resorts = Resort.tagged_with('ski')
   end
 
   # GET /streams/1
