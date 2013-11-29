@@ -11,6 +11,7 @@ namespace :import do
     require 'tasks/import/models/agreements'
     require 'tasks/import/models/comments'
     require 'tasks/import/models/leads'
+    require 'tasks/import/models/bookit'
     require 'tasks/import/helpers'
     require 'tasks/import/import_types'
     require 'tasks/import/import_objects'
@@ -33,7 +34,9 @@ namespace :import do
 
     #reimport_albums
 
-    reimport_addreses
+    #reimport_addreses
+
+    reimport_bookit_ids
 
   end
 end

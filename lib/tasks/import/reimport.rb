@@ -45,5 +45,19 @@ namespace :import do
 
   end
 
+  def reimport_bookit_ids
+    puts "Reimport IDs #{BookitObject.count}"
+    BookitHotel.all.each do |obj|
+      I18n.locale = :ru
+      legacy = SkiworldLegacy.where(legator_id: obj.djObjId, legator_table: 'Objects')[0]
+      if legacy && legacy.legatee
+        #puts "#{obj.name} -> [#{obj.djObjId}] #{(legacy ? legacy.legatee.name : '')}"
+        hotel = legacy.legatee
+        hotel.leads[0].params = obj.attributes.to_json
+        hotel.save
+      end
+    end
+  end
+
 end
 

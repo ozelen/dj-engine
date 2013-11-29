@@ -39,6 +39,7 @@ namespace :import do
 
     def attributes
       {
+          id: self.id,
           name: self.name
       }
     end
