@@ -18,6 +18,10 @@ class CitiesController < ApplicationController
     #render template: 'hotels/index'
   end
 
+  def comments
+    @comments = @city.comments.latest.paginate(page: params[:page], per_page: 20).to_a
+  end
+
   def location
   end
 

@@ -1,0 +1,5 @@
+<% title "#{@city.name}, #{t 'comments.h'}" %>
+
+<%= render @comments, show_commentable: true, truncate_text: true %>
+
+<%= will_paginate @comments, renderer: BootstrapPagination::Rails, bootstrap: 3 %>

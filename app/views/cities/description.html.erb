@@ -1,7 +1,7 @@
 <% title "#{t 'description' } - #{@city.name}" %>
 
 <div class="page-header">
-  <h1><%= t 'description' %></h1>
+  <h1><%= "#{@city.name}, #{t 'description'}" %></h1>
 </div>
 
 <%= markdown @city.description if @city.description %>

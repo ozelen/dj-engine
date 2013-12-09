@@ -6,8 +6,8 @@
     [t('resorts.h'),          city_resorts_path(@city),     -1 ],
     [t('hotels.h'),           city_hotels_path(@city),      -1 ],
     [t('location'),           city_location_path(@city),    -1 ],
-    [t('photos.h'),           city_album_path(@city),       -1 ]
-    #['Comments',    city_comments_path,    @city.comment_threads.count ]
+    [t('photos.h'),           city_album_path(@city),       @city.gallery.photos.count ],
+    [t('comments.h'),         city_comments_path,           0] # TODO: add composite comments to cities
 ]
    cover_photo = @city.gallery.rand(:cover).image_url(:content) rescue nil
    title_photo = @city.gallery.rand(:title).image_url(:mini)    rescue nil

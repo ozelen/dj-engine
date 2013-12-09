@@ -1,4 +1,4 @@
-<% desc_of_resort = "#{t 'description'} #{t('resorts.of')} \"#{@resort.node.header}\"" %>
+<% desc_of_resort = "#{@resort.node.header}, #{t 'description'}" %>
 <% title desc_of_resort %>
 <h1><%= desc_of_resort %></h1>
 <%= markdown @resort.description %>

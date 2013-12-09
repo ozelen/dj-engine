@@ -1,6 +1,6 @@
-<% t = "#{t('photos.h')}, #{@resort.name}" %>
-<% title t %>
+<% tit = "#{@resort.name}, #{t('photos.h')}" %>
+<% title tit %>
 
-<h1><%= t %></h1>
+<h1><%= tit %></h1>
 
 <%= render 'photos/dynamic_form', gallery: @resort.gallery %>

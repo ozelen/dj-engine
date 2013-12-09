@@ -28,6 +28,10 @@ class City < ActiveRecord::Base
   default_scope includes({node: :translations}).order("node_translations.header ASC")
   #default_scope order: :updated_at
 
+  def comments
+    Comment.where(commentable_type: 'Hotel', commentable_id: self.id)
+  end
+
   def to_param
     self.node.name
   end
