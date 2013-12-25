@@ -33,7 +33,7 @@ class ResortsController < ApplicationController
   end
 
   def blog
-    @posts = @resort.posts
+    @posts = @resort.posts.paginate(page: params[:page], per_page: 10)
   end
 
   # GET /resorts/1

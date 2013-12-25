@@ -1,4 +1,7 @@
-<% @post = channel.posts.new %>
+<%
+   @post = channel.posts.new
+   posts ||= (params[:tag] ? channel.posts.tagged_with(params[:tag]) : channel.posts).paginate(page: params[:page], per_page: 10)
+%>
 
 <% if can? :create, Post %>
   <a id="new_post_link" class="btn btn-primary" href="#" onclick="$('#form_post').show(); $(this).hide(); return false">
@@ -9,6 +12,8 @@
 
 
 <div id="posts" class="checktags">
-  <%= render params[:tag] ? channel.posts.tagged_with(params[:tag]) : channel.posts %>
+  <%= render posts %>
 </div>
+
+<%= will_paginate posts, renderer: BootstrapPagination::Rails, bootstrap: 3 %>
 

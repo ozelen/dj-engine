@@ -87,7 +87,7 @@ ru:
     album: "Фотоальбом гостиницы"
     contacts: "Контакты отеля"
     rooms: "Номера гостиницы"
-    comments: "Обсуждение гостиницы"
+    comments: "Отзывы"
     menu:
       summary:      "Резюме"
       description:  "Описание"
@@ -96,7 +96,7 @@ ru:
       blog:         "Блог"
       photos:       "Фото"
       prices:       "Цены"
-      comments:     "Комментарии"
+      comments:     "Отзывы"
       booking:      "Бронирование"
       contacts:     "Контакты"
 
@@ -207,6 +207,7 @@ ru:
     count: "%{count} постов"
     latest: Последние публикации
     crud: "публикацию"
+    all: "Все публикации"
 
   redirects: "Редиректы"
   measures: "Единицы измерения"

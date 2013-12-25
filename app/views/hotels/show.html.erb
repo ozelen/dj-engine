@@ -23,7 +23,7 @@
       <h4><%= link_to post.title, [@hotel, post] %></h4>
       <%= markdown truncate(post.teaser, length: 200, separator: ' ') %>
     <% end %>
-    <p><%= link_to 'See all posts', slug_hotel_blog_path(@hotel) %></p>
+    <p><%= link_to t('posts.all'), slug_hotel_blog_path(@hotel) %></p>
     <hr>
   <% end %>
 

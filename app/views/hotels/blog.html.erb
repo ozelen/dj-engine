@@ -1,5 +1,5 @@
-<% title('Blog - ' + @hotel.node.header) %>
+<% title( t('blog.h') + @hotel.node.header) %>
 
-<h1>Blog</h1>
+<h1><%= t 'blog' %></h1>
 
 <%= render 'posts/block', channel: @hotel %>
