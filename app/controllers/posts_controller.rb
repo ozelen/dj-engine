@@ -2,7 +2,8 @@ class PostsController < ApplicationController
   # GET /posts
   # GET /posts.json
   def index
-    @posts = params[:stream] ? Stream.find_by_slug(params[:stream]).posts : Post.all
+    @posts = (params[:stream] ? Stream.find_by_slug(params[:stream]).posts : Post.all).
+        paginate(page: params[:page], per_page: 10)
 
     respond_to do |format|
       format.html { render layout: 'stream' if params[:stream] }
