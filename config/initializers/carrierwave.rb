@@ -31,8 +31,8 @@ CarrierWave.configure do |config|
       persistent: false,
       provider: "AWS",
       region: 'eu-west-1',
-      aws_access_key_id: 'AKIAJD553Y7CKLHWQTFA', # S3_CONFIG['key'],
-      aws_secret_access_key: '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' # S3_CONFIG['secret'],
+      aws_access_key_id: ENV['AWS_KEY_ID'],
+      aws_secret_access_key: ENV['AWS_KEY_SECRET'] # S3_CONFIG['secret'],
   }
   config.fog_directory = Rails.env.production? ? 'bh-prod' : 'bh-dev' #S3_CONFIG['bucket']
   #config.fog_public     = true
