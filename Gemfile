@@ -15,7 +15,7 @@ gem "jquery-fileupload-rails"
 
 group :development do
   gem "nifty-generators"
-  gem 'mysql2' # required for importing legacy
+  #gem 'mysql2' # required for importing legacy
   gem 'activerecord-mysql-adapter'
   gem 'taps', require: false
   gem 'sqlite3'
@@ -23,12 +23,12 @@ end
 
 group :production do
   gem 'taps'
+  gem 'unicorn'
 end
 
 gem 'pg'
 #gem 'activerecord-postgres-adapter'
 
-gem "therubyracer"
 gem "less-rails" #Sprockets (what Rails 3.1 uses for its asset pipeline) supports LESS
 gem 'anjlab-bootstrap-rails', :require => 'bootstrap-rails',
     :github => 'anjlab/bootstrap-rails'
@@ -64,8 +64,7 @@ gem 'will_paginate-bootstrap'
 gem 'fog', :git => 'https://github.com/fog/fog.git'
 gem "recaptcha", :require => "recaptcha/rails"
 gem 'activerecord-postgres-hstore'
-
+gem 'therubyracer'
 
 gem 'capistrano', '~> 2.15'
-gem 'unicorn'
 gem "capistrano-db-tasks", require: false

@@ -145,7 +145,7 @@ GEM
     less-rails (2.4.2)
       actionpack (>= 3.1)
       less (~> 2.4.0)
-    libv8 (3.16.14.3)
+    libv8 (3.16.14.13)
     mail (2.5.4)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
@@ -157,7 +157,6 @@ GEM
     multi_json (1.8.2)
     multipart-post (1.2.0)
     mysql (2.9.1)
-    mysql2 (0.3.13)
     net-scp (1.1.2)
       net-ssh (>= 2.6.5)
     net-sftp (2.1.2)
@@ -236,7 +235,7 @@ GEM
       json (~> 1.4)
     recaptcha (0.3.5)
     redcarpet (3.0.0)
-    ref (1.0.5)
+    ref (2.0.0)
     rest-client (1.6.7)
       mime-types (>= 1.16)
     reverse_markdown (0.4.6)
@@ -264,7 +263,7 @@ GEM
       rest-client (>= 1.4.0, < 1.7.0)
       sequel (~> 3.20.0)
       sinatra (~> 1.0.0)
-    therubyracer (0.12.0)
+    therubyracer (0.12.2)
       libv8 (~> 3.16.14.0)
       ref
     thin (1.5.1)
@@ -318,7 +317,6 @@ DEPENDENCIES
   koala
   less-rails
   mocha
-  mysql2
   nifty-generators
   omniauth
   omniauth-facebook
@@ -341,3 +339,6 @@ DEPENDENCIES
   uglifier (>= 1.0.3)
   unicorn
   will_paginate-bootstrap
+
+BUNDLED WITH
+   1.11.2
