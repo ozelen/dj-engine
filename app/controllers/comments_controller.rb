@@ -1,5 +1,6 @@
 class CommentsController < ApplicationController
   load_and_authorize_resource
+  skip_authorize_resource :only => :create
 
   def index
     authorize! :manage, Comment
@@ -19,6 +20,10 @@ class CommentsController < ApplicationController
         else
           format.js { render js: 'alert("Something went wrong")' }
         end
+      end
+    else
+      respond_to do |format|
+        format.js { render js: 'alert("Cannot Save")' }
       end
     end
   end
