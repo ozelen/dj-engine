@@ -27,6 +27,10 @@ class User < ActiveRecord::Base
     "#{self.first_name} #{self.last_name}"
   end
 
+  def to_s
+    self.name.present? ? self.name : self.username
+  end
+
   def set_email_to_address # ugly workaround, but don't want to extern the email into other (not necessary) model
     address.email = email if address
   end
