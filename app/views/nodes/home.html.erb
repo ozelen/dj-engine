@@ -20,7 +20,7 @@
               <% arr.each do |resort| %>
               <% cache resort do %>
                 <div class="col-lg-6">
-                  <%= render resort if resort, cached: true %>
+                  <%= render(resort, cached: true) if resort %>
                 </div>
               <% end %>
               <% end %>
