@@ -5,12 +5,18 @@ class LegaciesController < ApplicationController
     I18n.locale = params[:lang] == 'ua' ? :uk : :ru
   end
 
+  def domain
+    request.base_url
+  end
+
   def goto
     if params[:goto] =~ /\d.+/
       legacy = SkiworldLegacy.where(legator_id: params[:goto], legator_table: 'Objects')[0]
-      redirect_to "http://besthotels.in.ua#{slug_hotel_path(legacy.legatee)}" if legacy
+      redirect_to legacy ?
+        "#{domain}#{slug_hotel_path(legacy.legatee)}" : domain
     else
-      redirect_to "http://besthotels.in.ua/#{params[:goto]}" + (params[:filter_types] ? '/hotels' : '')
+      # redirect_to "http://besthotels.in.ua/#{params[:goto]}" + (params[:filter_types] ? '/hotels' : '')
+      render text: "http://besthotels.in.ua/#{params[:goto]}" + (params[:filter_types] ? '/hotels' : '')
     end
   end
 

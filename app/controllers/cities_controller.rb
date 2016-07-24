@@ -3,7 +3,7 @@ class CitiesController < ApplicationController
   # GET /cities
   # GET /cities.json
   before_filter :find_city, except: [:new, :my, :index, :create]
-  layout 'city', except: [:index, :new]
+  layout 'city', except: [:index, :new, :edit]
   def index
     @cities = City.paginate(page: params[:page], per_page: 10)
 
