@@ -15,18 +15,22 @@
         <div class="col-lg-8">
           <h2><%= t 'resorts.h' %></h2>
           <% Resort.tagged_with('best').in_groups_of(2) do |arr| %>
+          <% cache arr do %>
             <div class="row">
               <% arr.each do |resort| %>
+              <% cache resort do %>
                 <div class="col-lg-6">
-                  <%= render resort if resort %>
+                  <%= render resort if resort, cached: true %>
                 </div>
               <% end %>
+              <% end %>
             </div>
+          <% end %>
           <% end %>
         </div>
         <div class="col-lg-4">
           <h2><%= t 'tours.h' %></h2>
-          <%= render Tour.limit(5) %>
+          <%= render Tour.limit(5), cached: true %>
         </div>
       </div>
 
@@ -38,7 +42,7 @@
 
 <% content_for :sidebar do %>
     <h2><%= t('comments.latest') %></h2>
-    <%= render @comments, show_commentable: true, truncate_text: true %>
+    <%= render @comments, show_commentable: true, truncate_text: true, cached: true %>
 <% end %>
 
 
@@ -46,12 +50,12 @@
 <div class="row">
   <div class="col-lg-6">
     <h2><%= t 'hotels.h' %></h2>
-    <%= render @hotels %>
+    <%= render @hotels, cached: true %>
     <%= link_to 'View all hotels', hotels_path %>
   </div>
   <div class="col-lg-6">
     <h2><%= t 'posts.latest' %></h2>
-    <%= render Post.limit(10) %>
+    <%= render Post.limit(10), cached: true %>
 
     <%= link_to t('posts.all'), posts_path %>
   </div>

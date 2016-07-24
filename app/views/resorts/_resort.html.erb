@@ -3,7 +3,7 @@
   <%= link_to resort.name, find_path(resort) %>
 </h3>
 <% if resort.cities.present? %>
-  (<%= resort.cities.map{ |c| link_to(c.name, find_path(c)) }.join(', ').html_safe %>)
+  (<%= resort.cities.map{ |c| cache c { link_to(c.name, find_path(c)) } }.join(', ').html_safe %>)
 <% end %>
 <p>
   <%= resort.node.title %>
