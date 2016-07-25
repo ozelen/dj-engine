@@ -1,3 +1,5 @@
+require './config/initializers/localized_cache_store'
+
 DjEngine::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb
 
@@ -41,6 +43,7 @@ DjEngine::Application.configure do
 
   # Use a different cache store in production
   # config.cache_store = :mem_cache_store
+  config.cache_store = LocalizedCacheStore.new('/tmp/cache')
 
   # Enable serving of images, stylesheets, and JavaScripts from an asset server
   # config.action_controller.asset_host = "http://assets.example.com"
@@ -64,4 +67,5 @@ DjEngine::Application.configure do
   # Log the query plan for queries taking more than this (works
   # with SQLite, MySQL, and PostgreSQL)
   # config.active_record.auto_explain_threshold_in_seconds = 0.5
+
 end
