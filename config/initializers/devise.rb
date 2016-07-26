@@ -19,7 +19,7 @@ Devise.setup do |config|
   #require "omniauth-twitter"
   #require "omniauth-vkontakte"
   config.secret_key = '20efd628736e31600ab361f498854df855800e6038d5bb604d4a8d635808fb4a01136974e53b23626875c22466eecbacf0e1b62b4d375c9daa3346db4ed6f77a'
-  config.omniauth :facebook, '560733490656801', '23010397b9a1515ba9fc1274f8d9462f', scope: "email,publish_stream,user_activities,user_birthday,user_checkins,user_location"
+  config.omniauth :facebook, '560733490656801', '23010397b9a1515ba9fc1274f8d9462f', scope: "email,user_activities,user_birthday,user_location"
   config.omniauth :twitter, 'l4uzzYUWtWwXt7eu0jHGCQ', 'S52qsi577WhsMoovJ5eIKqF7qwEmA7XHHEFVeTIJuE'
   config.omniauth :vkontakte, '3814050', 'Ih9Ka7UXNv34zFwRITIw'
 
