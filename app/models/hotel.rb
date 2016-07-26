@@ -51,7 +51,7 @@ class Hotel < ActiveRecord::Base
                   :location_attributes, :address_attributes,
                   :deals_attributes, :leads_attributes,
                   :skiworld_legacy_attributes,
-                  :portal_list
+                  :portal_list, :facebook_page_url
 
   validate :validate_properties
 

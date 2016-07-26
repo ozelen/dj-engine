@@ -49,6 +49,7 @@ class HotelsController < ApplicationController
   # GET /hotels/1
   # GET /hotels/1.json
   def show
+    @fb_url = ['http://djerelo.info', @hotel.slug].join '/'
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @hotel }
