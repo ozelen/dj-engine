@@ -27,15 +27,21 @@
     <hr>
   <% end %>
 
-  <% if @hotel.comment_threads.present? %>
-    <h3><%= t('comments.latest') %></h3>
-    <% @hotel.comment_threads.limit(5).each do |comment| %>
-      <%= render comment %>
-    <% end %>
-    <br>
-    <p><%= link_to t('comments.see_all'), slug_hotel_comments_path(@hotel) %></p>
-    <hr>
+  <h3>Facebook</h3>
+  <div class="fb-like" data-href="<%=@fb_url%>" data-layout="standard" data-action="like" data-size="small" data-show-faces="true" data-share="true"></div>
+
+  <div class="fb-save" data-uri="<%=@fb_url%>" data-size="small"></div>
+  <div class="fb-send" data-href="<%=@fb_url%>" data-size="small"></div>
+
+  <% if @hotel.facebook_page_url %>
+    <div class="fb-page" style="margin: 5px 0" data-href="https://www.facebook.com/ustepana/" data-tabs="timeline" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true">
+      <blockquote cite="https://www.facebook.com/ustepana/" class="fb-xfbml-parse-ignore">
+        <a href="https://www.facebook.com/<%= @hotel.facebook_page_url %>/"><%= @hotel.name %></a>
+      </blockquote>
+    </div>
   <% end %>
+
+  <div class="fb-comments" data-href="<%=@fb_url%>" data-width="338" data-numposts="5"></div>
 
 <% end %>
 
@@ -75,10 +81,17 @@
   </div>
 </div>
 <div class="row">
-  <div class="col-lg-6">
+  <div class="col-lg-12">
 
-  </div>
-  <div class="col-lg-6">
+    <% if @hotel.comment_threads.present? %>
+      <h3><%= t('comments.latest') %></h3>
+      <% @hotel.comment_threads.limit(5).each do |comment| %>
+        <%= render comment %>
+      <% end %>
+      <br>
+      <p><%= link_to t('comments.see_all'), slug_hotel_comments_path(@hotel) %></p>
+      <hr>
+    <% end %>
 
   </div>
 </div>

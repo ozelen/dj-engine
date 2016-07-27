@@ -32,6 +32,13 @@
       </div>
     </div>
 
+    <div class="form-group">
+      <%= f.label 'Facebook Page URL', for: :name, :class => 'control-label col-lg-3' %>
+      <div class="col-lg-9">
+        <%= f.text_field :facebook_page_url, :class => 'form-control', placeholder: 'Facebook Page Url' %>
+      </div>
+    </div>
+
     <%= f.fields_for :node do |node| %>
         <div class="form-group">
           <%= node.label :title, 'Short description title', :class => 'control-label col-lg-3' %>

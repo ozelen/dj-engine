@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131115172658) do
+ActiveRecord::Schema.define(:version => 20160726223922) do
 
   create_table "address_translations", :force => true do |t|
     t.integer  "address_id"
@@ -189,11 +189,12 @@ ActiveRecord::Schema.define(:version => 20131115172658) do
     t.integer  "city_id"
     t.integer  "user_id"
     t.string   "ident"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
     t.integer  "type_id"
     t.integer  "donated"
     t.date     "deal_expire"
+    t.string   "facebook_page_url"
   end
 
   add_index "hotels", ["city_id"], :name => "index_hotels_on_city_id"
