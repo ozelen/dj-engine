@@ -4,7 +4,7 @@
   <%= content_tag_for :div, post do %>
     <% path = find_path post %>
     <%# path = params[:resort] ? post_path(@resort, post) : [post.channel, post] %>
-    <h3><%= link_to post.title, path %></h3>
+    <h4><%= link_to post.title, path %></h4>
     <p><%= post.teaser || truncate(  Sanitize.clean(markdown post.content), length: 300, separator: '.' ) unless hide_description %></p>
     <% unless post.comment_threads.blank? %>
       <%= post.comment_threads.count %> comments

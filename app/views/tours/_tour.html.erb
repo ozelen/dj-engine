@@ -1,7 +1,8 @@
-<%= content_tag_for :h3, tour do %>
+<%= content_tag_for :article, tour do %>
+  <h4>
   <%= link_to tour.name, tour %>
+  </h4>
+  <p>
+    <%= tour.title %>
+  </p>
 <% end %>
-<p>
-  <%= tour.title %>
-</p>
-
