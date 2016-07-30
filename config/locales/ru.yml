@@ -6,13 +6,17 @@ ru:
   lang_short: "рус"
   hello: "Приветствую Вас, землянин!"
 
+  send: "Отправить"
+  cancel: "Отмена"
+  header: "Заголовок"
+  text: "Текст"
+
   helpers:
     links:
       edit: "Редактировать"
       destroy: "Удалить"
       create: "Создать"
       new: "Новый"
-
 
   page: "Страница"
   pages:
@@ -88,6 +92,7 @@ ru:
     contacts: "Контакты отеля"
     rooms: "Номера гостиницы"
     comments: "Отзывы"
+    address: "Адрес"
     menu:
       summary:      "Резюме"
       description:  "Описание"

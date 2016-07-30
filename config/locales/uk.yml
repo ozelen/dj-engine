@@ -5,6 +5,10 @@ uk:
   lang: "Українська"
   lang_short: "укр"
   hello: "Здоровенькі були!"
+  send: "Надіслати"
+  cancel: "Відміна"
+  header: "Заголовок"
+  text: "Текст"
 
   helpers:
     links:
@@ -85,6 +89,7 @@ uk:
     contacts: "Контакты готелю"
     rooms: "Номера готелю"
     comments: "Обговорення готелю"
+    address: "Адреса"
     menu:
       summary:      "Резюме"
       description:  "Опис"

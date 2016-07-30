@@ -83,6 +83,8 @@
 <div class="row">
   <div class="col-lg-12">
 
+    <%= render 'comments/form', commentable: @hotel %>
+
     <% if @hotel.comment_threads.present? %>
       <h3><%= t('comments.latest') %></h3>
       <% @hotel.comment_threads.limit(5).each do |comment| %>
