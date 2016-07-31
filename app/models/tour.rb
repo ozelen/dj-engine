@@ -21,7 +21,7 @@ class Tour < ActiveRecord::Base
   end
 
   acts_as_commentable
-  acts_as_taggable_on :portals
+  acts_as_taggable_on :portals, :tags
   after_create :create_gallery
 
   def to_param

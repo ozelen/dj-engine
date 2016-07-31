@@ -15,12 +15,24 @@ class StreamsController < ApplicationController
   def blog
   end
 
+  def tagged(klass)
+    klass.tagged_with(@stream_id).paginate(page: params[:page], per_page: 10)
+  end
+
   def news
-    @posts = Post.tagged_with('ski').paginate(page: params[:page], per_page: 10)
+    @posts = self.tagged(Post)
+  end
+
+  def tours
+    @tours = self.tagged(Tour)
   end
 
   def resorts
-    @resorts = Resort.tagged_with('ski')
+    @resorts = self.tagged(Resort)
+  end
+
+  def hotels
+    @hotels = self.tagged(Hotel)
   end
 
   # GET /streams/1
@@ -89,11 +101,11 @@ class StreamsController < ApplicationController
   end
 
   def find_stream
-    id = params[:stream_id] || params[:stream_slug] || params[:id]
+    @stream_id = params[:stream_id] || params[:stream_slug] || params[:@stream_id]
     #render text: params; return
-    if id
-      @node = Node.find_by_name(id)
-      @stream = @node.accessible if id
+    if @stream_id
+      @node = Node.find_by_name(@stream_id)
+      @stream = @node.accessible if @stream_id
     end
   end
 
