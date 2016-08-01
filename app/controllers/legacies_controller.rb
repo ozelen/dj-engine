@@ -16,7 +16,7 @@ class LegaciesController < ApplicationController
         "#{domain}#{slug_hotel_path(legacy.legatee)}" : domain
     else
       # redirect_to "http://besthotels.in.ua/#{params[:goto]}" + (params[:filter_types] ? '/hotels' : '')
-      redirect_to: "http://skiworld.org.ua/#{params[:goto]}" + (params[:filter_types] ? '/hotels' : '')
+      redirect_to "#{domain}/#{params[:goto]}" + (params[:filter_types] ? '/hotels' : '')
     end
   end
 
