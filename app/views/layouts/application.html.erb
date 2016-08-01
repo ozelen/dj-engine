@@ -126,6 +126,8 @@
           <h4 class="inverse"><%= params[:stream_slug] ? @stream.node.title : t('homepage.title') %></h4>
           <%= yield(:stream_title) if content_for?(:stream_title) %>
         </div>
+
+        
       </div>
     </div>
   </div>
@@ -154,14 +156,15 @@
 
 
   <div class="row">
-    <div class="col-lg-8">
+    <div class="col-lg-<%= content_for?(:sidebar) ? 8 : 12 %>">
       <%= content_for?(:content) ? yield(:content) : yield %>
     </div>
-    <div class="col-lg-4">
 
-      <%= yield(:sidebar) if content_for?(:sidebar) %>
-
-    </div>
+    <% if content_for?(:sidebar) %>
+      <div class="col-lg-4">
+        <%= yield(:sidebar) %>
+      </div>
+    <% end %>
   </div>
 
   <hr>

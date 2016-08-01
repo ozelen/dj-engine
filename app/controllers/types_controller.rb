@@ -1,4 +1,5 @@
 class TypesController < ApplicationController
+  # layout 'hotel', except: [:index, :new]
   # GET /types
   # GET /types.json
   def index
