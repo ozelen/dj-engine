@@ -130,14 +130,7 @@
         <% hotel = Hotel.new %>
         <% hotel.type = Type.find_by_slug('hotels') %>
         <div class="col-lg-8">
-          <%= form_for hotel, :html => { :class => 'form-horizontal search-form' } do |f| %>
-              <div class="form-group">
-                <%= f.label t('search'), :class => 'col-lg-2 control-label' %>
-                <div class="col-lg-3">
-                  <%= f.select(:type_id, hotel.type.collection_for_parent_select('hotels'), {}, {class: 'form-control'}) %>
-                </div>
-              </div>
-          <% end %>
+
         </div>
       </div>
     </div>
