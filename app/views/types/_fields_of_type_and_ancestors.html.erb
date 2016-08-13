@@ -1,20 +1,18 @@
 
 <%= render('types/fields_of_type_and_ancestors', type: type.parent, f: f, existed: existed) if type.parent %>
 <!-- TODO: group fields by categories -->
-
+FIELDS COUNT <%= f.object.values.count %>
 <% type.fields.each do |field| %>
 
     <%= f.fields_for field do |fd| %>
             <%
-               existing = f.object.values.select{|v| v if v.field_id == field.id }[0]
+               existing = f.object.values.find{|v| v if v.field_id == field.id }
                obj = existing || fd.object.values.new
                obj.field = fd.object
                id = obj.object_id
             %>
             <%= f.fields_for(:values, obj, child_index: id) do |val| %>
-
-                <%= render 'types/field_form', field: field, val: val %>
-
+              <%= render 'types/field_form', field: field, val: val %>
             <% end %>
     <% end %>
 <% end %>

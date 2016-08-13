@@ -6,16 +6,21 @@
 
 <%= render 'photos/dynamic_form', gallery: category.gallery %>
 
+
 <div class="row">
   <div class="col-lg-9">
 
-    <h3>Description</h3>
+    <%= render('values/structured_list', valuable: category) %>
+
+  <% if category.description.present? %>
+    <h3><%=t('description')%></h3>
     <div>
       <%= markdown category.description %>
     </div>
+  <% end %>
 
     <% if category.respond_to?(:comment_threads) %>
-      <h3>Comments</h3>
+      <h3><%=t('comments.h')%></h3>
       <%= render 'comments/comments_block', commentable: category %>
     <% end %>
 

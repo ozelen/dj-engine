@@ -1,9 +1,15 @@
-<ul>
-  <% valuable.field_categories.uniq.each do |category| %>
-      <% cat_values = valuable.values.select{|v| v.field.field_category == category and (v.value_boolean or v.value_integer or v.value_string ) } %>
-      <li>
-        <strong><%= category.name %></strong>:
-        <%= cat_values.map{|v| v.field.name }.join(', ') %>
-      </li>
+<% valuable.field_categories.uniq.each do |category| %>
+  <% cache category do %>
+    <% cat_values = valuable.values.select{|v| v.field and v.field.field_category == category and (v.value_boolean or v.value_integer or v.value_string ) } %>
+    <% if cat_values.present? %>
+      <h3><%= category.name %> </h3>
+      <ul>
+        <% cat_values.each do |value| %>
+          <% cache value do %>
+            <li><%= value %></li>
+          <% end %>
+        <% end %>
+      </ul>
+    <% end %>
   <% end %>
-</ul>
+<% end %>

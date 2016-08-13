@@ -30,6 +30,7 @@ class RoomsController < ApplicationController
     authorize! :manage, @hotel
     @room = Room.new
     @room.hotel_id = @hotel.id
+    @room.type = Type.find_by_slug('rooms')
 
     respond_to do |format|
       format.html # new.html.erb

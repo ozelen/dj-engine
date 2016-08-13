@@ -1,11 +1,10 @@
 <div class="form-group">
-
   <% if field.measure_category %>
-
-    <% req = field.required? ? '* ' : ''  %>
-    <%= val.label :value_string, req + field.name, class: 'col-lg-3 control-label' %>
+    <% req = field.required? ? '* ' : '' %>
+    <%= val.label val.object.value_field_name, req + field.name, class: 'col-lg-3 control-label' %>
     <div class="col-lg-<%= (field.measure_category && field.measure_category.measures.blank?) ? 9 : 6 %>">
-      <%= val.text_field :value_string, class: 'form-control', placeholder: field.name %> <%= val.hidden_field :field_id %>
+      <%= val.text_field val.object.value_field_name, class: 'form-control amenity', placeholder: field.name, category_id: field.field_category_id %>
+      <%= val.hidden_field :field_id %>
     </div>
 
     <% if field.measure_category && !field.measure_category.measures.blank? %>
@@ -17,7 +16,9 @@
   <% else %>
     <div class="col-lg-3"></div>
     <label>
-      <%= val.check_box :value_boolean, class: 'amenity', category_id: field.field_category.id %> <%= field.name %> <%= val.hidden_field :field_id %>
+      <%= val.check_box :value_boolean, class: 'amenity', category_id: field.field_category_id %>
+      <%= field.name %>
+      <%= val.hidden_field :field_id %>
     </label>
   <% end %>
 

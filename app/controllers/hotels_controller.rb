@@ -110,8 +110,8 @@ class HotelsController < ApplicationController
         format.json { head :no_content }
       else
         format.html {
-          #redirect_to action: :edit
-          render :edit
+          # redirect_to action: :edit
+          render :edit, notice: @hotel.errors
         }
         format.json { render json: @hotel.errors, status: :unprocessable_entity }
       end

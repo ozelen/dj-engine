@@ -1,11 +1,10 @@
 class Hotel < ActiveRecord::Base
-  extend Poi
+  # extend Poi
 
   has_one :node, as: :accessible, dependent: :destroy#, after_add: :create_node #, before_destroy: :destroy_node
   belongs_to :city
   belongs_to :user
   belongs_to :type
-  has_many :values,     as: :evaluated
   has_many :rooms,      dependent: :destroy
   has_many :services,   dependent: :destroy
 
@@ -45,6 +44,7 @@ class Hotel < ActiveRecord::Base
 
   attr_accessible :city_id, :location, :user_id, :ident, :type_id, :fields,
                   :values_attributes, :node_attributes,
+                  :fields_attributes,
                   :rooms_attributes, :services_attributes,
                   :periods_attributes, :prices_attributes,
                   :gallery_attributes, :photos_attributes,
@@ -53,14 +53,14 @@ class Hotel < ActiveRecord::Base
                   :skiworld_legacy_attributes,
                   :portal_list, :facebook_page_url
 
-  validate :validate_properties
+  # validate :validate_properties
 
   acts_as_commentable
   acts_as_taggable_on :portals
 
   after_create :create_gallery
 
-  acts_as_poi
+  # acts_as_poi
 
   scope :by_resort, lambda { includes(node: :translations) }
   default_scope order("deal_expire DESC")
@@ -73,13 +73,13 @@ class Hotel < ActiveRecord::Base
     self.node.name
   end
 
-  def validate_properties
-    values.each do |value|
-      if value.field.required? && value.value_string == ''
-        errors.add value.field.name, "must not be blank"
-      end
-    end
-  end
+  # def validate_properties
+  #   values.each do |value|
+  #     if value.field and value.field.required? && value.value_string == ''
+  #       errors.add value.field.name, "must not be blank"
+  #     end
+  #   end
+  # end
 
   def delete_node
     node.destroy if node

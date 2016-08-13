@@ -17,7 +17,6 @@
   <div class="form-group">
     <%= f.label :type, :class => 'col-lg-3 control-label' %>
     <div class="col-lg-9">
-      <%# f.select(:type_id, Type.find_by_slug('rooms').children.collection_for_parent_select, {}, {class: 'form-control'}) %>
       <%= f.select(:type_id, category.type.collection_for_parent_select(controller_name), {}, {class: 'form-control'}) %>
     </div>
   </div>

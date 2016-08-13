@@ -9,4 +9,8 @@ class MeasureCategory < ActiveRecord::Base
     %w[integer float string datetime]
   end
 
+  def type_name
+    data_types[data_type-1]
+  end
+
 end

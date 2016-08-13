@@ -26,13 +26,16 @@ module CarrierWave
 end
 
 S3_CONFIG = YAML.load_file("#{::Rails.root}/config/s3.yml")[::Rails.env]
+S3_KEY = ENV['AWS_KEY_ID']
+S3_SEC = ENV['AWS_KEY_SECRET']
+
 CarrierWave.configure do |config|
   config.fog_credentials = {
       persistent: false,
       provider: "AWS",
       region: 'eu-west-1',
-      aws_access_key_id: ENV['AWS_KEY_ID'],
-      aws_secret_access_key: ENV['AWS_KEY_SECRET'] # S3_CONFIG['secret'],
+      aws_access_key_id: S3_KEY,
+      aws_secret_access_key: S3_SEC,
   }
   config.fog_directory = Rails.env.production? ? 'bh-prod' : 'bh-dev' #S3_CONFIG['bucket']
   #config.fog_public     = true
