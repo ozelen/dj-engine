@@ -34,6 +34,7 @@ default_run_options[:pty] = true
 ssh_options[:forward_agent] = true
 
 after "deploy", "deploy:cleanup" # keep only the last 5 releases
+after "deploy", "deploy:sitemaps"
 
 namespace :deploy do
   %w[start stop restart].each do |command|
@@ -47,6 +48,10 @@ namespace :deploy do
   # usage: cap deploy:invoke task=db:seed
   task :invoke do
     run "cd '#{current_path}' && #{rake} #{ENV['task']} RAILS_ENV=#{rails_env}"
+  end
+
+  task :sitemaps do
+    run "cd '#{current_path}' && #{rake} sitemap:refresh RAILS_ENV=#{rails_env}"
   end
 
   task :setup_config, roles: :app do
@@ -72,5 +77,4 @@ namespace :deploy do
     end
   end
   before "deploy", "deploy:check_revision"
-  after "deploy", "invoke task=sitemap:refresh"
 end
