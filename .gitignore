@@ -21,4 +21,6 @@
 /public/uploads
 /public/uploads/*
 
-/config/s3.yml
+/config/s3.yml.DS_Store
+*.DS_Store
+/public/sitemaps/

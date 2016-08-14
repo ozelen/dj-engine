@@ -252,6 +252,8 @@ GEM
     sequel (3.20.0)
     sinatra (1.0)
       rack (>= 1.0)
+    sitemap_generator (5.1.0)
+      builder
     sprockets (2.2.2)
       hike (~> 1.2)
       multi_json (~> 1.0)
@@ -326,12 +328,14 @@ DEPENDENCIES
   pg
   rails (= 3.2.13)
   rails-i18n (~> 3.0.0.pre)
+  rake (= 10.1.0)
   recaptcha
   redcarpet
   reverse_markdown
   rmagick
   sanitize
   sass-rails (~> 3.2.3)
+  sitemap_generator
   sqlite3
   taps
   therubyracer

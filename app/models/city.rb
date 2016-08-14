@@ -60,4 +60,12 @@ class City < ActiveRecord::Base
     Node.find_by_name(slug).accessible
   end
 
+  def slug
+    node.name
+  end
+
+  def slug=(slug)
+    node.name=slug
+  end
+
 end

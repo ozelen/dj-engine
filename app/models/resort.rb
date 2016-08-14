@@ -41,4 +41,12 @@ class Resort < ActiveRecord::Base
     node.content
   end
 
+  def slug
+    node.name
+  end
+
+  def slug=(slug)
+    node.name=slug
+  end
+
 end
