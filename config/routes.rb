@@ -11,7 +11,7 @@ end
 
 DjEngine::Application.routes.draw do
 
-
+  get '/robots.txt' => 'home#robots'
 
   resources :redirects
 
