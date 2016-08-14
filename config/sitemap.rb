@@ -31,8 +31,7 @@ domains.each do |sitename, domain|
             resort.cities.each do |city|
               add slug_city_path(city_slug: city.slug, locale: locale),
                   lastmod:    city.updated_at,
-                  changefreq: 'weekly',
-                  geo: {format: 'kml'}
+                  changefreq: 'weekly'
 
               add city_hotels_path(city_slug: city.slug, locale: locale),
                   changefreq: 'monthly'

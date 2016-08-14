@@ -72,4 +72,5 @@ namespace :deploy do
     end
   end
   before "deploy", "deploy:check_revision"
+  after "deploy", "invoke task=sitemap:refresh"
 end
