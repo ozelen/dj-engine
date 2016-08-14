@@ -12,6 +12,7 @@ end
 DjEngine::Application.routes.draw do
 
   get '/robots.txt' => 'home#robots'
+  get '/sitemap.xml' => 'home#sitemap'
 
   resources :redirects
 
