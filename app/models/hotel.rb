@@ -123,4 +123,8 @@ class Hotel < ActiveRecord::Base
     periods.last # TODO: select current period
   end
 
+  def title
+    [type, city].join ', '
+  end
+
 end

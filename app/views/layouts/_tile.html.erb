@@ -1,0 +1,23 @@
+<%
+   image_version  ||=:small
+   img              = object.gallery.title.image_url(image_version) rescue nil
+   landmark       ||= @default_landmark
+   landmark_link  ||= nil
+   dist = distance_between(object, landmark, landmark_link) if landmark.present?
+   link ||= find_path(object)
+   type ||= ''
+   title ||= ''
+%>
+
+<%= link_to link, class: "alert alert-info #{type}" do %>
+  <h3>
+    <%= object.name %>
+  </h3>
+  <div class="title">
+    <%= title %>
+  </div>
+
+  <div class="thumbnail-container pull-right">
+    <%= image_tag(img, class: 'img-circle thumbnail object-thumbnail') if img %>
+  </div>
+<% end %>

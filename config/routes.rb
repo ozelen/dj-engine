@@ -147,7 +147,8 @@ DjEngine::Application.routes.draw do
       match 'hotels/:city(/page/:page)'   => 'resorts#hotels_city',  as: :resort_hotels_city
       match 'blog(/page/:page)'           => 'resorts#blog',         as: :resort_blog
       match 'posts/:post_id'              => 'posts#show',           as: :resort_post
-      match 'album'                       => 'resorts#album',        as: :resort_album
+      # match 'album'                       => 'resorts#album',        as: :resort_album
+      get   'album(/:photo_id)'           => 'resorts#album',         as: :resort_album
       match 'comments(/page/:page)'       => 'resorts#comments',     as: :resort_comments
     end
 

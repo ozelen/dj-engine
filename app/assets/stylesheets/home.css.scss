@@ -1,0 +1,51 @@
+$color_purple: #5133AB;
+$color_red: #AC193D;
+$color_orange: #DC572E;
+$color_green: #00A600;
+$color_blue: #2672EC;
+
+@mixin tile($color) {
+  // background: #333;
+  background: $color;
+  height: 25vw;
+  min-height: 150px;
+  max-height: 250px;
+  margin: 5px -10px;
+  border-radius: 5px;
+  display: block;
+  position: relative;
+  overflow: hidden;
+
+  .thumbnail-container {
+    position: absolute;
+    right: -2vw;
+    bottom: -2vw;
+
+    .thumbnail {
+      margin-bottom: 0;
+    }
+  }
+
+  &:hover {
+    text-decoration: none;
+    background: darken($color, 10%);
+  }
+}
+
+.body-content {
+  .resort {
+    @include tile($color_blue);
+  }
+
+  .tour {
+    @include tile($color_purple);
+  }
+
+  .hotel {
+    @include tile($color_green);
+  }
+
+  .tile-wrapper {
+    // max-height: 250px;
+  }
+}

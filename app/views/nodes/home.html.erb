@@ -12,51 +12,48 @@
     <div class="body-content">
 
       <div class="row">
-        <div class="col-lg-8">
-          <h2><%= t 'resorts.h' %></h2>
-          <% Resort.tagged_with('best').in_groups_of(2) do |arr| %>
-          <% cache arr do %>
-            <div class="row">
-              <% arr.each do |resort| %>
-              <% cache resort do %>
-                <div class="col-lg-6">
-                  <%= render(resort, cached: true) if resort %>
-                </div>
-              <% end %>
-              <% end %>
+        <% Resort.tagged_with('ski').each do |resort| %>
+          <% cache resort do %>
+            <div class="tile-wrapper col-sm-6 col-lg-4">
+              <%= render('layouts/tile', cached: true, type: 'resort',
+                         object: resort, title: resort.node.title) if resort %>
             </div>
           <% end %>
+        <% end %>
+
+        <% Tour.limit(5).each do |tour| %>
+          <% cache tour do %>
+            <div class="tile-wrapper col-sm-6 col-lg-4">
+              <%= render('layouts/tile', cached: true, type: 'tour',
+                         object: tour, title: tour.title) if tour %>
+            </div>
           <% end %>
-        </div>
-        <div class="col-lg-4">
-          <h2><%= t 'tours.h' %></h2>
-          <%= render Tour.limit(5), cached: true %>
-        </div>
+        <% end %>
+
+        <% @hotels.each do |hotel| %>
+          <%= cache hotel do %>
+            <div class="tile-wrapper col-sm-6 col-lg-4">
+              <%= render('layouts/tile', cached: true, type: 'hotel',
+                          object: hotel, title: hotel.title) if hotel %>
+            </div>
+          <% end %>
+        <% end %>
+
       </div>
-
-      <hr>
-
     </div>
 
 <% end %>
 
-<% content_for :sidebar do %>
-    <h2><%= t('comments.latest') %></h2>
-    <%= render @comments, show_commentable: true, truncate_text: true, cached: true %>
-<% end %>
-
-
 
 <div class="row">
-  <div class="col-lg-6">
-    <h2><%= t 'hotels.h' %></h2>
-    <%= render @hotels, cached: true %>
-    <%= link_to 'View all hotels', hotels_path %>
-  </div>
   <div class="col-lg-6">
     <h2><%= t 'posts.latest' %></h2>
     <%= render Post.limit(10), cached: true %>
 
     <%= link_to t('posts.all'), posts_path %>
+  </div>
+  <div class="col-lg-6">
+    <h2><%= t('comments.latest') %></h2>
+    <%= render @comments, show_commentable: true, truncate_text: true, cached: true %>
   </div>
 </div>

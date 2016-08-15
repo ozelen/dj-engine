@@ -12,6 +12,9 @@ class Type < ActiveRecord::Base
   has_ancestry
   translates :name
 
+  def to_s
+    name
+  end
 
   def collection_for_parent_select slug=nil
     if slug
