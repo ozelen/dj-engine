@@ -15,7 +15,7 @@
         <% Resort.tagged_with('ski').each do |resort| %>
           <% cache resort do %>
             <div class="tile-wrapper col-sm-6 col-lg-4">
-              <%= render('layouts/tile', cached: true, type: 'resort',
+              <%= render('layouts/tile', type: 'resort',
                          object: resort, title: resort.node.title) if resort %>
             </div>
           <% end %>
@@ -24,7 +24,7 @@
         <% Tour.limit(5).each do |tour| %>
           <% cache tour do %>
             <div class="tile-wrapper col-sm-6 col-lg-4">
-              <%= render('layouts/tile', cached: true, type: 'tour',
+              <%= render('layouts/tile', type: 'tour',
                          object: tour, title: tour.title) if tour %>
             </div>
           <% end %>
@@ -33,7 +33,7 @@
         <% @hotels.each do |hotel| %>
           <%= cache hotel do %>
             <div class="tile-wrapper col-sm-6 col-lg-4">
-              <%= render('layouts/tile', cached: true, type: 'hotel',
+              <%= render('layouts/tile', type: 'hotel',
                           object: hotel, title: hotel.title) if hotel %>
             </div>
           <% end %>
