@@ -13,10 +13,12 @@
 
       <div class="row">
         <% Resort.tagged_with('ski').each do |resort| %>
+          <% cache resort do %>
           <div class="tile-wrapper col-sm-6 col-lg-4">
-            <%= render('layouts/tile', type: 'resort', cached: true,
+            <%= render('layouts/tile', type: 'resort',
                        object: resort, title: resort.node.title) if resort %>
           </div>
+          <% end %>
         <% end %>
 
         <% Tour.limit(5).each do |tour| %>
